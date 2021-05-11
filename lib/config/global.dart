@@ -1,0 +1,18 @@
+import 'dart:io';
+
+/// 全局配置
+class Global {
+
+  /// http请求token
+  static String accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEwNDQ4IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImRlMzlhMTBjYWY1ZjQ3YzU4NWEzYTNkMDc4NzkwMDcxIiwiQXNwTmV0LklkZW50aXR5LlNlY3VyaXR5U3RhbXAiOiJBM1FJVzNaQUVJQ1VZMzJXSVdSV1VYQjNaM01RSU9BQSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlVzZXIiLCJodHRwOi8vd3d3LmFzcG5ldGJvaWxlcnBsYXRlLmNvbS9pZGVudGl0eS9jbGFpbXMvdGVuYW50SWQiOiIxIiwic3ViIjoiMTA0NDgiLCJqdGkiOiJlZTE3NTc3ZS1iM2UyLTRjNTgtYmEwZC1mNWNjYTk0ZDY2OTMiLCJpYXQiOjE2MTkzMzE2MDUsIm5iZiI6MTYxOTMzMTYwNSwiZXhwIjoxNjE5OTM2NDA1LCJpc3MiOiJMaWdodGhvdXNlIiwiYXVkIjoiTGlnaHRob3VzZSJ9.8rBzWhrNEuSr90qF9rYFMeFeYo7Qa7M2cl447Sz222Y";
+
+  /// dio请求，网络出错是否可继续请求
+  static bool retryEnable = false;
+
+  /// 安卓平台
+  static bool isAndroid = Platform.isAndroid;
+
+  /// ios平台
+  static bool isIos = Platform.isIOS;
+
+}

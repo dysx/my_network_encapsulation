@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocalStorage {
   static SharedPreferences preferences;
 
+  ///测试
+
   /// 初始化
   static Future getInstance() async {
     preferences = await SharedPreferences.getInstance();

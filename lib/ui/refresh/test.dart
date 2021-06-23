@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_network_encapsulation/util/size_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 /// @name：
@@ -71,7 +72,7 @@ class RefreshTestState extends State<RefreshTest> {
               body = Text("No more Data");
             }
             return Container(
-              height: 55.0,
+              height: 55,
               child: Center(child:body),
             );
           },

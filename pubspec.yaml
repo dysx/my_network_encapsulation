@@ -14,7 +14,7 @@ description: A encapsulation application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -29,9 +29,6 @@ dependencies:
 
   # 状态管理
   provider: 5.0.0
-
-  # 屏幕适配
-  flutter_screenutil: 4.0.4+1
 
   # 持久化存储
   shared_preferences: 0.5.12+4
@@ -65,6 +62,14 @@ dependencies:
 
   # 防止录屏，但项目主要用其中的控制音量功能
   flutter_forbidshot: 0.0.2
+
+  # nested_scroll_view组件（tab内容保持状态+吸顶）
+  extended_nested_scroll_view:
+    git:
+      url: https://gitee.com/fantuanx/extended_nested_scroll_view.git
+
+  # 日志打印
+  logger: ^1.0.0
 
 dev_dependencies:
   flutter_test:

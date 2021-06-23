@@ -1,20 +1,24 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_network_encapsulation/alert/alert.dart';
 import 'package:my_network_encapsulation/config/application.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/network/request_util.dart';
 import 'package:my_network_encapsulation/provider/locale_model.dart';
 import 'package:my_network_encapsulation/provider/theme_data_model.dart';
+import 'package:my_network_encapsulation/res/my_colors.dart';
+import 'package:my_network_encapsulation/res/my_text_styles.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
+import 'package:my_network_encapsulation/ui/aixin/aixin.dart';
 import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
 import 'package:my_network_encapsulation/ui/refresh/test.dart';
+import 'package:my_network_encapsulation/util/size_util.dart';
 import 'package:provider/provider.dart';
 
 /// @name：
@@ -35,12 +39,10 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     final _theme = Provider.of<ThemeDataModel>(context);
-
     return Scaffold(
-      appBar: AppBar(title: Text('demo'),),
       body: Container(
+        // color: Colors.red,
         width: double.maxFinite,
         child: SingleChildScrollView(
           child: Column(
@@ -49,14 +51,14 @@ class HomePageState extends State<HomePage> {
                 spacing: 20,
                 children: [
                   MyOutlinedButton(
-                    onPressed: ()async{
+                    onPressed: () {
 
                       // bool b = true;
                       // bool a = b == true;
                       // print("a的值: $a");
                       // print("b的值: $b");
 
-                      await RequestUtil.getTime().then((value) {
+                      RequestUtil.getTime().then((value) {
                         print('请求结束,打印结果: ${value.sysTime2}');
                       });
 
@@ -89,7 +91,7 @@ class HomePageState extends State<HomePage> {
 
                     },
                     text: S.of(context).interfaceTest,
-                    style: TextStyle(fontSize: ScreenUtil().setSp(15)),
+                    style: MyTextStyles.title,
                   ),
                   MyOutlinedButton(
                     onPressed: (){
@@ -148,13 +150,6 @@ class HomePageState extends State<HomePage> {
                   MyOutlinedButton(
                     onPressed: (){
                       // Navigator.of(context).pushNamed(RouteName.routeAnim);
-                      Navigator.of(context).pushNamed(RouteName.test);
-                    },
-                    text: S.of(context).normalPage,
-                  ),
-                  MyOutlinedButton(
-                    onPressed: (){
-                      // Navigator.of(context).pushNamed(RouteName.routeAnim);
                       Navigator.of(context).pushNamed(RouteName.htmlText);
                     },
                     text: "html测试",
@@ -169,9 +164,9 @@ class HomePageState extends State<HomePage> {
                   MyOutlinedButton(
                     onPressed: (){
                       // Navigator.of(context).pushNamed(RouteName.routeAnim);
-                      Navigator.of(context).pushNamed(RouteName.alarmPage);
+                      Navigator.of(context).pushNamed(RouteName.paintTest);
                     },
-                    text: "时钟",
+                    text: "paint测试1",
                   ),
                   MyOutlinedButton(
                     onPressed: (){
@@ -179,19 +174,52 @@ class HomePageState extends State<HomePage> {
                       Navigator.of(context).pushNamed(RouteName.grammarTest);
                     },
                     text: "dart语法测试",
+                  ),
+                  MyOutlinedButton(
+                    onPressed: (){
+                      // Navigator.of(context).pushNamed(RouteName.routeAnim);
+                      Navigator.of(context).pushNamed(RouteName.nestedScrollViewTest);
+                    },
+                    text: "nestedScrollView_test测试",
+                  ),
+                  MyOutlinedButton(
+                    onPressed: (){
+                      // Navigator.of(context).pushNamed(RouteName.aiXin,arguments: );
+
+                      // Navigator.push(
+                      //     context, new MaterialPageRoute(builder: (context) => TikTokVideoGesture(
+                      //   child: Container(
+                      //     width: double.minPositive,
+                      //     height: double.minPositive,
+                      //     color: Colors.white,
+                      //   ),
+                      // )));
+
+                      Navigator.of(context).pushNamed('fdkjfjk');
+                    },
+                    text: "双击爱心",
                   )
                 ],
               ),
               Container(
                 color: Colors.red,
-                width: 200.h,
-                height: 200.h,
+                width: 50,
+                height: 50,
               ),
               Container(
                 color: Colors.blue,
-                width: 200.w,
+                width: 375,
                 height: 200.h,
-              )
+              ),
+              // BackdropFilter(
+              //   filter: ImageFilter.blur(
+              //     sigmaX: 1.0,
+              //     sigmaY: 1.0
+              //   ),
+              //   child: Center(
+              //     child: Image.network('https://up.enterdesk.com/edpic_source/29/30/5c/29305cdb4125ea2c813bac60326e5e13.jpg'),
+              //   ),
+              // )
             ],
           ),
         ),

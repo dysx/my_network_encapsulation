@@ -18,19 +18,20 @@ import 'package:my_network_encapsulation/network/intercept/retry_interceptor.dar
 class Http {
 
   /// 超时时间 毫秒
-  static const int CONNECT_TIMEOUT = 3000;
+  static const int CONNECT_TIMEOUT = 5000;
   static const int RECEIVE_TIMEOUT = 3000;
 
-  static Http _instance = Http._internal();
+  Dio dio;
+  CancelToken _cancelToken = CancelToken();
 
   /// 单例模式
+  /// 单例公开访问点
   factory Http() => _instance;
-
-  Dio dio;
-  CancelToken _cancelToken = new CancelToken();
-
+  /// 静态私有成员
+  static Http _instance = Http._internal();
+  /// 私有构造函数
+  /// 具体初始化
   Http._internal() {
-    print('初始化http');
     if (dio == null) {
       // BaseOptions、Options、RequestOptions 都可以配置参数，优先级别依次递增，且可以根据优先级别覆盖参数
       BaseOptions options = new BaseOptions(
@@ -65,7 +66,8 @@ class Http {
         (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
             (client) {
           client.findProxy = (uri) {
-            return "PROXY $PROXY_IP:$PROXY_PORT";
+            // return "PROXY $PROXY_IP:$PROXY_PORT";
+            return "PROXY 192.168.168.254:8888";
           };
           // 代理工具会提供一个抓包的自签名证书，会通不过证书校验，所以我们禁用证书校验
           client.badCertificateCallback =

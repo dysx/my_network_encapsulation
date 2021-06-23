@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_network_encapsulation/dart/dart_test.dart';
 import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
+import 'package:my_network_encapsulation/util/size_util.dart';
 
 /// @name：dart语法测试
 /// @author qds
@@ -16,10 +18,12 @@ class GrammarTest extends StatelessWidget {
         children: [
           MyOutlinedButton(
             onPressed: (){
-              _test();
+              DartTest dartTest = DartTest();
+              dartTest.test();
+              PageTest.scorllDown();
             },
             text: "dart语法测试",
-          )
+          ),
         ],
       ),
     );

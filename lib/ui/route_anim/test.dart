@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/my_base_widget.dart';
 
-/// @name：团队介绍
 class RouteAnim extends MyBaseWidget {
 
   RouteAnim({Key key,this.arguments}):super(key: key);

@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/ui/aixin/aixin.dart';
 import 'package:my_network_encapsulation/ui/base/not_found_page.dart';
 import 'package:my_network_encapsulation/ui/flutter_html_test.dart';
 import 'package:my_network_encapsulation/ui/grammar/grammarTest.dart';
 import 'package:my_network_encapsulation/ui/home.dart';
 import 'package:my_network_encapsulation/ui/home_page.dart';
+import 'package:my_network_encapsulation/ui/login/login.dart';
 import 'file:///E:/study_project/my_network_encapsulation/lib/ui/paintTest/paint_test.dart';
 import 'package:my_network_encapsulation/ui/route_anim/test.dart';
 import 'package:my_network_encapsulation/ui/scrollView/nestedScrollView_test.dart';
 import 'file:///E:/study_project/my_network_encapsulation/lib/routes/page_route_anim.dart';
 import 'package:my_network_encapsulation/ui/webview/webView_test.dart';
+import 'package:my_network_encapsulation/util/local_storage.dart';
+import 'package:my_network_encapsulation/util/log_utils.dart';
 
 /// 路由名
 class RouteName {
+  static const String login = 'login';
   static const String home = 'home';
   static const String homePage = 'homePage';
   static const String routeAnim = 'routeAnim';
@@ -29,7 +34,11 @@ class RouteName {
 /// [arguments]: 参数为Object类型，根据需求自定义；接受页面请定义
 class MyRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name) {
+    String routeName;
+    routeName = routeBeforeHook(settings);
+    switch (routeName) {
+      case RouteName.login:
+        return SlideBottomRouteBuilder(Login());
       case RouteName.home:
         return SizeRoute(Home());
       case RouteName.routeAnim:
@@ -51,6 +60,36 @@ class MyRouter {
       default:
         return FadeRouteBuilder(NotFoundPage());
     }
+  }
+
+  // 指定哪些页面需要登录权限
+  static List<String> powerPage = [
+    'grammarTest'
+  ];
+
+  /*登陆拦截*/
+  // 此处做登陆权限拦截
+  static String routeBeforeHook(RouteSettings settings) {
+    String route;
+    for (String item in powerPage) {
+      // 如果此路由需登陆权限
+      if (item == settings.name) {
+        // 获取本地存储的token
+        final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
+        if (token != '') {
+          if(settings.name == 'login'){
+            route = 'login';
+          } else {
+            route = settings.name;
+          }
+        } else {
+          route = 'login';
+        }
+      } else {
+        route = settings.name;
+      }
+    }
+    return route;
   }
 }
 

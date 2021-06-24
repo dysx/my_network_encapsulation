@@ -5,6 +5,7 @@ import 'package:my_network_encapsulation/config/application.dart';
 import 'package:my_network_encapsulation/config/global.dart';
 import 'package:my_network_encapsulation/alert/alert.dart';
 import 'package:my_network_encapsulation/network/app_exception.dart';
+import 'package:my_network_encapsulation/routes/router_manger.dart';
 
 /// 请求拦截
 class RequestInterceptor extends Interceptor {
@@ -54,10 +55,14 @@ class RequestInterceptor extends Interceptor {
     if ((err.type == DioErrorType.other &&
         err.error != null &&
         err.message.substring(0, 15) == 'SocketException')) {
-      /// 网络错误类型  关闭loading框
+      // 网络错误类型  关闭loading框
       Alert.hide();
       err.error = BadAppException(-1, "网络错误");
     }
+    // 登陆失效处理 统一跳回登陆页
+    // if (true) {
+    //   Application.globalKey.currentState.pushNamed(RouteName.login);
+    // }
     // else if (err.response.data != null) {
     //   print('==================');
     //   print(err.response.data);
@@ -71,7 +76,7 @@ class RequestInterceptor extends Interceptor {
     //       showCancel: false);
     // }
     else{
-      /// [RequestException] 自定义的异常
+      // [RequestException] 自定义的异常
       AppException requestException = AppException.create(err);
       err.error = requestException;
     }

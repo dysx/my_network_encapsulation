@@ -5,10 +5,15 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/config/application.dart';
+import 'package:my_network_encapsulation/res/my_commons.dart';
+import 'package:my_network_encapsulation/res/my_text_styles.dart';
 import 'package:my_network_encapsulation/ui/aixin/aixin.dart';
 import 'package:my_network_encapsulation/ui/grammar/grammarTest.dart';
 import 'package:my_network_encapsulation/ui/home_page.dart';
+import 'package:my_network_encapsulation/ui/login/goto_login.dart';
+import 'package:my_network_encapsulation/ui/login/login.dart';
 import 'package:my_network_encapsulation/ui/paintTest/paint_test.dart';
+import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// @name：
 /// @author qds
@@ -29,22 +34,18 @@ class HomeState extends State<Home> {
   int currentIndex = 0;
   final List<BottomNavigationBarItem> bottomNavItems = [
     BottomNavigationBarItem(
-      backgroundColor: Colors.blue,
       icon: Icon(Icons.home),
       label: '首页',
     ),
     BottomNavigationBarItem(
-      backgroundColor: Colors.blue,
       icon: Icon(Icons.message),
       label: '消息',
     ),
     BottomNavigationBarItem(
-      backgroundColor: Colors.blue,
       icon: Icon(Icons.shopping_cart),
       label: '购物车',
     ),
     BottomNavigationBarItem(
-      backgroundColor: Colors.blue,
       icon: Icon(Icons.person),
       label: '个人中心',
     ),
@@ -54,14 +55,25 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: bottomNavItems,
+      bottomNavigationBar:
+      CupertinoTabBar(
         currentIndex: currentIndex,
-        type: BottomNavigationBarType.shifting,
         onTap: (index) {
           _changePage(index);
         },
+        items: bottomNavItems,
+        activeColor: Colors.blue,
       ),
+
+      // BottomNavigationBar(
+      //   items: bottomNavItems,
+      //   currentIndex: currentIndex,
+      //   type: BottomNavigationBarType.fixed,
+      //   fixedColor: Colors.green,
+      //   onTap: (index) {
+      //     _changePage(index);
+      //   },
+      // ),
       body: pages[currentIndex]
     );
   }
@@ -93,9 +105,25 @@ class HomeState extends State<Home> {
   void _changePage(int index) {
     /*如果点击的导航项不是当前项  切换 */
     if (index != currentIndex) {
+      if(index == 2){
+        checkPower();
+      }
       setState(() {
         currentIndex = index;
       });
+    }
+  }
+
+  /*登陆权限拦截*/
+  Future<void> checkPower() async {
+    // 获取本地存储的token
+    final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
+    if (token == '') {
+      setState(() {
+        pages[2] = GoToLogin();
+      });
+    } else {
+      pages[2] = PaintTest();
     }
   }
 

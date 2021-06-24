@@ -11,7 +11,7 @@ class NotFoundPage extends StatelessWidget{
         title: Text(''),
       ),
       body: Center(
-        child: Text('404页面'),
+        child: Text('404!抱歉，页面暂未找到'),
       ),
     );
   }

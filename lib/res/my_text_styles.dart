@@ -6,16 +6,14 @@ import 'package:my_network_encapsulation/util/size_util.dart';
 
 /// 字体样式
 class MyTextStyles {
-
-  static TextStyle title = TextStyle(
-      fontSize: 20.sp,
-      color: MyColors.black
-  );
-
-  static TextStyle titleRightStyle = TextStyle(
-      fontSize: 20.sp,
-      color: Colors.red,
-      height: 1.3
-  );
-
+  static TextStyle fourteenWhite =
+      TextStyle(fontSize: 14.sp, color: Colors.white);
+  static TextStyle fourteenBlack3333 =
+  TextStyle(fontSize: 14.sp, color: MyColors.black_3333);
+  static TextStyle sixteenBlue91FF =
+      TextStyle(fontSize: 16.sp, color: MyColors.blue_91ff);
+  static TextStyle sixteenBlack3333 =
+      TextStyle(fontSize: 16.sp, color: MyColors.black_3333);
+  static TextStyle sixteenBlack3333Bold = TextStyle(
+      fontSize: 16.sp, color: MyColors.black_3333, fontWeight: FontWeight.bold);
 }

@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/config/application.dart';
 import 'package:my_network_encapsulation/network/http/http_util.dart';
+import 'package:my_network_encapsulation/res/my_text_styles.dart';
 import 'package:my_network_encapsulation/routes/navigater.dart';
+import 'package:my_network_encapsulation/ui/common/button/text_button.dart';
 
 /// 弹框
 typedef IndexCallback = void Function(int index);
@@ -46,11 +48,9 @@ class Alert {
             width: double.infinity,
             height: double.infinity,
             child: Center(
-                child:
-                CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.yellow),
-                )
-            ),
+                child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.yellow),
+            )),
           ),
         );
       },
@@ -86,50 +86,33 @@ class Alert {
             child: AlertDialog(
               title: Text(
                 title ?? '提示',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF505050),
-                  fontSize: 18.0,
-                ),
+                style: MyTextStyles.sixteenBlack3333Bold
               ),
               content: message != null && message.length > 0
                   ? Text(
-                message,
-                style: TextStyle(
-                  color: Color(0xFF505050),
-                  fontSize: 16.0,
-                ),
-              )
+                      message,
+                      style: MyTextStyles.fourteenBlack3333,
+                    )
                   : SizedBox.shrink(),
               actions: <Widget>[
                 showCancel
-                    ? FlatButton(
-                  child: Text(
-                    cancel ?? '取消',
-                    style: TextStyle(
-                      color: Color(0xFF505050),
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  onPressed: () {
-                    hide();
-                    if (onCancel != null) onCancel();
-                  },
-                )
+                    ? MyTextButton(
+                        text: cancel ?? '取消',
+                        style: MyTextStyles.sixteenBlack3333,
+                        onPressed: () {
+                          hide();
+                          if (onCancel != null) onCancel();
+                        },
+                      )
                     : SizedBox.shrink(),
-                FlatButton(
-                  child: Text(
-                    confirm ?? '确定',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 16.0,
-                    ),
-                  ),
+                MyTextButton(
+                  text: confirm ?? '确定',
+                  style: MyTextStyles.sixteenBlue91FF,
                   onPressed: () {
                     hide();
                     if (onConfirm != null) onConfirm();
                   },
-                ),
+                )
               ],
             ),
           );
@@ -172,11 +155,7 @@ class Alert {
             child: AlertDialog(
               title: Text(
                 title ?? '提示',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF505050),
-                  fontSize: 18.0,
-                ),
+                style: MyTextStyles.sixteenBlack3333Bold,
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -199,12 +178,9 @@ class Alert {
                         (BuildContext context, String value, Widget child) {
                       return value != null && value.length > 0
                           ? Text(
-                        value,
-                        style: TextStyle(
-                          color: Color(0xFF505050),
-                          fontSize: 14.0,
-                        ),
-                      )
+                              value,
+                              style: MyTextStyles.fourteenBlack3333,
+                            )
                           : SizedBox.shrink();
                     },
                   ),
@@ -213,33 +189,30 @@ class Alert {
               actions: <Widget>[
                 showCancel
                     ? FlatButton(
-                  child: Text(
-                    cancel ?? '取消',
-                    style: TextStyle(
-                      color: Color(0xFF505050),
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  onPressed: () {
-                    hide();
-                    if (onCancel != null) onCancel();
-                  },
-                )
+                        child: Text(
+                          cancel ?? '取消',
+                          style: TextStyle(
+                            color: Color(0xFF505050),
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        onPressed: () {
+                          hide();
+                          if (onCancel != null) onCancel();
+                        },
+                      )
                     : SizedBox.shrink(),
                 showConfirm
                     ? FlatButton(
-                  child: Text(
-                    confirm ?? '确定',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  onPressed: () {
-                    hide();
-                    if (onConfirm != null) onConfirm();
-                  },
-                )
+                        child: Text(
+                          confirm ?? '确定',
+                          style: MyTextStyles.sixteenBlue91FF,
+                        ),
+                        onPressed: () {
+                          hide();
+                          if (onConfirm != null) onConfirm();
+                        },
+                      )
                     : SizedBox.shrink(),
               ],
             ),
@@ -285,28 +258,28 @@ class Alert {
             ),
             children: actions != null && actions.length > 0
                 ? actions
-                .asMap()
-                .map(
-                  (index, action) => MapEntry(
-                index,
-                SimpleDialogOption(
-                  onPressed: () {
-                    hide();
-                    if (onPressed != null) onPressed(index);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      action,
-                      style: TextStyle(
-                          color: Color(0xFF505050), fontSize: 16.0),
-                    ),
-                  ),
-                ),
-              ),
-            )
-                .values
-                .toList()
+                    .asMap()
+                    .map(
+                      (index, action) => MapEntry(
+                        index,
+                        SimpleDialogOption(
+                          onPressed: () {
+                            hide();
+                            if (onPressed != null) onPressed(index);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              action,
+                              style: TextStyle(
+                                  color: Color(0xFF505050), fontSize: 16.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                    .values
+                    .toList()
                 : SizedBox.shrink(),
           ),
         );

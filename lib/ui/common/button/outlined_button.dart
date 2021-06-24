@@ -7,10 +7,14 @@ import 'package:flutter/material.dart';
 class MyOutlinedButton extends StatelessWidget {
   MyOutlinedButton({this.text, this.onPressed,this.borderColor,this.style});
 
+  /// 按下事件
   final Function onPressed;
+  /// 按钮文字
   final String text;
-  final Color borderColor;
+  /// 文字样式
   final TextStyle style;
+  /// 边界颜色
+  final Color borderColor;
 
   @override
   Widget build(BuildContext context) {

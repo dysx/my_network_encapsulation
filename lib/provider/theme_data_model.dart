@@ -8,26 +8,26 @@ class ThemeDataModel extends ChangeNotifier {
 
   int get themeIndex => _themeIndex;
 
+  final ThemeData norTheme = ThemeData(
+      brightness: Brightness.light, // content颜色
+      primaryColor: Color(0xFFF8F8F8), // appbar、topBar颜色
+      accentColor: Colors.lightBlue[100],
+      backgroundColor: Colors.white);
+
+  final ThemeData darkTheme = ThemeData(
+      brightness: Brightness.dark,
+      primaryColor: Colors.black,
+      accentColor: Colors.red,
+      backgroundColor: Colors.black38);
+
   ThemeData get myThemeData {
     switch (_themeIndex) {
       case 0:
-        return ThemeData(
-            brightness: Brightness.light, // content颜色
-            primaryColor: Colors.blue[800], // appbar、topBar颜色
-            accentColor: Colors.lightBlue[100],
-            backgroundColor: Colors.red);
+        return norTheme;
       case 1:
-        return ThemeData(
-            brightness: Brightness.dark,
-            primaryColor: Colors.black,
-            accentColor: Colors.red,
-            backgroundColor: Colors.black38);
+        return darkTheme;
       default:
-        return ThemeData(
-            brightness: Brightness.light,
-            primaryColor: Colors.blue[800],
-            accentColor: Colors.lightBlue[100],
-            backgroundColor: Colors.red);
+        return norTheme;
     }
   }
 

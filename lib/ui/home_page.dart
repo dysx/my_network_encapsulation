@@ -13,12 +13,15 @@ import 'package:my_network_encapsulation/network/request_util.dart';
 import 'package:my_network_encapsulation/provider/locale_model.dart';
 import 'package:my_network_encapsulation/provider/theme_data_model.dart';
 import 'package:my_network_encapsulation/res/my_colors.dart';
+import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/res/my_text_styles.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
 import 'package:my_network_encapsulation/ui/aixin/aixin.dart';
 import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
 import 'package:my_network_encapsulation/ui/refresh/test.dart';
+import 'package:my_network_encapsulation/util/local_storage.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
 /// @name：
@@ -39,8 +42,10 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final _theme = Provider.of<ThemeDataModel>(context);
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+      ),
       body: Container(
         // color: Colors.red,
         width: double.maxFinite,
@@ -90,8 +95,7 @@ class HomePageState extends State<HomePage> {
                       // });
 
                     },
-                    text: S.of(context).interfaceTest,
-                    style: MyTextStyles.title,
+                    text: S.of(context).interfaceTest
                   ),
                   MyOutlinedButton(
                     onPressed: (){
@@ -184,20 +188,27 @@ class HomePageState extends State<HomePage> {
                   ),
                   MyOutlinedButton(
                     onPressed: (){
-                      // Navigator.of(context).pushNamed(RouteName.aiXin,arguments: );
-
-                      // Navigator.push(
-                      //     context, new MaterialPageRoute(builder: (context) => TikTokVideoGesture(
-                      //   child: Container(
-                      //     width: double.minPositive,
-                      //     height: double.minPositive,
-                      //     color: Colors.white,
-                      //   ),
-                      // )));
-
-                      Navigator.of(context).pushNamed('fdkjfjk');
+                      Navigator.of(context).pushNamed(RouteName.aiXin);
                     },
                     text: "双击爱心",
+                  ),
+                  MyOutlinedButton(
+                    onPressed: (){
+                      LocalStorage.save(MyCommons.TOKEN, '123');
+                    },
+                    text: "存储token",
+                  ),
+                  MyOutlinedButton(
+                    onPressed: (){
+                      showToast(LocalStorage.get(MyCommons.TOKEN));
+                    },
+                    text: "打印token",
+                  ),
+                  MyOutlinedButton(
+                    onPressed: (){
+                      LocalStorage.remove(MyCommons.TOKEN);
+                    },
+                    text: "清除token",
                   )
                 ],
               ),

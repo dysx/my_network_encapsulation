@@ -53,6 +53,25 @@ class SlideTopRouteBuilder extends PageRouteBuilder {
                     ));
 }
 
+// 从下往上展开路由
+class SlideBottomRouteBuilder extends PageRouteBuilder {
+  final Widget page;
+
+  SlideBottomRouteBuilder(this.page)
+      : super(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionDuration: Duration(milliseconds: 800),
+      transitionsBuilder:
+          (context, animation, secondaryAnimation, child) =>
+          SlideTransition(
+            position: Tween<Offset>(
+                begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
+                .animate(CurvedAnimation(
+                parent: animation, curve: Curves.fastOutSlowIn)),
+            child: child,
+          ));
+}
+
 // 从中间展开路由
 class SizeRoute extends PageRouteBuilder {
   final Widget page;

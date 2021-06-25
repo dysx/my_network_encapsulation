@@ -20,7 +20,3 @@ class MyCommons {
   static const int PAGE_SIZE = 20;
 
 }
-
-enum MyCommonStatus {
-  LOADING,SUCCESS,ERROR
-}

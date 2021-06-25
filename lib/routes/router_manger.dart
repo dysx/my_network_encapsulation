@@ -1,33 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
-import 'package:my_network_encapsulation/ui/aixin/aixin.dart';
+import 'package:my_network_encapsulation/ui/Third/third.dart';
 import 'package:my_network_encapsulation/ui/base/not_found_page.dart';
-import 'package:my_network_encapsulation/ui/flutter_html_test.dart';
-import 'package:my_network_encapsulation/ui/grammar/grammarTest.dart';
 import 'package:my_network_encapsulation/ui/home.dart';
-import 'package:my_network_encapsulation/ui/home_page.dart';
+import 'file:///E:/study_project/my_network_encapsulation/lib/ui/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/login/login.dart';
-import 'file:///E:/study_project/my_network_encapsulation/lib/ui/paintTest/paint_test.dart';
-import 'package:my_network_encapsulation/ui/route_anim/test.dart';
-import 'package:my_network_encapsulation/ui/scrollView/nestedScrollView_test.dart';
+import 'package:my_network_encapsulation/ui/mine/mine.dart';
+import 'package:my_network_encapsulation/ui/second/second.dart';
 import 'file:///E:/study_project/my_network_encapsulation/lib/routes/page_route_anim.dart';
-import 'package:my_network_encapsulation/ui/webview/webView_test.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
-import 'package:my_network_encapsulation/util/log_utils.dart';
 
 /// 路由名
 class RouteName {
   static const String login = 'login';
   static const String home = 'home';
   static const String homePage = 'homePage';
-  static const String routeAnim = 'routeAnim';
-  static const String htmlText = 'htmlTest';
-  static const String webViewText = 'webViewTest';
-  static const String grammarTest = 'grammarTest';
-  static const String paintTest = 'paintTest';
-  static const String nestedScrollViewTest = 'nestedScrollView_test';
-  static const String aiXin = 'aiXin';
+  static const String second = 'second';
+  static const String third = 'third';
+  static const String mine = 'mine';
 }
 
 /// 路由初始化
@@ -41,22 +32,14 @@ class MyRouter {
         return SlideBottomRouteBuilder(Login());
       case RouteName.home:
         return SizeRoute(Home());
-      case RouteName.routeAnim:
-        return SizeRoute(RouteAnim(arguments: settings.arguments));
       case RouteName.homePage:
         return NoAnimRouteBuilder(HomePage());
-      case RouteName.htmlText:
-        return FadeRouteBuilder(FlutterHtmlTest());
-      case RouteName.webViewText:
-        return FadeRouteBuilder(WebViewTest());
-      case RouteName.grammarTest:
-        return FadeRouteBuilder(GrammarTest());
-      case RouteName.paintTest:
-        return FadeRouteBuilder(PaintTest());
-      case RouteName.nestedScrollViewTest:
-        return FadeRouteBuilder(NestedScrollViewTest());
-      case RouteName.aiXin:
-        return FadeRouteBuilder(TikTokVideoGesture());
+      case RouteName.second:
+        return NoAnimRouteBuilder(Second());
+      case RouteName.third:
+        return NoAnimRouteBuilder(Third());
+      case RouteName.mine:
+        return NoAnimRouteBuilder(Mine());
       default:
         return FadeRouteBuilder(NotFoundPage());
     }
@@ -64,7 +47,7 @@ class MyRouter {
 
   // 指定哪些页面需要登录权限
   static List<String> powerPage = [
-    'grammarTest'
+    'mine'
   ];
 
   /*登陆拦截*/

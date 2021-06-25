@@ -6,13 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/config/application.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
-import 'package:my_network_encapsulation/res/my_text_styles.dart';
-import 'package:my_network_encapsulation/ui/aixin/aixin.dart';
-import 'package:my_network_encapsulation/ui/grammar/grammarTest.dart';
-import 'package:my_network_encapsulation/ui/home_page.dart';
+import 'package:my_network_encapsulation/ui/Third/third.dart';
+import 'file:///E:/study_project/my_network_encapsulation/lib/ui/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/login/goto_login.dart';
-import 'package:my_network_encapsulation/ui/login/login.dart';
-import 'package:my_network_encapsulation/ui/paintTest/paint_test.dart';
+import 'package:my_network_encapsulation/ui/mine/mine.dart';
+import 'package:my_network_encapsulation/ui/second/second.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// @name：
@@ -50,7 +48,7 @@ class HomeState extends State<Home> {
       label: '个人中心',
     ),
   ];
-  final pages = [HomePage(), TikTokVideoGesture(), PaintTest(), GrammarTest()];
+  final pages = [HomePage(), Second(), Third(), Mine()];
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +62,6 @@ class HomeState extends State<Home> {
         items: bottomNavItems,
         activeColor: Colors.blue,
       ),
-
-      // BottomNavigationBar(
-      //   items: bottomNavItems,
-      //   currentIndex: currentIndex,
-      //   type: BottomNavigationBarType.fixed,
-      //   fixedColor: Colors.green,
-      //   onTap: (index) {
-      //     _changePage(index);
-      //   },
-      // ),
       body: pages[currentIndex]
     );
   }
@@ -105,7 +93,7 @@ class HomeState extends State<Home> {
   void _changePage(int index) {
     /*如果点击的导航项不是当前项  切换 */
     if (index != currentIndex) {
-      if(index == 2){
+      if(index == 3){
         checkPower();
       }
       setState(() {
@@ -120,10 +108,10 @@ class HomeState extends State<Home> {
     final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
     if (token == '') {
       setState(() {
-        pages[2] = GoToLogin();
+        pages[3] = GoToLogin();
       });
     } else {
-      pages[2] = PaintTest();
+      pages[3] = Mine();
     }
   }
 

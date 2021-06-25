@@ -29,6 +29,8 @@ dependencies:
 
   # 状态管理
   provider: 5.0.0
+  flutter_bloc: 7.0.1 #状态管理框架
+  equatable: ^1.2.3 #增强组件相等性判断
 
   # 持久化存储
   shared_preferences: 0.5.12+4
@@ -51,17 +53,6 @@ dependencies:
 
   # webView
   webview_flutter: 1.0.7
-
-  # widget可见
-#  visible_detector: any
-
-#  # 腾讯云播放器
-#  flutter_tencentplayer:
-#    git:
-#      url: https://gitee.com/suluopital/flutter_tencentplayer.git
-
-  # 防止录屏，但项目主要用其中的控制音量功能
-  flutter_forbidshot: 0.0.2
 
   # nested_scroll_view组件（tab内容保持状态+吸顶）
   extended_nested_scroll_view:

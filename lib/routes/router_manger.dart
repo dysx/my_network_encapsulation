@@ -1,14 +1,19 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:my_network_encapsulation/res/my_commons.dart';
+import 'package:flutter/material.dart';
+import 'package:my_network_encapsulation/config/global.dart';
+import 'package:my_network_encapsulation/routes/page_route_anim.dart';
 import 'package:my_network_encapsulation/ui/Third/third.dart';
 import 'package:my_network_encapsulation/ui/base/not_found_page.dart';
 import 'package:my_network_encapsulation/ui/home.dart';
-import 'file:///E:/study_project/my_network_encapsulation/lib/ui/index/home_page.dart';
+import 'package:my_network_encapsulation/ui/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/login/login.dart';
 import 'package:my_network_encapsulation/ui/mine/mine.dart';
 import 'package:my_network_encapsulation/ui/second/second.dart';
-import 'file:///E:/study_project/my_network_encapsulation/lib/routes/page_route_anim.dart';
+import 'package:my_network_encapsulation/ui/test/base_test.dart';
+import 'package:my_network_encapsulation/ui/test/testA.dart';
+import 'package:my_network_encapsulation/ui/test/testB.dart';
+import 'package:my_network_encapsulation/ui/test/testC.dart';
+import 'package:my_network_encapsulation/ui/test/testD.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// 路由名
@@ -19,36 +24,49 @@ class RouteName {
   static const String second = 'second';
   static const String third = 'third';
   static const String mine = 'mine';
+  static const String baseTest = 'baseTest';
+  static const String testA = 'testA';
+  static const String testB = 'testB';
+  static const String testC = 'testC';
+  static const String testD = 'testD';
 }
 
 /// 路由初始化
 /// [arguments]: 参数为Object类型，根据需求自定义；接受页面请定义
 class MyRouter {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+  static Route generateRoute<T extends Object>(RouteSettings settings) {
     String routeName;
     routeName = routeBeforeHook(settings);
     switch (routeName) {
       case RouteName.login:
-        return SlideBottomRouteBuilder(Login());
+        return SlideBottomRouteBuilder(Login(), routeName);
       case RouteName.home:
-        return SizeRoute(Home());
+        return SizeRoute(Home(), routeName);
       case RouteName.homePage:
-        return NoAnimRouteBuilder(HomePage());
+        return NoAnimRouteBuilder(HomePage(), routeName);
       case RouteName.second:
-        return NoAnimRouteBuilder(Second());
+        return NoAnimRouteBuilder(Second(), routeName);
       case RouteName.third:
-        return NoAnimRouteBuilder(Third());
+        return NoAnimRouteBuilder(Third(), routeName);
       case RouteName.mine:
-        return NoAnimRouteBuilder(Mine());
+        return NoAnimRouteBuilder(Mine(), routeName);
+      case RouteName.baseTest:
+        return NoAnimRouteBuilder(BaseTest(), routeName);
+      case RouteName.testA:
+        return FadeRouteBuilder(TestA(), routeName);
+      case RouteName.testB:
+        return NoAnimRouteBuilder(TestB(), routeName);
+      case RouteName.testC:
+        return NoAnimRouteBuilder(TestC(), routeName);
+      case RouteName.testD:
+        return NoAnimRouteBuilder(TestD(), routeName);
       default:
-        return FadeRouteBuilder(NotFoundPage());
+        return FadeRouteBuilder(NotFoundPage(), routeName);
     }
   }
 
   // 指定哪些页面需要登录权限
-  static List<String> powerPage = [
-    'mine'
-  ];
+  static List<String> powerPage = ['mine'];
 
   /*登陆拦截*/
   // 此处做登陆权限拦截
@@ -58,9 +76,9 @@ class MyRouter {
       // 如果此路由需登陆权限
       if (item == settings.name) {
         // 获取本地存储的token
-        final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
+        final token = LocalStorage.get(Global.accessToken) ?? '';
         if (token != '') {
-          if(settings.name == 'login'){
+          if (settings.name == 'login') {
             route = 'login';
           } else {
             route = settings.name;

@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:my_network_encapsulation/config/application.dart';
 import 'package:my_network_encapsulation/config/global.dart';
 import 'package:my_network_encapsulation/alert/alert.dart';
+import 'package:my_network_encapsulation/generated/json/base/json_convert_content.dart';
 import 'package:my_network_encapsulation/network/app_exception.dart';
+import 'package:my_network_encapsulation/network/http/error_entity.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
 
 /// 请求拦截
@@ -51,38 +53,34 @@ class RequestInterceptor extends Interceptor {
     // TODO: implement onError
     debugPrint('###########################\n*** 错误处理onError ***');
     debugPrint('err:$err');
+    debugPrint('err:${err.response}');
     debugPrint('###########################\n');
+    Alert.hide();
+    /// 登陆失效处理 统一跳回登陆页
+    if (err.response.data['unAuthorizedRequest']) {
+      Application.globalKey.currentState.pushNamed(RouteName.login, arguments: {'havePop': true});
+      return super.onError(err, handler);
+    }
+    /// 网络错误
     if ((err.type == DioErrorType.other &&
         err.error != null &&
         err.message.substring(0, 15) == 'SocketException')) {
       // 网络错误类型  关闭loading框
-      Alert.hide();
       err.error = BadAppException(-1, "网络错误");
+      Alert.showAlert(message: err.message ?? '未知错误',showCancel: false);
     }
-    // 登陆失效处理 统一跳回登陆页
-    // if (true) {
-    //   Application.globalKey.currentState.pushNamed(RouteName.login);
-    // }
-    // else if (err.response.data != null) {
-    //   print('==================');
-    //   print(err.response.data);
-    //   print(err.response.statusCode);
-    //   print(err.response.statusMessage);
-    //   Alert.hide();
-    //   print('展示后台定义的错误message');
-    //   /// 展示后台定义的错误message
-    //   Alert.showAlert(
-    //       message: err.response.data['error']['message'] ?? '未知错误',
-    //       showCancel: false);
-    // }
+    /// 展示后台定义的错误message
+    if (err.response.data['error'] != null) {
+      Alert.showAlert(
+          message: err.response.data['error']['message'] ?? '未知错误',
+          showCancel: false);
+    }
+    /// [RequestException] 自定义的异常
     else{
-      // [RequestException] 自定义的异常
       AppException requestException = AppException.create(err);
       err.error = requestException;
+      Alert.showAlert(message: err.message ?? '未知错误',showCancel: false);
     }
-    print("错误信息: ${err.message}");
-    Alert.hide();
-    Alert.showAlert(message: err.message ?? '未知错误',showCancel: false);
     return super.onError(err, handler);
   }
 }

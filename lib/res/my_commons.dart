@@ -13,7 +13,6 @@ class MyCommons {
   static const String VERSION = "version";
 
   /// ------------- 用户信息 -------------
-  static const TOKEN = "token";
   static const USER_NAME = "user_name";
 
   /// 分页大小

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:my_network_encapsulation/network/http/http_util.dart';
+import 'package:my_network_encapsulation/network/model/login_entity.dart';
 import 'package:my_network_encapsulation/network/model/time_entity.dart';
 
 import 'address.dart';
@@ -25,8 +26,8 @@ class RequestUtil {
     );
   }
 
-  ///获取我的内容推荐列表
-  static Future login(String phoneNumber, String password) {
+  ///登陆
+  static Future<LoginEntity> login(String phoneNumber, String password) {
     return HttpUtils.post(Address.login, data: {
       "phoneNumber": phoneNumber,
       "password": password,

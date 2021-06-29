@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
 
-import 'log_utils.dart';
+import 'package:flutter/material.dart';
 
 /// 屏幕适配
 class SizeUtil {
@@ -35,14 +35,14 @@ class SizeUtil {
 
   static double _rpx;
 
-  static void initialize(BuildContext context,
+  static void initialize(
       {double standardWidth = _defaultWidth,
         double standardHeight = _defaultHeight,
         bool allowFontScaling = false}) {
     _uiWidthPx = standardWidth;
     _uiHeightPx = standardHeight;
 
-    _mediaQueryData = MediaQuery.of(context);
+    _mediaQueryData = MediaQueryData.fromWindow(window);
     _screenWidth = _mediaQueryData.size.width;
     _screenHeight = _mediaQueryData.size.height;
 

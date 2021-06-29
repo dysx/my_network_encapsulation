@@ -9,6 +9,7 @@ class Address {
 
   ///手机密码登陆
   static const String login = BASE_HTTP + "TokenAuth/AuthenticateByPhonePwd";
+
   static const String addFriend = BASE_HTTP + "services/app/NoticeService/AddFriend";
 
 

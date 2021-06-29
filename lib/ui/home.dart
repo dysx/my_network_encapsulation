@@ -5,6 +5,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/config/application.dart';
+import 'package:my_network_encapsulation/config/global.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/ui/Third/third.dart';
 import 'file:///E:/study_project/my_network_encapsulation/lib/ui/index/home_page.dart';
@@ -105,7 +106,7 @@ class HomeState extends State<Home> {
   /*登陆权限拦截*/
   Future<void> checkPower() async {
     // 获取本地存储的token
-    final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
+    final token = LocalStorage.get(Global.accessToken) ?? '';
     if (token == '') {
       setState(() {
         pages[3] = GoToLogin();

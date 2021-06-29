@@ -1,17 +1,21 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:my_network_encapsulation/config/cache.dart';
 import 'package:my_network_encapsulation/config/global.dart';
 import 'package:my_network_encapsulation/config/proxy.dart';
 import 'package:my_network_encapsulation/generated/json/base/json_convert_content.dart';
+import 'package:my_network_encapsulation/network/http/BaseResponse.dart';
 import 'package:my_network_encapsulation/network/intercept/dio_connectivity_request_retrier%20.dart';
 import 'package:my_network_encapsulation/network/intercept/net_cache_interceptor.dart';
 import 'package:my_network_encapsulation/network/intercept/request_interceptor.dart';
 import 'package:my_network_encapsulation/network/intercept/retry_interceptor.dart';
+import 'package:my_network_encapsulation/util/log_utils.dart';
 
 
 /// http请求
@@ -65,10 +69,10 @@ class Http {
       if (PROXY_ENABLE) {
         (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
             (client) {
-          client.findProxy = (uri) {
-            // return "PROXY $PROXY_IP:$PROXY_PORT";
-            return "PROXY 192.168.168.254:8888";
-          };
+          // client.findProxy = (uri) {
+          //   // return "PROXY $PROXY_IP:$PROXY_PORT";
+          //   return "PROXY 192.168.168.254:8888";
+          // };
           // 代理工具会提供一个抓包的自签名证书，会通不过证书校验，所以我们禁用证书校验
           client.badCertificateCallback =
               (X509Certificate cert, String host, int port) => true;
@@ -157,15 +161,17 @@ class Http {
       "cacheDisk": cacheDisk,
     });
     Response response;
-    response = await dio.get(path,
-    queryParameters: params,
-    options: requestOptions,
-    cancelToken: cancelToken ?? _cancelToken);
-    // print(response.data.runtimeType);
-    response.data = {"sysTime2":"2021-04-28 17:15:24","sysTime1":"20210428171524"};
-    // print(JsonConvert.fromJsonAsT<T>(response.data));
-    return JsonConvert.fromJsonAsT<T>(response.data);
-    // return response.data;
+    try {
+      response = await dio.get(path,
+          queryParameters: params,
+          options: requestOptions,
+          cancelToken: cancelToken ?? _cancelToken);
+      return JsonConvert.fromJsonAsT<T>(response.data);
+    } on DioError catch(e) {
+      print('输出错误');
+      print('123${e.toString()}');
+      return null;
+    }
   }
 
   /// restful post 操作
@@ -180,12 +186,17 @@ class Http {
     if (_authorization != null) {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
-    Response response = await dio.post(path,
-        data: data,
-        options: requestOptions,
-        cancelToken: cancelToken ?? _cancelToken);
-    return JsonConvert.fromJsonAsT<T>(response.data);
-    // return response.data;
+    Response response;
+    try {
+      response = await dio.post(path,
+          data: data,
+          options: requestOptions,
+          cancelToken: cancelToken ?? _cancelToken);
+      return JsonConvert.fromJsonAsT<T>(response.data);
+    } on DioError catch(e) {
+      print('错误信息: ${e.toString()}');
+      return null;
+    }
   }
 
   /// restful put 操作
@@ -207,8 +218,7 @@ class Http {
         queryParameters: params,
         options: requestOptions,
         cancelToken: cancelToken ?? _cancelToken);
-    // return JsonConvert.fromJsonAsT<T>(response.data);
-    return response.data;
+    return JsonConvert.fromJsonAsT<T>(response.data);
   }
 
   /// restful patch 操作
@@ -229,8 +239,7 @@ class Http {
         queryParameters: params,
         options: requestOptions,
         cancelToken: cancelToken ?? _cancelToken);
-    // return JsonConvert.fromJsonAsT<T>(response.data);
-    return response.data;
+    return JsonConvert.fromJsonAsT<T>(response.data);
   }
 
   /// restful delete 操作
@@ -253,8 +262,7 @@ class Http {
         options: requestOptions,
         cancelToken: cancelToken ?? _cancelToken
     );
-    // return JsonConvert.fromJsonAsT<T>(response.data);
-    return response.data;
+    return JsonConvert.fromJsonAsT<T>(response.data);
   }
 
   /// restful post form 表单提交操作
@@ -275,8 +283,7 @@ class Http {
         data: data,
         options: requestOptions,
         cancelToken: cancelToken ?? _cancelToken);
-    // return JsonConvert.fromJsonAsT<T>(response.data);
-    return response.data;
+    return JsonConvert.fromJsonAsT<T>(response.data);
   }
 
 }

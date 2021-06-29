@@ -29,8 +29,8 @@ dependencies:
 
   # 状态管理
   provider: 5.0.0
-  flutter_bloc: 7.0.1 #状态管理框架
-  equatable: ^1.2.3 #增强组件相等性判断
+#  flutter_bloc: 7.0.1 #状态管理框架
+#  equatable: ^1.2.3 #增强组件相等性判断
 
   # 持久化存储
   shared_preferences: 0.5.12+4
@@ -77,6 +77,16 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/android/
+    - assets/images/android/hdpi/
+    - assets/images/android/mdpi/
+    - assets/images/android/xhdpi/
+    - assets/images/android/xxhdpi/
+    - assets/images/android/xxxhdpi/
+    - assets/images/ios/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,16 +1,12 @@
-# my_network_encapsulation
+本项目是在学习flutter过程中，利用业余时间封装的，代码结构清晰
 
-A encapsulation application.
+本项目封装：
+- 路由：全局路由、路由拦截（用作用户登录状态拦截）、路由管理工具封装
+- 网络请求：封装了网络请求工具类（单例模式），请求拦截、请求缓存处理、网络状态改变重连、请求错误处理
+- 屏幕适配：通过屏幕分辨率以及屏幕size，根据原型设计尺寸，进行适配
+- 数据库：通过shared_preferences进行持久化存储
+- 日志：通过logger进行日志输出
+- 图标工具类：LocalImageSelector，其中根据机型不同分辨率做适配
+- 吐司工具：toast
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

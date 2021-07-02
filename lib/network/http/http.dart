@@ -1,29 +1,21 @@
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:connectivity/connectivity.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:my_network_encapsulation/config/cache.dart';
-import 'package:my_network_encapsulation/config/global.dart';
 import 'package:my_network_encapsulation/config/proxy.dart';
-import 'package:my_network_encapsulation/generated/json/base/json_convert_content.dart';
-import 'package:my_network_encapsulation/network/http/BaseResponse.dart';
-import 'package:my_network_encapsulation/network/intercept/dio_connectivity_request_retrier%20.dart';
 import 'package:my_network_encapsulation/network/intercept/net_cache_interceptor.dart';
 import 'package:my_network_encapsulation/network/intercept/request_interceptor.dart';
-import 'package:my_network_encapsulation/network/intercept/retry_interceptor.dart';
+import 'package:my_network_encapsulation/network/response/transform.dart';
+import 'package:my_network_encapsulation/res/my_commons.dart';
+import 'package:my_network_encapsulation/util/local_storage.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
-
 
 /// http请求
 class Http {
-
   /// 超时时间 毫秒
-  static const int CONNECT_TIMEOUT = 5000;
-  static const int RECEIVE_TIMEOUT = 3000;
+  static const int CONNECT_TIMEOUT = 30000;
+  static const int RECEIVE_TIMEOUT = 5000;
 
   Dio dio;
   CancelToken _cancelToken = CancelToken();
@@ -31,8 +23,10 @@ class Http {
   /// 单例模式
   /// 单例公开访问点
   factory Http() => _instance;
+
   /// 静态私有成员
   static Http _instance = Http._internal();
+
   /// 私有构造函数
   /// 具体初始化
   Http._internal() {
@@ -112,16 +106,15 @@ class Http {
   * 所以参数可选
   */
   void cancelRequests({CancelToken cancelToken}) {
-    print("cancelToken: $cancelToken");
-    print("_cancelToken: ${_cancelToken..hashCode.toString()}");
-    print("_cancelToken: ${_cancelToken.hashCode}");
+    // Log.d("${_cancelToken.hashCode}");
+    // Log.d("取消网络请求");
     // cancelToken ?? _cancelToken.cancel("用户取消了");
   }
 
   /// 读取本地配置  设置token
   Map<String, dynamic> getAuthorizationHeader() {
     var headers;
-    String accessToken = Global.accessToken;
+    String accessToken = LocalStorage.get(MyCommons.TOKEN) ?? null;
     if (accessToken != null) {
       headers = {
         "Authorization": 'Bearer $accessToken',
@@ -160,27 +153,30 @@ class Http {
       "cacheKey": cacheKey,
       "cacheDisk": cacheDisk,
     });
+    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    if (_authorization != null) {
+      requestOptions = requestOptions.copyWith(headers: _authorization);
+    }
     Response response;
     try {
       response = await dio.get(path,
           queryParameters: params,
           options: requestOptions,
           cancelToken: cancelToken ?? _cancelToken);
-      return JsonConvert.fromJsonAsT<T>(response.data);
-    } on DioError catch(e) {
-      print('输出错误');
-      print('123${e.toString()}');
+      return TransformJson().jsonConvertResult(response);
+    } on DioError catch (e) {
+      Log.e("错误信息：${e.toString()}");
       return null;
     }
   }
 
   /// restful post 操作
   Future<T> post<T>(
-      String path, {
-        data,
-        Options options,
-        CancelToken cancelToken,
-      }) async {
+    String path, {
+    data,
+    Options options,
+    CancelToken cancelToken,
+  }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     if (_authorization != null) {
@@ -192,98 +188,118 @@ class Http {
           data: data,
           options: requestOptions,
           cancelToken: cancelToken ?? _cancelToken);
-      return JsonConvert.fromJsonAsT<T>(response.data);
-    } on DioError catch(e) {
-      print('错误信息: ${e.toString()}');
+      return TransformJson().jsonConvertResult(response);
+    } on DioError catch (e) {
+      Log.e("错误信息：${e.toString()}");
       return null;
     }
   }
 
   /// restful put 操作
   Future<T> put<T>(
-      String path, {
-        data,
-        Map<String, dynamic> params,
-        Options options,
-        CancelToken cancelToken,
-      }) async {
+    String path, {
+    data,
+    Map<String, dynamic> params,
+    Options options,
+    CancelToken cancelToken,
+  }) async {
     Options requestOptions = options ?? Options();
-
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     if (_authorization != null) {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
-    Response response = await dio.put(path,
-        data: data,
-        queryParameters: params,
-        options: requestOptions,
-        cancelToken: cancelToken ?? _cancelToken);
-    return JsonConvert.fromJsonAsT<T>(response.data);
+    Response response;
+    try {
+      response = await dio.put(path,
+          data: data,
+          queryParameters: params,
+          options: requestOptions,
+          cancelToken: cancelToken ?? _cancelToken);
+      return TransformJson().jsonConvertResult(response);
+    } on DioError catch (e) {
+      Log.e("错误信息：${e.toString()}");
+      return null;
+    }
   }
 
   /// restful patch 操作
   Future<T> patch<T>(
-      String path, {
-        data,
-        Map<String, dynamic> params,
-        Options options,
-        CancelToken cancelToken,
-      }) async {
+    String path, {
+    data,
+    Map<String, dynamic> params,
+    Options options,
+    CancelToken cancelToken,
+  }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     if (_authorization != null) {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
-    Response response = await dio.patch(path,
-        data: data,
-        queryParameters: params,
-        options: requestOptions,
-        cancelToken: cancelToken ?? _cancelToken);
-    return JsonConvert.fromJsonAsT<T>(response.data);
+    Response response;
+    try {
+      response = await dio.patch(path,
+          data: data,
+          queryParameters: params,
+          options: requestOptions,
+          cancelToken: cancelToken ?? _cancelToken);
+      return TransformJson().jsonConvertResult(response);
+    } on DioError catch (e) {
+      Log.e("错误信息：${e.toString()}");
+      return null;
+    }
   }
 
   /// restful delete 操作
   Future<T> delete<T>(
-      String path, {
-        data,
-        Map<String, dynamic> params,
-        Options options,
-        CancelToken cancelToken,
-      }) async {
+    String path, {
+    data,
+    Map<String, dynamic> params,
+    Options options,
+    CancelToken cancelToken,
+  }) async {
     Options requestOptions = options ?? Options();
-
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     if (_authorization != null) {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
-    Response response = await dio.delete(path,
-        data: data,
-        queryParameters: params,
-        options: requestOptions,
-        cancelToken: cancelToken ?? _cancelToken
-    );
-    return JsonConvert.fromJsonAsT<T>(response.data);
+    Response response;
+    try {
+      response = await dio.delete(path,
+          data: data,
+          queryParameters: params,
+          options: requestOptions,
+          cancelToken: cancelToken ?? _cancelToken);
+      return TransformJson().jsonConvertResult(response);
+    } on DioError catch (e) {
+      Log.e("错误信息：${e.toString()}");
+      return null;
+    }
   }
 
   /// restful post form 表单提交操作
   Future<T> postForm<T>(
-      String path, {
-        Map<String, dynamic> params,
-        Options options,
-        CancelToken cancelToken,
-      }) async {
+    String path, {
+    Map<String, dynamic> params,
+    Options options,
+    CancelToken cancelToken,
+  }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     if (_authorization != null) {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
     var data = FormData.fromMap(params);
-    print(data.length);
-    Response response = await dio.post(path,
-        data: data,
-        options: requestOptions,
-        cancelToken: cancelToken ?? _cancelToken);
-    return JsonConvert.fromJsonAsT<T>(response.data);
+    Log.d('${data.length}');
+    Response response;
+    try {
+      response = await dio.post(path,
+          data: data,
+          options: requestOptions,
+          cancelToken: cancelToken ?? _cancelToken);
+      return TransformJson().jsonConvertResult(response);
+    } on DioError catch (e) {
+      Log.e("错误信息：${e.toString()}");
+      return null;
+    }
   }
-
 }

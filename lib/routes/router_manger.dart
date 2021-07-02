@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/config/global.dart';
+import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/routes/page_route_anim.dart';
 import 'package:my_network_encapsulation/ui/Third/third.dart';
-import 'package:my_network_encapsulation/ui/base/not_found_page.dart';
 import 'package:my_network_encapsulation/ui/home.dart';
 import 'package:my_network_encapsulation/ui/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/login/login.dart';
@@ -14,6 +14,7 @@ import 'package:my_network_encapsulation/ui/test/testA.dart';
 import 'package:my_network_encapsulation/ui/test/testB.dart';
 import 'package:my_network_encapsulation/ui/test/testC.dart';
 import 'package:my_network_encapsulation/ui/test/testD.dart';
+import 'package:my_network_encapsulation/ui/widget/not_found_page.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// 路由名
@@ -76,7 +77,7 @@ class MyRouter {
       // 如果此路由需登陆权限
       if (item == settings.name) {
         // 获取本地存储的token
-        final token = LocalStorage.get(Global.accessToken) ?? '';
+        final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
         if (token != '') {
           if (settings.name == 'login') {
             route = 'login';

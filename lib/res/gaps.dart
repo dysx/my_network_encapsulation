@@ -16,13 +16,13 @@ class Gaps {
   static Widget vGap20 = SizedBox(height: Dimens.gapDp20);
 
   static Widget hLine = const SizedBox(
-    height: 1.0,
+    height: 0.3,
     width: double.infinity,
     child: const DecoratedBox(decoration: BoxDecoration(color: MyColors.gray_ee)),
   );
 
   static Widget vLine = const SizedBox(
-    width: 1.0,
+    width: 0.3,
     height: double.infinity,
     child: const DecoratedBox(decoration: BoxDecoration(color: MyColors.gray_ee)),
   );

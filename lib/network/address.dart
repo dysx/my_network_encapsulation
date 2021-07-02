@@ -12,5 +12,7 @@ class Address {
 
   static const String addFriend = BASE_HTTP + "services/app/NoticeService/AddFriend";
 
+  static const String comment = BASE_HTTP + 'services/app/CommentService/CommentWebArticle';
+
 
 }

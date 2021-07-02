@@ -1,6 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:my_network_encapsulation/base/my_base_widget.dart';
+import 'package:my_network_encapsulation/base/base_widget.dart';
 import 'package:my_network_encapsulation/routes/navigater.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
 import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
@@ -8,13 +8,13 @@ import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
 /// @name：
 /// @author qds
 /// @date 2020/10/23
-class BaseTest extends MyBaseWidget {
+class BaseTest extends BaseWidget {
 
   @override
-  MyBaseWidgetState<MyBaseWidget> getState() => new BaseTestState();
+  BaseWidgetState<BaseWidget> getState() => new BaseTestState();
 }
 
-class BaseTestState extends MyBaseWidgetState<BaseTest> {
+class BaseTestState extends BaseWidgetState<BaseTest> {
   ///api
 
   @override

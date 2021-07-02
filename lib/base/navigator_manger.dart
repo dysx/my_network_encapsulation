@@ -1,5 +1,6 @@
-import 'package:my_network_encapsulation/base/my_base_widget.dart';
 
+
+import 'package:my_network_encapsulation/base/base_widget.dart';
 
 /// 这个管理类，只是标记 当前 按照顺序放入和移除栈名称，并不是页面跳转后退 的功能，
 /// 只是方便 推算、表示生命周期方法，一般不需要修改
@@ -12,15 +13,15 @@ class NavigatorManger {
 
   //工厂模式
   factory NavigatorManger() => _singleton;
-  void addWidget(MyBaseWidgetState widgetName) {
+  void addWidget(BaseWidgetState widgetName) {
     _activityStack.add(widgetName.getClassName());
   }
 
-  void removeWidget(MyBaseWidgetState widgetName) {
+  void removeWidget(BaseWidgetState widgetName) {
     _activityStack.remove(widgetName.getClassName());
   }
 
-  bool isTopPage(MyBaseWidgetState widgetName) {
+  bool isTopPage(BaseWidgetState widgetName) {
     if (_activityStack == null) {
       return false;
     }
@@ -32,7 +33,7 @@ class NavigatorManger {
     }
   }
 
-  bool isSecondTop(MyBaseWidgetState widgetName) {
+  bool isSecondTop(BaseWidgetState widgetName) {
     if (_activityStack == null) {
       return false;
     }

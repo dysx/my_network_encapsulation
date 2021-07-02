@@ -20,3 +20,14 @@ class MyTextStyles {
       color: MyColors.black_3333,
       fontWeight: FontWeight.bold);
 }
+
+class Styles {
+
+  ///appbar阴影
+  static const BoxShadow appbarShadow = BoxShadow(
+    color: MyColors.appbar_bottom,
+    offset: Offset(0, 2.0),
+    blurRadius: 6.0,
+  );
+
+}

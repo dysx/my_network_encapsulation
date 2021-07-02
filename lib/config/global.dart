@@ -3,9 +3,6 @@ import 'dart:io';
 /// 全局配置
 class Global {
 
-  /// http请求token
-  static String accessToken = "";
-
   /// dio请求，网络出错是否可继续请求
   static bool retryEnable = false;
 

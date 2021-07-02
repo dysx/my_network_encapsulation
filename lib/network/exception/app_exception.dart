@@ -118,3 +118,8 @@ class BadAppException extends AppException {
 class UnauthorisedException extends AppException {
   UnauthorisedException([int code, String message]) : super(code, message);
 }
+
+/// 接口的success没有返回true的异常
+class NotSuccessException extends AppException {
+  NotSuccessException([int code, String message]) : super(code, message);
+}

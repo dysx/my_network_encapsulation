@@ -10,15 +10,14 @@ class ThemeDataModel extends ChangeNotifier {
 
   final ThemeData norTheme = ThemeData(
       brightness: Brightness.light, // content颜色
-      primaryColor: Color(0xFFF8F8F8), // appbar、topBar颜色
-      accentColor: Colors.lightBlue[100],
-      backgroundColor: Colors.white);
+      backgroundColor: Colors.white,
+      textTheme:
+          TextTheme(bodyText1: TextStyle(fontSize: 30, color: Colors.red)));
 
   final ThemeData darkTheme = ThemeData(
       brightness: Brightness.dark,
       primaryColor: Colors.black,
-      accentColor: Colors.red,
-      backgroundColor: Colors.black38);
+      textTheme: TextTheme(bodyText1: TextStyle(fontSize: 50)));
 
   ThemeData get myThemeData {
     switch (_themeIndex) {

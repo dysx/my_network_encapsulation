@@ -26,7 +26,7 @@ class DioConnectivityRequestRetrier {
             streamSubscription.cancel();
             print('检查网络是否连接');
           } else if (connectivityResult != ConnectivityResult.none) {
-            Alert.hide();
+            // Alert.hide();
             streamSubscription.cancel();
             responseCompleter.complete(dio.request(
               requestOptions.path,

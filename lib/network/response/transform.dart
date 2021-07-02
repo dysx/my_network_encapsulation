@@ -1,14 +1,17 @@
 import 'dart:async';
-import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:my_network_encapsulation/generated/json/base/json_convert_content.dart';
 
 /// 数据解析
-class ApiFullTransform<T> {
-  Completer<T> publishSubject;
+class TransformJson<T> {
 
-  void add(T data) {
-    publishSubject.complete(data);
+  Future<T> jsonConvert<T>(Response response) async {
+    return JsonConvert.fromJsonAsT<T>(response.data);
+  }
+
+  Future<T> jsonConvertResult<T>(Response response) async {
+    return JsonConvert.fromJsonAsT<T>(response.data['result']);
   }
 
 }

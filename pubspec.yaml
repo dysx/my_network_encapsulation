@@ -62,6 +62,9 @@ dependencies:
   # 日志打印
   logger: ^1.0.0
 
+  # 微光效果
+  shimmer: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

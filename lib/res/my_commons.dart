@@ -2,6 +2,9 @@
 /// 常量
 class MyCommons {
 
+  ///Token
+  static const String TOKEN = "token";
+
   /// 项目名
   static const String PROJECT_NAME = "";
 

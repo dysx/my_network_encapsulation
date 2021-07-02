@@ -8,6 +8,7 @@ import 'package:my_network_encapsulation/config/cache.dart';
 import 'package:my_network_encapsulation/alert/alert.dart';
 import 'package:my_network_encapsulation/network/intercept/request_interceptor.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
+import 'package:my_network_encapsulation/util/log_utils.dart';
 
 /// 网络缓存拦截器
 class NetCacheInterceptor extends Interceptor {
@@ -17,17 +18,12 @@ class NetCacheInterceptor extends Interceptor {
 
   @override
   onRequest(RequestOptions options,RequestInterceptorHandler handler) async {
-    debugPrint('===========================\n*** NetCacheInterceptor请求拦截器onRequest ***');
-    // debugPrint('NetCacheInterceptor请求method:${options.method}');
-    // debugPrint('NetCacheInterceptor请求data:${options.data.toString()}');
-    debugPrint('NetCacheInterceptor请求options.uri:${options.uri}');
-    // debugPrint('NetCacheInterceptor请求path:${options.path}');
-    // debugPrint('NetCacheInterceptor请求header:${options.headers}');
+    Log.d("缓存拦截器");
 
     // TODO: implement onRequest
     // 如果不启用缓存，则直接返回
     if(!CACHE_ENABLE) {
-      Alert.hide();
+      // Alert.hide();
       return super.onRequest(options, handler);
     }
 
@@ -47,7 +43,7 @@ class NetCacheInterceptor extends Interceptor {
       if(cacheDisk) {
         await LocalStorage.remove(options.uri.toString());
       }
-      Alert.hide();
+      // Alert.hide();
       return super.onRequest(options, handler);
     }
 
@@ -68,7 +64,7 @@ class NetCacheInterceptor extends Interceptor {
         if((DateTime.now().millisecondsSinceEpoch - ob.timeStamp) / 1000 < CACHE_MAXAGE) {
           debugPrint('若缓存未过期，则返回缓存内容');
           print('缓存当前$key的结果: ${cache[key].response}');
-          Alert.hide();
+          // Alert.hide();
           return handler.resolve(cache[key].response);
           // return cache[key].response;
         }else{
@@ -83,7 +79,7 @@ class NetCacheInterceptor extends Interceptor {
         print('磁盘缓存');
         var cacheData = LocalStorage.get(key);
         if(cacheData != null){
-          Alert.hide();
+          // Alert.hide();
           return handler.resolve(Response(
             statusCode: 200,
             data: cacheData,
@@ -91,8 +87,6 @@ class NetCacheInterceptor extends Interceptor {
         }
       }
     }
-
-    debugPrint('===========================\n');
     // Alert.hide();
     return super.onRequest(options, handler);
   }

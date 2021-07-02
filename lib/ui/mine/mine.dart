@@ -1,25 +1,44 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_network_encapsulation/base/base_inner_widget.dart';
 
-class Mine extends StatefulWidget {
+class Mine extends BaseInnerWidget {
   @override
-  State<StatefulWidget> createState() => new MineState();
+  BaseInnerWidgetState<BaseInnerWidget> getState() => MineState();
+
+  @override
+  int setIndex() => 3;
 }
 
-class MineState extends State<Mine> {
+class MineState extends BaseInnerWidgetState<Mine> {
   @override
-  Widget build(BuildContext context) {
+  Widget buildWidget(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(toolbarHeight: 0),
       body: SafeArea(
-        child: Container(
-          child: Center(
-            child: Text('这是我的页面'),
-          ),
+        child: Center(
+          child: Text('我的页面'),
         ),
       ),
     );
+  }
+
+  @override
+  double getVerticalMargin() => 0;
+
+  @override
+  void onCreate() {
+    setTopBarVisible(false);
+    setAppBarVisible(false);
+  }
+
+  @override
+  void onPause() {
+    // TODO: implement onPause
+  }
+
+  @override
+  void onResume() {
+    // TODO: implement onResume
   }
 
 }

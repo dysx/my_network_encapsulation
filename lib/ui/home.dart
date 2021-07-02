@@ -4,11 +4,13 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_network_encapsulation/base/base_tabBar_widget.dart';
+import 'package:my_network_encapsulation/base/base_widget.dart';
 import 'package:my_network_encapsulation/config/application.dart';
 import 'package:my_network_encapsulation/config/global.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/ui/Third/third.dart';
-import 'file:///E:/study_project/my_network_encapsulation/lib/ui/index/home_page.dart';
+import 'package:my_network_encapsulation/ui/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/login/goto_login.dart';
 import 'package:my_network_encapsulation/ui/mine/mine.dart';
 import 'package:my_network_encapsulation/ui/second/second.dart';
@@ -16,17 +18,12 @@ import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// @name：
 /// @author qds
-
-class Home extends StatefulWidget {
-
-  Home({Key key}) : super(key: key);
-
+class Home extends BaseWidget {
   @override
-  State createState() => new HomeState();
+  BaseWidgetState<BaseWidget> getState() => HomeState();
 }
 
-class HomeState extends State<Home> {
-  String _connectionStatus = 'Unknown';
+class HomeState extends BaseWidgetState<Home> {
   final Connectivity _connectivity = Connectivity();
   StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
@@ -49,28 +46,42 @@ class HomeState extends State<Home> {
       label: '个人中心',
     ),
   ];
-  final pages = [HomePage(), Second(), Third(), Mine()];
+  List<Widget> pages = [HomePage(), Second(), Third(), Mine()];
+
+  PageController _pageController = new PageController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildWidget(BuildContext context) {
+    return BaseTabBarWidget(
+      type: 1,
+      tabItems: bottomNavItems,
+      tabViews: pages,
+      pageControl: _pageController,
+      indicatorColor: Colors.blue,
+      onPageChanged: (value){
+        _changePage(value);
+      },
+    );
     return Scaffold(
-      bottomNavigationBar:
-      CupertinoTabBar(
-        currentIndex: currentIndex,
-        onTap: (index) {
-          _changePage(index);
-        },
-        items: bottomNavItems,
-        activeColor: Colors.blue,
-      ),
-      body: pages[currentIndex]
+        bottomNavigationBar:
+        CupertinoTabBar(
+          currentIndex: currentIndex,
+          onTap: (index) {
+            _changePage(index);
+          },
+          items: bottomNavItems,
+          activeColor: Colors.blue,
+        ),
+        body: pages[currentIndex]
     );
   }
+
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // initConnectivity();
+  void onCreate() {
+    setTopBarVisible(true);
+    setTopBarBackColor(Colors.white);
+    setAppBarVisible(false);
+    setBackIconHinde();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
           if(result == ConnectivityResult.wifi || result == ConnectivityResult.mobile){
@@ -84,35 +95,48 @@ class HomeState extends State<Home> {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
+  void onPause() {
     _connectivitySubscription.cancel();
-    super.dispose();
+  }
+
+  @override
+  void onResume() {}
+
+  List<Widget> myPages(int index) {
+    List<Widget> list = [];
+    _changePage(index);
+    list = pages;
+    return list;
   }
 
   /*切换页面*/
-  void _changePage(int index) {
+  Future<void> _changePage(int index) async {
     /*如果点击的导航项不是当前项  切换 */
     if (index != currentIndex) {
       if(index == 3){
-        checkPower();
+        await checkPower();
       }
       setState(() {
         currentIndex = index;
       });
     }
+    // _pageController.jumpToPage(currentIndex);
   }
 
   /*登陆权限拦截*/
-  Future<void> checkPower() async {
+  void checkPower() {
     // 获取本地存储的token
-    final token = LocalStorage.get(Global.accessToken) ?? '';
+    final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
     if (token == '') {
+      print('无token值');
       setState(() {
         pages[3] = GoToLogin();
       });
     } else {
-      pages[3] = Mine();
+      print('有token值');
+      setState(() {
+        pages[3] = Mine();
+      });
     }
   }
 
@@ -137,4 +161,5 @@ class HomeState extends State<Home> {
 //     _connectionStatus = connectionStatus;
 //   });
 // }
+
 }

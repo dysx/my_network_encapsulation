@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:my_network_encapsulation/base/mvvm/provider/view_state.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
-import 'package:my_network_encapsulation/network/exception/app_exception.dart';
+import 'package:my_network_encapsulation/provider/view_state.dart';
+import 'package:my_network_encapsulation/util/log_utils.dart';
 import 'package:my_network_encapsulation/util/toast.dart';
 
 class ViewStateModel with ChangeNotifier {
@@ -61,11 +61,9 @@ class ViewStateModel with ChangeNotifier {
   /// [e]分类Error和Exception两种
   void setError(e, stackTrace, {String message}) {
     ViewStateErrorType errorType = ViewStateErrorType.defaultError;
-
-    print("进入setError");
+    Log.e('错误详情信息: $e');
     /// 见https://github.com/flutterchina/dio/blob/master/README-ZH.md#dioerrortype
     if (e is DioError) {
-      print('这是一个DioError');
       if (e.type == DioErrorType.connectTimeout ||
           e.type == DioErrorType.sendTimeout ||
           e.type == DioErrorType.receiveTimeout) {
@@ -76,25 +74,32 @@ class ViewStateModel with ChangeNotifier {
       } else if (e.type == DioErrorType.cancel) {
         message = e.error;
       } else {
-        e = e.error;
-        if(e is UnauthorisedException) {
-          stackTrace = null;
-          errorType = ViewStateErrorType.unauthorizedError;
-        } else if(e is NotSuccessException){
-          stackTrace = null;
-          // message = e.message;
-        } else if (e is SocketException) {
-          errorType = ViewStateErrorType.networkTimeOutError;
-          message = e.message;
+        if(e.error is SocketException) {
+            errorType = ViewStateErrorType.networkTimeOutError;
+            message = e.message;
         } else {
           message = e.message;
         }
+        // if(e is UnauthorisedException) {
+        //   stackTrace = null;
+        //   errorType = ViewStateErrorType.unauthorizedError;
+        // } else if(e is NotSuccessException){
+        //   stackTrace = null;
+        //   // message = e.message;
+        // } else if (e is SocketException) {
+        //   print('666');
+        //   errorType = ViewStateErrorType.networkTimeOutError;
+        //   message = e.message;
+        // } else {
+        //   message = e.message;
+        // }
       }
     }
     viewState = ViewState.error;
     _viewStateError = ViewStateError(
       errorType,
       message: '',
+      // message: message,
       errorMessage: e.toString()
     );
     printErrorStack(e, stackTrace);

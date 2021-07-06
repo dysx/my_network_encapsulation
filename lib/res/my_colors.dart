@@ -3,6 +3,7 @@ import 'dart:ui';
 
 /// 颜色管理
 class MyColors {
+  static const Color white = Color(0xFFFFFF);
 
   static const Color appbar_bottom = Color(0x0A000000);
 
@@ -12,5 +13,6 @@ class MyColors {
   static const Color blue_91ff = Color(0xFF0091FF);
   static const Color yellow_ab00 = Color(0xFFFFAB00);
   static const Color gray_ee = Color(0xFFEEEEEE);
+  static const Color grey_9999 = Color(0xFF999999);
 
 }

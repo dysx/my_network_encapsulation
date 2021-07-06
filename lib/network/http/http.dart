@@ -1,10 +1,10 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:my_network_encapsulation/config/cache.dart';
 import 'package:my_network_encapsulation/config/proxy.dart';
-import 'package:my_network_encapsulation/network/intercept/net_cache_interceptor.dart';
 import 'package:my_network_encapsulation/network/intercept/request_interceptor.dart';
 import 'package:my_network_encapsulation/network/response/transform.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
@@ -157,17 +157,27 @@ class Http {
     if (_authorization != null) {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
-    Response response;
+
+    Future future;
+    Completer<T> completer = Completer();
+
     try {
-      response = await dio.get(path,
+      future = dio.get(path,
           queryParameters: params,
           options: requestOptions,
           cancelToken: cancelToken ?? _cancelToken);
-      return TransformJson().jsonConvertResult(response);
     } on DioError catch (e) {
-      Log.e("错误信息：${e.toString()}");
-      return null;
+      Log.e('------- dio catchError --------');
+      completer.completeError(e);
     }
+    future.then((data){
+      completer.complete(TransformJson().jsonConvertResult(data));
+    }).catchError((err){
+      Log.e("------- future catchError --------");
+      completer.completeError(err);
+    });
+
+    return completer.future;
   }
 
   /// restful post 操作
@@ -182,17 +192,27 @@ class Http {
     if (_authorization != null) {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
-    Response response;
+
+    Future future;
+    Completer<T> completer = Completer();
+
     try {
-      response = await dio.post(path,
+      future = dio.post(path,
           data: data,
           options: requestOptions,
           cancelToken: cancelToken ?? _cancelToken);
-      return TransformJson().jsonConvertResult(response);
     } on DioError catch (e) {
-      Log.e("错误信息：${e.toString()}");
-      return null;
+      Log.e('------- dio catchError --------');
+      completer.completeError(e);
     }
+    future.then((data){
+      completer.complete(TransformJson().jsonConvertResult(data));
+    }).catchError((err){
+      Log.e("------- future catchError --------");
+      completer.completeError(err);
+    });
+
+    return completer.future;
   }
 
   /// restful put 操作
@@ -208,18 +228,27 @@ class Http {
     if (_authorization != null) {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
-    Response response;
+
+    Future future;
+    Completer<T> completer = Completer();
+
     try {
-      response = await dio.put(path,
-          data: data,
+      future = dio.put(path,
           queryParameters: params,
           options: requestOptions,
           cancelToken: cancelToken ?? _cancelToken);
-      return TransformJson().jsonConvertResult(response);
     } on DioError catch (e) {
-      Log.e("错误信息：${e.toString()}");
-      return null;
+      Log.e('------- dio catchError --------');
+      completer.completeError(e);
     }
+    future.then((data){
+      completer.complete(TransformJson().jsonConvertResult(data));
+    }).catchError((err){
+      Log.e("------- future catchError --------");
+      completer.completeError(err);
+    });
+
+    return completer.future;
   }
 
   /// restful patch 操作
@@ -235,18 +264,27 @@ class Http {
     if (_authorization != null) {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
-    Response response;
+
+    Future future;
+    Completer<T> completer = Completer();
+
     try {
-      response = await dio.patch(path,
-          data: data,
+      future = dio.patch(path,
           queryParameters: params,
           options: requestOptions,
           cancelToken: cancelToken ?? _cancelToken);
-      return TransformJson().jsonConvertResult(response);
     } on DioError catch (e) {
-      Log.e("错误信息：${e.toString()}");
-      return null;
+      Log.e('------- dio catchError --------');
+      completer.completeError(e);
     }
+    future.then((data){
+      completer.complete(TransformJson().jsonConvertResult(data));
+    }).catchError((err){
+      Log.e("------- future catchError --------");
+      completer.completeError(err);
+    });
+
+    return completer.future;
   }
 
   /// restful delete 操作
@@ -262,18 +300,28 @@ class Http {
     if (_authorization != null) {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
-    Response response;
+
+    Future future;
+    Completer<T> completer = Completer();
+
     try {
-      response = await dio.delete(path,
+      future = dio.delete(path,
           data: data,
           queryParameters: params,
           options: requestOptions,
           cancelToken: cancelToken ?? _cancelToken);
-      return TransformJson().jsonConvertResult(response);
     } on DioError catch (e) {
-      Log.e("错误信息：${e.toString()}");
-      return null;
+      Log.e('------- dio catchError --------');
+      completer.completeError(e);
     }
+    future.then((data){
+      completer.complete(TransformJson().jsonConvertResult(data));
+    }).catchError((err){
+      Log.e("------- future catchError --------");
+      completer.completeError(err);
+    });
+
+    return completer.future;
   }
 
   /// restful post form 表单提交操作
@@ -290,16 +338,26 @@ class Http {
     }
     var data = FormData.fromMap(params);
     Log.d('${data.length}');
-    Response response;
+
+    Future future;
+    Completer<T> completer = Completer();
+
     try {
-      response = await dio.post(path,
+      future = dio.post(path,
           data: data,
           options: requestOptions,
           cancelToken: cancelToken ?? _cancelToken);
-      return TransformJson().jsonConvertResult(response);
     } on DioError catch (e) {
-      Log.e("错误信息：${e.toString()}");
-      return null;
+      Log.e('------- dio catchError --------');
+      completer.completeError(e);
     }
+    future.then((data){
+      completer.complete(TransformJson().jsonConvertResult(data));
+    }).catchError((err){
+      Log.e("------- future catchError --------");
+      completer.completeError(err);
+    });
+
+    return completer.future;
   }
 }

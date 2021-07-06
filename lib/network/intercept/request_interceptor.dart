@@ -1,14 +1,13 @@
 
+import 'dart:io';
+
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:my_network_encapsulation/config/application.dart';
-import 'package:my_network_encapsulation/config/global.dart';
 import 'package:my_network_encapsulation/alert/alert.dart';
-import 'package:my_network_encapsulation/generated/json/base/json_convert_content.dart';
 import 'package:my_network_encapsulation/network/exception/app_exception.dart';
-import 'package:my_network_encapsulation/network/http/error_entity.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
+import 'package:my_network_encapsulation/util/toast.dart';
 
 /// 请求拦截
 class RequestInterceptor extends Interceptor {
@@ -42,14 +41,9 @@ class RequestInterceptor extends Interceptor {
     // TODO: implement onError
     Log.e("*** 错误处理onError ***\n"
         "response:${err.response}");
-
-    // Alert.hide();
     /// 网络错误
-    if ((err.type == DioErrorType.other &&
-        err.error != null &&
-        err.message.substring(0, 15) == 'SocketException')) {
-      err.error = BadAppException(-1, "网络错误");
-      Alert.showAlert(message: err.message ?? '未知错误',showCancel: false);
+    if (err.error is SocketException) {
+      // err.error = BadAppException(-1, "网络错误");
       return super.onError(err, handler);
     }
     /// 登陆失效处理 统一跳回登陆页
@@ -59,9 +53,10 @@ class RequestInterceptor extends Interceptor {
     }
     /// 展示后台定义的错误message
     if (err.response.data['error'] != null) {
-      Alert.showAlert(
-          message: err.response.data['error']['message'] ?? '未知错误',
-          showCancel: false);
+      Toast.showMsg(err.response.data['error']['message'] ?? '未知错误');
+      // Alert.showAlert(
+      //     message: err.response.data['error']['message'] ?? '未知错误',
+      //     showCancel: false);
       return super.onError(err, handler);
     }
     /// [RequestException] 自定义的异常

@@ -1,10 +1,11 @@
 
-import 'package:my_network_encapsulation/provider/locale_model.dart';
-import 'package:my_network_encapsulation/provider/theme_data_model.dart';
+import 'package:my_network_encapsulation/view_model/locale_model.dart';
+import 'package:my_network_encapsulation/view_model/theme_data_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 ///@name: 创建Provider服务配置列表
+
 List<SingleChildWidget> providers = [
   ...independentServices,
   ...dependentServices,

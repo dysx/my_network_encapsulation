@@ -1,19 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_inner_widget.dart';
-import 'package:my_network_encapsulation/config/global.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/network/request_util.dart';
-import 'package:my_network_encapsulation/provider/locale_model.dart';
-import 'package:my_network_encapsulation/provider/theme_data_model.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/routes/navigater.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
 import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
-import 'package:my_network_encapsulation/util/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 import 'package:my_network_encapsulation/util/toast.dart';
+import 'package:my_network_encapsulation/view_model/locale_model.dart';
+import 'package:my_network_encapsulation/view_model/theme_data_model.dart';
 import 'package:provider/provider.dart';
 
 /// @name：

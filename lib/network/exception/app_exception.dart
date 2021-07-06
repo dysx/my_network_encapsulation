@@ -11,6 +11,7 @@ class AppException implements Exception{
   AppException([this._code,this._message]);
 
   String toString() {
+    return "$_message";
     return "$_message($_code)";
   }
 

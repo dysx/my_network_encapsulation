@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:my_network_encapsulation/provider/view_state_list_model.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'view_state_list_model.dart';
 
 /// 基于
 abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
@@ -30,23 +30,25 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
     try {
       _currentPageNum = pageNumFirst;
       var data = await loadData(pageIndex: pageNumFirst, pageSize: pageSize);
-      if (data.isEmpty) {
-        refreshController.refreshCompleted(resetFooterState: true);
-        list.clear();
-        setEmpty();
-      } else {
-        onCompleted(data);
-        list.clear();
-        list.addAll(data);
-        refreshController.refreshCompleted();
-        // 小于分页的数量,禁止上拉加载更多
-        if (data.length < pageSize) {
-          refreshController.loadNoData();
+      if(data != null) {
+        if (data.isEmpty) {
+          refreshController.refreshCompleted(resetFooterState: true);
+          list.clear();
+          setEmpty();
         } else {
-          //防止上次上拉加载更多失败,需要重置状态
-          refreshController.loadComplete();
+          onCompleted(data);
+          list.clear();
+          list.addAll(data);
+          refreshController.refreshCompleted();
+          // 小于分页的数量,禁止上拉加载更多
+          if (data.length < pageSize) {
+            refreshController.loadNoData();
+          } else {
+            //防止上次上拉加载更多失败,需要重置状态
+            refreshController.loadComplete();
+          }
+          setIdle();
         }
-        setIdle();
       }
       return data;
     } catch (e, s) {

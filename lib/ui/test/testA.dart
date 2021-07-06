@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_widget.dart';
-import 'package:my_network_encapsulation/base/mvvm/provider/provider_widget.dart';
-import 'package:my_network_encapsulation/base/mvvm/provider/view_state_widget.dart';
-import 'package:my_network_encapsulation/base/mvvm/view_model/articleModel.dart';
+import 'package:my_network_encapsulation/provider/provider_widget.dart';
+import 'package:my_network_encapsulation/provider/view_state_widget.dart';
 import 'package:my_network_encapsulation/res/gaps.dart';
 import 'package:my_network_encapsulation/res/my_colors.dart';
 import 'package:my_network_encapsulation/routes/navigater.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
 import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
 import 'package:my_network_encapsulation/ui/widget/skeleton.dart';
+import 'package:my_network_encapsulation/util/log_utils.dart';
+import 'package:my_network_encapsulation/view_model/articleModel.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TestA extends BaseWidget {
@@ -23,26 +24,37 @@ class TestAState extends BaseWidgetState<TestA> {
   @override
   Widget buildWidget(BuildContext context) {
 
-    return SkeletonList(
-      // length: 20,
-      builder: (context, index) => ArticleItemSkeleton(),
-    );
-
     return ProviderWidget<ArticleModel>(
       model: ArticleModel(),
       onModelReady: (model) => model.initData(),
       builder: (context, model, child) {
         if (model.isBusy) {
+          return ViewStateBusyWidget();
           return SkeletonList(
             // length: 20,
             builder: (context, index) => ArticleItemSkeleton(),
           );
-        } else if (model.isError && model.list.isEmpty) {
-          return ViewStateErrorWidget(
-              error: model.viewStateError,
-              onPressed: () => model.initData());
         } else if (model.isEmpty) {
-          return ViewStateEmptyWidget(onPressed: () => model.initData());
+          print("model.isEmpty");
+          return ViewStateEmptyWidget(
+              onPressed: () => model.initData());
+        } else if (model.isError) {
+          print("model.isError");
+          if (model.viewStateError.isUnauthorized) {
+            return ViewStateUnAuthWidget(onPressed: () async {
+              var success =
+              await Navigator.of(context).pushNamed(RouteName.login);
+              // 登录成功,获取数据,刷新页面
+              if (success ?? false) {
+                model.initData();
+              }
+            });
+          } else if (model.list.isEmpty) {
+            print(model.list.isEmpty);
+            // 只有在页面上没有数据的时候才显示错误widget
+            return ViewStateErrorWidget(
+                error: model.viewStateError, onPressed: model.initData);
+          }
         }
         return SmartRefresher(
             controller: model.refreshController,
@@ -69,61 +81,6 @@ class TestAState extends BaseWidgetState<TestA> {
             ));
       },
     );
-
-    return SingleChildScrollView(
-        child: Column(
-      children: [
-        MyOutlinedButton(
-          onPressed: () {
-            Navigater.pushNamed(RouteName.testB);
-          },
-          text: "跳到b",
-        ),
-        ProviderWidget<ArticleModel>(
-          model: ArticleModel(),
-          onModelReady: (model) => model.initData(),
-          builder: (context, model, child) {
-            if (model.isBusy) {
-              return SkeletonList(
-                length: 11,
-                builder: (context, index) => ArticleItemSkeleton(),
-              );
-            } else if (model.isError && model.list.isEmpty) {
-              return ViewStateErrorWidget(
-                  error: model.viewStateError,
-                  onPressed: () => model.initData());
-            } else if (model.isEmpty) {
-              return ViewStateEmptyWidget(onPressed: () => model.initData());
-            }
-            return Container(
-              height: 500,
-              child: SmartRefresher(
-                  controller: model.refreshController,
-                  header: WaterDropHeader(),
-                  onRefresh: model.refresh,
-                  onLoading: model.loadMore,
-                  enablePullUp: true,
-                  child: ListView.separated(
-                    padding: EdgeInsets.only(top: 0),
-                    shrinkWrap: true,
-                    separatorBuilder: (BuildContext context, int index) {
-                      return Gaps.hLine;
-                    },
-                    itemCount: model.list.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        margin: EdgeInsets.symmetric(vertical: 5),
-                        height: 20,
-                        color: Colors.red,
-                        child: Text(model.list[index].title),
-                      );
-                    },
-                  )),
-            );
-          },
-        )
-      ],
-    ));
   }
 
   @override
@@ -160,11 +117,6 @@ class ArticleItemSkeleton extends StatelessWidget {
             child: SkeletonBox(width: 180, height: 10),
           ),
           trailing: SkeletonBox(width: 50, height: 10))
-
-      // Container(
-      //   height: 10,
-      //   color: MyColors.background,
-      // ),
     );
   }
 }

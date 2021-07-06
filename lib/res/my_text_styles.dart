@@ -15,6 +15,8 @@ class MyTextStyles {
       TextStyle(fontSize: Dimens.fontSp16, color: MyColors.blue_91ff);
   static TextStyle sixteenBlack3333 =
       TextStyle(fontSize: Dimens.fontSp16, color: MyColors.black_3333);
+  static TextStyle fourteenGrey3333 =
+  TextStyle(fontSize: Dimens.fontSp14, color: MyColors.grey_9999);
   static TextStyle sixteenBlack3333Bold = TextStyle(
       fontSize: Dimens.fontSp16,
       color: MyColors.black_3333,

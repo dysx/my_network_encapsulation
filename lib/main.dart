@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:my_network_encapsulation/base/mvvm/provider_setup.dart';
 import 'package:my_network_encapsulation/config/application.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
-import 'package:my_network_encapsulation/provider/locale_model.dart';
+import 'package:my_network_encapsulation/provider/provider_setup.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
 import 'package:my_network_encapsulation/util/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
+import 'package:my_network_encapsulation/view_model/locale_model.dart';
+import 'package:my_network_encapsulation/view_model/theme_data_model.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-import 'provider/theme_data_model.dart';
 
 void main() async {
 

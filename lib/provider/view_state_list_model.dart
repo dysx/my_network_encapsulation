@@ -1,6 +1,6 @@
+import 'package:my_network_encapsulation/provider/view_state_model.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 
-import 'view_state_model.dart';
 
 /// 基于
 abstract class ViewStateListModel<T> extends ViewStateModel {

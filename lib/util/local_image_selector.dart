@@ -60,7 +60,7 @@ class LocalImageSelector {
   static Image getSingleImage(String imageName,
       {double imageWidth,
       double imageHeight,
-      String type: ".jpg",
+      String type: ".png",
       BoxFit bFitFill,
       Key key,
       Color imageColor}) {

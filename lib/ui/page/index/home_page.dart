@@ -146,26 +146,6 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   )
                 ],
               ),
-              Container(
-                color: Colors.red,
-                width: 50.w,
-                height: 50.w,
-              ),
-              Container(
-                color: Colors.blue,
-                width: 360.w,
-                height: 200.h,
-              ),
-              Container(
-                color: Colors.blue,
-                width: 360.w,
-                height: 200.h,
-              ),
-              Container(
-                color: Colors.blue,
-                width: 360.w,
-                height: 200.h,
-              )
             ],
           ),
         ),
@@ -175,7 +155,9 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
 
   @override
   void onCreate() {
-    setTopBarVisible(false);
+    setTopBarVisible(true);
+    setTopBarStyle(false);
+    // setTopBarColor(Colors.red);
     setAppBarVisible(false);
   }
 

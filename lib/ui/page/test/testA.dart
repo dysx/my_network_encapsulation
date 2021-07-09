@@ -10,7 +10,7 @@ import 'package:my_network_encapsulation/routes/router_manger.dart';
 import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
 import 'package:my_network_encapsulation/ui/widget/skeleton.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
-import 'package:my_network_encapsulation/view_model/articleModel.dart';
+import 'package:my_network_encapsulation/view_model/article_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TestA extends BaseWidget {
@@ -87,7 +87,6 @@ class TestAState extends BaseWidgetState<TestA> {
   void onCreate() {
     setAppBarTitle('testA');
     // TODO: implement onCreate
-    // setTopBarBackColor(MyColors.background);
   }
 
   @override

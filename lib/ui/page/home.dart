@@ -6,14 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_tabBar_widget.dart';
 import 'package:my_network_encapsulation/base/base_widget.dart';
-import 'package:my_network_encapsulation/config/application.dart';
-import 'package:my_network_encapsulation/config/global.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
-import 'package:my_network_encapsulation/ui/Third/third.dart';
-import 'package:my_network_encapsulation/ui/index/home_page.dart';
-import 'package:my_network_encapsulation/ui/login/goto_login.dart';
-import 'package:my_network_encapsulation/ui/mine/mine.dart';
-import 'package:my_network_encapsulation/ui/second/second.dart';
+import 'package:my_network_encapsulation/ui/page/index/home_page.dart';
+import 'package:my_network_encapsulation/ui/page/login/goto_login.dart';
+import 'package:my_network_encapsulation/ui/page/mine/mine.dart';
+import 'package:my_network_encapsulation/ui/page/second/second.dart';
+import 'package:my_network_encapsulation/ui/page/third/third.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// @name：
@@ -78,18 +76,15 @@ class HomeState extends BaseWidgetState<Home> {
 
   @override
   void onCreate() {
-    setTopBarVisible(true);
-    setTopBarBackColor(Colors.white);
+    setTopBarVisible(false);
     setAppBarVisible(false);
     setBackIconHinde();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
           if(result == ConnectivityResult.wifi || result == ConnectivityResult.mobile){
-            Application.haveNetWork = true;
-            debugPrint('网络可用：${Application.haveNetWork}');
+            debugPrint('网络可用');
           }else{
-            Application.haveNetWork = false;
-            debugPrint('网络不可用：${Application.haveNetWork}');
+            debugPrint('网络不可用');
           }
         });
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_network_encapsulation/config/application.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
@@ -19,6 +20,15 @@ void main() async {
   await LocalStorage.getInstance();
   SizeUtil.initialize();
   LocalImageSelector.init();
+
+  //设置头部导航栏的透明
+  SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, //全局设置透明
+      statusBarIconBrightness: Brightness.light
+    //light:黑色图标 dark：白色图标
+    //在此处设置statusBarIconBrightness为全局设置
+  );
+  SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   runApp(MyApp());
 
 }

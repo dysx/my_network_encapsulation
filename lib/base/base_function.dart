@@ -30,7 +30,7 @@ abstract class BaseFunction {
   Color _appBarBottomLineColor = Colors.transparent;
   Widget _appBarRightContent;
   Widget _bottomWidget;
-  bool _topBarStyle = false;
+  bool _topBarStyle = false;  //设置状态栏字体黑白 true: 白色，false: 黑色
 
   Function _backIconClick;
 
@@ -67,45 +67,41 @@ abstract class BaseFunction {
   }
 
   Widget getBaseView(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: _appBarContentColor.computeLuminance() < 0.5
-            ? SystemUiOverlayStyle.dark
-            : SystemUiOverlayStyle.light,
-        child: Container(
-          width: double.maxFinite,
-          height: double.maxFinite,
-          color: _backgroundColor,
-          alignment: Alignment.topCenter,
-          child: Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(
-                    bottom: _isAppBarBottomShow ? _appBarBottomLineheight : 0),
-                decoration: _isAppBarBottomShow
-                    ? BoxDecoration(
-                        color: _appBarColor, boxShadow: [Styles.appbarShadow])
-                    : BoxDecoration(),
-                child: Column(
-                  children: <Widget>[
-                    _getBaseTopBar(),
-                    _getBaseAppBar(),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  width: getScreenWidth(),
-                  child: Stack(
-                    children: <Widget>[
-                      buildWidget(context),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+    return Container(
+      width: double.maxFinite,
+      height: double.maxFinite,
+      color: _backgroundColor,
+      alignment: Alignment.topCenter,
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(
+                bottom: _isAppBarBottomShow ? _appBarBottomLineheight : 0),
+            decoration: _isAppBarBottomShow
+                ? BoxDecoration(
+                color: _appBarColor, boxShadow: [Styles.appbarShadow])
+                : BoxDecoration(),
+            child: Column(
+              children: <Widget>[
+                _getBaseTopBar(),
+                _getBaseAppBar(),
+              ],
+            ),
           ),
-        ));
+          Expanded(
+            flex: 1,
+            child: Container(
+              width: getScreenWidth(),
+              child: Stack(
+                children: <Widget>[
+                  buildWidget(context),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _getBaseTopBar() {

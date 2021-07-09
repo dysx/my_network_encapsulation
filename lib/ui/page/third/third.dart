@@ -2,23 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_inner_widget.dart';
 
-class Mine extends BaseInnerWidget {
+class Third extends BaseInnerWidget {
   @override
-  BaseInnerWidgetState<BaseInnerWidget> getState() => MineState();
+  BaseInnerWidgetState<BaseInnerWidget> getState() => ThirdState();
 
   @override
-  int setIndex() => 3;
+  int setIndex() => 2;
 }
 
-class MineState extends BaseInnerWidgetState<Mine> {
+class ThirdState extends BaseInnerWidgetState<Third> {
   @override
   Widget buildWidget(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Text('我的页面'),
-        ),
-      ),
+    return Center(
+      child: Text('这是第三个页面'),
     );
   }
 
@@ -27,7 +23,7 @@ class MineState extends BaseInnerWidgetState<Mine> {
 
   @override
   void onCreate() {
-    setTopBarVisible(false);
+    setTopBarVisible(true);
     setAppBarVisible(false);
   }
 

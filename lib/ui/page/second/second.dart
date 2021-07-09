@@ -27,7 +27,7 @@ class SecondState extends BaseInnerWidgetState<Second> {
 
   @override
   void onCreate() {
-    setTopBarVisible(false);
+    setTopBarVisible(true);
     setAppBarVisible(false);
   }
 

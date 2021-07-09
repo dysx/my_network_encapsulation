@@ -29,15 +29,13 @@ dependencies:
 
   # 状态管理
   provider: 5.0.0
-#  flutter_bloc: 7.0.1 #状态管理框架
-#  equatable: ^1.2.3 #增强组件相等性判断
 
   # 持久化存储
-  shared_preferences: 0.5.12+4
+  shared_preferences: ^2.0.6
 
   # 网络
   dio: 4.0.0
-  connectivity: 2.0.2
+  connectivity: ^3.0.6
 
   # 吐司
   oktoast: 2.3.2
@@ -64,6 +62,15 @@ dependencies:
 
   # 微光效果
   shimmer: ^2.0.0
+
+  # 跳转第三方
+  url_launcher: ^6.0.9
+
+  # app升级
+  ota_update: ^3.0.2
+
+  # 网络图像缓存
+  cached_network_image: ^3.0.0
 
 dev_dependencies:
   flutter_test:

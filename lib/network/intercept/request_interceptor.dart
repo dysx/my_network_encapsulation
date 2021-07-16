@@ -2,7 +2,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:my_network_encapsulation/config/application.dart';
+import 'package:my_network_encapsulation/config/appconfig.dart';
 import 'package:my_network_encapsulation/alert/alert.dart';
 import 'package:my_network_encapsulation/network/exception/app_exception.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
@@ -47,13 +47,13 @@ class RequestInterceptor extends Interceptor {
       return super.onError(err, handler);
     }
     /// 登陆失效处理 统一跳回登陆页
-    if (err.response.data['unAuthorizedRequest']) {
-      Application.globalKey.currentState.pushNamed(RouteName.login, arguments: {'havePop': true});
+    if (err.response!.data['unAuthorizedRequest']) {
+      AppConfig.globalKey.currentState!.pushNamed(RouteName.login, arguments: {'havePop': true});
       return super.onError(err, handler);
     }
     /// 展示后台定义的错误message
-    if (err.response.data['error'] != null) {
-      Toast.showMsg(err.response.data['error']['message'] ?? '未知错误');
+    if (err.response!.data['error'] != null) {
+      Toast.showMsg(err.response!.data['error']['message'] ?? '未知错误');
       // Alert.showAlert(
       //     message: err.response.data['error']['message'] ?? '未知错误',
       //     showCancel: false);
@@ -63,7 +63,7 @@ class RequestInterceptor extends Interceptor {
     else{
       AppException requestException = AppException.create(err);
       err.error = requestException;
-      Alert.showAlert(message: err.message ?? '未知错误',showCancel: false);
+      Alert.showAlert(message: err.message != '' ? err.message : '未知错误',showCancel: false);
       return super.onError(err, handler);
     }
   }

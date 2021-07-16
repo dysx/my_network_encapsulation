@@ -10,7 +10,7 @@ import 'navigator_manger.dart';
 
 /// 基类
 abstract class BaseWidget extends StatefulWidget {
-  BaseWidget({Key key}) : super(key: key);
+  BaseWidget({Key? key}) : super(key: key);
 
   @override
   BaseWidgetState createState()=> getState();
@@ -38,7 +38,7 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
   void initState() {
     initBaseCommon(this, context);
     NavigatorManger().addWidget(this);
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance!.addObserver(this);
     onCreate();
     log("create");
     super.initState();
@@ -91,8 +91,7 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
               ? getBaseView(context)
               : Scaffold(
             key: baseScaffoldKey,
-            resizeToAvoidBottomInset: isBottomInset,
-            // resizeToAvoidBottomPadding: false,//防止键盘出界
+            resizeToAvoidBottomInset: isBottomInset,//防止键盘出界
             drawer: getDrawer(),
             endDrawer: getEndDrawer(),
             body: getBaseView(context),
@@ -105,7 +104,7 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
   void dispose() {
     // TODO: implement dispose
     onDestroy();
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance!.removeObserver(this);
     _onResumed = false;
     _onPause = false;
 

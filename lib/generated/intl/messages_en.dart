@@ -21,10 +21,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "actionCancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
+    "actionConfirm" : MessageLookupByLibrary.simpleMessage("Confirm"),
     "autoBySystem" : MessageLookupByLibrary.simpleMessage("autoBySystem"),
+    "click_again_to_exit" : MessageLookupByLibrary.simpleMessage("Click again to exit"),
     "interfaceTest" : MessageLookupByLibrary.simpleMessage("interfaceTest"),
     "jump" : MessageLookupByLibrary.simpleMessage("jump"),
     "normalPage" : MessageLookupByLibrary.simpleMessage("normalPage"),
-    "test" : MessageLookupByLibrary.simpleMessage("test")
+    "test" : MessageLookupByLibrary.simpleMessage("test"),
+    "viewStateButtonLogin" : MessageLookupByLibrary.simpleMessage("Sign In"),
+    "viewStateButtonRefresh" : MessageLookupByLibrary.simpleMessage("Refresh"),
+    "viewStateButtonRetry" : MessageLookupByLibrary.simpleMessage("Retry"),
+    "viewStateMessageEmpty" : MessageLookupByLibrary.simpleMessage("Nothing Found"),
+    "viewStateMessageError" : MessageLookupByLibrary.simpleMessage("Load Failed"),
+    "viewStateMessageNetworkError" : MessageLookupByLibrary.simpleMessage("Load Failed,Check network "),
+    "viewStateMessageUnAuth" : MessageLookupByLibrary.simpleMessage("Not sign in yet")
   };
 }

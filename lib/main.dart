@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:my_network_encapsulation/config/application.dart';
+import 'package:my_network_encapsulation/config/appconfig.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/provider/provider_setup.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
@@ -66,14 +66,14 @@ class MyApp extends StatelessWidget {
                   ],
                   locale: currentLocale.locale, // 当前的语言
                   supportedLocales: S.delegate.supportedLocales, // 支持的语言
-                  navigatorKey: Application.globalKey,      // 全局globalKey
+                  navigatorKey: AppConfig.globalKey,      // 全局globalKey
                   onGenerateRoute: MyRouter.generateRoute,  // 路由拦截器
                   initialRoute: RouteName.home,
                   builder: (context, widget) {
                     return MediaQuery(
                       data: MediaQuery.of(context)
                           .copyWith(textScaleFactor: 1.0), // 字体大小不随系统变化
-                      child: widget,
+                      child: widget!,
                     );
                   },
                 )

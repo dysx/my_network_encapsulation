@@ -13,36 +13,43 @@ import 'package:my_network_encapsulation/util/size_util.dart';
 /// base 类 常用的一些工具类 ， 放在这里就可以了
 /// get方法均可以重写，set方法可直接调用设置
 abstract class BaseFunction {
-  State _stateBaseFunction;
-  BuildContext _contextBaseFunction;
+  late State _stateBaseFunction;
+  late BuildContext _contextBaseFunction;
 
   GlobalKey<ScaffoldState> baseScaffoldKey = new GlobalKey();
 
-  bool _isTopBarShow = true; //状态栏是否显示
-  bool _isAppBarShow = true; //导航栏是否显示
-  bool _isAppBarBottomShow = false; //导航栏底部是否显示
-
+  ///状态栏是否显示 默认显示
+  bool _isTopBarShow = true;
+  ///导航栏是否显示 默认显示
+  bool _isAppBarShow = true;
+  ///导航栏底部是否显示 默认不显示
+  bool _isAppBarBottomShow = false;
+  ///背景色 默认白
   Color _backgroundColor = Colors.white;
-
+  ///状态栏背景色
   Color _topBarColor = MyColors.background;
+  ///导航栏背景色
   Color _appBarColor = MyColors.background;
+  ///导航栏内容颜色
   Color _appBarContentColor = MyColors.black_3333;
-  Color _appBarBottomLineColor = Colors.transparent;
-  Widget _appBarRightContent;
-  Widget _bottomWidget;
-  bool _topBarStyle = false;  //设置状态栏字体黑白 true: 白色，false: 黑色
-
-  Function _backIconClick;
-
-  //标题字体大小
-  double _appBarCenterTextSize = 18.sp; //根据需求变更
+  Color _appBarBottomLineColor = MyColors.background;
+  ///导航栏右边组件
+  Widget? _appBarRightContent;
+  ///底部组件
+  Widget? _bottomWidget;
+  ///设置状态栏字体黑白 true: 白色，false: 黑色
+  bool _topBarStyle = false;
+  ///导航栏返回按钮事件
+  Function? _backIconClick;
+  ///标题字体大小
+  double _appBarCenterTextSize = 18.sp;
+  ///标题
   String _appBarTitle = '';
-
-  //小标题信息
-  String _appBarRightTitle;
+  ///右边小标题信息
+  String? _appBarRightTitle;
   double _appBarRightTextSize = 15.sp;
   double _appBarBottomLineheight = 2;
-
+  ///是否显示左边返回按钮
   bool _isBackIconShow = true;
 
   double bottomVsrtical = 0; //作为内部页面距离底部的高度
@@ -182,7 +189,7 @@ abstract class BaseFunction {
     return Text(
       _appBarTitle,
       style: TextStyle(
-        fontSize: _appBarCenterTextSize,
+        fontSize: _appBarCenterTextSize.toDouble(),
         color: _appBarContentColor,
         fontWeight: FontWeight.bold,
       ),
@@ -193,7 +200,7 @@ abstract class BaseFunction {
   Widget getAppBarRight() {
     return _appBarRightContent ??
         Text(
-          _appBarRightTitle == null ? "" : _appBarRightTitle,
+          (_appBarRightTitle == null ? "" : _appBarRightTitle)!,
           style: TextStyle(
             fontSize: _appBarRightTextSize,
             color: _appBarContentColor,
@@ -237,13 +244,15 @@ abstract class BaseFunction {
   int backTime = 0;
 
   /// 返回事件
-  Future getBackEvent(BuildContext context) async {
+  Future<bool> getBackEvent(BuildContext context) async {
     if (Navigator.canPop(_contextBaseFunction)) {
       Navigator.of(_contextBaseFunction).pop();
+      return Future.value(false);
     } else {
       if (backTime != 0 &&
           DateTime.now().millisecondsSinceEpoch - backTime < 2000) {
         finishDartPageOrApp();
+        return Future.value(false);
       } else if (backTime != 0 &&
           DateTime.now().millisecondsSinceEpoch - backTime > 2000) {
         backTime = DateTime.now().millisecondsSinceEpoch;
@@ -252,7 +261,7 @@ abstract class BaseFunction {
       } else {
         backTime = DateTime.now().millisecondsSinceEpoch;
         Toast.showMsg(S.of(context).click_again_to_exit);
-        return Future.value(true);
+        return Future.value(false);
       }
     }
   }
@@ -298,24 +307,24 @@ abstract class BaseFunction {
 
   /// 抽屉， 如需要需重写
   /// 抽屉顶部状态栏灰色解决方法：Drawer() 下的child设置padding为zero。
-  Drawer getDrawer() {
+  Drawer? getDrawer() {
     return null;
   }
 
   /// 右侧抽屉， 如需要需重写
   /// 右侧抽屉顶部状态栏灰色解决方法：Drawer() 下的child设置padding为zero。
-  Drawer getEndDrawer() {
+  Drawer? getEndDrawer() {
     return null;
   }
 
   /// 打开抽屉，需要主动关闭抽屉调用Navigator.pop(context)即可
   void openDrawer() {
-    baseScaffoldKey.currentState.openDrawer();
+    baseScaffoldKey.currentState!.openDrawer();
   }
 
   /// 打开右侧抽屉
   void openEndDrawer() {
-    baseScaffoldKey.currentState.openEndDrawer();
+    baseScaffoldKey.currentState!.openEndDrawer();
   }
 
   ///关闭最后一个 flutter 页面 ， 如果是原生跳过来的则回到原生，否则关闭app
@@ -333,7 +342,7 @@ abstract class BaseFunction {
   }
 
   ///设置背景色
-  void setBackground(Color color) {
+  void setBackground(Color? color) {
     // ignore: invalid_use_of_protected_member
     _stateBaseFunction.setState(() {
       _backgroundColor = color ?? _backgroundColor;
@@ -439,7 +448,7 @@ abstract class BaseFunction {
   }
 
   ///设置底部线是否显示
-  void setAppBarBottomShow(bool isShow, {Color bottomColor, double height}) {
+  void setAppBarBottomShow(bool isShow, {Color? bottomColor, double? height}) {
     if (isShow != null) {
       // ignore: invalid_use_of_protected_member
       _stateBaseFunction.setState(() {

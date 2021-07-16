@@ -9,7 +9,7 @@ import 'package:my_network_encapsulation/network/intercept/dio_connectivity_requ
 class RetryOnConnectionChangeInterceptor extends Interceptor {
   final DioConnectivityRequestRetrier requestRetrier;
 
-  RetryOnConnectionChangeInterceptor({@required this.requestRetrier});
+  RetryOnConnectionChangeInterceptor({required this.requestRetrier});
 
   @override
   Future onError(DioError err,ErrorInterceptorHandler handler) async {
@@ -28,7 +28,7 @@ class RetryOnConnectionChangeInterceptor extends Interceptor {
   bool _shouldRetry(DioError err) {
     print(
         '是否可以重试：${err.type == DioErrorType.other && err.error != null && err.error is SocketException}');
-    String errorType;
+    String errorType = '';
     if(err.message.length>=15){
       String errorType = err.message.substring(0, 15);
     }

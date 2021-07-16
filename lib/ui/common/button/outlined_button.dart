@@ -4,6 +4,8 @@ import 'package:my_network_encapsulation/res/my_colors.dart';
 import 'package:my_network_encapsulation/util/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 
+typedef MyFunction = void Function();
+
 /// @name：OutlinedButton
 /// @author qds
 /// 带边界的按钮
@@ -25,51 +27,51 @@ class MyOutlinedButton extends StatelessWidget {
       this.iconWidth});
 
   /// 按下事件
-  final Function onPressed;
+  final MyFunction? onPressed;
 
   /// 图标
-  final String icon;
+  final String? icon;
   final bool multiplePixel;
   final String iconType;
-  final double iconWidth;
-  final double iconHeight;
+  final double? iconWidth;
+  final double? iconHeight;
 
   /// 文字
-  final String text;
-  final TextStyle style;
+  final String? text;
+  final TextStyle? style;
 
   /// 颜色
-  final Color borderColor;
-  final Color backgroundColor;
-  final Color overlayColor;
+  final Color? borderColor;
+  final Color? backgroundColor;
+  final Color? overlayColor;
 
-  final Size size;
-  final EdgeInsets padding;
-  final double radius;
+  final Size? size;
+  final EdgeInsets? padding;
+  final double? radius;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
       clipBehavior: Clip.antiAlias,
-        onPressed: onPressed,
+        onPressed: onPressed!,
         child:
         icon == null
-            ? Text(text, style: style ?? null)
+            ? Text(text!, style: style ?? null)
             : Wrap(
                 alignment: WrapAlignment.center,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   !multiplePixel
-                      ? LocalImageSelector.getSingleImage(icon,
+                      ? LocalImageSelector.getSingleImage(icon!,
                           type: iconType,
                           imageWidth: iconWidth ?? 10.w,
                           imageHeight: iconHeight ?? 10.w)
-                      : LocalImageSelector.getImage(icon,
+                      : LocalImageSelector.getImage(icon!,
                           type: iconType,
                           imageWidth: iconWidth ?? 10.w,
                           imageHeight: iconHeight ?? 10.w),
                   SizedBox(width: 10.w),
-                  Text(text, style: style)
+                  Text(text!, style: style)
                 ],
               ),
         style: ButtonStyle(

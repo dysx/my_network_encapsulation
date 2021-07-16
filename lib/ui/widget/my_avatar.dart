@@ -15,12 +15,12 @@ class MyAvatar extends StatelessWidget {
     this.onTap,
     this.bigSize : false,
   });
-  final String avatarUrl;
-  final double width;
-  final double height;
-  final double borderWidth;
-  final Widget defaultImage;
-  final Function onTap;
+  final String? avatarUrl;
+  final double? width;
+  final double? height;
+  final double? borderWidth;
+  final Widget? defaultImage;
+  final Function? onTap;
   final bool bigSize;
 
   @override
@@ -28,9 +28,7 @@ class MyAvatar extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: (){
-        if(onTap != null){
-          onTap();
-        }
+        onTap!();
       },
       child: Container(
         // color: Colors.red,

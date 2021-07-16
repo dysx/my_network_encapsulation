@@ -5,10 +5,10 @@ import 'package:my_network_encapsulation/network/http/http.dart';
 ///通常是和 viewpager 联合使用  ， 类似于Android 中的 fragment
 /// 不过生命周期 还需要在容器父类中根据tab切换来完善
 abstract class BaseInnerWidget extends StatefulWidget {
-  BaseInnerWidget({Key key}) : super(key: key);
+  BaseInnerWidget({Key? key}) : super(key: key);
 
-  BaseInnerWidgetState baseInnerWidgetState;
-  int index;
+  late BaseInnerWidgetState baseInnerWidgetState;
+  int? index;
   @override
   BaseInnerWidgetState createState() {
     baseInnerWidgetState = getState();
@@ -47,15 +47,19 @@ abstract class BaseInnerWidgetState<T extends BaseInnerWidget> extends State<T>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    return getBaseView(context);
+
     return WillPopScope(
       onWillPop: () => getBackEvent(context),
-      child: isAsFrame
-          ? getBaseView(context)
-          : Scaffold(
-        resizeToAvoidBottomInset: true,
-        // resizeToAvoidBottomPadding: false,//防止键盘出界
-        body: getBaseView(context),
-      ),
+      child:
+      getBaseView(context)
+      // isAsFrame
+      //     ? getBaseView(context)
+      //     : Scaffold(
+      //   resizeToAvoidBottomInset: true,
+      //   // resizeToAvoidBottomPadding: false,//防止键盘出界
+      //   body: getBaseView(context),
+      // ),
     );
   }
 

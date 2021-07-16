@@ -7,6 +7,8 @@ import 'package:my_network_encapsulation/network/model/time_entity.dart';
 import 'package:my_network_encapsulation/generated/json/time_entity_helper.dart';
 import 'package:my_network_encapsulation/network/model/get_recommends_entity.dart';
 import 'package:my_network_encapsulation/generated/json/get_recommends_entity_helper.dart';
+import 'package:my_network_encapsulation/network/model/login_entity.dart';
+import 'package:my_network_encapsulation/generated/json/login_entity_helper.dart';
 
 class JsonConvert<T> {
 	T fromJson(Map<String, dynamic> json) {
@@ -18,50 +20,57 @@ class JsonConvert<T> {
   }
 
   static _getFromJson<T>(Type type, data, json) {
-    switch (type) {			case TimeEntity:
-			return timeEntityFromJson(data as TimeEntity, json) as T;			case GetRecommendsEntity:
-			return getRecommendsEntityFromJson(data as GetRecommendsEntity, json) as T;			case GetRecommandsResult:
-			return getRecommandsResultFromJson(data as GetRecommandsResult, json) as T;    }
+    switch (type) {
+			case TimeEntity:
+				return timeEntityFromJson(data as TimeEntity, json) as T;
+			case GetRecommendsEntity:
+				return getRecommendsEntityFromJson(data as GetRecommendsEntity, json) as T;
+			case LoginEntity:
+				return loginEntityFromJson(data as LoginEntity, json) as T;    }
     return data as T;
   }
 
   static _getToJson<T>(Type type, data) {
-		switch (type) {			case TimeEntity:
-			return timeEntityToJson(data as TimeEntity);			case GetRecommendsEntity:
-			return getRecommendsEntityToJson(data as GetRecommendsEntity);			case GetRecommandsResult:
-			return getRecommandsResultToJson(data as GetRecommandsResult);    }
-    return data as T;
-  }
+		switch (type) {
+			case TimeEntity:
+				return timeEntityToJson(data as TimeEntity);
+			case GetRecommendsEntity:
+				return getRecommendsEntityToJson(data as GetRecommendsEntity);
+			case LoginEntity:
+				return loginEntityToJson(data as LoginEntity);
+			}
+			return data as T;
+		}
   //Go back to a single instance by type
-  static _fromJsonSingle(String type, json) {
-    switch (type) {			case 'TimeEntity':
-			return TimeEntity().fromJson(json);			case 'GetRecommendsEntity':
-			return GetRecommendsEntity().fromJson(json);			case 'GetRecommandsResult':
-			return GetRecommandsResult().fromJson(json);    }
-    return null;
-  }
+	static _fromJsonSingle<M>( json) {
+		String type = M.toString();
+		if(type == (TimeEntity).toString()){
+			return TimeEntity().fromJson(json);
+		}	else if(type == (GetRecommendsEntity).toString()){
+			return GetRecommendsEntity().fromJson(json);
+		}	else if(type == (LoginEntity).toString()){
+			return LoginEntity().fromJson(json);
+		}	
+		return null;
+	}
 
-  //empty list is returned by type
-  static _getListFromType(String type) {
-    switch (type) {			case 'TimeEntity':
-			return List<TimeEntity>();			case 'GetRecommendsEntity':
-			return List<GetRecommendsEntity>();			case 'GetRecommandsResult':
-			return List<GetRecommandsResult>();    }
-    return null;
-  }
+  //list is returned by type
+	static M _getListChildType<M>(List data) {
+		if(<TimeEntity>[] is M){
+			return data.map<TimeEntity>((e) => TimeEntity().fromJson(e)).toList() as M;
+		}	else if(<GetRecommendsEntity>[] is M){
+			return data.map<GetRecommendsEntity>((e) => GetRecommendsEntity().fromJson(e)).toList() as M;
+		}	else if(<LoginEntity>[] is M){
+			return data.map<LoginEntity>((e) => LoginEntity().fromJson(e)).toList() as M;
+		}
+		throw Exception("not fond");
+	}
 
   static M fromJsonAsT<M>(json) {
-    String type = M.toString();
-    if (json is List && type.contains("List<")) {
-      String itemType = type.substring(5, type.length - 1);
-      List tempList = _getListFromType(itemType);
-      json.forEach((itemJson) {
-        tempList
-            .add(_fromJsonSingle(type.substring(5, type.length - 1), itemJson));
-      });
-      return tempList as M;
+    if (json is List) {
+      return _getListChildType<M>(json);
     } else {
-      return _fromJsonSingle(M.toString(), json) as M;
+      return _fromJsonSingle<M>(json) as M;
     }
   }
 }

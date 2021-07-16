@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/base/base_tabBar_widget.dart';
 import 'package:my_network_encapsulation/base/base_widget.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/ui/page/index/home_page.dart';
@@ -23,7 +22,7 @@ class Home extends BaseWidget {
 
 class HomeState extends BaseWidgetState<Home> {
   final Connectivity _connectivity = Connectivity();
-  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   int currentIndex = 0;
   final List<BottomNavigationBarItem> bottomNavItems = [
@@ -50,16 +49,7 @@ class HomeState extends BaseWidgetState<Home> {
 
   @override
   Widget buildWidget(BuildContext context) {
-    return BaseTabBarWidget(
-      type: 1,
-      tabItems: bottomNavItems,
-      tabViews: pages,
-      pageControl: _pageController,
-      indicatorColor: Colors.blue,
-      onPageChanged: (value){
-        _changePage(value);
-      },
-    );
+    return pages[currentIndex];
     return Scaffold(
         bottomNavigationBar:
         CupertinoTabBar(
@@ -71,6 +61,19 @@ class HomeState extends BaseWidgetState<Home> {
           activeColor: Colors.blue,
         ),
         body: pages[currentIndex]
+    );
+  }
+
+  @override
+  Widget getBottomWidget() {
+    // TODO: implement getBottomWidget
+    return CupertinoTabBar(
+      currentIndex: currentIndex,
+      onTap: (index) {
+        _changePage(index);
+      },
+      items: bottomNavItems,
+      activeColor: Colors.blue,
     );
   }
 
@@ -109,7 +112,7 @@ class HomeState extends BaseWidgetState<Home> {
     /*如果点击的导航项不是当前项  切换 */
     if (index != currentIndex) {
       if(index == 3){
-        await checkPower();
+        checkPower();
       }
       setState(() {
         currentIndex = index;

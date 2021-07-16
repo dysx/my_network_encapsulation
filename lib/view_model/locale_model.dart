@@ -10,7 +10,7 @@ class LocaleModel extends ChangeNotifier {
 
   int get localeIndex => _localeIndex;
 
-  Locale get locale {
+  Locale? get locale {
     if(_localeIndex > 0){
       switch (_localeIndex){
         case 1: return Locale("zh");

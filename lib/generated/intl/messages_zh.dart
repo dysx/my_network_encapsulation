@@ -21,10 +21,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "actionCancel" : MessageLookupByLibrary.simpleMessage("取消"),
+    "actionConfirm" : MessageLookupByLibrary.simpleMessage("确认"),
     "autoBySystem" : MessageLookupByLibrary.simpleMessage("跟随系统"),
+    "click_again_to_exit" : MessageLookupByLibrary.simpleMessage("再点击一次退出"),
     "interfaceTest" : MessageLookupByLibrary.simpleMessage("接口测试"),
     "jump" : MessageLookupByLibrary.simpleMessage("跳转"),
     "normalPage" : MessageLookupByLibrary.simpleMessage("普通页面"),
-    "test" : MessageLookupByLibrary.simpleMessage("测试")
+    "test" : MessageLookupByLibrary.simpleMessage("测试"),
+    "viewStateButtonLogin" : MessageLookupByLibrary.simpleMessage("登录"),
+    "viewStateButtonRefresh" : MessageLookupByLibrary.simpleMessage("刷新一下"),
+    "viewStateButtonRetry" : MessageLookupByLibrary.simpleMessage("重试"),
+    "viewStateMessageEmpty" : MessageLookupByLibrary.simpleMessage("空空如也"),
+    "viewStateMessageError" : MessageLookupByLibrary.simpleMessage("加载失败"),
+    "viewStateMessageNetworkError" : MessageLookupByLibrary.simpleMessage("网络连接异常，请检查网络或稍后重试"),
+    "viewStateMessageUnAuth" : MessageLookupByLibrary.simpleMessage("未登录")
   };
 }

@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 ///@name: 数据存取
 class LocalStorage {
-  static SharedPreferences preferences;
+  static late SharedPreferences preferences;
 
   ///测试
 

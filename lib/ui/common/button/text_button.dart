@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 
 /// @name：textButton
@@ -9,29 +10,29 @@ class MyTextButton extends StatelessWidget {
       {this.onPressed, this.text, this.backgroundColor, this.overlayColor,this.style,this.buttonSize});
 
   /// 按下事件
-  final Function onPressed;
+  final MyFunction? onPressed;
   /// 按钮文字
-  final String text;
+  final String? text;
   /// 文字样式
-  final TextStyle style;
+  final TextStyle? style;
   /// 叠加颜色
-  final Color overlayColor;
+  final Color? overlayColor;
   /// 背景颜色
-  final Color backgroundColor;
+  final Color? backgroundColor;
   /// 按钮尺寸
-  final Size buttonSize;
+  final Size? buttonSize;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      child: Text(text,style: style ?? null,),
+      child: Text(text!,style: style ?? null,),
       style: ButtonStyle(
         // padding: padding ?? MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 10)),
         // shape: MaterialStateProperty.all(StadiumBorder()),
-        overlayColor: MaterialStateProperty.all(overlayColor) ?? null,
-        backgroundColor: MaterialStateProperty.all(backgroundColor) ?? null,
-        minimumSize: MaterialStateProperty.all(buttonSize) ?? null,
+        overlayColor: overlayColor != null ? MaterialStateProperty.all(overlayColor) : null,
+        backgroundColor: backgroundColor != null ? MaterialStateProperty.all(backgroundColor) : null,
+        minimumSize: buttonSize != null ? MaterialStateProperty.all(buttonSize) : null,
         // shape: MaterialStateProperty.all(RoundedRectangleBorder(
         //     borderRadius: BorderRadius.circular(7.0),
         //     side: BorderSide(

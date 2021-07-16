@@ -3,8 +3,7 @@ import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:my_network_encapsulation/config/cache.dart';
-import 'package:my_network_encapsulation/config/proxy.dart';
+import 'package:my_network_encapsulation/config/appconfig.dart';
 import 'package:my_network_encapsulation/network/intercept/request_interceptor.dart';
 import 'package:my_network_encapsulation/network/response/transform.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
@@ -17,7 +16,7 @@ class Http {
   static const int CONNECT_TIMEOUT = 30000;
   static const int RECEIVE_TIMEOUT = 5000;
 
-  Dio dio;
+  late Dio dio;
   CancelToken _cancelToken = CancelToken();
 
   /// 单例模式
@@ -30,48 +29,45 @@ class Http {
   /// 私有构造函数
   /// 具体初始化
   Http._internal() {
-    if (dio == null) {
-      // BaseOptions、Options、RequestOptions 都可以配置参数，优先级别依次递增，且可以根据优先级别覆盖参数
-      BaseOptions options = new BaseOptions(
-          connectTimeout: CONNECT_TIMEOUT,
-          // 响应流上 前后两次接受到数据的间隔，单位为毫秒
-          receiveTimeout: RECEIVE_TIMEOUT,
-          // Http请求头
-          headers: {});
+    // BaseOptions、Options、RequestOptions 都可以配置参数，优先级别依次递增，且可以根据优先级别覆盖参数
+    BaseOptions options = new BaseOptions(
+        connectTimeout: CONNECT_TIMEOUT,
+        // 响应流上 前后两次接受到数据的间隔，单位为毫秒
+        receiveTimeout: RECEIVE_TIMEOUT,
+        // Http请求头
+        headers: {});
 
-      dio = new Dio(options);
+    dio = new Dio(options);
 
-      // 添加请求拦截器
-      dio.interceptors.add(RequestInterceptor());
+    // 添加请求拦截器
+    dio.interceptors.add(RequestInterceptor());
 
-      // 添加内存缓存
-      // dio.interceptors.add(NetCacheInterceptor());
+    // 添加内存缓存
+    // dio.interceptors.add(NetCacheInterceptor());
 
-      // if(Global.retryEnable){
-      //   // 加网络监听拦截器
-      //   dio.interceptors.add(
-      //     RetryOnConnectionChangeInterceptor(
-      //       requestRetrier: DioConnectivityRequestRetrier(
-      //         dio: dio,
-      //         connectivity: Connectivity()
-      //       )
-      //     )
-      //   );
-      // }
+    // if(Global.retryEnable){
+    //   // 加网络监听拦截器
+    //   dio.interceptors.add(
+    //     RetryOnConnectionChangeInterceptor(
+    //       requestRetrier: DioConnectivityRequestRetrier(
+    //         dio: dio,
+    //         connectivity: Connectivity()
+    //       )
+    //     )
+    //   );
+    // }
 
-      // 在调试模式下需要抓包调试，所以我们使用代理，并禁用HTTPS证书校验
-      if (PROXY_ENABLE) {
-        (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-            (client) {
-          // client.findProxy = (uri) {
-          //   // return "PROXY $PROXY_IP:$PROXY_PORT";
-          //   return "PROXY 192.168.168.254:8888";
-          // };
-          // 代理工具会提供一个抓包的自签名证书，会通不过证书校验，所以我们禁用证书校验
-          client.badCertificateCallback =
-              (X509Certificate cert, String host, int port) => true;
+    // 在调试模式下需要抓包调试，所以我们使用代理，并禁用HTTPS证书校验
+    if (AppConfig.PROXY_ENABLE) {
+      (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (client) {
+        client.findProxy = (uri) {
+          return "PROXY ${AppConfig.PROXY_IP}:${AppConfig.PROXY_PORT}";
         };
-      }
+        // 代理工具会提供一个抓包的自签名证书，会通不过证书校验，所以我们禁用证书校验
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
+      };
     }
   }
 
@@ -81,10 +77,10 @@ class Http {
   /// [connectTimeOut] 连接超时时间
   /// [receiveTimeOut] 接收超时时间
   void init(
-      {String baseUrl,
-      int connectTimeOut,
-      int receiveTimeOut,
-      List<Interceptor> interceptors}) {
+      {String? baseUrl,
+      int? connectTimeOut,
+      int? receiveTimeOut,
+      List<Interceptor>? interceptors}) {
     dio.options = dio.options.copyWith(
         baseUrl: baseUrl,
         connectTimeout: connectTimeOut,
@@ -105,7 +101,7 @@ class Http {
   * 同一个cancel token 可用于多个请求，当一个cancel token取消时，所有使用该cancel token的请求都会被取消。
   * 所以参数可选
   */
-  void cancelRequests({CancelToken cancelToken}) {
+  void cancelRequests({CancelToken? cancelToken}) {
     // Log.d("${_cancelToken.hashCode}");
     // Log.d("取消网络请求");
     // cancelToken ?? _cancelToken.cancel("用户取消了");
@@ -114,7 +110,7 @@ class Http {
   /// 读取本地配置  设置token
   Map<String, dynamic> getAuthorizationHeader() {
     var headers;
-    String accessToken = LocalStorage.get(MyCommons.TOKEN) ?? null;
+    String accessToken = LocalStorage.get(MyCommons.TOKEN) ?? '';
     if (accessToken != null) {
       headers = {
         "Authorization": 'Bearer $accessToken',
@@ -138,12 +134,12 @@ class Http {
   */
   Future<T> get<T>(
     String path, {
-    Map<String, dynamic> params,
-    Options options,
-    CancelToken cancelToken,
+    Map<String, dynamic>? params,
+    Options? options,
+    CancelToken? cancelToken,
     bool refresh = false,
-    bool noCache = !CACHE_ENABLE,
-    String cacheKey,
+    bool noCache = !AppConfig.CACHE_ENABLE,
+    String? cacheKey,
     bool cacheDisk = false,
   }) async {
     Options requestOptions = options ?? Options();
@@ -158,7 +154,7 @@ class Http {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
 
-    Future future;
+    late Future future;
     Completer<T> completer = Completer();
 
     try {
@@ -184,8 +180,8 @@ class Http {
   Future<T> post<T>(
     String path, {
     data,
-    Options options,
-    CancelToken cancelToken,
+    Options? options,
+    CancelToken? cancelToken,
   }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
@@ -193,7 +189,7 @@ class Http {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
 
-    Future future;
+    late Future future;
     Completer<T> completer = Completer();
 
     try {
@@ -219,9 +215,9 @@ class Http {
   Future<T> put<T>(
     String path, {
     data,
-    Map<String, dynamic> params,
-    Options options,
-    CancelToken cancelToken,
+    Map<String, dynamic>? params,
+    Options? options,
+    CancelToken? cancelToken,
   }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
@@ -229,7 +225,7 @@ class Http {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
 
-    Future future;
+    late Future future;
     Completer<T> completer = Completer();
 
     try {
@@ -255,9 +251,9 @@ class Http {
   Future<T> patch<T>(
     String path, {
     data,
-    Map<String, dynamic> params,
-    Options options,
-    CancelToken cancelToken,
+    Map<String, dynamic>? params,
+    Options? options,
+    CancelToken? cancelToken,
   }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
@@ -265,7 +261,7 @@ class Http {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
 
-    Future future;
+    late Future future;
     Completer<T> completer = Completer();
 
     try {
@@ -291,9 +287,9 @@ class Http {
   Future<T> delete<T>(
     String path, {
     data,
-    Map<String, dynamic> params,
-    Options options,
-    CancelToken cancelToken,
+    Map<String, dynamic>? params,
+    Options? options,
+    CancelToken? cancelToken,
   }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
@@ -301,7 +297,7 @@ class Http {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
 
-    Future future;
+    late Future future;
     Completer<T> completer = Completer();
 
     try {
@@ -327,19 +323,19 @@ class Http {
   /// restful post form 表单提交操作
   Future<T> postForm<T>(
     String path, {
-    Map<String, dynamic> params,
-    Options options,
-    CancelToken cancelToken,
+    Map<String, dynamic>? params,
+    Options? options,
+    CancelToken? cancelToken,
   }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     if (_authorization != null) {
       requestOptions = requestOptions.copyWith(headers: _authorization);
     }
-    var data = FormData.fromMap(params);
+    var data = FormData.fromMap(params!);
     Log.d('${data.length}');
 
-    Future future;
+    late Future future;
     Completer<T> completer = Completer();
 
     try {

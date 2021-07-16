@@ -16,8 +16,8 @@ class ArticleModel extends ViewStateRefreshListModel<GetRecommendsEntity> {
 
   @override
   Future<List<GetRecommendsEntity>> loadData(
-      {int pageIndex, int pageSize}) async {
-      return await RequestUtil.getRecommends(pageIndex, pageSize)
+      {int? pageIndex, int? pageSize}) async {
+      return await RequestUtil.getRecommends(pageIndex!, pageSize!)
           .catchError((e, s) {
             print('异常捕捉');
         setError(e, s);

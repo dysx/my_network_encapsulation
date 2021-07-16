@@ -26,7 +26,7 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
   /// [init] 是否是第一次加载
   /// true:  Error时,需要跳转页面
   /// false: Error时,不需要跳转页面,直接给出提示
-  Future<List<T>> refresh({bool init = false}) async {
+  Future<List<T>?> refresh({bool init = false}) async {
     try {
       _currentPageNum = pageNumFirst;
       var data = await loadData(pageIndex: pageNumFirst, pageSize: pageSize);
@@ -64,7 +64,7 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
   }
 
   /// 上拉加载更多
-  Future<List<T>> loadMore() async {
+  Future<List<T>?> loadMore() async {
     try {
       var data = await loadData(pageIndex: ++_currentPageNum);
       if (data.isEmpty) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CommonWidgets {
-  static AppBar appBar({String title: '', bool centerTitle: false, Widget backIcon, List<Widget> actions}) {
+  static AppBar appBar({String title: '', bool centerTitle: false, Widget? backIcon, List<Widget>? actions}) {
     return AppBar(
         leading: backIcon == null ? null : backIcon,
         centerTitle: centerTitle,

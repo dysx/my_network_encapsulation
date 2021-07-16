@@ -17,7 +17,7 @@ class ViewStateModel with ChangeNotifier {
   /// 根据状态构造
   /// 子类可以在构造函数指定需要的页面状态
   /// FooModel():super(viewState:ViewState.busy);
-  ViewStateModel({ViewState viewState})
+  ViewStateModel({ViewState? viewState})
       : _viewState = viewState ?? ViewState.idle {
     // debugPrint('ViewStateModel---constructor--->$runtimeType');
   }
@@ -32,9 +32,9 @@ class ViewStateModel with ChangeNotifier {
   }
 
   /// ViewStateError
-  ViewStateError _viewStateError;
+  ViewStateError? _viewStateError;
 
-  ViewStateError get viewStateError => _viewStateError;
+  ViewStateError? get viewStateError => _viewStateError;
 
   /// get
   bool get isIdle => viewState == ViewState.idle;
@@ -59,7 +59,7 @@ class ViewStateModel with ChangeNotifier {
   }
 
   /// [e]分类Error和Exception两种
-  void setError(e, stackTrace, {String message}) {
+  void setError(e, stackTrace, {String? message}) {
     ViewStateErrorType errorType = ViewStateErrorType.defaultError;
     Log.e('错误详情信息: $e');
     /// 见https://github.com/flutterchina/dio/blob/master/README-ZH.md#dioerrortype
@@ -103,21 +103,21 @@ class ViewStateModel with ChangeNotifier {
       errorMessage: e.toString()
     );
     printErrorStack(e, stackTrace);
-    onError(viewStateError);
+    onError(viewStateError!);
   }
 
   void onError(ViewStateError viewStateError) {}
 
   /// 显示错误消息
-  showErrorMessage(context, {String message}) {
+  showErrorMessage(context, {String? message}) {
     if (viewStateError != null || message != null) {
-      if (viewStateError.isNetworkTimeOut) {
+      if (viewStateError!.isNetworkTimeOut) {
         message ??= S.of(context).viewStateMessageNetworkError;
       } else {
-        message ??= viewStateError.message;
+        message ??= viewStateError!.message;
       }
       Future.microtask(() {
-        Toast.showMsg(message);
+        Toast.showMsg(message!);
       });
     }
   }

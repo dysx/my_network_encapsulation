@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 /// 自定义异常
 class AppException implements Exception{
 
-  final String _message;
-  final int _code;
+  final String? _message;
+  final int? _code;
 
   AppException([this._code,this._message]);
 
@@ -42,7 +42,7 @@ class AppException implements Exception{
       case DioErrorType.response:
         {
           try {
-            int errCode = error.response.statusCode;
+            int errCode = error.response!.statusCode!;
             // String errMsg = error.response.statusMessage;
             // return ErrorEntity(code: errCode, message: errMsg);
             switch (errCode) {
@@ -94,7 +94,7 @@ class AppException implements Exception{
               default:
                 {
                   // return ErrorEntity(code: errCode, message: "未知错误");
-                  return AppException(errCode, error.response.statusMessage);
+                  return AppException(errCode, error.response!.statusMessage);
                 }
             }
           } on Exception catch (_) {
@@ -112,15 +112,15 @@ class AppException implements Exception{
 
 /// 请求错误
 class BadAppException extends AppException {
-  BadAppException([int code, String message]) : super(code, message);
+  BadAppException([int? code, String? message]) : super(code, message);
 }
 
 /// 未认证异常
 class UnauthorisedException extends AppException {
-  UnauthorisedException([int code, String message]) : super(code, message);
+  UnauthorisedException([int? code, String? message]) : super(code, message);
 }
 
 /// 接口的success没有返回true的异常
 class NotSuccessException extends AppException {
-  NotSuccessException([int code, String message]) : super(code, message);
+  NotSuccessException([int? code, String? message]) : super(code, message);
 }

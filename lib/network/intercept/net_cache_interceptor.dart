@@ -4,9 +4,7 @@ import 'dart:collection';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:my_network_encapsulation/config/cache.dart';
-import 'package:my_network_encapsulation/alert/alert.dart';
-import 'package:my_network_encapsulation/network/intercept/request_interceptor.dart';
+import 'package:my_network_encapsulation/config/appconfig.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 
@@ -22,7 +20,7 @@ class NetCacheInterceptor extends Interceptor {
 
     // TODO: implement onRequest
     // 如果不启用缓存，则直接返回
-    if(!CACHE_ENABLE) {
+    if(!AppConfig.CACHE_ENABLE) {
       // Alert.hide();
       return super.onRequest(options, handler);
     }
@@ -61,11 +59,11 @@ class NetCacheInterceptor extends Interceptor {
       if(ob != null) {
         print('内存缓存');
         // 若缓存未过期，则返回缓存内容
-        if((DateTime.now().millisecondsSinceEpoch - ob.timeStamp) / 1000 < CACHE_MAXAGE) {
+        if((DateTime.now().millisecondsSinceEpoch - ob.timeStamp) / 1000 < AppConfig.CACHE_MAXAGE) {
           debugPrint('若缓存未过期，则返回缓存内容');
-          print('缓存当前$key的结果: ${cache[key].response}');
+          print('缓存当前$key的结果: ${cache[key]!.response}');
           // Alert.hide();
-          return handler.resolve(cache[key].response);
+          return handler.resolve(cache[key]!.response);
           // return cache[key].response;
         }else{
           debugPrint('若已过期则删除缓存，继续向服务器请求');
@@ -83,6 +81,7 @@ class NetCacheInterceptor extends Interceptor {
           return handler.resolve(Response(
             statusCode: 200,
             data: cacheData,
+            requestOptions: options
           ));
         }
       }
@@ -97,7 +96,7 @@ class NetCacheInterceptor extends Interceptor {
     // debugPrint('onResponse缓存结果data: ${response.data}');
     // debugPrint('000000000000000000000000000');
     // 如果启用缓存，将返回结果保存到缓存
-    if(CACHE_ENABLE) {
+    if(AppConfig.CACHE_ENABLE) {
       await _saveCache(response);
     }
 
@@ -130,7 +129,7 @@ class NetCacheInterceptor extends Interceptor {
 
       // 内存缓存
       // 如果缓存数量超过最大数量限制，则先移除最早的一条记录
-      if (cache.length == CACHE_MAXCOUNT) {
+      if (cache.length == AppConfig.CACHE_MAXCOUNT) {
         cache.remove(cache[cache.keys.first]);
       }
 

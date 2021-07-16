@@ -6,15 +6,15 @@ import 'package:my_network_encapsulation/util/local_image_selector.dart';
 ///@name: 网络图片（带缓存）
 class NetImage {
   static Widget cachedNetworkImage(
-      {String imgUrl,
-      double width,
-      double height,
-      BoxFit fit,
-      double placeholderWidth,
-      double placeholderHeight,
-      Widget errorImage,
-      Widget normalImage}) {
-    if (isCorrectImg(imgUrl)) {
+      {String? imgUrl,
+      double? width,
+      double? height,
+      BoxFit? fit,
+      double? placeholderWidth,
+      double? placeholderHeight,
+      Widget? errorImage,
+      Widget? normalImage}) {
+    if (isCorrectImg(imgUrl!)) {
       return CachedNetworkImage(
         placeholder: (context, url) => SizedBox(
             width: placeholderWidth,

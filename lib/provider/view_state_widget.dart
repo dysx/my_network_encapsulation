@@ -19,15 +19,15 @@ class ViewStateBusyWidget extends StatelessWidget {
 
 /// 基础Widget
 class ViewStateWidget extends StatelessWidget {
-  final String title;
-  final String message;
-  final Widget image;
-  final Widget buttonText;
-  final String buttonTextData;
-  final VoidCallback onPressed;
+  final String? title;
+  final String? message;
+  final Widget? image;
+  final Widget? buttonText;
+  final String? buttonTextData;
+  final VoidCallback? onPressed;
 
   ViewStateWidget(
-      {Key key,
+      {Key? key,
       this.image,
       this.title,
       this.message,
@@ -39,9 +39,9 @@ class ViewStateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var titleStyle =
-        Theme.of(context).textTheme.subhead.copyWith(color: Colors.grey);
+        Theme.of(context).textTheme.subhead!.copyWith(color: Colors.grey);
     var messageStyle = titleStyle.copyWith(
-        color: titleStyle.color.withOpacity(0.7), fontSize: 14);
+        color: titleStyle.color!.withOpacity(0.7), fontSize: 14);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,8 +69,8 @@ class ViewStateWidget extends StatelessWidget {
         ),
         Center(
           child: ViewStateButton(
-            textData: buttonTextData,
-            onPressed: onPressed,
+            textData: buttonTextData!,
+            onPressed: onPressed!,
           ),
         ),
       ],
@@ -80,16 +80,16 @@ class ViewStateWidget extends StatelessWidget {
 
 /// ErrorWidget
 class ViewStateErrorWidget extends StatelessWidget {
-  final ViewStateError error;
-  final String title;
-  final String message;
-  final Widget image;
-  final Widget buttonText;
-  final String buttonTextData;
-  final VoidCallback onPressed;
+  final ViewStateError? error;
+  final String? title;
+  final String? message;
+  final Widget? image;
+  final Widget? buttonText;
+  final String? buttonTextData;
+  final VoidCallback? onPressed;
 
   const ViewStateErrorWidget({
-    Key key,
+    Key? key,
     @required this.error,
     this.image,
     this.title,
@@ -103,9 +103,9 @@ class ViewStateErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var defaultImage;
     var defaultTitle;
-    var errorMessage = error.message;
+    var errorMessage = error!.message;
     String defaultTextData = S.of(context).viewStateButtonRetry;
-    switch (error.errorType) {
+    switch (error!.errorType) {
       case ViewStateErrorType.networkTimeOutError:
         defaultImage = LocalImageSelector.getSingleImage('error_nonet',imageWidth: 80.w);
         // defaultImage = Transform.translate(
@@ -125,10 +125,10 @@ class ViewStateErrorWidget extends StatelessWidget {
 
       case ViewStateErrorType.unauthorizedError:
         return ViewStateUnAuthWidget(
-          image: image,
-          message: message,
-          buttonText: buttonText,
-          onPressed: onPressed,
+          image: image!,
+          message: message!,
+          buttonText: buttonText!,
+          onPressed: onPressed!,
         );
     }
 
@@ -145,13 +145,13 @@ class ViewStateErrorWidget extends StatelessWidget {
 
 /// 页面无数据
 class ViewStateEmptyWidget extends StatelessWidget {
-  final String message;
-  final Widget image;
-  final Widget buttonText;
-  final VoidCallback onPressed;
+  final String? message;
+  final Widget? image;
+  final Widget? buttonText;
+  final VoidCallback? onPressed;
 
   const ViewStateEmptyWidget(
-      {Key key,
+      {Key? key,
       this.image,
       this.message,
       this.buttonText,
@@ -172,13 +172,13 @@ class ViewStateEmptyWidget extends StatelessWidget {
 
 /// 页面未授权
 class ViewStateUnAuthWidget extends StatelessWidget {
-  final String message;
-  final Widget image;
-  final Widget buttonText;
-  final VoidCallback onPressed;
+  final String? message;
+  final Widget? image;
+  final Widget? buttonText;
+  final VoidCallback? onPressed;
 
   const ViewStateUnAuthWidget(
-      {Key key,
+      {Key? key,
         this.image,
         this.message,
         this.buttonText,
@@ -217,8 +217,8 @@ class ViewStateUnAuthImage extends StatelessWidget {
 
 /// 公用Button
 class ViewStateButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final String textData;
+  final VoidCallback? onPressed;
+  final String? textData;
 
   const ViewStateButton({@required this.onPressed, this.textData});
 
@@ -227,7 +227,7 @@ class ViewStateButton extends StatelessWidget {
     return MyOutlinedButton(
       text: textData ?? S.of(context).viewStateButtonRetry,
       style: MyTextStyles.fourteenGrey3333,
-      onPressed: onPressed,
+      onPressed: onPressed!,
       icon: 'error_retry',
     );
   }

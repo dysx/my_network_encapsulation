@@ -11,13 +11,13 @@ class DioConnectivityRequestRetrier {
   final Connectivity connectivity;
 
   DioConnectivityRequestRetrier({
-    @required this.dio,
-    @required this.connectivity,
+    required this.dio,
+    required this.connectivity,
   });
 
   Future<Response> scheduleRequestRetry(RequestOptions requestOptions, ErrorInterceptorHandler handler) {
 
-    StreamSubscription streamSubscription;
+    late StreamSubscription streamSubscription;
     final responseCompleter = Completer<Response>();
 
     streamSubscription =

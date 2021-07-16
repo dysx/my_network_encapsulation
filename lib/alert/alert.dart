@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/config/application.dart';
+import 'package:my_network_encapsulation/config/appconfig.dart';
 import 'package:my_network_encapsulation/network/http/http_util.dart';
 import 'package:my_network_encapsulation/res/my_text_styles.dart';
 import 'package:my_network_encapsulation/routes/navigater.dart';
@@ -23,7 +23,7 @@ class Alert {
 
   /// 显示loading弹窗
   static showLoading({
-    String message,
+    String? message,
     bool mask = false,
     bool barrierDismissible = false,
   }) {
@@ -31,7 +31,7 @@ class Alert {
     isShowingAlert = true;
 
     showGeneralDialog(
-      context: Application.globalKey.currentState.overlay.context,
+      context: AppConfig.globalKey.currentState!.overlay!.context,
       barrierDismissible: barrierDismissible,
       barrierLabel: '',
       barrierColor: mask ? Colors.red.withOpacity(0.3) : Colors.transparent,
@@ -59,24 +59,24 @@ class Alert {
 
   /// 显示对话框
   static showAlert({
-    String title,
-    String message,
-    String cancel,
-    String confirm,
+    String? title,
+    String? message,
+    String? cancel,
+    String? confirm,
     bool showCancel = true,
     bool barrierDismissible = false,
-    VoidCallback onCancel,
-    VoidCallback onConfirm,
+    VoidCallback? onCancel,
+    VoidCallback? onConfirm,
   }) {
     if (isShowingAlert) return;
     isShowingAlert = true;
 
-    var _context = Application.globalKey.currentState.overlay.context;
+    var _context = AppConfig.globalKey.currentState!.overlay!.context;
     bool _isLight = Theme.of(_context).brightness == Brightness.light;
 
     showDialog(
         context: _context,
-        barrierDismissible: barrierDismissible ?? false,
+        barrierDismissible: barrierDismissible,
         builder: (BuildContext context) {
           return WillPopScope(
             onWillPop: () async {
@@ -120,32 +120,32 @@ class Alert {
   }
 
   /// 显示进度对话框
-  static Map<String, ValueNotifier> showProgressAlert({
-    String title,
-    String message,
-    double progress,
-    String cancel,
-    String confirm,
+  static Map<String, ValueNotifier>? showProgressAlert({
+    String? title,
+    String? message,
+    double? progress,
+    String? cancel,
+    String? confirm,
     bool showCancel = false,
     bool showConfirm = false,
     bool barrierDismissible = false,
-    VoidCallback onCancel,
-    VoidCallback onConfirm,
+    VoidCallback? onCancel,
+    VoidCallback? onConfirm,
   }) {
     if (isShowingAlert) return null;
     isShowingAlert = true;
 
     final ValueNotifier<double> _progressNotifier =
-        ValueNotifier<double>(progress);
+        ValueNotifier<double>(progress!);
     final ValueNotifier<String> _messageNotifier =
-        ValueNotifier<String>(message);
+        ValueNotifier<String>(message!);
 
-    var _context = Application.globalKey.currentState.overlay.context;
+    var _context = AppConfig.globalKey.currentState!.overlay!.context;
     bool _isLight = Theme.of(_context).brightness == Brightness.light;
 
     showDialog(
         context: _context,
-        barrierDismissible: barrierDismissible ?? false,
+        barrierDismissible: barrierDismissible,
         builder: (BuildContext context) {
           return WillPopScope(
             onWillPop: () async {
@@ -167,7 +167,7 @@ class Alert {
                     child: ValueListenableBuilder(
                       valueListenable: _progressNotifier,
                       builder:
-                          (BuildContext context, double value, Widget child) {
+                          (BuildContext context, double value, Widget? child) {
                         return CircularProgressIndicator(value: value);
                       },
                     ),
@@ -175,7 +175,7 @@ class Alert {
                   ValueListenableBuilder(
                     valueListenable: _messageNotifier,
                     builder:
-                        (BuildContext context, String value, Widget child) {
+                        (BuildContext context, String value, Widget? child) {
                       return value != null && value.length > 0
                           ? Text(
                               value,
@@ -227,20 +227,20 @@ class Alert {
 
   /// 显示多项选择框
   static showSheet({
-    String title,
+    String? title,
     bool barrierDismissible = true,
-    List<String> actions,
-    IndexCallback onPressed,
+    List<String>? actions,
+    IndexCallback? onPressed,
   }) {
     if (isShowingAlert) return;
     isShowingAlert = true;
 
-    var _context = Application.globalKey.currentState.overlay.context;
+    var _context = AppConfig.globalKey.currentState!.overlay!.context;
     bool _isLight = Theme.of(_context).brightness == Brightness.light;
 
     showDialog<String>(
       context: _context,
-      barrierDismissible: barrierDismissible ?? true,
+      barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return WillPopScope(
           onWillPop: () async {
@@ -256,31 +256,55 @@ class Alert {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            children: actions != null && actions.length > 0
-                ? actions
-                    .asMap()
-                    .map(
-                      (index, action) => MapEntry(
-                        index,
-                        SimpleDialogOption(
-                          onPressed: () {
-                            hide();
-                            if (onPressed != null) onPressed(index);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              action,
-                              style: TextStyle(
-                                  color: Color(0xFF505050), fontSize: 16.0),
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                    .values
-                    .toList()
-                : SizedBox.shrink(),
+            children:
+            actions!
+                .asMap()
+                .map(
+                  (index, action) => MapEntry(
+                index,
+                SimpleDialogOption(
+                  onPressed: () {
+                    hide();
+                    if (onPressed != null) onPressed(index);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      action,
+                      style: TextStyle(
+                          color: Color(0xFF505050), fontSize: 16.0),
+                    ),
+                  ),
+                ),
+              ),
+            )
+                .values
+                .toList()
+            // actions != null && actions.length > 0
+            //     ? actions
+            //         .asMap()
+            //         .map(
+            //           (index, action) => MapEntry(
+            //             index,
+            //             SimpleDialogOption(
+            //               onPressed: () {
+            //                 hide();
+            //                 if (onPressed != null) onPressed(index);
+            //               },
+            //               child: Padding(
+            //                 padding: const EdgeInsets.all(8.0),
+            //                 child: Text(
+            //                   action,
+            //                   style: TextStyle(
+            //                       color: Color(0xFF505050), fontSize: 16.0),
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //         )
+            //         .values
+            //         .toList()
+            //     : SizedBox.shrink(),
           ),
         );
       },

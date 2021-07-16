@@ -9,6 +9,7 @@ import 'package:my_network_encapsulation/ui/page/login/login.dart';
 import 'package:my_network_encapsulation/ui/page/mine/mine.dart';
 import 'package:my_network_encapsulation/ui/page/second/second.dart';
 import 'package:my_network_encapsulation/ui/page/test/base_test.dart';
+import 'package:my_network_encapsulation/ui/page/test/scroll_to_index.dart';
 import 'package:my_network_encapsulation/ui/page/test/testA.dart';
 import 'package:my_network_encapsulation/ui/page/test/testB.dart';
 import 'package:my_network_encapsulation/ui/page/test/testC.dart';
@@ -29,6 +30,7 @@ class RouteName {
   static const String testB = 'testB';
   static const String testC = 'testC';
   static const String testD = 'testD';
+  static const String scrollToIndex = 'scrollToIndex';
 }
 
 /// 路由初始化
@@ -60,6 +62,8 @@ class MyRouter {
         return NoAnimRouteBuilder(TestC(), routeName);
       case RouteName.testD:
         return NoAnimRouteBuilder(TestD(), routeName);
+        case RouteName.scrollToIndex:
+        return NoAnimRouteBuilder(ScrollToIndexDemoPage2(), routeName);
       default:
         return FadeRouteBuilder(NotFoundPage(), routeName);
     }
@@ -71,7 +75,7 @@ class MyRouter {
   /*登陆拦截*/
   // 此处做登陆权限拦截
   static String routeBeforeHook(RouteSettings settings) {
-    String route;
+    late String route;
     for (String item in powerPage) {
       // 如果此路由需登陆权限
       if (item == settings.name) {
@@ -81,13 +85,13 @@ class MyRouter {
           if (settings.name == 'login') {
             route = 'login';
           } else {
-            route = settings.name;
+            route = settings.name!;
           }
         } else {
           route = 'login';
         }
       } else {
-        route = settings.name;
+        route = settings.name!;
       }
     }
     return route;
@@ -97,23 +101,23 @@ class MyRouter {
 /// Pop路由
 class PopRoute extends PopupRoute {
   final Duration _duration = Duration(milliseconds: 300);
-  Widget child;
+  Widget? child;
 
   PopRoute({@required this.child});
 
   @override
-  Color get barrierColor => null;
+  Color? get barrierColor => null;
 
   @override
   bool get barrierDismissible => true;
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation) {
-    return child;
+    return child!;
   }
 
   @override

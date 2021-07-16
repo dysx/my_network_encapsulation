@@ -14,9 +14,14 @@ import 'intl/messages_all.dart';
 
 class S {
   S();
-  
-  static S current;
-  
+
+  static S? _current;
+
+  static S get current {
+    assert(_current != null, 'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    return _current!;
+  }
+
   static const AppLocalizationDelegate delegate =
     AppLocalizationDelegate();
 
@@ -25,14 +30,31 @@ class S {
     final localeName = Intl.canonicalizedLocale(name); 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      S.current = S();
-      
-      return S.current;
+      final instance = S();
+      S._current = instance;
+ 
+      return instance;
     });
   } 
 
   static S of(BuildContext context) {
+    final instance = S.maybeOf(context);
+    assert(instance != null, 'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    return instance!;
+  }
+
+  static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
+  }
+
+  /// `Click again to exit`
+  String get click_again_to_exit {
+    return Intl.message(
+      'Click again to exit',
+      name: 'click_again_to_exit',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `interfaceTest`
@@ -84,6 +106,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Confirm`
+  String get actionConfirm {
+    return Intl.message(
+      'Confirm',
+      name: 'actionConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get actionCancel {
+    return Intl.message(
+      'Cancel',
+      name: 'actionCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load Failed`
+  String get viewStateMessageError {
+    return Intl.message(
+      'Load Failed',
+      name: 'viewStateMessageError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load Failed,Check network `
+  String get viewStateMessageNetworkError {
+    return Intl.message(
+      'Load Failed,Check network ',
+      name: 'viewStateMessageNetworkError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nothing Found`
+  String get viewStateMessageEmpty {
+    return Intl.message(
+      'Nothing Found',
+      name: 'viewStateMessageEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not sign in yet`
+  String get viewStateMessageUnAuth {
+    return Intl.message(
+      'Not sign in yet',
+      name: 'viewStateMessageUnAuth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refresh`
+  String get viewStateButtonRefresh {
+    return Intl.message(
+      'Refresh',
+      name: 'viewStateButtonRefresh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get viewStateButtonRetry {
+    return Intl.message(
+      'Retry',
+      name: 'viewStateButtonRetry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign In`
+  String get viewStateButtonLogin {
+    return Intl.message(
+      'Sign In',
+      name: 'viewStateButtonLogin',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -104,11 +216,9 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   bool shouldReload(AppLocalizationDelegate old) => false;
 
   bool _isSupported(Locale locale) {
-    if (locale != null) {
-      for (var supportedLocale in supportedLocales) {
-        if (supportedLocale.languageCode == locale.languageCode) {
-          return true;
-        }
+    for (var supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode) {
+        return true;
       }
     }
     return false;

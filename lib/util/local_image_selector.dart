@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class LocalImageSelector {
   static double dpi = MediaQueryData.fromWindow(window).devicePixelRatio; //屏幕密度
   static int platform = Platform.isAndroid ? 1 : 2;
-  static String basePath;
+  static late String basePath;
   static String postfix = ".png";
 
   static const Local_Icon_prefix = "assets/images/";
@@ -19,13 +19,13 @@ class LocalImageSelector {
   }
 
   static Image getImage(String imageName,
-      {double imageWidth,
-      double imageHeight,
+      {double? imageWidth,
+      double? imageHeight,
       String type: ".png",
-      BoxFit bFitFill,
-      Key key,
-      Color imageColor}) {
-    String basicPath;
+      BoxFit? bFitFill,
+      Key? key,
+      Color? imageColor}) {
+    late String basicPath;
     if (platform == 1) {
       postfix = type;
       if (dpi < 1) {
@@ -58,12 +58,12 @@ class LocalImageSelector {
 
   /// 没有区分分辨率的图标
   static Image getSingleImage(String imageName,
-      {double imageWidth,
-      double imageHeight,
+      {double? imageWidth,
+      double? imageHeight,
       String type: ".png",
-      BoxFit bFitFill,
-      Key key,
-      Color imageColor}) {
+      BoxFit? bFitFill,
+      Key? key,
+      Color? imageColor}) {
     String path = basePath + imageName + type;
     return Image.asset(path,
         key: key,

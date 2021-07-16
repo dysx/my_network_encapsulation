@@ -2,10 +2,10 @@ import 'package:my_network_encapsulation/network/model/time_entity.dart';
 
 timeEntityFromJson(TimeEntity data, Map<String, dynamic> json) {
 	if (json['sysTime2'] != null) {
-		data.sysTime2 = json['sysTime2']?.toString();
+		data.sysTime2 = json['sysTime2'];
 	}
 	if (json['sysTime1'] != null) {
-		data.sysTime1 = json['sysTime1']?.toString();
+		data.sysTime1 = json['sysTime1'];
 	}
 	return data;
 }

@@ -5,8 +5,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 
 class SkeletonBox extends StatelessWidget {
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final bool isCircle;
 
   SkeletonBox(
@@ -45,7 +45,7 @@ class BottomBorderDecoration extends BoxDecoration {
 class SkeletonList extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final int length;
-  final IndexedWidgetBuilder builder;
+  final IndexedWidgetBuilder? builder;
 
   SkeletonList(
       {this.length: 6, //一般屏幕长度够用
@@ -65,13 +65,15 @@ class SkeletonList extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       child: Shimmer.fromColors(
           period: Duration(milliseconds: 1200),
-          baseColor: isDark ? Colors.grey[700] : Colors.grey[350],
-          highlightColor: isDark ? Colors.grey[500] : Colors.grey[200],
+          baseColor: isDark ? Color(0xFF616161) : Color(0xFFD6D6D6),
+          highlightColor: isDark ? Color(0xFF9E9E9E) : Color(0xFFEEEEEE),
+          // baseColor: isDark ? Colors.grey[700] : Colors.grey[350],
+          // highlightColor: isDark ? Colors.grey[500] : Colors.grey[200],
           child: Padding(
               padding: padding,
               child: Column(
                 children:
-                    List.generate(length, (index) => builder(context, index)),
+                    List.generate(length, (index) => builder!(context, index)),
               ))),
     );
   }

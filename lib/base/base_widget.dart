@@ -103,7 +103,6 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
   @override
   void dispose() {
     // TODO: implement dispose
-    print('777777777777${getClassName()}');
     onDestroy();
     WidgetsBinding.instance!.removeObserver(this);
     _onResumed = false;

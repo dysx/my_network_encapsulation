@@ -105,12 +105,10 @@ class HomeState extends BaseWidgetState<Home> {
     final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
     if(currentIndex == 3){
       if (token == '') {
-        print('无token值');
         setState(() {
           needToLogin = true;
         });
       } else {
-        print('有token值');
         setState(() {
           needToLogin = false;
         });

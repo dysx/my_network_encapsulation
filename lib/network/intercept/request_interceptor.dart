@@ -2,7 +2,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:my_network_encapsulation/config/appconfig.dart';
+import 'package:my_network_encapsulation/config/appConfig.dart';
 import 'package:my_network_encapsulation/alert/alert.dart';
 import 'package:my_network_encapsulation/network/exception/app_exception.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';

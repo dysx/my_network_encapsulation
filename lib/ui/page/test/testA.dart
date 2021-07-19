@@ -1,8 +1,8 @@
 
+import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'package:my_network_encapsulation/ui/widget/skeleton.dart';
-import 'package:my_network_encapsulation/unified_import/base_insert.dart';
 import 'package:my_network_encapsulation/view_model/article_model.dart';
 
 class TestA extends BaseWidget {
@@ -16,7 +16,7 @@ class TestAState extends BaseWidgetState<TestA>{
   @override
   Widget buildWidget(BuildContext context) {
     return ProviderWidget<ArticleModel>(
-      model: ArticleModel(),
+      model: ArticleModel(cancelTag: 'TestA'),
       onModelReady: (model) => model.initData(),
       builder: (context, model, child) {
         if (model.isBusy) {

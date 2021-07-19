@@ -4,7 +4,7 @@ import 'dart:collection';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:my_network_encapsulation/config/appconfig.dart';
+import 'package:my_network_encapsulation/config/appConfig.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 

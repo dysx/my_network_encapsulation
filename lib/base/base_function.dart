@@ -520,13 +520,7 @@ abstract class BaseFunction {
   }
 
   String getClassName() {
-    if (_contextBaseFunction == null) {
-      return "";
-    }
-    String className = _contextBaseFunction.toString();
-    if (className == null) {
-      return "";
-    }
+    String className = _contextBaseFunction.widget.toStringShort();
     return className;
   }
 }

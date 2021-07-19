@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/config/appconfig.dart';
+import 'package:my_network_encapsulation/config/appConfig.dart';
 
 ///@name: 路由工具
 class Navigater {

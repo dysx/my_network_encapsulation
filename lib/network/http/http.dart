@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:my_network_encapsulation/config/appconfig.dart';
+import 'package:my_network_encapsulation/config/appConfig.dart';
 import 'package:my_network_encapsulation/network/intercept/request_interceptor.dart';
 import 'package:my_network_encapsulation/network/response/transform.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
@@ -17,7 +17,7 @@ class Http {
   static const int RECEIVE_TIMEOUT = 5000;
 
   late Dio dio;
-  CancelToken _cancelToken = CancelToken();
+  static Map<String, CancelToken> _cancelTokens = Map<String, CancelToken>();
 
   /// 单例模式
   /// 单例公开访问点
@@ -99,24 +99,26 @@ class Http {
   * 取消请求
   *
   * 同一个cancel token 可用于多个请求，当一个cancel token取消时，所有使用该cancel token的请求都会被取消。
-  * 所以参数可选
+  * 传入页面名，关闭页面，取消所有当前页面的请求
   */
-  void cancelRequests({CancelToken? cancelToken}) {
-    // Log.d("${_cancelToken.hashCode}");
-    // Log.d("取消网络请求");
-    // cancelToken ?? _cancelToken.cancel("用户取消了");
+  static void cancelHttp(String tag) {
+    print("$tag页面取消网络请求");
+    if (_cancelTokens.containsKey(tag)) {
+      if (!_cancelTokens[tag]!.isCancelled) {
+        _cancelTokens[tag]!.cancel();
+      }
+      _cancelTokens.remove(tag);
+    }
   }
 
   /// 读取本地配置  设置token
   Map<String, dynamic> getAuthorizationHeader() {
     var headers;
     String accessToken = LocalStorage.get(MyCommons.TOKEN) ?? '';
-    if (accessToken != null) {
-      headers = {
-        "Authorization": 'Bearer $accessToken',
-        "Access-Token": '$accessToken'
-      };
-    }
+    headers = {
+      "Authorization": 'Bearer $accessToken',
+      "Access-Token": '$accessToken'
+    };
     return headers;
   }
 
@@ -125,6 +127,7 @@ class Http {
      [params]       get 请求参数
      [data]         post请求参数
      [options]      requestOptions
+     [cancelTag]    取消请求页面名
      [cancelToken]  取消请求cancelToken
      // 缓存
      [refresh]      refresh标记是否是"下拉刷新"
@@ -136,6 +139,7 @@ class Http {
     String path, {
     Map<String, dynamic>? params,
     Options? options,
+    required String cancelTag,
     CancelToken? cancelToken,
     bool refresh = false,
     bool noCache = !AppConfig.CACHE_ENABLE,
@@ -150,9 +154,13 @@ class Http {
       "cacheDisk": cacheDisk,
     });
     Map<String, dynamic> _authorization = getAuthorizationHeader();
-    if (_authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: _authorization);
-    }
+    requestOptions = requestOptions.copyWith(headers: _authorization);
+
+    CancelToken cancelToken;
+    cancelToken = (_cancelTokens[cancelTag] == null
+        ? CancelToken()
+        : _cancelTokens[cancelTag])!;
+    _cancelTokens[cancelTag] = cancelToken;
 
     late Future future;
     Completer<T> completer = Completer();
@@ -161,14 +169,14 @@ class Http {
       future = dio.get(path,
           queryParameters: params,
           options: requestOptions,
-          cancelToken: cancelToken ?? _cancelToken);
+          cancelToken: cancelToken);
     } on DioError catch (e) {
       Log.e('------- dio catchError --------');
       completer.completeError(e);
     }
-    future.then((data){
+    future.then((data) {
       completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err){
+    }).catchError((err) {
       Log.e("------- future catchError --------");
       completer.completeError(err);
     });
@@ -181,13 +189,18 @@ class Http {
     String path, {
     data,
     Options? options,
+    required String cancelTag,
     CancelToken? cancelToken,
   }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
-    if (_authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: _authorization);
-    }
+    requestOptions = requestOptions.copyWith(headers: _authorization);
+
+    CancelToken cancelToken;
+    cancelToken = (_cancelTokens[cancelTag] == null
+        ? CancelToken()
+        : _cancelTokens[cancelTag])!;
+    _cancelTokens[cancelTag] = cancelToken;
 
     late Future future;
     Completer<T> completer = Completer();
@@ -196,14 +209,14 @@ class Http {
       future = dio.post(path,
           data: data,
           options: requestOptions,
-          cancelToken: cancelToken ?? _cancelToken);
+          cancelToken: cancelToken);
     } on DioError catch (e) {
       Log.e('------- dio catchError --------');
       completer.completeError(e);
     }
-    future.then((data){
+    future.then((data) {
       completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err){
+    }).catchError((err) {
       Log.e("------- future catchError --------");
       completer.completeError(err);
     });
@@ -217,13 +230,18 @@ class Http {
     data,
     Map<String, dynamic>? params,
     Options? options,
+    required String cancelTag,
     CancelToken? cancelToken,
   }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
-    if (_authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: _authorization);
-    }
+    requestOptions = requestOptions.copyWith(headers: _authorization);
+
+    CancelToken cancelToken;
+    cancelToken = (_cancelTokens[cancelTag] == null
+        ? CancelToken()
+        : _cancelTokens[cancelTag])!;
+    _cancelTokens[cancelTag] = cancelToken;
 
     late Future future;
     Completer<T> completer = Completer();
@@ -232,14 +250,14 @@ class Http {
       future = dio.put(path,
           queryParameters: params,
           options: requestOptions,
-          cancelToken: cancelToken ?? _cancelToken);
+          cancelToken: cancelToken);
     } on DioError catch (e) {
       Log.e('------- dio catchError --------');
       completer.completeError(e);
     }
-    future.then((data){
+    future.then((data) {
       completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err){
+    }).catchError((err) {
       Log.e("------- future catchError --------");
       completer.completeError(err);
     });
@@ -253,13 +271,18 @@ class Http {
     data,
     Map<String, dynamic>? params,
     Options? options,
+    required String cancelTag,
     CancelToken? cancelToken,
   }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
-    if (_authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: _authorization);
-    }
+    requestOptions = requestOptions.copyWith(headers: _authorization);
+
+    CancelToken cancelToken;
+    cancelToken = (_cancelTokens[cancelTag] == null
+        ? CancelToken()
+        : _cancelTokens[cancelTag])!;
+    _cancelTokens[cancelTag] = cancelToken;
 
     late Future future;
     Completer<T> completer = Completer();
@@ -268,14 +291,14 @@ class Http {
       future = dio.patch(path,
           queryParameters: params,
           options: requestOptions,
-          cancelToken: cancelToken ?? _cancelToken);
+          cancelToken: cancelToken);
     } on DioError catch (e) {
       Log.e('------- dio catchError --------');
       completer.completeError(e);
     }
-    future.then((data){
+    future.then((data) {
       completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err){
+    }).catchError((err) {
       Log.e("------- future catchError --------");
       completer.completeError(err);
     });
@@ -289,13 +312,18 @@ class Http {
     data,
     Map<String, dynamic>? params,
     Options? options,
+    required String cancelTag,
     CancelToken? cancelToken,
   }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
-    if (_authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: _authorization);
-    }
+    requestOptions = requestOptions.copyWith(headers: _authorization);
+
+    CancelToken cancelToken;
+    cancelToken = (_cancelTokens[cancelTag] == null
+        ? CancelToken()
+        : _cancelTokens[cancelTag])!;
+    _cancelTokens[cancelTag] = cancelToken;
 
     late Future future;
     Completer<T> completer = Completer();
@@ -305,14 +333,14 @@ class Http {
           data: data,
           queryParameters: params,
           options: requestOptions,
-          cancelToken: cancelToken ?? _cancelToken);
+          cancelToken: cancelToken);
     } on DioError catch (e) {
       Log.e('------- dio catchError --------');
       completer.completeError(e);
     }
-    future.then((data){
+    future.then((data) {
       completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err){
+    }).catchError((err) {
       Log.e("------- future catchError --------");
       completer.completeError(err);
     });
@@ -325,15 +353,21 @@ class Http {
     String path, {
     Map<String, dynamic>? params,
     Options? options,
+    required String cancelTag,
     CancelToken? cancelToken,
   }) async {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
-    if (_authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: _authorization);
-    }
+    requestOptions = requestOptions.copyWith(headers: _authorization);
+
     var data = FormData.fromMap(params!);
     Log.d('${data.length}');
+
+    CancelToken cancelToken;
+    cancelToken = (_cancelTokens[cancelTag] == null
+        ? CancelToken()
+        : _cancelTokens[cancelTag])!;
+    _cancelTokens[cancelTag] = cancelToken;
 
     late Future future;
     Completer<T> completer = Completer();
@@ -342,14 +376,14 @@ class Http {
       future = dio.post(path,
           data: data,
           options: requestOptions,
-          cancelToken: cancelToken ?? _cancelToken);
+          cancelToken: cancelToken);
     } on DioError catch (e) {
       Log.e('------- dio catchError --------');
       completer.completeError(e);
     }
-    future.then((data){
+    future.then((data) {
       completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err){
+    }).catchError((err) {
       Log.e("------- future catchError --------");
       completer.completeError(err);
     });

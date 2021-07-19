@@ -46,8 +46,9 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   text: '$aaa'),
               MyOutlinedButton(
                   onPressed: () {
+                    LocalStorage.save(MyCommons.TOKEN, '123');
                     print("${LocalStorage.get(MyCommons.TOKEN)}");
-                    RequestUtil.login('15015802692', 'qds123123')
+                    RequestUtil.login('15015802692', 'qds123123',cancelTag: 'HomePage')
                         .then((value) {
                       LocalStorage.save(
                           MyCommons.TOKEN, value.accessToken);
@@ -56,9 +57,9 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   text: '登陆'),
               MyOutlinedButton(
                   onPressed: () {
-                    RequestUtil.getRecommends(1, 20).then((value) {
-
-                    });
+                    // RequestUtil.getRecommends(1, 20).then((value) {
+                    //
+                    // });
                     // RequestUtil.subscribeKey().then((value) {
                     //   print("结果值:${value}");
                     // });

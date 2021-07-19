@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/config/appconfig.dart';
-import 'package:my_network_encapsulation/network/http/http_util.dart';
+import 'package:my_network_encapsulation/config/appConfig.dart';
+import 'package:my_network_encapsulation/network/http/http.dart';
 import 'package:my_network_encapsulation/res/my_text_styles.dart';
 import 'package:my_network_encapsulation/routes/navigater.dart';
 import 'package:my_network_encapsulation/ui/common/button/text_button.dart';
@@ -24,6 +24,7 @@ class Alert {
   /// 显示loading弹窗
   static showLoading({
     String? message,
+    String? cancelTag,
     bool mask = false,
     bool barrierDismissible = false,
   }) {
@@ -41,7 +42,7 @@ class Alert {
         return WillPopScope(
           onWillPop: () async {
             hide();
-            HttpUtils.cancelRequest();
+            Http.cancelHttp(cancelTag!);
             return Future.value(true);
           },
           child: Container(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:my_network_encapsulation/config/appconfig.dart';
+import 'package:my_network_encapsulation/config/appConfig.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/provider/provider_setup.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';

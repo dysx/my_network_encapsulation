@@ -87,7 +87,6 @@ class ViewStateModel with ChangeNotifier {
         //   stackTrace = null;
         //   // message = e.message;
         // } else if (e is SocketException) {
-        //   print('666');
         //   errorType = ViewStateErrorType.networkTimeOutError;
         //   message = e.message;
         // } else {

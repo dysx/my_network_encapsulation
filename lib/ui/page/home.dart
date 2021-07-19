@@ -8,6 +8,7 @@ import 'package:my_network_encapsulation/base/base_widget.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/ui/page/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/page/login/goto_login.dart';
+import 'package:my_network_encapsulation/ui/page/login/login.dart';
 import 'package:my_network_encapsulation/ui/page/mine/mine.dart';
 import 'package:my_network_encapsulation/ui/page/second/second.dart';
 import 'package:my_network_encapsulation/ui/page/third/third.dart';
@@ -44,23 +45,17 @@ class HomeState extends BaseWidgetState<Home> {
     ),
   ];
   List<Widget> pages = [HomePage(), Second(), Third(), Mine()];
+  List<Widget> noTokenPages = [HomePage(), Second(), Third(), GoToLogin()];
+  bool needToLogin = false;
 
   PageController _pageController = new PageController();
 
   @override
   Widget buildWidget(BuildContext context) {
-    return pages[currentIndex];
-    return Scaffold(
-        bottomNavigationBar:
-        CupertinoTabBar(
-          currentIndex: currentIndex,
-          onTap: (index) {
-            _changePage(index);
-          },
-          items: bottomNavItems,
-          activeColor: Colors.blue,
-        ),
-        body: pages[currentIndex]
+    return PageView(
+      controller: _pageController,
+      physics: NeverScrollableScrollPhysics(),
+      children: needToLogin ? noTokenPages : pages,
     );
   }
 
@@ -69,8 +64,12 @@ class HomeState extends BaseWidgetState<Home> {
     // TODO: implement getBottomWidget
     return CupertinoTabBar(
       currentIndex: currentIndex,
-      onTap: (index) {
-        _changePage(index);
+      onTap: (index) async {
+        setState(() {
+          currentIndex = index;
+        });
+        await _checkPower();
+        _pageController.jumpToPage(index);
       },
       items: bottomNavItems,
       activeColor: Colors.blue,
@@ -100,41 +99,22 @@ class HomeState extends BaseWidgetState<Home> {
   @override
   void onResume() {}
 
-  List<Widget> myPages(int index) {
-    List<Widget> list = [];
-    _changePage(index);
-    list = pages;
-    return list;
-  }
-
-  /*切换页面*/
-  Future<void> _changePage(int index) async {
-    /*如果点击的导航项不是当前项  切换 */
-    if (index != currentIndex) {
-      if(index == 3){
-        checkPower();
-      }
-      setState(() {
-        currentIndex = index;
-      });
-    }
-    // _pageController.jumpToPage(currentIndex);
-  }
-
   /*登陆权限拦截*/
-  void checkPower() {
+  Future<void> _checkPower() async {
     // 获取本地存储的token
     final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
-    if (token == '') {
-      print('无token值');
-      setState(() {
-        pages[3] = GoToLogin();
-      });
-    } else {
-      print('有token值');
-      setState(() {
-        pages[3] = Mine();
-      });
+    if(currentIndex == 3){
+      if (token == '') {
+        print('无token值');
+        setState(() {
+          needToLogin = true;
+        });
+      } else {
+        print('有token值');
+        setState(() {
+          needToLogin = false;
+        });
+      }
     }
   }
 

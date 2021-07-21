@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/routes/navigater.dart';
+import 'package:my_network_encapsulation/routes/my_navigator.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
-import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
+import 'package:my_network_encapsulation/util/buttons.dart';
 
 class TestD extends StatelessWidget {
   @override
@@ -11,9 +11,9 @@ class TestD extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: Center(
-          child: MyOutlinedButton(
+          child: ordinaryButton(
             onPressed: (){
-              Navigater.popUntil(RouteName.testA);
+              MyNavigator.popUntil(RouteName.testA);
             },
             text: "回到a",
           ),

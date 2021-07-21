@@ -4,7 +4,7 @@ import 'package:my_network_encapsulation/config/resource_mananger.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/provider/view_state.dart';
 import 'package:my_network_encapsulation/res/my_text_styles.dart';
-import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
+import 'package:my_network_encapsulation/util/buttons.dart';
 import 'package:my_network_encapsulation/util/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 
@@ -224,9 +224,9 @@ class ViewStateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyOutlinedButton(
+    return iconButton(
       text: textData ?? S.of(context).viewStateButtonRetry,
-      style: MyTextStyles.fourteenGrey3333,
+      textStyle: MyTextStyles.fourteenGrey3333,
       onPressed: onPressed!,
       icon: 'error_retry',
     );

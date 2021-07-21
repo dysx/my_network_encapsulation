@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/config/appConfig.dart';
 import 'package:my_network_encapsulation/network/http/http.dart';
 import 'package:my_network_encapsulation/res/my_text_styles.dart';
-import 'package:my_network_encapsulation/routes/navigater.dart';
-import 'package:my_network_encapsulation/ui/common/button/text_button.dart';
+import 'package:my_network_encapsulation/routes/my_navigator.dart';
+import 'package:my_network_encapsulation/util/buttons.dart';
 
 /// 弹框
 typedef IndexCallback = void Function(int index);
@@ -17,7 +17,7 @@ class Alert {
   /// 隐藏弹窗
   static hide() {
     if (!isShowingAlert) return;
-    Navigater.pop();
+    MyNavigator.pop();
     isShowingAlert = false;
   }
 
@@ -97,18 +97,18 @@ class Alert {
                   : SizedBox.shrink(),
               actions: <Widget>[
                 showCancel
-                    ? MyTextButton(
+                    ? ordinaryButton(
                         text: cancel ?? '取消',
-                        style: MyTextStyles.sixteenBlack3333,
+                        textStyle: MyTextStyles.sixteenBlack3333,
                         onPressed: () {
                           hide();
                           if (onCancel != null) onCancel();
                         },
                       )
                     : SizedBox.shrink(),
-                MyTextButton(
+                ordinaryButton(
                   text: confirm ?? '确定',
-                  style: MyTextStyles.sixteenBlue91FF,
+                  textStyle: MyTextStyles.sixteenBlue91FF,
                   onPressed: () {
                     hide();
                     if (onConfirm != null) onConfirm();

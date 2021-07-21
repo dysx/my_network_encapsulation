@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_widget.dart';
-import 'package:my_network_encapsulation/res/my_colors.dart';
-import 'package:my_network_encapsulation/routes/navigater.dart';
+import 'package:my_network_encapsulation/routes/my_navigator.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
-import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
+import 'package:my_network_encapsulation/util/buttons.dart';
 
 class TestB extends BaseWidget {
   @override
@@ -15,10 +14,10 @@ class TestBState extends BaseWidgetState<TestB> {
   @override
   Widget buildWidget(BuildContext context) {
     return Center(
-      child: MyOutlinedButton(
+      child: ordinaryButton(
         onPressed: () {
           // setErrorWidgetVisible(true);
-          Navigater.pushNamed(RouteName.testC);
+          MyNavigator.pushNamed(RouteName.testC);
         },
         text: "跳到c",
       ),

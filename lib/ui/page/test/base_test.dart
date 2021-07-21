@@ -1,9 +1,7 @@
 
-import 'package:flutter/cupertino.dart';
-import 'package:my_network_encapsulation/base/base_widget.dart';
-import 'package:my_network_encapsulation/routes/navigater.dart';
-import 'package:my_network_encapsulation/routes/router_manger.dart';
-import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
+
+import 'package:my_network_encapsulation/base/base_insert.dart';
+import 'package:my_network_encapsulation/routes/my_navigator.dart';
 
 /// @name：
 /// @author qds
@@ -20,9 +18,9 @@ class BaseTestState extends BaseWidgetState<BaseTest> {
   @override
   Widget buildWidget(BuildContext context) {
     return Center(
-      child: MyOutlinedButton(
+      child: ordinaryButton(
         onPressed: (){
-          Navigater.pushNamedAndRemoveUntil(RouteName.home);
+          MyNavigator.pushNamedAndRemoveUntil(RouteName.home);
         },
         text: "测试路由",
       ),

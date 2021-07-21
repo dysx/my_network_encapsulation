@@ -91,6 +91,10 @@ flutter:
   assets:
     - assets/images/
     - assets/images/android/
+    - assets/images/physicalH/
+    - assets/images/physicalM/
+    - assets/images/physicalXH/
+    - assets/images/physicalXXH/
     - assets/images/android/hdpi/
     - assets/images/android/mdpi/
     - assets/images/android/xhdpi/

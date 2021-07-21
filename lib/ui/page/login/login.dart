@@ -1,9 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/routes/navigater.dart';
+import 'package:my_network_encapsulation/routes/my_navigator.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
-import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
+import 'package:my_network_encapsulation/util/buttons.dart';
 
 ///@name: 登陆页
 class Login extends StatefulWidget {
@@ -22,9 +22,9 @@ class LoginState extends State<Login> {
         child: Center(
           child: Column(
             children: [
-              MyOutlinedButton(
+              ordinaryButton(
                 onPressed: (){
-                  Navigater.popUntil(RouteName.login);
+                  MyNavigator.popUntil(RouteName.login);
                 },
                 text: "测试路由",
               ),

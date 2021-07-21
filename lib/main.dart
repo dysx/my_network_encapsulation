@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
                   supportedLocales: S.delegate.supportedLocales, // 支持的语言
                   navigatorKey: AppConfig.globalKey,      // 全局globalKey
                   onGenerateRoute: MyRouter.generateRoute,  // 路由拦截器
-                  initialRoute: RouteName.home,
+                  initialRoute: RouteName.lead,
                   builder: (context, widget) {
                     return MediaQuery(
                       data: MediaQuery.of(context)

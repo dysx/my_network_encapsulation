@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/config/appConfig.dart';
 
 ///@name: 路由工具
-class Navigater {
+class MyNavigator {
   ///打开新页面
   static Future pushNamed(String routeName, {Map<String, dynamic>? arguments}) {
     return AppConfig.globalKey.currentState!

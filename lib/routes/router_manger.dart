@@ -5,6 +5,7 @@ import 'package:my_network_encapsulation/routes/page_route_anim.dart';
 import 'package:my_network_encapsulation/ui/page/Third/third.dart';
 import 'package:my_network_encapsulation/ui/page/home.dart';
 import 'package:my_network_encapsulation/ui/page/index/home_page.dart';
+import 'package:my_network_encapsulation/ui/page/launch/lead_page.dart';
 import 'package:my_network_encapsulation/ui/page/login/login.dart';
 import 'package:my_network_encapsulation/ui/page/mine/mine.dart';
 import 'package:my_network_encapsulation/ui/page/second/second.dart';
@@ -19,6 +20,7 @@ import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// 路由名
 class RouteName {
+  static const String lead = 'lead';
   static const String login = 'login';
   static const String home = 'home';
   static const String homePage = 'homePage';
@@ -40,6 +42,8 @@ class MyRouter {
     String routeName;
     routeName = routeBeforeHook(settings);
     switch (routeName) {
+      case RouteName.lead:
+        return SlideBottomRouteBuilder(LeadPage(), routeName);
       case RouteName.login:
         return SlideBottomRouteBuilder(Login(), routeName);
       case RouteName.home:

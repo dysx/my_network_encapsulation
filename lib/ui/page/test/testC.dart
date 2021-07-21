@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/routes/navigater.dart';
+import 'package:my_network_encapsulation/routes/my_navigator.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
-import 'package:my_network_encapsulation/ui/common/button/outlined_button.dart';
+import 'package:my_network_encapsulation/util/buttons.dart';
 
 class TestC extends StatelessWidget {
   @override
@@ -11,9 +11,9 @@ class TestC extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: Center(
-          child: MyOutlinedButton(
+          child: ordinaryButton(
             onPressed: (){
-              Navigater.pushNamed(RouteName.testD);
+              MyNavigator.pushNamed(RouteName.testD);
             },
             text: "跳到d",
           ),

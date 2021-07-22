@@ -2,14 +2,15 @@ import 'dart:async';
 
 import 'package:my_network_encapsulation/base/base_insert.dart';
 
-///@name: 启动页
-class StartupPage extends BaseWidget {
+///@name: 广告页
+class AdvertisingPage extends BaseWidget {
+
   @override
-  BaseWidgetState<BaseWidget> getState() => StartupPageState();
+  BaseWidgetState<BaseWidget> getState() => AdvertisingPageState();
 
 }
 
-class StartupPageState extends BaseWidgetState<StartupPage> {
+class AdvertisingPageState extends BaseWidgetState<AdvertisingPage> {
 
   @override
   Widget buildWidget(BuildContext context) {

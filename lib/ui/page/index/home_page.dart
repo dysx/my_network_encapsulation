@@ -203,7 +203,7 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
   }
 
   @override
-  double getVerticalMargin() => 100;
+  double getVerticalMargin() => 0;
 
   @override
   // TODO: implement wantKeepAlive

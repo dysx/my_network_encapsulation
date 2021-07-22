@@ -36,7 +36,7 @@ Widget ordinaryButton(
               borderRadius: BorderRadius.circular(radius ?? 7))),
           overlayColor: MaterialStateProperty.all(overlayColor),
           backgroundColor: MaterialStateProperty.all(
-              backgroundColor ?? MyColors.yellow_ab00),
+              backgroundColor ?? null),
           minimumSize: MaterialStateProperty.all(minimumSize),
           side: sideColor != null
               ? MaterialStateProperty.all(

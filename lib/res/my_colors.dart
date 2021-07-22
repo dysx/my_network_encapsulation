@@ -1,9 +1,11 @@
 
 import 'dart:ui';
 
+import 'package:my_network_encapsulation/base/base_insert.dart';
+
 /// 颜色管理
 class MyColors {
-  static const Color white = Color(0xFFFFFF);
+  static const Color white = Color(0xFFFFFFFF);
 
   static const Color appbar_bottom = Color(0x0A000000);
 

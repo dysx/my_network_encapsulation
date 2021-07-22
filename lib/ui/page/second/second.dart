@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/base/base_inner_widget.dart';
+
+
+import 'package:my_network_encapsulation/base/base_insert.dart';
 
 class Second extends BaseInnerWidget {
   @override
@@ -13,6 +13,12 @@ class Second extends BaseInnerWidget {
 class SecondState extends BaseInnerWidgetState<Second> {
   @override
   Widget buildWidget(BuildContext context) {
+    // return SafeArea(
+    //   child: Center(
+    //     child: Text('这是第二个页面', style: MyTextStyles.fourteenBlack3333),
+    //   ),
+    // );
+
     return Scaffold(
       body: SafeArea(
         child: Center(

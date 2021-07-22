@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/config/appConfig.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/provider/provider_setup.dart';
@@ -68,7 +69,8 @@ class MyApp extends StatelessWidget {
                   supportedLocales: S.delegate.supportedLocales, // 支持的语言
                   navigatorKey: AppConfig.globalKey,      // 全局globalKey
                   onGenerateRoute: MyRouter.generateRoute,  // 路由拦截器
-                  initialRoute: RouteName.lead,
+                  initialRoute: routeName(),
+                  // initialRoute: RouteName.privacyTipsPage,
                   builder: (context, widget) {
                     return MediaQuery(
                       data: MediaQuery.of(context)
@@ -82,5 +84,14 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String routeName()  {
+    LocalStorage.save(MyCommons.AGREE_PRIVACY, false);
+    if(LocalStorage.get(MyCommons.AGREE_PRIVACY) == null || !LocalStorage.get(MyCommons.AGREE_PRIVACY)){
+      return RouteName.privacyTipsPage;
+    }else{
+      return RouteName.startupPage;
+    }
   }
 }

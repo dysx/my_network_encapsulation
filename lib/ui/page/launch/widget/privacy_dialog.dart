@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
+import 'package:my_network_encapsulation/generated/l10n.dart';
 
+///@name: 隐私政策弹窗
 class PrivacyDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class PrivacyDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              '服务条款和隐私政策提示',
+              S.of(context).terms_of_service_and_privacy_policy_tips,
               style: MyTextStyles.sixteenBlack3333Bold,
             ),
             Gaps.vGap15,

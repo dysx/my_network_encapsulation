@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         providers: providers,
         child: Consumer2<LocaleModel,ThemeDataModel>(
           builder: (context, LocaleModel currentLocale,ThemeDataModel themeData, child) {
-            /// 统一刷新控件
+            // 统一刷新控件
             return RefreshConfiguration(
                 hideFooterWhenNotFull: true, // Viewport不满一屏时,禁用上拉加载更多功能
                 // headerBuilder: () => WaterDropHeader(),// 配置默认头部指示器,假如你每个页面的头部指示器都一样的话,你需要设置这个
@@ -86,8 +86,8 @@ class MyApp extends StatelessWidget {
     );
   }
 
+  //检测是否同意了隐私政策
   String routeName()  {
-    LocalStorage.save(MyCommons.AGREE_PRIVACY, false);
     if(LocalStorage.get(MyCommons.AGREE_PRIVACY) == null || !LocalStorage.get(MyCommons.AGREE_PRIVACY)){
       return RouteName.privacyTipsPage;
     }else{

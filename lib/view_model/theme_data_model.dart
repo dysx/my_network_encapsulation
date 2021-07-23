@@ -4,7 +4,7 @@ import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// 主题model
 class ThemeDataModel extends ChangeNotifier {
-  int _themeIndex = LocalStorage.get(MyCommons.THEME_DATA) ?? 1;
+  int _themeIndex = LocalStorage.get(MyCommons.THEME_DATA) ?? 0;
 
   int get themeIndex => _themeIndex;
 

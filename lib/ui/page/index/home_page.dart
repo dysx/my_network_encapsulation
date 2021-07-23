@@ -1,3 +1,4 @@
+import 'package:device_info/device_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_inner_widget.dart';
@@ -143,6 +144,15 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   },
                   text: "滑动到指定位置",
                   sideColor: MyColors.black_3333),
+              ordinaryButton(
+                  onPressed: () async {
+                    DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+                    Map<String, dynamic> _deviceData = Map<String, dynamic>();
+                    _deviceData = _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
+                    print(_deviceData);
+                  },
+                  text: "获取设备信息",
+                  sideColor: MyColors.black_3333),
               Container(
                 width: 375.w,
                 height: 100,
@@ -208,4 +218,36 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+
+  Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
+    return <String, dynamic>{
+      'version.securityPatch': build.version.securityPatch,
+      'version.sdkInt': build.version.sdkInt,
+      'version.release': build.version.release,
+      'version.previewSdkInt': build.version.previewSdkInt,
+      'version.incremental': build.version.incremental,
+      'version.codename': build.version.codename,
+      'version.baseOS': build.version.baseOS,
+      'board': build.board,
+      'bootloader': build.bootloader,
+      'brand': build.brand,
+      'device': build.device,
+      'display': build.display,
+      'fingerprint': build.fingerprint,
+      'hardware': build.hardware,
+      'host': build.host,
+      'id': build.id,
+      'manufacturer': build.manufacturer,
+      'model': build.model,
+      'product': build.product,
+      'supported32BitAbis': build.supported32BitAbis,
+      'supported64BitAbis': build.supported64BitAbis,
+      'supportedAbis': build.supportedAbis,
+      'tags': build.tags,
+      'type': build.type,
+      'isPhysicalDevice': build.isPhysicalDevice,
+      'androidId': build.androidId,
+      'systemFeatures': build.systemFeatures,
+    };
+  }
 }

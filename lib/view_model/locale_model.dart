@@ -17,6 +17,7 @@ class LocaleModel extends ChangeNotifier {
         case 2: return Locale("en");
       }
     }
+    print('当前localeIndex： $_localeIndex');
     // 跟随系统
     return null;
   }

@@ -4,6 +4,8 @@
 //flutter内的库
 export 'package:flutter/material.dart';
 
+export 'package:my_network_encapsulation/generated/l10n.dart';
+
 //自己的库
 export 'file:///E:/study_project/my_network_encapsulation/lib/util/alert.dart';
 

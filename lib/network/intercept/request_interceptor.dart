@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:my_network_encapsulation/config/appConfig.dart';
-import 'file:///E:/study_project/my_network_encapsulation/lib/util/alert.dart';
 import 'package:my_network_encapsulation/network/exception/app_exception.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
+import 'package:my_network_encapsulation/util/alert.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 import 'package:my_network_encapsulation/util/toast.dart';
 

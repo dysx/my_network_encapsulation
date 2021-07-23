@@ -7,7 +7,6 @@ export 'package:flutter/material.dart';
 export 'package:my_network_encapsulation/generated/l10n.dart';
 
 //自己的库
-export 'file:///E:/study_project/my_network_encapsulation/lib/util/alert.dart';
 
 export 'package:my_network_encapsulation/base/base_function.dart';
 export 'package:my_network_encapsulation/base/base_widget.dart';

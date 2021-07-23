@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'file:///E:/study_project/my_network_encapsulation/lib/util/alert.dart';
 
 /// 网络错误重连
 class DioConnectivityRequestRetrier {

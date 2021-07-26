@@ -47,6 +47,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Terms of service and privacy policy tips`
+  String get terms_of_service_and_privacy_policy_tips {
+    return Intl.message(
+      'Terms of service and privacy policy tips',
+      name: 'terms_of_service_and_privacy_policy_tips',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Click again to exit`
   String get click_again_to_exit {
     return Intl.message(

@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "interfaceTest" : MessageLookupByLibrary.simpleMessage("接口测试"),
     "jump" : MessageLookupByLibrary.simpleMessage("跳转"),
     "normalPage" : MessageLookupByLibrary.simpleMessage("普通页面"),
+    "terms_of_service_and_privacy_policy_tips" : MessageLookupByLibrary.simpleMessage("服务条款和隐私政策提示"),
     "test" : MessageLookupByLibrary.simpleMessage("测试"),
     "viewStateButtonLogin" : MessageLookupByLibrary.simpleMessage("登录"),
     "viewStateButtonRefresh" : MessageLookupByLibrary.simpleMessage("刷新一下"),

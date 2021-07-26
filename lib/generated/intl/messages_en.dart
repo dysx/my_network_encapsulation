@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "interfaceTest" : MessageLookupByLibrary.simpleMessage("interfaceTest"),
     "jump" : MessageLookupByLibrary.simpleMessage("jump"),
     "normalPage" : MessageLookupByLibrary.simpleMessage("normalPage"),
+    "terms_of_service_and_privacy_policy_tips" : MessageLookupByLibrary.simpleMessage("Terms of service and privacy policy tips"),
     "test" : MessageLookupByLibrary.simpleMessage("test"),
     "viewStateButtonLogin" : MessageLookupByLibrary.simpleMessage("Sign In"),
     "viewStateButtonRefresh" : MessageLookupByLibrary.simpleMessage("Refresh"),

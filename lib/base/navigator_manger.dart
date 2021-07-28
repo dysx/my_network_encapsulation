@@ -1,11 +1,9 @@
-
-
 import 'package:my_network_encapsulation/base/base_widget.dart';
 
 /// 这个管理类，只是标记 当前 按照顺序放入和移除栈名称，并不是页面跳转后退 的功能，
 /// 只是方便 推算、表示生命周期方法，一般不需要修改
 class NavigatorManger {
-  List<String> _activityStack = [];
+  static List<String> activityStack = [];
 
   NavigatorManger._internal();
 
@@ -13,33 +11,34 @@ class NavigatorManger {
 
   //工厂模式
   factory NavigatorManger() => _singleton;
-  void addWidget(BaseWidgetState widgetName) {
-    _activityStack.add(widgetName.getClassName());
+
+  static void addWidget(String widgetName) {
+    activityStack.add(widgetName);
   }
 
-  void removeWidget(BaseWidgetState widgetName) {
-    _activityStack.remove(widgetName.getClassName());
+  static void removeWidget(String widgetName) {
+    activityStack.remove(widgetName);
   }
 
-  bool isTopPage(BaseWidgetState widgetName) {
-    if (_activityStack == null) {
+  static bool isTopPage(String widgetName) {
+    if (activityStack.isEmpty) {
       return false;
     }
     try {
-      return widgetName.getClassName() ==
-          _activityStack[_activityStack.length - 1];
+      return widgetName ==
+          activityStack[activityStack.length - 1];
     } catch (exception) {
       return false;
     }
   }
 
-  bool isSecondTop(BaseWidgetState widgetName) {
-    if (_activityStack == null) {
+  static bool isSecondTop(BaseWidgetState widgetName) {
+    if (activityStack.isEmpty) {
       return false;
     }
     try {
       return widgetName.getClassName() ==
-          _activityStack[_activityStack.length - 2];
+          activityStack[activityStack.length - 2];
     } catch (exception) {
       return false;
     }

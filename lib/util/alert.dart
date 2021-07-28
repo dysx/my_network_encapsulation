@@ -72,7 +72,7 @@ class Alert {
     if (isShowingAlert) return;
     isShowingAlert = true;
 
-    var _context = AppConfig.globalKey.currentState!.overlay!.context;
+    BuildContext _context = AppConfig.globalKey.currentState!.overlay!.context;
     bool _isLight = Theme.of(_context).brightness == Brightness.light;
 
     showDialog(
@@ -84,38 +84,67 @@ class Alert {
               if (barrierDismissible != null && barrierDismissible) hide();
               return Future.value(false);
             },
-            child: AlertDialog(
-              title: Text(
-                title ?? '提示',
-                style: MyTextStyles.sixteenBlack3333Bold
-              ),
-              content: message != null && message.length > 0
-                  ? Text(
-                      message,
-                      style: MyTextStyles.fourteenBlack3333,
-                    )
-                  : SizedBox.shrink(),
-              actions: <Widget>[
-                showCancel
-                    ? ordinaryButton(
-                        text: cancel ?? '取消',
-                        textStyle: MyTextStyles.sixteenBlack3333,
+            child: AppConfig.isAndroid
+                ? AlertDialog(
+                    title: Text(title ?? '提示',
+                        style: MyTextStyles.sixteenBlack3333Bold),
+                    content: message != null && message.length > 0
+                        ? Text(
+                            message,
+                            style: MyTextStyles.fourteenBlack3333,
+                          )
+                        : SizedBox.shrink(),
+                    actions: <Widget>[
+                      showCancel
+                          ? ordinaryButton(
+                              text: cancel ?? '取消',
+                              textStyle: MyTextStyles.sixteenBlack3333,
+                              onPressed: () {
+                                hide();
+                                if (onCancel != null) onCancel();
+                              },
+                            )
+                          : SizedBox.shrink(),
+                      ordinaryButton(
+                        text: confirm ?? '确定',
+                        textStyle: MyTextStyles.sixteenBlue91FF,
                         onPressed: () {
                           hide();
-                          if (onCancel != null) onCancel();
+                          if (onConfirm != null) onConfirm();
                         },
                       )
-                    : SizedBox.shrink(),
-                ordinaryButton(
-                  text: confirm ?? '确定',
-                  textStyle: MyTextStyles.sixteenBlue91FF,
-                  onPressed: () {
-                    hide();
-                    if (onConfirm != null) onConfirm();
-                  },
-                )
-              ],
-            ),
+                    ],
+                  )
+                : CupertinoAlertDialog(
+                    title: Text(title ?? '提示',
+                        style: MyTextStyles.sixteenBlack3333Bold),
+                    content: message != null && message.length > 0
+                        ? Text(
+                            message,
+                            style: MyTextStyles.fourteenBlack3333,
+                          )
+                        : SizedBox.shrink(),
+                    actions: <Widget>[
+                      showCancel
+                          ? ordinaryButton(
+                              text: cancel ?? '取消',
+                              textStyle: MyTextStyles.sixteenBlack3333,
+                              onPressed: () {
+                                hide();
+                                if (onCancel != null) onCancel();
+                              },
+                            )
+                          : SizedBox.shrink(),
+                      ordinaryButton(
+                        text: confirm ?? '确定',
+                        textStyle: MyTextStyles.sixteenBlue91FF,
+                        onPressed: () {
+                          hide();
+                          if (onConfirm != null) onConfirm();
+                        },
+                      )
+                    ],
+                  ),
           );
         });
   }
@@ -249,64 +278,63 @@ class Alert {
             return Future.value(false);
           },
           child: SimpleDialog(
-            title: Text(
-              title ?? '请选择',
-              style: TextStyle(
-                color: Color(0xFF505050),
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            children:
-            actions!
-                .asMap()
-                .map(
-                  (index, action) => MapEntry(
-                index,
-                SimpleDialogOption(
-                  onPressed: () {
-                    hide();
-                    if (onPressed != null) onPressed(index);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      action,
-                      style: TextStyle(
-                          color: Color(0xFF505050), fontSize: 16.0),
-                    ),
-                  ),
+              title: Text(
+                title ?? '请选择',
+                style: TextStyle(
+                  color: Color(0xFF505050),
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            )
-                .values
-                .toList()
-            // actions != null && actions.length > 0
-            //     ? actions
-            //         .asMap()
-            //         .map(
-            //           (index, action) => MapEntry(
-            //             index,
-            //             SimpleDialogOption(
-            //               onPressed: () {
-            //                 hide();
-            //                 if (onPressed != null) onPressed(index);
-            //               },
-            //               child: Padding(
-            //                 padding: const EdgeInsets.all(8.0),
-            //                 child: Text(
-            //                   action,
-            //                   style: TextStyle(
-            //                       color: Color(0xFF505050), fontSize: 16.0),
-            //                 ),
-            //               ),
-            //             ),
-            //           ),
-            //         )
-            //         .values
-            //         .toList()
-            //     : SizedBox.shrink(),
-          ),
+              children: actions!
+                  .asMap()
+                  .map(
+                    (index, action) => MapEntry(
+                      index,
+                      SimpleDialogOption(
+                        onPressed: () {
+                          hide();
+                          if (onPressed != null) onPressed(index);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            action,
+                            style: TextStyle(
+                                color: Color(0xFF505050), fontSize: 16.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                  .values
+                  .toList()
+              // actions != null && actions.length > 0
+              //     ? actions
+              //         .asMap()
+              //         .map(
+              //           (index, action) => MapEntry(
+              //             index,
+              //             SimpleDialogOption(
+              //               onPressed: () {
+              //                 hide();
+              //                 if (onPressed != null) onPressed(index);
+              //               },
+              //               child: Padding(
+              //                 padding: const EdgeInsets.all(8.0),
+              //                 child: Text(
+              //                   action,
+              //                   style: TextStyle(
+              //                       color: Color(0xFF505050), fontSize: 16.0),
+              //                 ),
+              //               ),
+              //             ),
+              //           ),
+              //         )
+              //         .values
+              //         .toList()
+              //     : SizedBox.shrink(),
+              ),
         );
       },
     );

@@ -22,7 +22,10 @@ class SecondState extends BaseInnerWidgetState<Second> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: Text('这是第二个页面'),
+          child: NetImage.cachedNetworkImage(
+              imgUrl: 'https://img10.360buyimg.com/ddimg/jfs/t1/196622/32/15344/79769/61012148E85f8e012/13a997ee2e6d36ba.jpg',
+          width: double.infinity,
+          height: double.infinity)
         ),
       ),
     );

@@ -7,6 +7,10 @@ import 'my_colors.dart';
 
 /// 字体样式
 class MyTextStyles {
+  static TextStyle tenBlack3333 =
+  TextStyle(fontSize: Dimens.fontSp10, color: MyColors.black_3333);
+  static TextStyle tenYellow =
+  TextStyle(fontSize: Dimens.fontSp10, color: MyColors.yellow_ab00);
   static TextStyle fourteenWhite =
       TextStyle(fontSize: Dimens.fontSp14, color: Colors.white);
   static TextStyle fourteenBlack3333 =

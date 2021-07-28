@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/base/base_widget.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/ui/page/index/home_page.dart';
@@ -12,6 +13,7 @@ import 'package:my_network_encapsulation/ui/page/login/login.dart';
 import 'package:my_network_encapsulation/ui/page/mine/mine.dart';
 import 'package:my_network_encapsulation/ui/page/second/second.dart';
 import 'package:my_network_encapsulation/ui/page/third/third.dart';
+import 'package:my_network_encapsulation/ui/widget/bottom_bar.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// @name：
@@ -62,7 +64,46 @@ class HomeState extends BaseWidgetState<Home> {
   @override
   Widget getBottomWidget() {
     // TODO: implement getBottomWidget
+    return MyBottomBar(items: [
+      BottomNavyBarItem(
+        icon: Icon(Icons.apps),
+        title: '首页',
+        activeColor: Colors.green,
+        inactiveColor: MyColors.black_3333,
+      ),
+      BottomNavyBarItem(
+        icon: Icon(Icons.apps),
+        title: '社区',
+        activeColor: Colors.green,
+        inactiveColor: MyColors.black_3333,
+      ),
+      BottomNavyBarItem(
+        icon: Icon(Icons.apps),
+        title: '消息',
+        activeColor: Colors.green,
+        inactiveColor: MyColors.black_3333,
+      ),
+      BottomNavyBarItem(
+        icon: Icon(Icons.apps),
+        title: '我的',
+        activeColor: Colors.green,
+        inactiveColor: MyColors.black_3333,
+      ),
+    ],
+        iconSize: 23.w,
+        containerHeight: 52.w,
+        showElevation: false,
+        selectedIndex: currentIndex,
+        onItemSelected: (index) async {
+      setState(() {
+        currentIndex = index;
+      });
+      await _checkPower();
+      _pageController.jumpToPage(index);
+    });
+
     return CupertinoTabBar(
+      backgroundColor: MyColors.white,
       currentIndex: currentIndex,
       onTap: (index) async {
         setState(() {
@@ -73,6 +114,7 @@ class HomeState extends BaseWidgetState<Home> {
       },
       items: bottomNavItems,
       activeColor: Colors.blue,
+      border: null,
     );
   }
 

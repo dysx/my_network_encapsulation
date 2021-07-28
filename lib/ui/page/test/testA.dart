@@ -63,9 +63,9 @@ class TestAState extends BaseWidgetState<TestA>{
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () async {
-                    await for(int i in countForOneMinute()) {
-                      print(i);
-                    }
+                    // await for(int i in countForOneMinute()) {
+                    //   print(i);
+                    // }
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 5),

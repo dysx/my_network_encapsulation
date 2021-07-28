@@ -33,6 +33,9 @@ dependencies:
   # 持久化存储
   shared_preferences: ^2.0.6
 
+  # 缓存
+  path_provider: ^2.0.2
+
   # 网络
   dio: ^4.0.0
   connectivity: ^3.0.6

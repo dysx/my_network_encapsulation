@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_inner_widget.dart';
+import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/ui/widget/bottom_clipper.dart';
 import 'package:my_network_encapsulation/util/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
+import 'package:my_network_encapsulation/view_model/base/cache_model.dart';
 
 class Mine extends BaseInnerWidget {
   @override
@@ -22,6 +24,20 @@ class MineState extends BaseInnerWidgetState<Mine> {
           width: double.infinity,
           height: 304.h,
           child: UserHeaderWidget(),
+        ),
+        ProviderWidget<CacheModel>(
+          model: CacheModel(),
+          onModelReady: (model) => model.initCache(),
+          builder: (context, model, child) {
+            if (model.isBusy) {
+              return SizedBox();
+            }
+            return ordinaryButton(
+                text: model.cache,
+                onPressed: () {
+                  model.clearCache();
+                });
+          },
         )
       ],
     );
@@ -31,7 +47,7 @@ class MineState extends BaseInnerWidgetState<Mine> {
   double getVerticalMargin() => 0;
 
   @override
-  void onCreate() {
+  void onCreate() async {
     setTopBarVisible(false);
     setAppBarVisible(false);
   }

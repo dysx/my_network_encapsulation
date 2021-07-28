@@ -16,10 +16,10 @@ class NetImage {
       Widget? normalImage}) {
     if (isCorrectImg(imgUrl!)) {
       return CachedNetworkImage(
-        placeholder: (context, url) => SizedBox(
-            width: placeholderWidth,
-            height: placeholderHeight,
-            child: Image.asset('assets/images/image_loading.gif')),
+        // placeholder: (context, url) => SizedBox(
+        //     width: placeholderWidth,
+        //     height: placeholderHeight,
+        //     child: Image.asset('assets/images/image_loading.gif')),
         errorWidget: (context, url, error) =>
             errorImage ?? Icon(Icons.error_outline),
         imageUrl: imgUrl,

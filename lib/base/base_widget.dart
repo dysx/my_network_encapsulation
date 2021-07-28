@@ -37,7 +37,7 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
   @override
   void initState() {
     initBaseCommon(this, context);
-    NavigatorManger().addWidget(this);
+    NavigatorManger.addWidget(getClassName());
     WidgetsBinding.instance!.addObserver(this);
     onCreate();
     log("create");
@@ -52,7 +52,7 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
   void deactivate() {
 //    log("----buildbuild---deactivate");
     //说明是被覆盖了
-    if (NavigatorManger().isSecondTop(this)) {
+    if (NavigatorManger.isSecondTop(this)) {
       if (!_onPause) {
         onPause();
         _onPause = true;
@@ -60,7 +60,7 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
         onResume();
         _onPause = false;
       }
-    } else if (NavigatorManger().isTopPage(this)) {
+    } else if (NavigatorManger.isTopPage(getClassName())) {
       if (!_onPause) {
         onPause();
       }
@@ -73,7 +73,7 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
 //    log("------buildbuild---build");
     if (!_onResumed) {
       //说明是 初次加载
-      if (NavigatorManger().isTopPage(this)) {
+      if (NavigatorManger.isTopPage(getClassName())) {
         _onResumed = true;
         onResume();
       }
@@ -109,7 +109,7 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
     _onPause = false;
 
     //把该页面 从 页面列表中 去除
-    NavigatorManger().removeWidget(this);
+    NavigatorManger.removeWidget(getClassName());
     //取消网络请求
     Http.cancelHttp(getClassName());
     super.dispose();
@@ -121,13 +121,13 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
     //此处可以拓展 是不是从前台回到后台
     if (state == AppLifecycleState.resumed) {
       //on resume
-      if (NavigatorManger().isTopPage(this)) {
+      if (NavigatorManger.isTopPage(getClassName())) {
         onForeground();
         onResume();
       }
     } else if (state == AppLifecycleState.paused) {
-      //onpause
-      if (NavigatorManger().isTopPage(this)) {
+      //on pause
+      if (NavigatorManger.isTopPage(getClassName())) {
         onBackground();
         onPause();
       }

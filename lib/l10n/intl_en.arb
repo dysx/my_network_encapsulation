@@ -1,15 +1,5 @@
 {
-  "terms_of_service_and_privacy_policy_tips": "Terms of service and privacy policy tips",
-
-  "click_again_to_exit": "Click again to exit",
-  "interfaceTest": "interfaceTest",
-  "jump": "jump",
-  "test": "test",
-  "autoBySystem": "autoBySystem",
-  "normalPage": "normalPage",
-
-
-
+  "tip": "Tip",
   "actionConfirm": "Confirm",
   "actionCancel": "Cancel",
   "viewStateMessageError": "Load Failed",
@@ -18,5 +8,10 @@
   "viewStateMessageUnAuth": "Not sign in yet",
   "viewStateButtonRefresh": "Refresh",
   "viewStateButtonRetry": "Retry",
-  "viewStateButtonLogin": "Sign In"
+  "viewStateButtonLogin": "Sign In",
+  "terms_of_service_and_privacy_policy_tips": "Terms of service and privacy policy tips",
+  "click_again_to_exit": "Click again to exit",
+  "test": "test",
+  "autoBySystem": "autoBySystem",
+  "normalPage": "normalPage"
 }

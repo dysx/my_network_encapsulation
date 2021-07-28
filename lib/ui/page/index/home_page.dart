@@ -1,20 +1,7 @@
 import 'package:device_info/device_info.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/base/base_inner_widget.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
-import 'package:my_network_encapsulation/generated/l10n.dart';
-import 'package:my_network_encapsulation/network/request_util.dart';
-import 'package:my_network_encapsulation/res/my_colors.dart';
-import 'package:my_network_encapsulation/res/my_commons.dart';
-import 'package:my_network_encapsulation/routes/my_navigator.dart';
-import 'package:my_network_encapsulation/routes/router_manger.dart';
-import 'package:my_network_encapsulation/util/local_storage.dart';
-import 'package:my_network_encapsulation/util/size_util.dart';
-import 'package:my_network_encapsulation/util/toast.dart';
-import 'package:my_network_encapsulation/view_model/locale_model.dart';
-import 'package:my_network_encapsulation/view_model/theme_data_model.dart';
-import 'package:provider/provider.dart';
+import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
+import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
 
 /// @name：
 /// @author qds
@@ -76,7 +63,7 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                       print('请求结束,打印结果: ${value.sysTime2}');
                     });
                   },
-                  text: S.of(context).interfaceTest),
+                  text: '接口测试'),
               ordinaryButton(
                 onPressed: () {
                   Provider.of<LocaleModel>(context, listen: false)
@@ -153,42 +140,21 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   },
                   text: "获取设备信息",
                   sideColor: MyColors.black_3333),
-              Container(
-                width: 375.w,
-                height: 100,
-                color: Colors.red,
-              ),
-              Container(
-                width: 375.w,
-                height: 100,
-                color: Colors.red,
-              ),
-              Container(
-                width: 375.w,
-                height: 100,
-                color: Colors.red,
-              ),
-              Container(
-                width: 375.w,
-                height: 100,
-                color: Colors.red,
-              ),
-              Container(
-                width: 375.w,
-                height: 100,
-                color: Colors.red,
-              ),
-              Container(
-                width: 375.w,
-                height: 100,
-                color: Colors.red,
-              ),
-              Container(
-                width: 375.w,
-                height: 100,
-                color: Colors.red,
-              ),
-              Text('000')
+              ordinaryButton(
+                  onPressed: () {
+                    // print(NavigatorManger.activityStack);
+                    // Alert.showSheet(
+                    //   barrierDismissible: true,
+                    //   title: '标题',
+                    //   actions: ['111','222']
+                    // );
+                    Alert.showAlert(
+                      title: '标题',
+                      message: '内容'
+                    );
+                  },
+                  text: "打印路由",
+                  sideColor: MyColors.black_3333),
             ],
           ),
         ],
@@ -208,9 +174,7 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
   void onPause() {}
 
   @override
-  void onResume() {
-    print('homepage继续');
-  }
+  void onResume() {}
 
   @override
   double getVerticalMargin() => 0;

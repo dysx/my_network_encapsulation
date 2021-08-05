@@ -1,5 +1,5 @@
 import 'package:my_network_encapsulation/base/base_insert.dart';
-import 'package:my_network_encapsulation/ui/page/launch/widget/animation_page.dart';
+import 'package:my_network_encapsulation/ui/pages/launch/widget/animation_page.dart';
 
 ///@name: 引导页
 class LeadPage extends BaseWidget {

@@ -2,13 +2,12 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/util/permission_manager.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 /// 图片浏览
 /// @author [su,qds]
@@ -43,11 +42,12 @@ class _MyPhotoViewState extends BaseWidgetState<MyPhotoView> {
         Navigator.of(context).pop();
       },
       onLongPress: () {
-        if(widget.photoList.isNotEmpty){
+        if (widget.photoList.isNotEmpty) {
           _bottomSheet();
         }
       },
-      child: widget.photoList.isNotEmpty ? _buildNetPhotos() : _buildLocalPhotos(),
+      child:
+          widget.photoList.isNotEmpty ? _buildNetPhotos() : _buildLocalPhotos(),
     );
   }
 
@@ -82,14 +82,16 @@ class _MyPhotoViewState extends BaseWidgetState<MyPhotoView> {
     });
   }
 
-  void _bottomSheet(){
+  void _bottomSheet() {
     showModalBottomSheet(
         context: context,
         barrierColor: Colors.transparent,
         backgroundColor: MyColors.white,
         elevation: 100,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))),
-        builder: (BuildContext context){
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+        builder: (BuildContext context) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -117,44 +119,16 @@ class _MyPhotoViewState extends BaseWidgetState<MyPhotoView> {
   }
 
   void _saveImage(String imageUrl) async {
-
     Uint8List imageBytes;
     CachedNetworkImage image = CachedNetworkImage(imageUrl: imageUrl);
     BaseCacheManager manager = image.cacheManager ?? DefaultCacheManager();
     File file = await manager.getSingleFile(imageUrl);
     imageBytes = await file.readAsBytes();
     PermissionManager.applyStoragePermission(() async {
-      await ImageGallerySaver.saveImage(imageBytes,quality: 100);
+      await ImageGallerySaver.saveImage(imageBytes, quality: 100);
       Toast.showMsg('保存图片成功');
       Navigator.pop(context);
     });
-
-    // ByteData bytes;
-    // ImageProvider imageProvider = CachedNetworkImageProvider(imageUrl);
-    // imageProvider
-    //     .resolve(new ImageConfiguration())
-    //     .addListener(new ImageStreamListener(
-    //       (ImageInfo info, bool _) async {
-    //     print('fjskf: ${info.image.toByteData()}');
-    //     bytes = (await info.image.toByteData())!;
-    //     PermissionManager.applyStoragePermission(() async {
-    //       await ImageGallerySaver.saveImage(bytes.buffer.asUint8List(),quality: 100);
-    //       Toast.showMsg('保存图片成功');
-    //       Navigator.pop(context);
-    //     });
-    //     // print('放假康师傅说了: ${bytes.buffer.asUint8List()}');
-    //   },
-    // ));
-    // imageProvider.obtainKey(createLocalImageConfiguration(context)).then((value) {
-    //   print('图片字节: $value');
-    // });
-    // var response = await Dio().get(imageUrl, options: Options(responseType: ResponseType.bytes));
-    // print('response: ${response.data}');
-    // PermissionManager.applyStoragePermission(() async {
-    //   await ImageGallerySaver.saveImage(Uint8List.fromList(response.data),quality: 60);
-    //   Toast.showMsg('保存图片成功');
-    //   Navigator.pop(context);
-    // });
   }
 
   PhotoViewComputedScale? _getNetScale(int index) {

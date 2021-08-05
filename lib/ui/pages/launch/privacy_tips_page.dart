@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:my_network_encapsulation/base/base_insert.dart';
-import 'package:my_network_encapsulation/ui/page/launch/widget/privacy_dialog.dart';
+import 'package:my_network_encapsulation/ui/pages/launch/widget/privacy_dialog.dart';
 
 ///@name: 隐私政策提示页
 class PrivacyTipsPage extends BaseWidget {

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
-import 'package:my_network_encapsulation/ui/page/launch/widget/PrivacyView.dart';
+import 'package:my_network_encapsulation/ui/pages/launch/widget/PrivacyView.dart';
 
 ///@name: 隐私政策弹窗
 class PrivacyDialog extends StatelessWidget {

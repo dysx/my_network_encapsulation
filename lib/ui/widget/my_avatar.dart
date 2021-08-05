@@ -1,7 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:my_network_encapsulation/res/my_colors.dart';
-import 'package:my_network_encapsulation/util/net_image.dart';
+import 'package:my_network_encapsulation/util/image/net_image.dart';
 
 ///头像类型
 

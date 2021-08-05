@@ -1,18 +1,20 @@
 
+import 'package:my_network_encapsulation/network/api_config.dart';
+
 /// 接口
 class Address {
 
   ///基础地址
-  static const String BASE_HTTP = "https://app.lightencancer.cn/api/";
+  static final String baseHttp = ApiConfig().getBaseUrl();
 
   ///获取我的内容推荐列表
-  static const String GET_RECOMMENDS = BASE_HTTP + "services/app/SearchService/GetRecommends";
+  static final String getRecommends = baseHttp + "services/app/SearchService/GetRecommends";
 
   ///手机密码登陆
-  static const String login = BASE_HTTP + "TokenAuth/AuthenticateByPhonePwd";
+  static final String login = baseHttp + "TokenAuth/AuthenticateByPhonePwd";
 
-  static const String addFriend = BASE_HTTP + "services/app/NoticeService/AddFriend";
+  static final String addFriend = baseHttp + "services/app/NoticeService/AddFriend";
 
-  static const String comment = BASE_HTTP + 'services/app/CommentService/CommentWebArticle';
+  static final String comment = baseHttp + 'services/app/CommentService/CommentWebArticle';
 
 }

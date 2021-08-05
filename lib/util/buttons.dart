@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/res/my_colors.dart';
-import 'package:my_network_encapsulation/util/local_image_selector.dart';
+import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 
 /// @name：app基本按钮
@@ -27,13 +28,13 @@ Widget ordinaryButton(
     TextButton(
       onPressed: onPressed,
       child: Text(text!,
-          style: textStyle ?? TextStyle(color: MyColors.black_3333)),
+          style: textStyle ?? MyTextStyles.fourteenBlack3333),
       style: ButtonStyle(
           padding: MaterialStateProperty.all(
               padding ?? EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
           // shape: MaterialStateProperty.all(StadiumBorder()),
           shape: MaterialStateProperty.all(RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(radius ?? 7))),
+              borderRadius: BorderRadius.circular(radius ?? 0))),
           overlayColor: MaterialStateProperty.all(overlayColor),
           backgroundColor: MaterialStateProperty.all(
               backgroundColor ?? null),

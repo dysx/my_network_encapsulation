@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
+import 'package:my_network_encapsulation/util/size_util.dart';
 
 /// 主题model
 class ThemeDataModel extends ChangeNotifier {
@@ -11,8 +13,8 @@ class ThemeDataModel extends ChangeNotifier {
   final ThemeData norTheme = ThemeData(
       brightness: Brightness.light, // content颜色
       backgroundColor: Colors.white,
-      textTheme:
-          TextTheme(bodyText1: TextStyle(fontSize: 30, color: Colors.red)));
+      textTheme: TextTheme(
+          bodyText2: TextStyle(fontSize: 14.sp, color: MyColors.black_3333)));
 
   final ThemeData darkTheme = ThemeData(
       brightness: Brightness.dark,

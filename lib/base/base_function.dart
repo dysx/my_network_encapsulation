@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/res/my_colors.dart';
 import 'package:my_network_encapsulation/res/my_text_styles.dart';
-import 'package:my_network_encapsulation/util/local_image_selector.dart';
+import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 import 'package:my_network_encapsulation/util/toast.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';

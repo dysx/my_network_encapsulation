@@ -1,5 +1,6 @@
 import 'package:device_info/device_info.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
+import 'package:my_network_encapsulation/util/permission_manager.dart';
 import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
 import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
 
@@ -154,6 +155,14 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                     );
                   },
                   text: "打印路由",
+                  sideColor: MyColors.black_3333),
+              ordinaryButton(
+                  onPressed: () {
+                    PermissionManager.applyStoragePermission((){
+                      print('申请权限成功');
+                    });
+                  },
+                  text: "文件权限测试",
                   sideColor: MyColors.black_3333),
             ],
           ),

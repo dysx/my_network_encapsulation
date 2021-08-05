@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/util/local_image_selector.dart';
+import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 
 ///@name: 网络图片（带缓存）
 class NetImage {

@@ -1,7 +1,7 @@
 //带有动画按钮的页面
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/ui/page/launch/widget/animation_btn.dart';
-import 'package:my_network_encapsulation/util/local_image_selector.dart';
+import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 
 class AnimationPage extends StatefulWidget {
 //设置一个标题

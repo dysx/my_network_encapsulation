@@ -17,6 +17,7 @@ import 'package:my_network_encapsulation/ui/page/test/testA.dart';
 import 'package:my_network_encapsulation/ui/page/test/testB.dart';
 import 'package:my_network_encapsulation/ui/page/test/testC.dart';
 import 'package:my_network_encapsulation/ui/page/test/testD.dart';
+import 'package:my_network_encapsulation/ui/widget/multipleImage/my_photo_view.dart';
 import 'package:my_network_encapsulation/ui/widget/not_found_page.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 
@@ -25,6 +26,7 @@ class RouteName {
   static const String privacyTipsPage = 'privacyTipsPage';
   static const String startupPage = 'startupPage';
   static const String lead = 'lead';
+  static const String myPhotoView = 'myPhotoView';
   static const String login = 'login';
   static const String home = 'home';
   static const String homePage = 'homePage';
@@ -52,6 +54,13 @@ class MyRouter {
         return NoAnimRouteBuilder(StartupPage(), routeName);
       case RouteName.lead:
         return FadeRouteBuilder(LeadPage(), routeName);
+      // case RouteName.photoView:
+      //   return FadeRouteBuilder(
+      //       PhotoView(
+      //         photoList: settings.arguments!['photoList'],
+      //         localPhotos: settings.arguments!['localPhotos'],
+      //       ),
+      //       routeName);
       case RouteName.login:
         return SlideBottomRouteBuilder(Login(), routeName);
       case RouteName.home:
@@ -74,7 +83,7 @@ class MyRouter {
         return NoAnimRouteBuilder(TestC(), routeName);
       case RouteName.testD:
         return NoAnimRouteBuilder(TestD(), routeName);
-        case RouteName.scrollToIndex:
+      case RouteName.scrollToIndex:
         return NoAnimRouteBuilder(ScrollToIndexDemoPage2(), routeName);
       default:
         return FadeRouteBuilder(NotFoundPage(), routeName);

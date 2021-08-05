@@ -5,7 +5,7 @@ import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/provider/view_state.dart';
 import 'package:my_network_encapsulation/res/my_text_styles.dart';
 import 'package:my_network_encapsulation/util/buttons.dart';
-import 'package:my_network_encapsulation/util/local_image_selector.dart';
+import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 
 

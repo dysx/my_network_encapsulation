@@ -24,7 +24,7 @@ class RequestUtil {
       int pageIndex, int pageSize,
       {required String cancelTag}) {
     CancelToken _cancelToken = CancelToken();
-    return Http().get(Address.GET_RECOMMENDS,
+    return Http().get(Address.getRecommends,
         params: {
           "PageIndex": pageIndex,
           "PageSize": pageSize,

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/routes/page_route_anim.dart';
-import 'package:my_network_encapsulation/ui/page/Third/third.dart';
+import 'package:my_network_encapsulation/ui/pages/Third/third.dart';
 import 'package:my_network_encapsulation/ui/pages/home.dart';
 import 'package:my_network_encapsulation/ui/pages/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/pages/launch/lead_page.dart';

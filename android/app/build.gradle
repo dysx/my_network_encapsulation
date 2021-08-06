@@ -21,11 +21,27 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def dartEnvironmentVariables = [
+        ANDROID_CHANNEL: 'android',
+]
+
+if (project.hasProperty('dart-defines')) {
+    println('print dart defines proerty')
+    dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
+            .split(',')
+            .collectEntries { entry ->
+                def pair = URLDecoder.decode(entry).split('=')
+                println(pair.first() + ':' + pair.last())
+                [(pair.first()): pair.last()]
+            }
+}
+
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
+//    buildToolVersion "28.0.3"
 
     lintOptions {
         disable 'InvalidPackage'
@@ -37,15 +53,42 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionName '2.0.0'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('key/key.jks')
+            storePassword '123456'
+            keyAlias 'qds'
+            keyPassword '123456'
+        }
+//        debug {
+//            storeFile file('key/key.jks')
+//            storePassword '123456'
+//            keyAlias = 'qds'
+//            keyPassword '123456'
+//        }
     }
 
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            if (variant.buildType.name == "release") {
+                def newApkName = "${dartEnvironmentVariables.ANDROID_CHANNEL}_app_v${defaultConfig.versionName}.apk"
+//                outputFileName = new File(newApkName)
+                outputFileName = newApkName
+                print('ApkName: ')
+                println(newApkName)
+            }
         }
     }
 }

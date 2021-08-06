@@ -1,5 +1,6 @@
 import 'package:device_info/device_info.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
+import 'package:my_network_encapsulation/util/pack/env_config.dart';
 import 'package:my_network_encapsulation/util/permission_manager.dart';
 import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
 import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
@@ -163,6 +164,18 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                     });
                   },
                   text: "文件权限测试",
+                  sideColor: MyColors.black_3333),
+              ordinaryButton(
+                  onPressed: () {
+                    Toast.showMsg(EnvConfig.CHANNEL);
+                  },
+                  text: "渠道",
+                  sideColor: MyColors.black_3333),
+              ordinaryButton(
+                  onPressed: () {
+                    Toast.showMsg(EnvConfig.VERSION);
+                  },
+                  text: "版本",
                   sideColor: MyColors.black_3333),
             ],
           ),

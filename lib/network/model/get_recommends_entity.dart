@@ -17,4 +17,5 @@ class GetRecommendsEntity with JsonConvert<GetRecommendsEntity> {
 	int? contentType;
 	bool? isMyself;
 	int? duration;
+	bool collect = false;
 }

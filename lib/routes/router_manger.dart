@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/routes/page_route_anim.dart';
 import 'package:my_network_encapsulation/ui/pages/Third/third.dart';
+import 'package:my_network_encapsulation/ui/pages/cartTest/goods_list.dart';
+import 'package:my_network_encapsulation/ui/pages/cartTest/my_cart.dart';
 import 'package:my_network_encapsulation/ui/pages/home.dart';
 import 'package:my_network_encapsulation/ui/pages/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/pages/launch/lead_page.dart';
@@ -16,6 +18,8 @@ import 'package:my_network_encapsulation/ui/pages/test/testA.dart';
 import 'package:my_network_encapsulation/ui/pages/test/testB.dart';
 import 'package:my_network_encapsulation/ui/pages/test/testC.dart';
 import 'package:my_network_encapsulation/ui/pages/test/testD.dart';
+import 'package:my_network_encapsulation/ui/pages/third/favourite_page.dart';
+import 'package:my_network_encapsulation/ui/pages/third/mock_page.dart';
 import 'package:my_network_encapsulation/ui/public/login/login.dart';
 import 'package:my_network_encapsulation/ui/widget/multipleImage/my_photo_view.dart';
 import 'package:my_network_encapsulation/ui/widget/not_found_page.dart';
@@ -32,6 +36,10 @@ class RouteName {
   static const String homePage = 'homePage';
   static const String second = 'second';
   static const String third = 'third';
+  static const String goodsList = 'goodsList';
+  static const String favouritePage = 'favouritePage';
+  static const String mockPage = 'mockPage';
+  static const String myCart = 'myCart';
   static const String mine = 'mine';
   static const String baseTest = 'baseTest';
   static const String testA = 'testA';
@@ -71,6 +79,14 @@ class MyRouter {
         return NoAnimRouteBuilder(Second(), routeName);
       case RouteName.third:
         return NoAnimRouteBuilder(Third(), routeName);
+      case RouteName.goodsList:
+        return NoAnimRouteBuilder(GoodsList(), routeName);
+      case RouteName.favouritePage:
+        return SizeRoute(FavouritePage(), routeName);
+      case RouteName.mockPage:
+        return SizeRoute(MockPage(), routeName);
+      case RouteName.myCart:
+        return NoAnimRouteBuilder(MyCart(), routeName);
       case RouteName.mine:
         return NoAnimRouteBuilder(Mine(), routeName);
       case RouteName.baseTest:

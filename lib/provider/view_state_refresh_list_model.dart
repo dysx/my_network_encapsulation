@@ -4,7 +4,6 @@ import 'package:my_network_encapsulation/provider/view_state_list_model.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-
 /// 基于
 abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
   /// 分页第一页页码
@@ -30,30 +29,29 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
     try {
       _currentPageNum = pageNumFirst;
       var data = await loadData(pageIndex: pageNumFirst, pageSize: pageSize);
-      if(data != null) {
-        if (data.isEmpty) {
-          refreshController.refreshCompleted(resetFooterState: true);
-          list.clear();
-          setEmpty();
+      if (data.isEmpty) {
+        refreshController.refreshCompleted(resetFooterState: true);
+        list.clear();
+        setEmpty();
+      } else {
+        onCompleted(data);
+        list.clear();
+        list.addAll(data);
+        refreshController.refreshCompleted();
+        // 小于分页的数量,禁止上拉加载更多
+        if (data.length < pageSize) {
+          refreshController.loadNoData();
         } else {
-          onCompleted(data);
-          list.clear();
-          list.addAll(data);
-          refreshController.refreshCompleted();
-          // 小于分页的数量,禁止上拉加载更多
-          if (data.length < pageSize) {
-            refreshController.loadNoData();
-          } else {
-            //防止上次上拉加载更多失败,需要重置状态
-            refreshController.loadComplete();
-          }
-          setIdle();
+          //防止上次上拉加载更多失败,需要重置状态
+          refreshController.loadComplete();
         }
+        setIdle();
       }
       return data;
     } catch (e, s) {
       Log.e("e的错误信息$e");
       Log.e("s的错误信息$s");
+
       /// 页面已经加载了数据,如果刷新报错,不应该直接跳转错误页面
       /// 而是显示之前的页面数据.给出错误提示
       if (init) list.clear();
@@ -66,7 +64,7 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
   /// 上拉加载更多
   Future<List<T>?> loadMore() async {
     try {
-      var data = await loadData(pageIndex: ++_currentPageNum);
+      var data = await loadData(pageIndex: ++_currentPageNum,pageSize: pageSize);
       if (data.isEmpty) {
         _currentPageNum--;
         refreshController.loadNoData();

@@ -59,6 +59,8 @@ android {
 
     signingConfigs {
         release {
+            v1SigningEnabled = true
+            v1SigningEnabled = true
             storeFile file('key/key.jks')
             storePassword '123456'
             keyAlias 'qds'

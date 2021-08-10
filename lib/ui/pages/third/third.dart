@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_inner_widget.dart';
+import 'package:my_network_encapsulation/base/base_insert.dart';
 
 class Third extends BaseInnerWidget {
   @override
@@ -14,7 +15,24 @@ class ThirdState extends BaseInnerWidgetState<Third> {
   @override
   Widget buildWidget(BuildContext context) {
     return Center(
-      child: Text('这是第三个页面'),
+      child: Column(
+        children: [
+          ordinaryButton(
+              text: '购物车状态',
+              backgroundColor: MyColors.blue_91ff,
+              onPressed: (){
+                MyNavigator.pushNamed(RouteName.goodsList);
+              }
+          ),
+          ordinaryButton(
+              text: '列表',
+              backgroundColor: MyColors.blue_91ff,
+              onPressed: (){
+                MyNavigator.pushNamed(RouteName.mockPage);
+              }
+          )
+        ],
+      ),
     );
   }
 

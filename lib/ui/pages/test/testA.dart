@@ -33,7 +33,7 @@ class TestAState extends BaseWidgetState<TestA>{
           if (model.viewStateError!.isUnauthorized) {
             return ViewStateUnAuthWidget(onPressed: () async {
               var success =
-                  await Navigator.of(context).pushNamed(RouteName.login);
+                  await Navigator.of(context).pushNamed(RouteName.loginPage);
               // 登录成功,获取数据,刷新页面
               if (success != null) {
                 model.initData();

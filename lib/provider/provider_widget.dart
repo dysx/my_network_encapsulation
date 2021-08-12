@@ -13,8 +13,8 @@ class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget {
 
   ProviderWidget({
     Key? key,
-    required this.builder,
     required this.model,
+    required this.builder,
     this.child,
     this.onModelReady,
     this.autoDispose: true,
@@ -64,9 +64,9 @@ class ProviderWidget2<A extends ChangeNotifier, B extends ChangeNotifier>
 
   ProviderWidget2({
     Key? key,
-    required this.builder,
     required this.model1,
     required this.model2,
+    required this.builder,
     this.child,
     this.onModelReady,
     this.autoDispose: false,

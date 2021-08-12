@@ -25,7 +25,7 @@ class LocaleModel extends ChangeNotifier {
   switchLocale(int index) {
     _localeIndex = index;
     notifyListeners();
-    LocalStorage.save(MyCommons.LOCALE, index);
+    LocalStorage.saveInt(MyCommons.LOCALE, index);
   }
 
   static String localeName(index, context) {

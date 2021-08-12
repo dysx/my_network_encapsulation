@@ -35,6 +35,6 @@ class ThemeDataModel extends ChangeNotifier {
   switchTheme(int index) {
     _themeIndex = index;
     notifyListeners();
-    LocalStorage.save(MyCommons.THEME_DATA, index);
+    LocalStorage.saveInt(MyCommons.THEME_DATA, index);
   }
 }

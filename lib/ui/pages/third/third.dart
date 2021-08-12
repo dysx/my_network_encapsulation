@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_inner_widget.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
+import 'package:my_network_encapsulation/ui/public/login/login_page.dart';
+import 'package:my_network_encapsulation/view_model/login_model.dart';
+import 'package:my_network_encapsulation/view_model/user_model.dart';
 
 class Third extends BaseInnerWidget {
   @override
@@ -30,7 +33,35 @@ class ThirdState extends BaseInnerWidgetState<Third> {
               onPressed: (){
                 MyNavigator.pushNamed(RouteName.mockPage);
               }
-          )
+          ),
+          // ordinaryButton(
+          //     text: '登陆保存user',
+          //     backgroundColor: MyColors.blue_91ff,
+          //     onPressed: (){
+          //       print(UserModel().hasUser);
+          //     }
+          // ),
+          // ordinaryButton(
+          //     text: '打印user',
+          //     backgroundColor: MyColors.blue_91ff,
+          //     onPressed: (){
+          //       print(UserModel().hasUser);
+          //     }
+          // ),
+          ordinaryButton(
+              text: '去登陆',
+              backgroundColor: MyColors.blue_91ff,
+              onPressed: (){
+                MyNavigator.pushNamed(RouteName.loginPage);
+              }
+          ),
+          ordinaryButton(
+              text: 'indicator测试',
+              backgroundColor: MyColors.blue_91ff,
+              onPressed: (){
+                MyNavigator.pushNamed(RouteName.indicatorTest);
+              }
+          ),
         ],
       ),
     );

@@ -48,7 +48,7 @@ class RequestInterceptor extends Interceptor {
     }
     /// 登陆失效处理 统一跳回登陆页
     if (err.response!.data['unAuthorizedRequest']) {
-      AppConfig.globalKey.currentState!.pushNamed(RouteName.login, arguments: {'havePop': true});
+      AppConfig.globalKey.currentState!.pushNamed(RouteName.loginPage, arguments: {'havePop': true});
       return super.onError(err, handler);
     }
     /// 展示后台定义的错误message

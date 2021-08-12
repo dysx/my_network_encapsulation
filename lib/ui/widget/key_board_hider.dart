@@ -37,9 +37,9 @@ class KeyboardHider extends StatelessWidget with KeyBoardHiderMixin {
         onTap: () {
           hideKeyboard(
               context: context,
-              hideTextInput: hideTextInput!,
-              requestFocusNode: requestFocusNode!);
-          onTap!();
+              hideTextInput: hideTextInput ?? true,
+              requestFocusNode: requestFocusNode ?? true);
+          if(onTap != null) onTap!();
         },
         child: child);
   }

@@ -1,12 +1,12 @@
 
-///统一导入
+/// 统一导入
 
-//flutter内的库
+/// flutter内的库
 export 'package:flutter/material.dart';
 
 export 'package:my_network_encapsulation/generated/l10n.dart';
 
-//自己的库
+/// 自己的库
 
 export 'package:my_network_encapsulation/base/base_function.dart';
 export 'package:my_network_encapsulation/base/base_widget.dart';

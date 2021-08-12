@@ -2,6 +2,7 @@
 import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
 import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
 import 'package:my_network_encapsulation/view_model/favourite_model.dart';
+import 'package:my_network_encapsulation/view_model/user_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -17,6 +18,7 @@ List<SingleChildWidget> providers = [
 List<SingleChildWidget> independentServices = [
   ChangeNotifierProvider<ThemeDataModel>(create: (context) => ThemeDataModel()),
   ChangeNotifierProvider<LocaleModel>(create: (context) => LocaleModel()),
+  ChangeNotifierProvider<UserModel>(create: (context) => UserModel()),
   ChangeNotifierProvider<GlobalFavouriteStateModel>(
     create: (context) => GlobalFavouriteStateModel(),
   )

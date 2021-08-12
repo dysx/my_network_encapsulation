@@ -203,14 +203,16 @@ class ViewStateUnAuthImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Hero(
       tag: 'loginLogo',
-      child: Image.asset(
-        ImageHelper.wrapAssets('login_logo.png'),
-        width: 130,
-        height: 100,
-        fit: BoxFit.fitWidth,
-        color: Theme.of(context).accentColor,
-        colorBlendMode: BlendMode.srcIn,
-      ),
+      child:
+      LocalImageSelector.getSingleImage('login_logo',imageWidth: 250.w,imageHeight: 191.w),
+      // Image.asset(
+      //   ImageHelper.wrapAssets('login_logo.png'),
+      //   width: 130,
+      //   height: 100,
+      //   fit: BoxFit.fitWidth,
+      //   color: Theme.of(context).accentColor,
+      //   colorBlendMode: BlendMode.srcIn,
+      // ),
     );
   }
 }

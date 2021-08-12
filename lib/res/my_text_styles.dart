@@ -29,6 +29,10 @@ class MyTextStyles {
       fontSize: Dimens.fontSp16,
       color: MyColors.black_3333,
       fontWeight: FontWeight.bold);
+  static TextStyle sixteenBlack3333W500 = TextStyle(
+      fontSize: Dimens.fontSp16,
+      color: MyColors.black_3333,
+      fontWeight: FontWeight.w500);
   static TextStyle sixteenFF66 =
   TextStyle(fontSize: Dimens.fontSp16, color: MyColors.grey_ff66);
 }

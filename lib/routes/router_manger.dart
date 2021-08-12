@@ -20,7 +20,8 @@ import 'package:my_network_encapsulation/ui/pages/test/testC.dart';
 import 'package:my_network_encapsulation/ui/pages/test/testD.dart';
 import 'package:my_network_encapsulation/ui/pages/third/favourite_page.dart';
 import 'package:my_network_encapsulation/ui/pages/third/mock_page.dart';
-import 'package:my_network_encapsulation/ui/public/login/login.dart';
+import 'package:my_network_encapsulation/ui/public/login/login_page.dart';
+import 'package:my_network_encapsulation/ui/public/test/indicator_test.dart';
 import 'package:my_network_encapsulation/ui/widget/multipleImage/my_photo_view.dart';
 import 'package:my_network_encapsulation/ui/widget/not_found_page.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
@@ -31,7 +32,8 @@ class RouteName {
   static const String startupPage = 'startupPage';
   static const String lead = 'lead';
   static const String myPhotoView = 'myPhotoView';
-  static const String login = 'login';
+  static const String loginPage = 'loginPage';
+  static const String indicatorTest = 'indicatorTest';
   static const String home = 'home';
   static const String homePage = 'homePage';
   static const String second = 'second';
@@ -69,8 +71,8 @@ class MyRouter {
       //         localPhotos: settings.arguments!['localPhotos'],
       //       ),
       //       routeName);
-      case RouteName.login:
-        return SlideBottomRouteBuilder(Login(), routeName);
+      case RouteName.loginPage:
+        return SlideBottomRouteBuilder(LoginPage(), routeName);
       case RouteName.home:
         return SizeRoute(Home(), routeName);
       case RouteName.homePage:
@@ -99,6 +101,8 @@ class MyRouter {
         return NoAnimRouteBuilder(TestC(), routeName);
       case RouteName.testD:
         return NoAnimRouteBuilder(TestD(), routeName);
+        case RouteName.indicatorTest:
+        return NoAnimRouteBuilder(IndicatorTest(), routeName);
       case RouteName.scrollToIndex:
         return NoAnimRouteBuilder(ScrollToIndexDemoPage2(), routeName);
       default:

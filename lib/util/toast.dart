@@ -10,13 +10,15 @@ class Toast {
   }
 
   static showWidget(Widget widget, {duration = 2000}) {
-    showToastWidget(widget, duration: Duration(milliseconds: duration));
+    showToastWidget(widget,
+        duration: Duration(milliseconds: duration),
+        position: ToastPosition.bottom);
   }
 
   static showMsgExit(String msg, {duration = 2000}) {
     showToast(msg,
         duration: Duration(milliseconds: duration),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         textStyle: MyTextStyles.fourteenBlack3333);
   }
 

@@ -35,12 +35,12 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   text: '$aaa'),
               ordinaryButton(
                   onPressed: () {
-                    LocalStorage.save(MyCommons.TOKEN, '123');
+                    LocalStorage.saveString(MyCommons.TOKEN, '123');
                     print("${LocalStorage.get(MyCommons.TOKEN)}");
                     RequestUtil.login('15015802692', 'qds123123',
                             cancelTag: 'HomePage')
                         .then((value) {
-                      LocalStorage.save(MyCommons.TOKEN, value.accessToken);
+                      LocalStorage.saveString(MyCommons.TOKEN, value.accessToken!);
                     });
                   },
                   text: '登陆'),
@@ -104,13 +104,13 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
               ),
               ordinaryButton(
                 onPressed: () {
-                  LocalStorage.save(MyCommons.TOKEN, '123');
+                  LocalStorage.saveString(MyCommons.TOKEN, '123');
                 },
                 text: "存储token",
               ),
               ordinaryButton(
                 onPressed: () {
-                  Toast.showMsg(LocalStorage.get(MyCommons.TOKEN));
+                  Toast.showMsg(LocalStorage.get(MyCommons.TOKEN)!);
                   // Toast.showWidget(widget);
                 },
                 text: "打印token",

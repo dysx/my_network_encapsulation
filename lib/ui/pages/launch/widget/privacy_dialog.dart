@@ -72,7 +72,7 @@ class PrivacyDialog extends StatelessWidget {
                             backgroundColor: Colors.blue,
                             minimumSize: Size(double.infinity, 45),
                             onPressed: () {
-                              LocalStorage.save(MyCommons.AGREE_PRIVACY, true);
+                              LocalStorage.saveBool(MyCommons.AGREE_PRIVACY, true);
                               MyNavigator.pushReplacementNamed(RouteName.lead);
                             },
                             text: '同意并使用',

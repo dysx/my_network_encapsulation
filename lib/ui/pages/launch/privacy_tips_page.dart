@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/ui/pages/launch/widget/privacy_dialog.dart';
 
-///@name: 隐私政策提示页
+/// @describe: 隐私政策提示页
+/// @author: qds
+/// @date:
 class PrivacyTipsPage extends BaseWidget {
   @override
   BaseWidgetState<BaseWidget> getState() => PrivacyTipsPageState();

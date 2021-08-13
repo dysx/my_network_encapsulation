@@ -1,5 +1,8 @@
 import 'package:url_launcher/url_launcher.dart';
 
+/// @describe: 第三方软件跳转工具
+/// @author: qds
+/// @date:
 class ThirdAppUtils {
   static Future<String> canOpenApp(url) async {
     Uri uri = Uri.parse(url);
@@ -16,9 +19,9 @@ class ThirdAppUtils {
       default:
         break;
     }
-    if(await canLaunch(scheme)){
+    if (await canLaunch(scheme)) {
       return scheme;
-    }else{
+    } else {
       throw 'Could not launch $url';
     }
   }

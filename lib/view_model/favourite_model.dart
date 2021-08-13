@@ -5,7 +5,7 @@ import 'package:my_network_encapsulation/network/model/goods_entity.dart';
 import 'package:my_network_encapsulation/provider/view_state.dart';
 import 'package:my_network_encapsulation/provider/view_state_model.dart';
 import 'package:my_network_encapsulation/provider/view_state_refresh_list_model.dart';
-import 'package:my_network_encapsulation/ui/pages/cartTest/mock/goods_mock_data.dart';
+import 'package:my_network_encapsulation/ui/pages/third/goods_mock_data.dart';
 import 'package:my_network_encapsulation/view_model/cart_model.dart';
 
 /// 我的收藏列表

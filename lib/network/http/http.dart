@@ -10,7 +10,9 @@ import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 
-/// http请求
+/// @describe: http请求
+/// @author: qds
+/// @date:
 class Http {
   /// 超时时间 毫秒
   static const int CONNECT_TIMEOUT = 30000;
@@ -95,12 +97,12 @@ class Http {
     dio.options.headers.addAll(map);
   }
 
-  /*
-  * 取消请求
-  *
-  * 同一个cancel token 可用于多个请求，当一个cancel token取消时，所有使用该cancel token的请求都会被取消。
-  * 传入页面名，关闭页面，取消所有当前页面的请求
-  */
+  /// 取消请求
+  ///
+  /// 同一个cancel token 可用于多个请求，当一个cancel token取消时
+  /// 所有使用该cancel token的请求都会被取消。
+  ///
+  /// 传入页面名，关闭页面，取消所有当前页面的请求
   static void cancelHttp(String tag) {
     print("$tag页面取消网络请求");
     if (_cancelTokens.containsKey(tag)) {
@@ -123,18 +125,16 @@ class Http {
   }
 
   /// ----------------------- restful -------------------------
-  /*
-     [params]       get 请求参数
-     [data]         post请求参数
-     [options]      requestOptions
-     [cancelTag]    取消请求页面名
-     [cancelToken]  取消请求cancelToken
-     // 缓存
-     [refresh]      refresh标记是否是"下拉刷新"
-     [noCache]      是否缓存
-     [cacheKey]     缓存key
-     [cacheDisk]    是否是磁盘缓存
-  */
+  ///      [params]       get 请求参数
+  /// [data]         post请求参数
+  /// [options]      requestOptions
+  /// [cancelTag]    取消请求页面名
+  /// [cancelToken]  取消请求cancelToken
+  /// 缓存
+  /// [refresh]      refresh标记是否是"下拉刷新"
+  /// [noCache]      是否缓存
+  /// [cacheKey]     缓存key
+  /// [cacheDisk]    是否是磁盘缓存
   Future<T> get<T>(
     String path, {
     Map<String, dynamic>? params,
@@ -207,9 +207,7 @@ class Http {
 
     try {
       future = dio.post(path,
-          data: data,
-          options: requestOptions,
-          cancelToken: cancelToken);
+          data: data, options: requestOptions, cancelToken: cancelToken);
     } on DioError catch (e) {
       Log.e('------- dio catchError --------');
       completer.completeError(e);
@@ -374,9 +372,7 @@ class Http {
 
     try {
       future = dio.post(path,
-          data: data,
-          options: requestOptions,
-          cancelToken: cancelToken);
+          data: data, options: requestOptions, cancelToken: cancelToken);
     } on DioError catch (e) {
       Log.e('------- dio catchError --------');
       completer.completeError(e);

@@ -1,10 +1,10 @@
-
 import 'package:my_network_encapsulation/config/appConfig.dart';
 
-/// @description api域名配置
+/// @description: api域名配置
+/// @author: qds
+/// @date:
 abstract class Config {
   String getBaseUrl();
-
 }
 
 class TestConfig extends Config {
@@ -44,9 +44,9 @@ class ApiConfig extends Config {
 
   ApiConfig._internal() {
     //初始化
-    if(AppConfig.isDebug){
+    if (AppConfig.isDebug) {
       baseUrl = TestConfig.BASE_URL;
-    }else{
+    } else {
       baseUrl = ProductionConfig.BASE_URL;
     }
   }

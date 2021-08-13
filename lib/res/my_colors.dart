@@ -1,9 +1,10 @@
-
 import 'dart:ui';
 
 import 'package:my_network_encapsulation/base/base_insert.dart';
 
-/// 颜色管理
+/// @describe: 颜色管理
+/// @author: qds
+/// @date:
 class MyColors {
   static const Color white = Color(0xFFFFFFFF);
 
@@ -24,5 +25,4 @@ class MyColors {
   ///背景色
   static const Color yellow_c133 = Color(0xFFFFC133);
   static const Color yellow_9a22 = Color(0xFFFF9A22);
-
 }

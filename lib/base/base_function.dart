@@ -1,58 +1,75 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/res/my_colors.dart';
 import 'package:my_network_encapsulation/res/my_text_styles.dart';
 import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
-import 'package:my_network_encapsulation/util/toast.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
+import 'package:my_network_encapsulation/util/toast.dart';
 
-/// base 类 常用的一些工具类 ， 放在这里就可以了
+/// @describe: base 类 常用的一些工具类 ， 放在这里就可以了
 /// get方法均可以重写，set方法可直接调用设置
+///
+/// @author: qds
+/// @date:
 abstract class BaseFunction {
   late State _stateBaseFunction;
   late BuildContext _contextBaseFunction;
 
   GlobalKey<ScaffoldState> baseScaffoldKey = new GlobalKey();
 
-  ///状态栏是否显示 默认显示
+  /// 状态栏是否显示 默认显示
   bool _isTopBarShow = true;
-  ///导航栏是否显示 默认显示
+
+  /// 导航栏是否显示 默认显示
   bool _isAppBarShow = true;
-  ///导航栏底部是否显示 默认不显示
+
+  /// 导航栏底部是否显示 默认不显示
   bool _isAppBarBottomShow = false;
-  ///背景色 默认白
+
+  /// 背景色 默认白
   Color _backgroundColor = Colors.white;
-  ///状态栏背景色
+
+  /// 状态栏背景色
   Color _topBarColor = MyColors.background;
-  ///导航栏背景色
+
+  /// 导航栏背景色
   Color _appBarColor = MyColors.background;
-  ///导航栏内容颜色
+
+  /// 导航栏内容颜色
   Color _appBarContentColor = MyColors.black_3333;
   Color _appBarBottomLineColor = MyColors.background;
-  ///导航栏右边组件
+
+  /// 导航栏右边组件
   Widget? _appBarRightContent;
-  ///底部组件
+
+  /// 底部组件
   Widget? _bottomWidget;
-  ///设置状态栏字体黑白 true: 白色，false: 黑色
+
+  /// 设置状态栏字体黑白 true: 白色，false: 黑色
   bool _topBarStyle = false;
-  ///导航栏返回按钮事件
+
+  /// 导航栏返回按钮事件
   Function? _backIconClick;
-  ///标题字体大小
+
+  /// 标题字体大小
   double _appBarCenterTextSize = 18.sp;
-  ///标题
+
+  /// 标题
   String _appBarTitle = '';
-  ///右边小标题信息
+
+  /// 右边小标题信息
   String? _appBarRightTitle;
   double _appBarRightTextSize = 15.sp;
   double _appBarBottomLineheight = 2;
-  ///是否显示左边返回按钮
+
+  /// 是否显示左边返回按钮
   bool _isBackIconShow = true;
 
-  double bottomVsrtical = 0; //作为内部页面距离底部的高度
+  /// 作为内部页面距离底部的高度
+  double bottomVertical = 0;
 
   bool _isBottomInset = false;
 
@@ -62,7 +79,7 @@ abstract class BaseFunction {
 
   bool get isAsFrame => _asFrame;
 
-  ///有需要的话就重写以下的方法
+  /// 有需要的话就重写以下的方法
   ///-----------------------------
   void initBaseCommon(State state, BuildContext context) {
     _stateBaseFunction = state;
@@ -86,7 +103,7 @@ abstract class BaseFunction {
                 bottom: _isAppBarBottomShow ? _appBarBottomLineheight : 0),
             decoration: _isAppBarBottomShow
                 ? BoxDecoration(
-                color: _appBarColor, boxShadow: [Styles.appbarShadow])
+                    color: _appBarColor, boxShadow: [Styles.appbarShadow])
                 : BoxDecoration(),
             child: Column(
               children: <Widget>[
@@ -125,7 +142,7 @@ abstract class BaseFunction {
     );
   }
 
-  ///设置状态栏，可以自行重写拓展成其他的任何形式
+  /// 设置状态栏，可以自行重写拓展成其他的任何形式
   Widget getTopBar() {
     return Container(
       height: getTopBarHeight(),
@@ -141,15 +158,13 @@ abstract class BaseFunction {
 
   /// 设置状态栏主题
   void setTopBarStyle(bool topBarStyle) {
-    if (topBarStyle != null) {
-      // ignore: invalid_use_of_protected_member
-      _stateBaseFunction.setState(() {
-        _topBarStyle = topBarStyle;
-      });
-    }
+    // ignore: invalid_use_of_protected_member
+    _stateBaseFunction.setState(() {
+      _topBarStyle = topBarStyle;
+    });
   }
 
-  ///导航栏 appBar 可以重写
+  /// 导航栏 appBar 可以重写
   Widget getAppBar() {
     return Container(
       height: getAppBarHeight(),
@@ -183,8 +198,8 @@ abstract class BaseFunction {
     );
   }
 
-  ///----------------暴露的错误页面方法，可以自己重写定制--------------------
-  ///导航栏appBar中间部分 ，不满足可以自行重写
+  /// ----------------暴露的错误页面方法，可以自己重写定制--------------------
+  /// 导航栏appBar中间部分 ，不满足可以自行重写
   Widget getAppBarCenter() {
     return Text(
       _appBarTitle,
@@ -196,7 +211,7 @@ abstract class BaseFunction {
     );
   }
 
-  ///导航栏appBar右边部分 ，不满足可以自行重写
+  /// 导航栏appBar右边部分 ，不满足可以自行重写
   Widget getAppBarRight() {
     return _appBarRightContent ??
         Text(
@@ -208,7 +223,7 @@ abstract class BaseFunction {
         );
   }
 
-  ///导航栏appBar左边部分 ，不满足可以自行重写
+  /// 导航栏appBar左边部分 ，不满足可以自行重写
   Widget getAppBarLeft() {
     return InkWell(
       onTap: clickAppBarBack,
@@ -225,14 +240,14 @@ abstract class BaseFunction {
     );
   }
 
-  ///导航栏appBar底部部分 ，不满足可以自行重写
+  /// 导航栏appBar底部部分 ，不满足可以自行重写
   Widget getAppBarBottom() {
     return Container(
       height: _isAppBarBottomShow ? _appBarBottomLineheight : 0,
     );
   }
 
-  ///导航栏appBar底部部分 ，不满足可以自行重写
+  /// 导航栏appBar底部部分 ，不满足可以自行重写
   Widget getBottomWidget() {
     return _bottomWidget ?? SizedBox.shrink();
   }
@@ -266,9 +281,9 @@ abstract class BaseFunction {
     }
   }
 
-  ///返回中间可绘制区域，也就是 我们子类 buildWidget 可利用的空间高度
+  /// 返回中间可绘制区域，也就是 我们子类 buildWidget 可利用的空间高度
   double getMainWidgetHeight() {
-    double screenHeight = getScreenHeight() - bottomVsrtical;
+    double screenHeight = getScreenHeight() - bottomVertical;
 
     if (_isTopBarShow) {
       screenHeight = screenHeight - getTopBarHeight();
@@ -280,27 +295,27 @@ abstract class BaseFunction {
     return screenHeight;
   }
 
-  ///返回屏幕高度
+  /// 返回屏幕高度
   double getScreenHeight() {
     return MediaQuery.of(_contextBaseFunction).size.height;
   }
 
-  ///返回状态栏高度
+  /// 返回状态栏高度
   double getTopBarHeight() {
     return MediaQuery.of(_contextBaseFunction).padding.top;
   }
 
-  ///返回底部safeArea高度
+  /// 返回底部safeArea高度
   double getBottomSafeAreaHeight() {
     return MediaQuery.of(_contextBaseFunction).padding.bottom;
   }
 
-  ///返回appbar高度，也就是导航栏高度
+  /// 返回appbar高度，也就是导航栏高度
   double getAppBarHeight() {
     return kToolbarHeight + (_isAppBarBottomShow ? _appBarBottomLineheight : 0);
   }
 
-  ///返回屏幕宽度
+  /// 返回屏幕宽度
   double getScreenWidth() {
     return MediaQuery.of(_contextBaseFunction).size.width;
   }
@@ -327,13 +342,12 @@ abstract class BaseFunction {
     baseScaffoldKey.currentState!.openEndDrawer();
   }
 
-  ///关闭最后一个 flutter 页面 ， 如果是原生跳过来的则回到原生，否则关闭app
+  /// 关闭最后一个 flutter 页面 ， 如果是原生跳过来的则回到原生，否则关闭app
   void finishDartPageOrApp() {
-//    SystemNavigator.pop();
     exit(0);
   }
 
-  ///是否为无需默认脚手架页面
+  /// 是否为无需默认脚手架页面
   void setIsAsFrame(bool asFrame) {
     // ignore: invalid_use_of_protected_member
     _stateBaseFunction.setState(() {
@@ -341,7 +355,7 @@ abstract class BaseFunction {
     });
   }
 
-  ///设置背景色
+  /// 设置背景色
   void setBackground(Color? color) {
     // ignore: invalid_use_of_protected_member
     _stateBaseFunction.setState(() {
@@ -349,7 +363,7 @@ abstract class BaseFunction {
     });
   }
 
-  ///设置状态栏隐藏或者显示
+  /// 设置状态栏隐藏或者显示
   void setTopBarVisible(bool isVisible) {
     // ignore: invalid_use_of_protected_member
     _stateBaseFunction.setState(() {
@@ -357,25 +371,23 @@ abstract class BaseFunction {
     });
   }
 
-  ///默认这个状态栏下，设置颜色
+  /// 默认这个状态栏下，设置颜色
   void setTopBarBackColor(Color color) {
     // ignore: invalid_use_of_protected_member
     _stateBaseFunction.setState(() {
-      _topBarColor = (color == null ? _topBarColor : color);
+      _topBarColor = color;
     });
   }
 
-  ///设置导航栏的字体以及图标颜色
+  /// 设置导航栏的字体以及图标颜色
   void setAppBarContentColor(Color contentColor) {
-    if (contentColor != null) {
-      // ignore: invalid_use_of_protected_member
-      _stateBaseFunction.setState(() {
-        _appBarContentColor = contentColor;
-      });
-    }
+    // ignore: invalid_use_of_protected_member
+    _stateBaseFunction.setState(() {
+      _appBarContentColor = contentColor;
+    });
   }
 
-  ///设置导航栏隐藏或者显示
+  /// 设置导航栏隐藏或者显示
   void setAppBarVisible(bool isVisible) {
     // ignore: invalid_use_of_protected_member
     _stateBaseFunction.setState(() {
@@ -383,94 +395,78 @@ abstract class BaseFunction {
     });
   }
 
-  ///默认这个导航栏下，设置颜色
+  /// 默认这个导航栏下，设置颜色
   void setAppBarBackColor(Color color) {
     // ignore: invalid_use_of_protected_member
     _stateBaseFunction.setState(() {
-      _appBarColor = color == null ? _appBarColor : color;
+      _appBarColor = color;
     });
   }
 
   void setAppBarTitle(String title) {
-    if (title != null) {
-      // ignore: invalid_use_of_protected_member
-      _stateBaseFunction.setState(() {
-        _appBarTitle = title;
-      });
-    }
+    // ignore: invalid_use_of_protected_member
+    _stateBaseFunction.setState(() {
+      _appBarTitle = title;
+    });
   }
 
   void setAppBarColor(Color color) {
-    if (color != null) {
-      // ignore: invalid_use_of_protected_member
-      _stateBaseFunction.setState(() {
-        _appBarColor = color;
-      });
-    }
+    // ignore: invalid_use_of_protected_member
+    _stateBaseFunction.setState(() {
+      _appBarColor = color;
+    });
   }
 
   void setTopBarColor(Color color) {
-    if (color != null) {
-      // ignore: invalid_use_of_protected_member
-      _stateBaseFunction.setState(() {
-        _topBarColor = color;
-      });
-    }
+    // ignore: invalid_use_of_protected_member
+    _stateBaseFunction.setState(() {
+      _topBarColor = color;
+    });
   }
 
   void setAppBarRightTitle(String title) {
-    if (title != null) {
-      // ignore: invalid_use_of_protected_member
-      _stateBaseFunction.setState(() {
-        _appBarRightTitle = title;
-      });
-    }
+    // ignore: invalid_use_of_protected_member
+    _stateBaseFunction.setState(() {
+      _appBarRightTitle = title;
+    });
   }
 
-  ///设置了这个设置的右边title将无效
+  /// 设置了这个设置的右边title将无效
   void setAppBarRightContent(Widget widget) {
-    if (widget != null) {
-      // ignore: invalid_use_of_protected_member
-      _stateBaseFunction.setState(() {
-        _appBarRightContent = widget;
-      });
-    }
+    // ignore: invalid_use_of_protected_member
+    _stateBaseFunction.setState(() {
+      _appBarRightContent = widget;
+    });
   }
 
-  ///设置固定底部Widget
+  /// 设置固定底部Widget
   void setBottomWidget(Widget widget) {
-    if (widget != null) {
-      // ignore: invalid_use_of_protected_member
-      _stateBaseFunction.setState(() {
-        _bottomWidget = widget;
-      });
-    }
+    // ignore: invalid_use_of_protected_member
+    _stateBaseFunction.setState(() {
+      _bottomWidget = widget;
+    });
   }
 
-  ///设置底部线是否显示
+  /// 设置底部线是否显示
   void setAppBarBottomShow(bool isShow, {Color? bottomColor, double? height}) {
-    if (isShow != null) {
-      // ignore: invalid_use_of_protected_member
-      _stateBaseFunction.setState(() {
-        _isAppBarBottomShow = isShow;
-        if (bottomColor != null) {
-          _appBarBottomLineColor = bottomColor;
-        }
-        if (height != null) {
-          _appBarBottomLineheight = height;
-        }
-      });
-    }
+    // ignore: invalid_use_of_protected_member
+    _stateBaseFunction.setState(() {
+      _isAppBarBottomShow = isShow;
+      if (bottomColor != null) {
+        _appBarBottomLineColor = bottomColor;
+      }
+      if (height != null) {
+        _appBarBottomLineheight = height;
+      }
+    });
   }
 
-  ///设置返回事件
+  /// 设置返回事件
   void setAppBarBackEvent(Function backFunc) {
-    if (backFunc != null) {
-      // ignore: invalid_use_of_protected_member
-      _stateBaseFunction.setState(() {
-        _backIconClick = backFunc;
-      });
-    }
+    // ignore: invalid_use_of_protected_member
+    _stateBaseFunction.setState(() {
+      _backIconClick = backFunc;
+    });
   }
 
   void setBackIconHinde({bool isHiinde = true}) {
@@ -487,33 +483,33 @@ abstract class BaseFunction {
     });
   }
 
-  ///初始化一些变量 相当于 onCreate ， 放一下 初始化数据操作
+  /// 初始化一些变量 相当于 onCreate ， 放一下 初始化数据操作
   void onCreate();
 
-  ///相当于onResume, 只要页面来到栈顶， 都会调用此方法，网络请求可以放在这个方法
+  /// 相当于onResume, 只要页面来到栈顶， 都会调用此方法，网络请求可以放在这个方法
   void onResume() {
     log("${getClassName()}页面onResume");
   }
 
-  ///页面被覆盖,暂停
+  /// 页面被覆盖,暂停
   void onPause() {
     log("页面被覆盖,暂停");
   }
 
-  ///返回UI控件 相当于setContentView()
+  /// 返回UI控件 相当于setContentView()
   Widget buildWidget(BuildContext context);
 
-  ///app切回到后台
+  /// app切回到后台
   void onBackground() {
     log("回到后台");
   }
 
-  ///app切回到前台
+  /// app切回到前台
   void onForeground() {
     log("回到前台");
   }
 
-  ///页面注销方法
+  /// 页面注销方法
   void onDestroy() {
     log("destroy");
   }

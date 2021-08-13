@@ -1,9 +1,10 @@
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 
-///@name: 日志处理
+/// @describe: 日志处理
+/// @author: qds
+/// @date:
 class Log {
-
   static const perform = const MethodChannel('x_log');
 
   static var logger = Logger();
@@ -25,11 +26,10 @@ class Log {
   }
 
   static json(String msg, {tag: 'X_LOG'}) {
-    try{
+    try {
       logger.wtf(msg);
-    } catch(e) {
+    } catch (e) {
       d(msg);
     }
   }
-
 }

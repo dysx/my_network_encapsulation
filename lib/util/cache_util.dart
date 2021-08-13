@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:path_provider/path_provider.dart';
 
+/// @describe: app缓存工具
+/// @author: qds
+/// @date:
 class CacheUtil {
-
-  ///加载缓存
+  /// 加载缓存
   static Future<String> loadCache() async {
     Directory tempDir = await getTemporaryDirectory();
     double value = await _getTotalSizeOfFilesInDir(tempDir);
@@ -17,7 +19,8 @@ class CacheUtil {
     return renderSize(value);
   }
 
-  static Future<double> _getTotalSizeOfFilesInDir(final FileSystemEntity file) async {
+  static Future<double> _getTotalSizeOfFilesInDir(
+      final FileSystemEntity file) async {
     if (file is File) {
       int length = await file.length();
       return double.parse(length.toString());
@@ -34,11 +37,7 @@ class CacheUtil {
   }
 
   static renderSize(double value) {
-    List<String> unitArr = []
-      ..add('B')
-      ..add('K')
-      ..add('M')
-      ..add('G');
+    List<String> unitArr = []..add('B')..add('K')..add('M')..add('G');
     int index = 0;
     while (value > 1024) {
       index++;
@@ -56,7 +55,8 @@ class CacheUtil {
     await loadCache();
     Toast.showMsg('清除缓存成功');
   }
-  ///递归方式删除目录
+
+  /// 递归方式删除目录
   static Future<Null> delDir(FileSystemEntity file) async {
     if (file is Directory) {
       final List<FileSystemEntity> children = file.listSync();
@@ -66,7 +66,4 @@ class CacheUtil {
     }
     await file.delete();
   }
-
-
-
 }

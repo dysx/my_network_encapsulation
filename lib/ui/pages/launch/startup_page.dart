@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:my_network_encapsulation/base/base_insert.dart';
 
-///@name: 启动页
+/// @describe: 启动页
+/// @author: qds
+/// @date:
 class StartupPage extends BaseWidget {
   @override
   BaseWidgetState<BaseWidget> getState() => StartupPageState();
@@ -39,7 +41,7 @@ class StartupPageState extends BaseWidgetState<StartupPage> {
   }
 
   startTime() async {
-    //设置启动图生效时间
+    // 设置启动图生效时间
     Duration _duration = new Duration(seconds: 2);
     return new Timer(_duration, _gotoHome);
   }

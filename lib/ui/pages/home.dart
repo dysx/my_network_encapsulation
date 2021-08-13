@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
@@ -11,12 +10,12 @@ import 'package:my_network_encapsulation/ui/pages/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/pages/mine/mine.dart';
 import 'package:my_network_encapsulation/ui/pages/second/second.dart';
 import 'package:my_network_encapsulation/ui/pages/third/third.dart';
-import 'package:my_network_encapsulation/ui/public/login/goto_login.dart';
 import 'package:my_network_encapsulation/ui/widget/bottom_bar.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 
-/// @name：
-/// @author qds
+/// @describe: home
+/// @author: qds
+/// @date:
 class Home extends BaseWidget {
   @override
   BaseWidgetState<BaseWidget> getState() => HomeState();
@@ -46,7 +45,9 @@ class HomeState extends BaseWidgetState<Home> {
     ),
   ];
   List<Widget> pages = [HomePage(), Second(), Third(), Mine()];
-  List<Widget> noTokenPages = [HomePage(), Second(), Third(), GoToLogin()];
+
+  /// 当用户没有登录的时候显示的路由页面
+  List<Widget> noTokenPages = [HomePage(), Second(), Third(), Mine()];
   bool needToLogin = false;
 
   PageController _pageController = new PageController();
@@ -63,43 +64,44 @@ class HomeState extends BaseWidgetState<Home> {
   @override
   Widget getBottomWidget() {
     // TODO: implement getBottomWidget
-    return MyBottomBar(items: [
-      BottomNavyBarItem(
-        icon: Icon(Icons.apps),
-        title: '首页',
-        activeColor: Colors.green,
-        inactiveColor: MyColors.black_3333,
-      ),
-      BottomNavyBarItem(
-        icon: Icon(Icons.apps),
-        title: '社区',
-        activeColor: Colors.green,
-        inactiveColor: MyColors.black_3333,
-      ),
-      BottomNavyBarItem(
-        icon: Icon(Icons.apps),
-        title: '消息',
-        activeColor: Colors.green,
-        inactiveColor: MyColors.black_3333,
-      ),
-      BottomNavyBarItem(
-        icon: Icon(Icons.apps),
-        title: '我的',
-        activeColor: Colors.green,
-        inactiveColor: MyColors.black_3333,
-      ),
-    ],
+    return MyBottomBar(
+        items: [
+          BottomNavyBarItem(
+            icon: Icon(Icons.apps),
+            title: '首页',
+            activeColor: Colors.green,
+            inactiveColor: MyColors.black_3333,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.apps),
+            title: '社区',
+            activeColor: Colors.green,
+            inactiveColor: MyColors.black_3333,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.apps),
+            title: '消息',
+            activeColor: Colors.green,
+            inactiveColor: MyColors.black_3333,
+          ),
+          BottomNavyBarItem(
+            icon: Icon(Icons.apps),
+            title: '我的',
+            activeColor: Colors.green,
+            inactiveColor: MyColors.black_3333,
+          ),
+        ],
         iconSize: 23.w,
         containerHeight: 52.w,
         showElevation: false,
         selectedIndex: currentIndex,
         onItemSelected: (index) async {
-      setState(() {
-        currentIndex = index;
-      });
-      await _checkPower();
-      _pageController.jumpToPage(index);
-    });
+          setState(() {
+            currentIndex = index;
+          });
+          await _checkPower();
+          _pageController.jumpToPage(index);
+        });
 
     return CupertinoTabBar(
       backgroundColor: MyColors.white,
@@ -124,12 +126,13 @@ class HomeState extends BaseWidgetState<Home> {
     setBackIconHinde();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
-          if(result == ConnectivityResult.wifi || result == ConnectivityResult.mobile){
-            debugPrint('网络可用');
-          }else{
-            debugPrint('网络不可用');
-          }
-        });
+      if (result == ConnectivityResult.wifi ||
+          result == ConnectivityResult.mobile) {
+        debugPrint('网络可用');
+      } else {
+        debugPrint('网络不可用');
+      }
+    });
   }
 
   @override
@@ -144,7 +147,7 @@ class HomeState extends BaseWidgetState<Home> {
   Future<void> _checkPower() async {
     // 获取本地存储的token
     final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
-    if(currentIndex == 3){
+    if (currentIndex == 3) {
       if (token == '') {
         setState(() {
           needToLogin = true;

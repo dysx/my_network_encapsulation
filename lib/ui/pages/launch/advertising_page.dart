@@ -2,16 +2,15 @@ import 'dart:async';
 
 import 'package:my_network_encapsulation/base/base_insert.dart';
 
-///@name: 广告页
+/// @describe: 广告页面
+/// @author: qds
+/// @date:
 class AdvertisingPage extends BaseWidget {
-
   @override
   BaseWidgetState<BaseWidget> getState() => AdvertisingPageState();
-
 }
 
 class AdvertisingPageState extends BaseWidgetState<AdvertisingPage> {
-
   @override
   Widget buildWidget(BuildContext context) {
     return ConstrainedBox(
@@ -40,7 +39,7 @@ class AdvertisingPageState extends BaseWidgetState<AdvertisingPage> {
   }
 
   startTime() async {
-    //设置启动图生效时间
+    // 设置启动图生效时间
     Duration _duration = new Duration(seconds: 2);
     return new Timer(_duration, _gotoHome);
   }

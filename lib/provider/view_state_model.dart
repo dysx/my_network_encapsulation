@@ -7,6 +7,9 @@ import 'package:my_network_encapsulation/provider/view_state.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 import 'package:my_network_encapsulation/util/toast.dart';
 
+/// @describe: model状态基类
+/// @author: qds
+/// @date:
 class ViewStateModel with ChangeNotifier {
   /// 防止页面销毁后，异步任务才完成，导致报错
   bool _disposed = false;
@@ -62,6 +65,7 @@ class ViewStateModel with ChangeNotifier {
   void setError(e, stackTrace, {String? message}) {
     ViewStateErrorType errorType = ViewStateErrorType.defaultError;
     Log.e('错误详情信息: $e');
+
     /// 见https://github.com/flutterchina/dio/blob/master/README-ZH.md#dioerrortype
     if (e is DioError) {
       if (e.type == DioErrorType.connectTimeout ||
@@ -74,9 +78,9 @@ class ViewStateModel with ChangeNotifier {
       } else if (e.type == DioErrorType.cancel) {
         message = e.error;
       } else {
-        if(e.error is SocketException) {
-            errorType = ViewStateErrorType.networkTimeOutError;
-            message = e.message;
+        if (e.error is SocketException) {
+          errorType = ViewStateErrorType.networkTimeOutError;
+          message = e.message;
         } else {
           message = e.message;
         }
@@ -95,12 +99,10 @@ class ViewStateModel with ChangeNotifier {
       }
     }
     viewState = ViewState.error;
-    _viewStateError = ViewStateError(
-      errorType,
-      message: '',
-      // message: message,
-      errorMessage: e.toString()
-    );
+    _viewStateError = ViewStateError(errorType,
+        message: '',
+        // message: message,
+        errorMessage: e.toString());
     printErrorStack(e, stackTrace);
     onError(viewStateError!);
   }

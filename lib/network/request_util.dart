@@ -6,7 +6,9 @@ import 'package:my_network_encapsulation/network/model/time_entity.dart';
 import 'address.dart';
 import 'model/get_recommends_entity.dart';
 
-/// 请求管理
+/// @describe: 请求管理
+/// @author: qds
+/// @date:
 class RequestUtil {
   static Future subscribeKey({required String cancelTag}) {
     return Http().post(Address.comment,

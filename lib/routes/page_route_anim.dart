@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
-/// 路由动画
+/// @describe: 路由动画
 /// 加上RouteSettings(name: routeName)，否则popUntil到某个路由会黑屏
 /// 原因：找不到指定的路由
+///
+/// @author: qds
+/// @date:
 
-// 无动画
+/// 无动画
 class NoAnimRouteBuilder extends PageRouteBuilder {
   final Widget page;
   final String routeName;
@@ -19,7 +22,7 @@ class NoAnimRouteBuilder extends PageRouteBuilder {
                 (context, animation, secondaryAnimation, child) => child);
 }
 
-// 路由渐变
+/// 路由渐变
 class FadeRouteBuilder extends PageRouteBuilder {
   final Widget page;
   final String routeName;
@@ -40,7 +43,7 @@ class FadeRouteBuilder extends PageRouteBuilder {
                 ));
 }
 
-// 从上往下展开路由
+/// 从上往下展开路由
 class SlideTopRouteBuilder extends PageRouteBuilder {
   final Widget page;
   final String routeName;
@@ -61,7 +64,7 @@ class SlideTopRouteBuilder extends PageRouteBuilder {
                     ));
 }
 
-// 从下往上展开路由
+/// 从下往上展开路由
 class SlideBottomRouteBuilder extends PageRouteBuilder {
   final Widget page;
   final String routeName;
@@ -82,7 +85,7 @@ class SlideBottomRouteBuilder extends PageRouteBuilder {
                     ));
 }
 
-// 从中间展开路由
+/// 从中间展开路由
 class SizeRoute extends PageRouteBuilder {
   final Widget page;
   final String routeName;

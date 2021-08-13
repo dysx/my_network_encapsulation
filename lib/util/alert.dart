@@ -8,7 +8,9 @@ import 'package:my_network_encapsulation/res/my_text_styles.dart';
 import 'package:my_network_encapsulation/routes/my_navigator.dart';
 import 'package:my_network_encapsulation/util/buttons.dart';
 
-/// 弹框
+/// @describe: 弹框
+/// @author: qds
+/// @date:
 typedef IndexCallback = void Function(int index);
 
 class Alert {

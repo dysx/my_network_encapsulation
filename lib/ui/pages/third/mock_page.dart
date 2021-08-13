@@ -1,7 +1,7 @@
 
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/network/model/goods_entity.dart';
-import 'package:my_network_encapsulation/ui/pages/cartTest/mock/goods_mock_data.dart';
+import 'package:my_network_encapsulation/ui/pages/third/goods_mock_data.dart';
 import 'package:my_network_encapsulation/ui/pages/test/testA.dart';
 import 'package:my_network_encapsulation/ui/widget/skeleton.dart';
 import 'package:my_network_encapsulation/view_model/favourite_model.dart';
@@ -33,7 +33,7 @@ class _MockPageState extends BaseWidgetState<MockPage> {
               children: [
                 Container(
                   color: Colors.white,
-                  margin: EdgeInsets.all(Dimens.gapDp15),
+                  margin: EdgeInsets.all(Dimens.gapDp15w),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -42,7 +42,7 @@ class _MockPageState extends BaseWidgetState<MockPage> {
                       Column(
                         children: [
                           Text('${list[index].name}'),
-                          Gaps.vGap5,
+                          Gaps.vGap5w,
                           Text('${list[index].price}'),
                         ],
                       )
@@ -51,7 +51,6 @@ class _MockPageState extends BaseWidgetState<MockPage> {
                 ),
                 Consumer<GlobalFavouriteStateModel>(
                   builder: (context, favouriteModel, child) {
-                    print('监听到刷新: $index ${favouriteModel[list[index].id!]}');
                     //利用child局部刷新
                     if (favouriteModel[list[index].id!] == null) {
                       //本地没有此条数据收藏状态

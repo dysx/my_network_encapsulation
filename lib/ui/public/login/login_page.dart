@@ -2,7 +2,7 @@ import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/res/my_theme.dart' as theme;
 import 'package:my_network_encapsulation/ui/public/login/widget/login_indicaor.dart';
 import 'package:my_network_encapsulation/ui/widget/key_board_hider.dart';
-import 'package:my_network_encapsulation/view_model/login_model.dart';
+import 'package:my_network_encapsulation/view_model/my_login_model.dart';
 
 import 'sign_in_page.dart';
 import 'sign_up_page.dart';
@@ -18,8 +18,7 @@ class LoginPage extends BaseWidget {
 }
 
 class _LoginPageState extends BaseWidgetState<LoginPage> {
-  late PageController _pageController;
-  late PageView _pageView;
+  PageController _pageController = PageController();
 
   @override
   Widget buildWidget(BuildContext context) {
@@ -32,37 +31,36 @@ class _LoginPageState extends BaseWidgetState<LoginPage> {
                 decoration: new BoxDecoration(
                   gradient: theme.MyTheme.primaryGradient,
                 ),
-                child: new Column(
+                child: Column(
+                  // mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     SizedBox(height: getTopBarHeight()),
                     //顶部图片
                     LocalImageSelector.getSingleImage('login_logo',
                         imageHeight: 191.h),
-                    Gaps.vGap20,
-                    LoginIndicator(pageController: _pageController),
-                    new Expanded(child: _pageView),
+                    Gaps.vGap20h,
+                    Expanded(
+                      child: ProviderWidget<MyLoginModel>(
+                        model: MyLoginModel(Provider.of(context)),
+                        builder: (context, model, child) {
+                          return Column(
+                            children: [
+                              LoginIndicator(pageController: _pageController),
+                              Expanded(
+                                  child: PageView(
+                                controller: _pageController,
+                                children: <Widget>[
+                                  SignInPage(myLoginModel: model),
+                                  SignUpPage(),
+                                ],
+                              ))
+                            ],
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ))));
-
-    return ProviderWidget<LoginModel>(
-        model: LoginModel(Provider.of(context)),
-        builder: (context, model, child) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(),
-              TextField(),
-              ordinaryButton(
-                  text: '登陆',
-                  backgroundColor: MyColors.blue_91ff,
-                  onPressed: () {
-                    model.login('123', '456').then((value) {
-                      print(value);
-                    });
-                  })
-            ],
-          );
-        });
   }
 
   @override
@@ -71,15 +69,6 @@ class _LoginPageState extends BaseWidgetState<LoginPage> {
     setTopBarVisible(false);
     setAppBarVisible(false);
     setBottomInset(isBottomInset: true);
-
-    _pageController = PageController();
-    _pageView = PageView(
-      controller: _pageController,
-      children: <Widget>[
-        SignInPage(),
-        SignUpPage(),
-      ],
-    );
   }
 
   @override

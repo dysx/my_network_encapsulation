@@ -5,8 +5,9 @@ import 'package:my_network_encapsulation/util/permission_manager.dart';
 import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
 import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
 
-/// @name：
-/// @author qds
+/// @describe: bottomNavItem_first页面
+/// @author: qds
+/// @date:
 // ignore: must_be_immutable
 class HomePage extends BaseInnerWidget {
   @override
@@ -40,7 +41,8 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                     RequestUtil.login('15015802692', 'qds123123',
                             cancelTag: 'HomePage')
                         .then((value) {
-                      LocalStorage.saveString(MyCommons.TOKEN, value.accessToken!);
+                      LocalStorage.saveString(
+                          MyCommons.TOKEN, value.accessToken!);
                     });
                   },
                   text: '登陆'),
@@ -137,7 +139,8 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   onPressed: () async {
                     DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
                     Map<String, dynamic> _deviceData = Map<String, dynamic>();
-                    _deviceData = _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
+                    _deviceData = _readAndroidBuildData(
+                        await deviceInfoPlugin.androidInfo);
                     print(_deviceData);
                   },
                   text: "获取设备信息",
@@ -150,16 +153,13 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                     //   title: '标题',
                     //   actions: ['111','222']
                     // );
-                    Alert.showAlert(
-                      title: '标题',
-                      message: '内容'
-                    );
+                    Alert.showAlert(title: '标题', message: '内容');
                   },
                   text: "打印路由",
                   sideColor: MyColors.black_3333),
               ordinaryButton(
                   onPressed: () {
-                    PermissionManager.applyStoragePermission((){
+                    PermissionManager.applyStoragePermission(() {
                       print('申请权限成功');
                     });
                   },

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 
+/// @describe: 带动画的字体按钮
+/// @author: qds
+/// @date:
+// ignore: must_be_immutable
 class AnimationBtn extends StatefulWidget {
-//按钮标题
-  final String? Title;
+  /// 按钮标题
+  final String? title;
 
   late AnimationController controller;
   Animation<double>? animation;
 
-//开始动画方法
+  /// 开始动画方法
   void startAnimation() {
     if (controller == null) {
       return;
@@ -16,7 +20,7 @@ class AnimationBtn extends StatefulWidget {
     controller.forward();
   }
 
-  AnimationBtn({Key? key, this.Title}) : super(key: key);
+  AnimationBtn({Key? key, this.title}) : super(key: key);
 
   @override
   _AnimationBtnState createState() => new _AnimationBtnState();
@@ -26,12 +30,12 @@ class _AnimationBtnState extends State<AnimationBtn>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
-    //初始化动画控制器和动画
-    //配置控制器 动画持续时间
+    // 初始化动画控制器和动画
+    // 配置控制器 动画持续时间
     widget.controller = new AnimationController(
         duration: const Duration(seconds: 2), vsync: this);
 
-    //动画描述,在持续时间内值的变化
+    // 动画描述,在持续时间内值的变化
     widget.animation =
         new Tween(begin: 0.0, end: 60.0).animate(widget.controller)
           ..addListener(() {
@@ -53,7 +57,7 @@ class _AnimationBtnState extends State<AnimationBtn>
           ),
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
       child: Text(
-        widget.Title!,
+        widget.title!,
         style: new TextStyle(
             color: Color.fromRGBO(100, 10, 10, widget.animation!.value / 60)),
       ),
@@ -69,7 +73,7 @@ class _AnimationBtnState extends State<AnimationBtn>
   }
 
   dispose() {
-    //路由销毁时需要释放动画资源
+    // 路由销毁时需要释放动画资源
     widget.controller.dispose();
     super.dispose();
   }

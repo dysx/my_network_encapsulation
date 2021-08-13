@@ -1,8 +1,9 @@
 import 'package:my_network_encapsulation/provider/view_state_model.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 
-
-/// 基于
+/// @describe: 基于model基类的list
+/// @author: qds
+/// @date:
 abstract class ViewStateListModel<T> extends ViewStateModel {
   /// 页面数据
   List<T> list = [];

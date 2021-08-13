@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 
-///@name: 网络图片（带缓存）
+/// @describe: 网络图片（带缓存）
+/// @author: qds
+/// @date:
 class NetImage {
   static Widget cachedNetworkImage(
       {String? imgUrl,
@@ -34,7 +36,7 @@ class NetImage {
     }
   }
 
-  //检验是否是网络图片地址
+  // 检验是否是网络图片地址
   static bool isCorrectImg(String imgUrl) {
     if (imgUrl != null && imgUrl.length > 7 &&
         (imgUrl.substring(0, 7) == "http://" ||

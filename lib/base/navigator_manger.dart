@@ -1,7 +1,10 @@
 import 'package:my_network_encapsulation/base/base_widget.dart';
 
-/// 这个管理类，只是标记 当前 按照顺序放入和移除栈名称，并不是页面跳转后退 的功能，
+/// @describe: 这个管理类，只是标记 当前 按照顺序放入和移除栈名称，并不是页面跳转后退 的功能，
 /// 只是方便 推算、表示生命周期方法，一般不需要修改
+///
+/// @author: qds
+/// @date:
 class NavigatorManger {
   static List<String> activityStack = [];
 
@@ -25,8 +28,7 @@ class NavigatorManger {
       return false;
     }
     try {
-      return widgetName ==
-          activityStack[activityStack.length - 1];
+      return widgetName == activityStack[activityStack.length - 1];
     } catch (exception) {
       return false;
     }

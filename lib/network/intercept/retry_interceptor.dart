@@ -2,12 +2,13 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:my_network_encapsulation/network/intercept/dio_connectivity_request_retrier%20.dart';
+import 'package:my_network_encapsulation/network/intercept/dio_connectivity_request_retry.dart';
 
-/// 重试拦截器，实现网络变化，继续请求
+/// @describe: 重试拦截器，实现网络变化，继续请求
+/// @author: qds
+/// @date:
 class RetryOnConnectionChangeInterceptor extends Interceptor {
-  final DioConnectivityRequestRetrier requestRetrier;
+  final DioConnectivityRequestRetry requestRetrier;
 
   RetryOnConnectionChangeInterceptor({required this.requestRetrier});
 

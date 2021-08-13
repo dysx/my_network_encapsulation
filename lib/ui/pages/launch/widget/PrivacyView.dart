@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 typedef OnTapCallback = void Function(String key);
 
-///@name: 自动从data中查找keys，例《用户协议》和《隐私政策》
+/// @describe: 自动从data中查找keys，例《用户协议》和《隐私政策》
+/// @author: qds
+/// @date:
 class PrivacyView extends StatefulWidget {
   final String data;
   final List<String> keys;

@@ -1,14 +1,16 @@
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/ui/pages/launch/widget/animation_page.dart';
 
-///@name: 引导页
+/// @describe: 引导页
+/// @author: qds
+/// @date:
 class LeadPage extends BaseWidget {
   @override
   BaseWidgetState<BaseWidget> getState() => LeadPageState();
 }
 
 class LeadPageState extends BaseWidgetState<LeadPage> {
-  //引出带动画的widget
+  // 引出带动画的widget
   AnimationPage aniPage = new AnimationPage();
 
   List<String> _leadImages = ['guide_page1', 'guide_page2', 'guide_page3'];
@@ -18,7 +20,7 @@ class LeadPageState extends BaseWidgetState<LeadPage> {
     return PageView(
       scrollDirection: Axis.horizontal,
       children: _leads(),
-      onPageChanged: (pageIndex){
+      onPageChanged: (pageIndex) {
         startPagePaged(pageIndex);
       },
     );
@@ -43,7 +45,7 @@ class LeadPageState extends BaseWidgetState<LeadPage> {
 
   void startPagePaged(int page) {
     if (page == 2) {
-      //当到达带按钮的页面时触发动画
+      // 当到达带按钮的页面时触发动画
       aniPage.btn.startAnimation();
     }
   }

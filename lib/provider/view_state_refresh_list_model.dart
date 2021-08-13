@@ -4,7 +4,9 @@ import 'package:my_network_encapsulation/provider/view_state_list_model.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-/// 基于
+/// @describe: 基于model基类的list + refresh
+/// @author: qds
+/// @date:
 abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
   /// 分页第一页页码
   static const int pageNumFirst = 1;
@@ -64,7 +66,8 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
   /// 上拉加载更多
   Future<List<T>?> loadMore() async {
     try {
-      var data = await loadData(pageIndex: ++_currentPageNum,pageSize: pageSize);
+      var data =
+          await loadData(pageIndex: ++_currentPageNum, pageSize: pageSize);
       if (data.isEmpty) {
         _currentPageNum--;
         refreshController.loadNoData();

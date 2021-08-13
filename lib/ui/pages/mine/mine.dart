@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_inner_widget.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/ui/widget/bottom_clipper.dart';
-import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 import 'package:my_network_encapsulation/view_model/base/cache_model.dart';
+import 'package:my_network_encapsulation/view_model/my_login_model.dart';
+import 'package:my_network_encapsulation/view_model/user_model.dart';
 
+/// @describe: bottomNavItem_second页面
+/// @author: qds
+/// @date:
+
+// ignore: must_be_immutable
 class Mine extends BaseInnerWidget {
   @override
   BaseInnerWidgetState<BaseInnerWidget> getState() => MineState();
@@ -29,14 +35,33 @@ class MineState extends BaseInnerWidgetState<Mine> {
           model: CacheModel(),
           onModelReady: (model) => model.initCache(),
           builder: (context, model, child) {
-            if (model.isBusy) {
-              return SizedBox();
-            }
-            return ordinaryButton(
-                text: model.cache,
-                onPressed: () {
-                  model.clearCache();
-                });
+            return ListTile(
+              trailing: Wrap(
+                children: [
+                  Text(model.cache),
+                  Gaps.hGap5,
+                  Icon(
+                    Icons.cleaning_services_rounded,
+                  )
+                ],
+              ),
+              title: Text('清除缓存'),
+              // contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
+              onTap: () {
+                model.clearCache();
+              },
+            );
+          },
+        ),
+        ListTile(
+          trailing: Icon(Icons.login_outlined),
+          title: Text('退出登陆'),
+          onTap: () {
+            MyLoginModel(Provider.of<UserModel>(context, listen: false))
+                .logout()
+                .then((value) {
+              print('退出是否成功: $value');
+            });
           },
         )
       ],
@@ -71,27 +96,26 @@ class UserHeaderWidget extends StatelessWidget {
         child: Container(
             color: Theme.of(context).primaryColor.withAlpha(200),
             // padding: EdgeInsets.only(top: 10),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  InkWell(
-                    child: Hero(
-                      tag: 'loginLogo',
-                      child: ClipOval(
-                        child: LocalImageSelector.getSingleImage('setting'),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Column(children: <Widget>[
-                    Text('double'),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ])
-                ])));
+            child: Consumer<UserModel>(
+              builder: (context, userModel, child) {
+                return userModel.hasUser
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                            NetImage.cachedNetworkImage(
+                                imgUrl: userModel.user!.avatarUrl ?? ''),
+                            Gaps.vGap20w,
+                            Text('${userModel.user!.nickName}'),
+                          ])
+                    : Center(
+                        child: GestureDetector(
+                          onTap: () =>
+                              MyNavigator.pushNamed(RouteName.loginPage),
+                          child: Text('去登录'),
+                        ),
+                      );
+              },
+            )));
   }
 }

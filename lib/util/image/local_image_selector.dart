@@ -3,11 +3,18 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-///@name: 预设图片选择工具，用于判断当前平台和当前手机屏幕密度获取适应的图片资源
+/// @describe: 预设图片选择工具，用于判断当前平台和当前手机屏幕密度获取适应的图片资源
+/// @author: qds
+/// @date:
 class LocalImageSelector {
-  static double dpi = MediaQueryData.fromWindow(window).devicePixelRatio; //设备像素
-  static Size physicalSize = window.physicalSize; //设备分辨率
-  static double physicalRatio = 0;  //设备分辨率比值（height/width）
+  /// 设备像素
+  static double dpi = MediaQueryData.fromWindow(window).devicePixelRatio;
+
+  /// 设备分辨率
+  static Size physicalSize = window.physicalSize;
+
+  /// 设备分辨率比值（height/width）
+  static double physicalRatio = 0;
   static int platform = Platform.isAndroid ? 1 : 2;
   static late String basePath;
   static String postfix = ".png";
@@ -16,25 +23,25 @@ class LocalImageSelector {
 
   static init() {
     basePath = Local_Icon_prefix;
-    physicalRatio = (physicalSize.height)/(physicalSize.width);
+    physicalRatio = (physicalSize.height) / (physicalSize.width);
     print("当前的屏幕像素比:$dpi");
     print("当前的屏幕分辨率:$physicalSize");
     print("当前的屏幕高宽比为:$physicalRatio");
     return basePath;
   }
 
-  ///根据设备分辨率适配图片
-  ///用于全屏图
-  ///启动页、引导页
+  /// 根据设备分辨率适配图片
+  /// 用于全屏图
+  /// 启动页、引导页
   static Image getImgByPhysicalSize(
-      String imageName, {
-        double? imageWidth,
-        double? imageHeight,
-        String type: ".png",
-        BoxFit? bFitFill,
-        Key? key,
-        Color? imageColor,
-      }) {
+    String imageName, {
+    double? imageWidth,
+    double? imageHeight,
+    String type: ".png",
+    BoxFit? bFitFill,
+    Key? key,
+    Color? imageColor,
+  }) {
     String basicPath;
     postfix = ".png";
     if (physicalRatio <= 1.5) {

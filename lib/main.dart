@@ -87,8 +87,7 @@ class MyApp extends StatelessWidget {
   }
 
   //检测是否同意了隐私政策
-  String routeName()  {
-    // LocalStorage.save(MyCommons.AGREE_PRIVACY,false);
+  String routeName() {
     if(LocalStorage.get(MyCommons.AGREE_PRIVACY) == null || !LocalStorage.get(MyCommons.AGREE_PRIVACY)){
       return RouteName.privacyTipsPage;
     }else{

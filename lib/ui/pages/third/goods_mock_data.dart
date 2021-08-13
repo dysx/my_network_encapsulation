@@ -1,8 +1,11 @@
 import 'package:my_network_encapsulation/network/model/goods_entity.dart';
 
+/// @describe: 虚拟收藏数据
+/// @author: qds
+/// @date:
 class GoodsMockData {
   static List<GoodsEntity> list(int page, int size) {
-    if(page > 2){
+    if (page > 2) {
       size = 15;
     }
     return List<GoodsEntity>.generate(size, (index) {

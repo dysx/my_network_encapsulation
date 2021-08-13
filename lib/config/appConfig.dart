@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 
-/// app配置文件
+/// @describe: app配置文件
+/// @author: qds
+/// @date:
 class AppConfig {
-
   /// 全局key
-  static final GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> globalKey =
+      GlobalKey<NavigatorState>();
 
   /// 是否为开发环境
   static bool get isDebug => !bool.fromEnvironment("dart.vm.product");
@@ -37,5 +39,4 @@ class AppConfig {
 
   /// 最大缓存数
   static const CACHE_MAXCOUNT = 100;
-
 }

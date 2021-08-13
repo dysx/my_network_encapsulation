@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_network_encapsulation/res/my_theme.dart' as theme;
 
-
+/// @describe: 注册页面
+/// @author: qds
+/// @date:
+// ignore: must_be_immutable
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => new _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> with AutomaticKeepAliveClientMixin{
+class _SignUpPageState extends State<SignUpPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -20,44 +24,50 @@ class _SignUpPageState extends State<SignUpPage> with AutomaticKeepAliveClientMi
             new Container(
                 decoration: new BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(8)),
-                  color: Colors.white,),
+                  color: Colors.white,
+                ),
                 width: 300,
                 height: 360,
-                child: buildSignUpTextForm()
-            ),
-
-            new Positioned(child: new Center(child:
-            new Container(
-              padding: EdgeInsets.only(
-                  top: 10, bottom: 10, left: 42, right: 42),
-              decoration: new BoxDecoration(
-                gradient: theme.MyTheme.primaryGradient,
-                borderRadius: BorderRadius.all(Radius.circular(5)),
+                child: buildSignUpTextForm()),
+            new Positioned(
+              child: new Center(
+                child: new Container(
+                  padding:
+                      EdgeInsets.only(top: 10, bottom: 10, left: 42, right: 42),
+                  decoration: new BoxDecoration(
+                    gradient: theme.MyTheme.primaryGradient,
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  child: new Text(
+                    "SignUp",
+                    style: new TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                ),
               ),
-              child: new Text("SignUp",
-                style: new TextStyle(fontSize: 25, color: Colors.white),),
-            ),), top: 340,)
-
+              top: 340,
+            )
           ],
-        )
-    );
+        ));
   }
 
   Widget buildSignUpTextForm() {
-    return new Form(child: new Column(
+    return new Form(
+        child: new Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         //用户名字
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(
-                left: 25, right: 25, top: 20, bottom: 20),
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 20),
             child: new TextFormField(
               decoration: new InputDecoration(
-                  icon: new Icon(FontAwesomeIcons.user, color: Colors.black,),
+                  icon: new Icon(
+                    FontAwesomeIcons.user,
+                    color: Colors.black,
+                  ),
                   hintText: "Name",
-                  border: InputBorder.none
-              ),
+                  border: InputBorder.none),
               style: new TextStyle(fontSize: 16, color: Colors.black),
             ),
           ),
@@ -70,14 +80,16 @@ class _SignUpPageState extends State<SignUpPage> with AutomaticKeepAliveClientMi
         //邮箱
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(
-                left: 25, right: 25, top: 20, bottom: 20),
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 20),
             child: new TextFormField(
               decoration: new InputDecoration(
-                  icon: new Icon(Icons.email, color: Colors.black,),
-                  hintText: "Email Address",
-                  border: InputBorder.none
-              ),
+                  icon: new Icon(
+                    Icons.email,
+                    color: Colors.black,
+                  ),
+                  hintText: "请输入邮箱地址",
+                  border: InputBorder.none),
               style: new TextStyle(fontSize: 16, color: Colors.black),
             ),
           ),
@@ -90,15 +102,21 @@ class _SignUpPageState extends State<SignUpPage> with AutomaticKeepAliveClientMi
         //密码
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(
-                left: 25, right: 25, top: 20, bottom: 20),
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 20),
             child: new TextFormField(
               decoration: new InputDecoration(
-                icon: new Icon(Icons.lock, color: Colors.black,),
+                icon: new Icon(
+                  Icons.lock,
+                  color: Colors.black,
+                ),
                 hintText: "Password",
                 border: InputBorder.none,
                 suffixIcon: new IconButton(
-                    icon: new Icon(Icons.remove_red_eye, color: Colors.black,),
+                    icon: new Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.black,
+                    ),
                     onPressed: () {}),
               ),
               obscureText: true,
@@ -114,15 +132,21 @@ class _SignUpPageState extends State<SignUpPage> with AutomaticKeepAliveClientMi
 
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(
-                left: 25, right: 25, top: 20, bottom: 20),
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 20),
             child: new TextFormField(
               decoration: new InputDecoration(
-                icon: new Icon(Icons.lock, color: Colors.black,),
+                icon: new Icon(
+                  Icons.lock,
+                  color: Colors.black,
+                ),
                 hintText: "Confirm Passowrd",
                 border: InputBorder.none,
                 suffixIcon: new IconButton(
-                    icon: new Icon(Icons.remove_red_eye, color: Colors.black,),
+                    icon: new Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.black,
+                    ),
                     onPressed: () {}),
               ),
               obscureText: true,
@@ -130,7 +154,6 @@ class _SignUpPageState extends State<SignUpPage> with AutomaticKeepAliveClientMi
             ),
           ),
         ),
-
       ],
     ));
   }
@@ -138,5 +161,4 @@ class _SignUpPageState extends State<SignUpPage> with AutomaticKeepAliveClientMi
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
-
 }

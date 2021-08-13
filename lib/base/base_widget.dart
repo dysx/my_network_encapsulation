@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,12 +6,14 @@ import 'package:my_network_encapsulation/network/http/http.dart';
 import 'base_function.dart';
 import 'navigator_manger.dart';
 
-/// 基类
+/// @describe: 基类
+/// @author: qds
+/// @date:
 abstract class BaseWidget extends StatefulWidget {
   BaseWidget({Key? key}) : super(key: key);
 
   @override
-  BaseWidgetState createState()=> getState();
+  BaseWidgetState createState() => getState();
 
   BaseWidgetState getState();
 
@@ -24,15 +24,15 @@ abstract class BaseWidget extends StatefulWidget {
 
 abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
     with WidgetsBindingObserver, BaseFunction {
-  //平台信息
-//  bool isAndroid = Platform.isAndroid;
 
   BaseFunction getBaseFunction() {
     return this;
   }
 
-  bool _onResumed = false; //页面展示标记
-  bool _onPause = false; //页面暂停标记
+  /// 页面展示标记
+  bool _onResumed = false;
+  /// 页面暂停标记
+  bool _onPause = false;
 
   @override
   void initState() {
@@ -50,8 +50,8 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
 
   @override
   void deactivate() {
-//    log("----buildbuild---deactivate");
-    //说明是被覆盖了
+    // log("----build---deactivate");
+    // 说明是被覆盖了
     if (NavigatorManger.isSecondTop(this)) {
       if (!_onPause) {
         onPause();
@@ -70,9 +70,9 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
 
   @override
   Widget build(BuildContext context) {
-//    log("------buildbuild---build");
+    // log("------build---build");
     if (!_onResumed) {
-      //说明是 初次加载
+      // 说明是 初次加载
       if (NavigatorManger.isTopPage(getClassName())) {
         _onResumed = true;
         onResume();
@@ -84,19 +84,20 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
             : SystemUiOverlayStyle.dark,
         child: WillPopScope(
           onWillPop: () => getBackEvent(context),
-          // onWillPop: () async {
-          //   return Future.value(false);
-          // },
+          /*onWillPop: () async {
+          return Future.value(false);
+          },*/
           child: isAsFrame
               ? getBaseView(context)
               : Scaffold(
-            key: baseScaffoldKey,
-            resizeToAvoidBottomInset: isBottomInset,//防止键盘出界
-            drawer: getDrawer(),
-            endDrawer: getEndDrawer(),
-            body: getBaseView(context),
-            bottomNavigationBar: getBottomWidget(),
-          ),
+                  key: baseScaffoldKey,
+                  resizeToAvoidBottomInset: isBottomInset,
+                  //防止键盘出界
+                  drawer: getDrawer(),
+                  endDrawer: getEndDrawer(),
+                  body: getBaseView(context),
+                  bottomNavigationBar: getBottomWidget(),
+                ),
         ));
   }
 
@@ -108,9 +109,9 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
     _onResumed = false;
     _onPause = false;
 
-    //把该页面 从 页面列表中 去除
+    // 把该页面 从 页面列表中 去除
     NavigatorManger.removeWidget(getClassName());
-    //取消网络请求
+    // 取消网络请求
     Http.cancelHttp(getClassName());
     super.dispose();
   }
@@ -118,15 +119,15 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // TODO: implement didChangeAppLifecycleState
-    //此处可以拓展 是不是从前台回到后台
+    // 此处可以拓展 是不是从前台回到后台
     if (state == AppLifecycleState.resumed) {
-      //on resume
+      // on resume
       if (NavigatorManger.isTopPage(getClassName())) {
         onForeground();
         onResume();
       }
     } else if (state == AppLifecycleState.paused) {
-      //on pause
+      // on pause
       if (NavigatorManger.isTopPage(getClassName())) {
         onBackground();
         onPause();

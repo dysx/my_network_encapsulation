@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -8,7 +7,7 @@ import 'package:my_network_encapsulation/base/base_insert.dart';
 /// @author: qds
 /// @date:
 class LoginIndicator extends StatefulWidget {
-  ///PageController
+  /// PageController
   final PageController pageController;
 
   LoginIndicator({
@@ -59,7 +58,7 @@ class _LoginIndicatorState extends State<LoginIndicator> {
                       behavior: HitTestBehavior.translucent,
                       onTap: () => _toPage(0),
                       child: Center(
-                        child: Text('Existing',
+                        child: Text('登录',
                             style: MyTextStyles.sixteenBlack3333W500),
                       ),
                     )),
@@ -68,7 +67,7 @@ class _LoginIndicatorState extends State<LoginIndicator> {
                       behavior: HitTestBehavior.translucent,
                       onTap: () => _toPage(1),
                       child: Center(
-                        child: Text('New',
+                        child: Text('注册',
                             style: MyTextStyles.sixteenBlack3333W500),
                       ),
                     )),
@@ -76,7 +75,7 @@ class _LoginIndicatorState extends State<LoginIndicator> {
                 ),
               )),
           Positioned(
-            ///StreamBuilder刷新
+            /// StreamBuilder刷新
             child: StreamBuilder<double>(
                 stream: _streamController.stream,
                 initialData: 0,
@@ -94,7 +93,7 @@ class _LoginIndicatorState extends State<LoginIndicator> {
                       color: Colors.white,
                     ),
                     child: Center(
-                      child: Text(snapshot.data! < 0.5 ? 'Existing' : 'New',
+                      child: Text(snapshot.data! < 0.5 ? '登录' : '注册',
                           style: MyTextStyles.sixteenBlack3333W500),
                     ),
                   );

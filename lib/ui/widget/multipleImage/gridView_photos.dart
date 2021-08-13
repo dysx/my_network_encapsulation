@@ -4,7 +4,9 @@ import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/routes/page_route_anim.dart';
 import 'package:my_network_encapsulation/ui/widget/multipleImage/my_photo_view.dart';
 
-/// @name：网格图片
+/// @describe: 网格图片
+/// @author: qds
+/// @date:
 class GridViewPhotos extends StatelessWidget {
   final List<String> thumbnail;
   final List<String> originalImage;
@@ -20,8 +22,8 @@ class GridViewPhotos extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              crossAxisSpacing: Dimens.gapDp15,
-              mainAxisSpacing: Dimens.gapDp15,
+              crossAxisSpacing: Dimens.gapDp15w,
+              mainAxisSpacing: Dimens.gapDp15w,
               childAspectRatio: 1.0,
             ),
             itemCount: thumbnail.length,

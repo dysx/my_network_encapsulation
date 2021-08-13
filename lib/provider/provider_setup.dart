@@ -1,4 +1,3 @@
-
 import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
 import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
 import 'package:my_network_encapsulation/view_model/favourite_model.dart';
@@ -6,7 +5,9 @@ import 'package:my_network_encapsulation/view_model/user_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
-///@name: 创建Provider服务配置列表
+/// @describe: 创建Provider服务配置列表
+/// @author: qds
+/// @date:
 
 List<SingleChildWidget> providers = [
   ...independentServices,

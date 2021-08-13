@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/res/my_commons.dart';
 import 'package:my_network_encapsulation/routes/page_route_anim.dart';
 import 'package:my_network_encapsulation/ui/pages/Third/third.dart';
-import 'package:my_network_encapsulation/ui/pages/cartTest/goods_list.dart';
-import 'package:my_network_encapsulation/ui/pages/cartTest/my_cart.dart';
 import 'package:my_network_encapsulation/ui/pages/home.dart';
 import 'package:my_network_encapsulation/ui/pages/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/pages/launch/lead_page.dart';
@@ -22,9 +20,12 @@ import 'package:my_network_encapsulation/ui/pages/third/favourite_page.dart';
 import 'package:my_network_encapsulation/ui/pages/third/mock_page.dart';
 import 'package:my_network_encapsulation/ui/public/login/login_page.dart';
 import 'package:my_network_encapsulation/ui/public/test/indicator_test.dart';
-import 'package:my_network_encapsulation/ui/widget/multipleImage/my_photo_view.dart';
 import 'package:my_network_encapsulation/ui/widget/not_found_page.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
+
+/// @describe: 路由
+/// @author: qds
+/// @date:
 
 /// 路由名
 class RouteName {
@@ -38,10 +39,8 @@ class RouteName {
   static const String homePage = 'homePage';
   static const String second = 'second';
   static const String third = 'third';
-  static const String goodsList = 'goodsList';
   static const String favouritePage = 'favouritePage';
   static const String mockPage = 'mockPage';
-  static const String myCart = 'myCart';
   static const String mine = 'mine';
   static const String baseTest = 'baseTest';
   static const String testA = 'testA';
@@ -64,13 +63,6 @@ class MyRouter {
         return NoAnimRouteBuilder(StartupPage(), routeName);
       case RouteName.lead:
         return FadeRouteBuilder(LeadPage(), routeName);
-      // case RouteName.photoView:
-      //   return FadeRouteBuilder(
-      //       PhotoView(
-      //         photoList: settings.arguments!['photoList'],
-      //         localPhotos: settings.arguments!['localPhotos'],
-      //       ),
-      //       routeName);
       case RouteName.loginPage:
         return SlideBottomRouteBuilder(LoginPage(), routeName);
       case RouteName.home:
@@ -81,14 +73,10 @@ class MyRouter {
         return NoAnimRouteBuilder(Second(), routeName);
       case RouteName.third:
         return NoAnimRouteBuilder(Third(), routeName);
-      case RouteName.goodsList:
-        return NoAnimRouteBuilder(GoodsList(), routeName);
       case RouteName.favouritePage:
         return SizeRoute(FavouritePage(), routeName);
       case RouteName.mockPage:
         return SizeRoute(MockPage(), routeName);
-      case RouteName.myCart:
-        return NoAnimRouteBuilder(MyCart(), routeName);
       case RouteName.mine:
         return NoAnimRouteBuilder(Mine(), routeName);
       case RouteName.baseTest:
@@ -101,7 +89,7 @@ class MyRouter {
         return NoAnimRouteBuilder(TestC(), routeName);
       case RouteName.testD:
         return NoAnimRouteBuilder(TestD(), routeName);
-        case RouteName.indicatorTest:
+      case RouteName.indicatorTest:
         return NoAnimRouteBuilder(IndicatorTest(), routeName);
       case RouteName.scrollToIndex:
         return NoAnimRouteBuilder(ScrollToIndexDemoPage2(), routeName);
@@ -110,11 +98,10 @@ class MyRouter {
     }
   }
 
-  // 指定哪些页面需要登录权限
+  /// 指定哪些页面需要登录权限
   static List<String> powerPage = ['mine'];
 
-  /*登陆拦截*/
-  // 此处做登陆权限拦截
+  /// 此处做登陆权限拦截
   static String routeBeforeHook(RouteSettings settings) {
     late String route;
     for (String item in powerPage) {

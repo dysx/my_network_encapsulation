@@ -1,6 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-///@name: 数据存取
+/// @describe: 缓存数据存取
+/// @author: qds
+/// @date:
 class LocalStorage {
   static late SharedPreferences preferences;
 

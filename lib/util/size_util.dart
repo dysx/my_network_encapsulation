@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-/// 屏幕适配
+/// @describe: 屏幕适配工具
+/// @author: qds
+/// @date:
 class SizeUtil {
   SizeUtil._();
 
@@ -37,8 +39,8 @@ class SizeUtil {
 
   static void initialize(
       {double standardWidth = _defaultWidth,
-        double standardHeight = _defaultHeight,
-        bool allowFontScaling = false}) {
+      double standardHeight = _defaultHeight,
+      bool allowFontScaling = false}) {
     _uiWidthPx = standardWidth;
     _uiHeightPx = standardHeight;
 
@@ -51,7 +53,7 @@ class SizeUtil {
 
     _allowFontScaling = allowFontScaling;
     _rpx = _screenWidth! / _uiWidthPx!;
-    _px= _screenHeight! / _uiHeightPx! * 2;
+    _px = _screenHeight! / _uiHeightPx! * 2;
   }
 
   /// 每个逻辑像素的字体像素数，字体的缩放比例
@@ -76,7 +78,7 @@ class SizeUtil {
 
   static double get scaleText => scaleWidth;
 
-  static double setPx(num size) => _rpx! * size * 2;//原型图像素为*2，所以这里需要扩大2倍
+  static double setPx(num size) => _rpx! * size * 2; //原型图像素为*2，所以这里需要扩大2倍
 
   static double setRpx(num size) => _px! * size;
 
@@ -87,15 +89,16 @@ class SizeUtil {
   static double setSp(num size, {bool? allowFontScalingSelf}) =>
       allowFontScalingSelf == null
           ? (_allowFontScaling!
-          ? (size * scaleText)
-          : ((size * scaleText) / _textScaleFactor!))
+              ? (size * scaleText)
+              : ((size * scaleText) / _textScaleFactor!))
           : (allowFontScalingSelf
-          ? (size * scaleText)
-          : ((size * scaleText) / _textScaleFactor!));
+              ? (size * scaleText)
+              : ((size * scaleText) / _textScaleFactor!));
 
   static double setWidthPercent(num percent) => (_screenWidth! * percent) / 100;
 
-  static double setHeightPercent(num percent) => (_screenHeight! * percent) / 100;
+  static double setHeightPercent(num percent) =>
+      (_screenHeight! * percent) / 100;
 }
 
 /// 对数进行扩展

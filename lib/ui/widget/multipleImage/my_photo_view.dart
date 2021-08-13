@@ -9,18 +9,19 @@ import 'package:my_network_encapsulation/util/permission_manager.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-/// 图片浏览
-/// @author [su,qds]
+/// @describe: 图片浏览
+/// @author: qds
+/// @date:
 class MyPhotoView extends BaseWidget {
   MyPhotoView({
     required this.photoList,
     required this.localPhotos,
     required this.thumbnails,
 
-    ///地址列表
+    /// 地址列表
     this.initialIndex: 0,
 
-    ///初始页
+    /// 初始页
   });
 
   final List<String> photoList;

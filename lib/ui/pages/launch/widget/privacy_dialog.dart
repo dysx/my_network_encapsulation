@@ -4,7 +4,10 @@ import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/ui/pages/launch/widget/PrivacyView.dart';
 
-///@name: 隐私政策弹窗
+/// @describe: 隐私政策弹窗
+/// @author: qds
+/// @date:
+// ignore: must_be_immutable
 class PrivacyDialog extends StatelessWidget {
   String data = "亲爱的xxxx用户，感谢您信任并使用xxxxAPP！\n" +
       " \n" +
@@ -39,16 +42,19 @@ class PrivacyDialog extends StatelessWidget {
                     S.of(context).terms_of_service_and_privacy_policy_tips,
                     style: MyTextStyles.sixteenBlack3333Bold,
                   ),
-                  Gaps.vGap15,
+                  Gaps.vGap15w,
                   Text('欢迎使用...app'),
-                  Gaps.vGap20,
-                  PrivacyView(data: data, keys: ['《用户协议》', '《隐私政策》'],onTapCallback: (key){
-                    if(key == '《用户协议》'){
-                      Toast.showMsg('点击了用户协议');
-                    }else if(key == '《隐私政策》'){
-                      Toast.showMsg('点击了隐私政策');
-                    }
-                  }),
+                  Gaps.vGap20w,
+                  PrivacyView(
+                      data: data,
+                      keys: ['《用户协议》', '《隐私政策》'],
+                      onTapCallback: (key) {
+                        if (key == '《用户协议》') {
+                          Toast.showMsg('点击了用户协议');
+                        } else if (key == '《隐私政策》') {
+                          Toast.showMsg('点击了隐私政策');
+                        }
+                      }),
                 ],
               ),
             )),
@@ -72,7 +78,8 @@ class PrivacyDialog extends StatelessWidget {
                             backgroundColor: Colors.blue,
                             minimumSize: Size(double.infinity, 45),
                             onPressed: () {
-                              LocalStorage.saveBool(MyCommons.AGREE_PRIVACY, true);
+                              LocalStorage.saveBool(
+                                  MyCommons.AGREE_PRIVACY, true);
                               MyNavigator.pushReplacementNamed(RouteName.lead);
                             },
                             text: '同意并使用',

@@ -1,4 +1,6 @@
-/// 常量
+/// @describe: 项目常量
+/// @author: qds
+/// @date:
 class MyCommons {
   static const String AGREE_PRIVACY = 'agree_privacy'; //是否同意了隐私政策
   static const String PROJECT_NAME = 'app'; //项目名

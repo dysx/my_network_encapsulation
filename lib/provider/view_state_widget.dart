@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/config/resource_mananger.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/provider/view_state.dart';
 import 'package:my_network_encapsulation/res/my_text_styles.dart';
@@ -8,6 +7,9 @@ import 'package:my_network_encapsulation/util/buttons.dart';
 import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 
+/// @describe: 页面状态对应的widget
+/// @author: qds
+/// @date:
 
 /// 加载中
 class ViewStateBusyWidget extends StatelessWidget {
@@ -46,7 +48,7 @@ class ViewStateWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        image ?? Icon(IconFonts.pageError, size: 80, color: Colors.grey[500]),
+        image ?? Icon(Icons.error, size: 80, color: Colors.grey[500]),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.w),
           child: Column(
@@ -107,7 +109,8 @@ class ViewStateErrorWidget extends StatelessWidget {
     String defaultTextData = S.of(context).viewStateButtonRetry;
     switch (error!.errorType) {
       case ViewStateErrorType.networkTimeOutError:
-        defaultImage = LocalImageSelector.getSingleImage('error_nonet',imageWidth: 80.w);
+        defaultImage =
+            LocalImageSelector.getSingleImage('error_nonet', imageWidth: 80.w);
         // defaultImage = Transform.translate(
         //   offset: Offset(-50, 0),
         //   child: const Icon(IconFonts.pageNetworkError,
@@ -117,7 +120,8 @@ class ViewStateErrorWidget extends StatelessWidget {
         // errorMessage = ''; // 网络异常移除message提示
         break;
       case ViewStateErrorType.defaultError:
-        defaultImage = LocalImageSelector.getSingleImage('error_default',imageWidth: 50.w);
+        defaultImage = LocalImageSelector.getSingleImage('error_default',
+            imageWidth: 50.w);
         // defaultImage =
         //     const Icon(IconFonts.pageError, size: 100, color: Colors.grey);
         defaultTitle = S.of(context).viewStateMessageError;
@@ -162,7 +166,7 @@ class ViewStateEmptyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewStateWidget(
       onPressed: this.onPressed,
-      image: LocalImageSelector.getSingleImage('error_empty',imageWidth: 50.w),
+      image: LocalImageSelector.getSingleImage('error_empty', imageWidth: 50.w),
       title: message ?? S.of(context).viewStateMessageEmpty,
       buttonText: buttonText,
       buttonTextData: S.of(context).viewStateButtonRefresh,
@@ -179,10 +183,10 @@ class ViewStateUnAuthWidget extends StatelessWidget {
 
   const ViewStateUnAuthWidget(
       {Key? key,
-        this.image,
-        this.message,
-        this.buttonText,
-        @required this.onPressed})
+      this.image,
+      this.message,
+      this.buttonText,
+      @required this.onPressed})
       : super(key: key);
 
   @override
@@ -203,8 +207,8 @@ class ViewStateUnAuthImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Hero(
       tag: 'loginLogo',
-      child:
-      LocalImageSelector.getSingleImage('login_logo',imageWidth: 250.w,imageHeight: 191.w),
+      child: LocalImageSelector.getSingleImage('login_logo',
+          imageWidth: 250.w, imageHeight: 191.w),
       // Image.asset(
       //   ImageHelper.wrapAssets('login_logo.png'),
       //   width: 130,

@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:my_network_encapsulation/config/appConfig.dart';
 import 'package:my_network_encapsulation/network/intercept/request_interceptor.dart';
 import 'package:my_network_encapsulation/network/response/transform.dart';
-import 'package:my_network_encapsulation/res/my_commons.dart';
+import 'package:my_network_encapsulation/res/keys.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 
@@ -116,7 +116,7 @@ class Http {
   /// 读取本地配置  设置token
   Map<String, dynamic> getAuthorizationHeader() {
     var headers;
-    String accessToken = LocalStorage.get(MyCommons.TOKEN) ?? '';
+    String accessToken = LocalStorage.get(Keys.token) ?? '';
     headers = {
       "Authorization": 'Bearer $accessToken',
       "Access-Token": '$accessToken'

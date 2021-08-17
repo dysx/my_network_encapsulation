@@ -28,7 +28,7 @@ class TestBState extends BaseWidgetState<TestB> {
   void onCreate() {
     setAppBarTitle('testA');
     // TODO: implement onCreate
-    // setTopBarBackColor(MyColors.background);
+    // setTopBarBackColor(AppColors.background);
   }
 
   @override

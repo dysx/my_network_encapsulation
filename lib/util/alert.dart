@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/config/appConfig.dart';
 import 'package:my_network_encapsulation/network/http/http.dart';
-import 'package:my_network_encapsulation/res/my_text_styles.dart';
+import 'package:my_network_encapsulation/res/app_styles.dart';
 import 'package:my_network_encapsulation/routes/my_navigator.dart';
 import 'package:my_network_encapsulation/util/buttons.dart';
 
@@ -89,18 +89,18 @@ class Alert {
             child: AppConfig.isAndroid
                 ? AlertDialog(
                     title: Text(title ?? '提示',
-                        style: MyTextStyles.sixteenBlack3333Bold),
+                        style: AppTextStyles.sixteenBlack3333Bold),
                     content: message != null && message.length > 0
                         ? Text(
                             message,
-                            style: MyTextStyles.fourteenBlack3333,
+                            style: AppTextStyles.fourteenBlack3333,
                           )
                         : SizedBox.shrink(),
                     actions: <Widget>[
                       showCancel
                           ? ordinaryButton(
                               text: cancel ?? '取消',
-                              textStyle: MyTextStyles.sixteenBlack3333,
+                              textStyle: AppTextStyles.sixteenBlack3333,
                               onPressed: () {
                                 hide();
                                 if (onCancel != null) onCancel();
@@ -109,7 +109,7 @@ class Alert {
                           : SizedBox.shrink(),
                       ordinaryButton(
                         text: confirm ?? '确定',
-                        textStyle: MyTextStyles.sixteenBlue91FF,
+                        textStyle: AppTextStyles.sixteenBlue91FF,
                         onPressed: () {
                           hide();
                           if (onConfirm != null) onConfirm();
@@ -119,18 +119,18 @@ class Alert {
                   )
                 : CupertinoAlertDialog(
                     title: Text(title ?? '提示',
-                        style: MyTextStyles.sixteenBlack3333Bold),
+                        style: AppTextStyles.sixteenBlack3333Bold),
                     content: message != null && message.length > 0
                         ? Text(
                             message,
-                            style: MyTextStyles.fourteenBlack3333,
+                            style: AppTextStyles.fourteenBlack3333,
                           )
                         : SizedBox.shrink(),
                     actions: <Widget>[
                       showCancel
                           ? ordinaryButton(
                               text: cancel ?? '取消',
-                              textStyle: MyTextStyles.sixteenBlack3333,
+                              textStyle: AppTextStyles.sixteenBlack3333,
                               onPressed: () {
                                 hide();
                                 if (onCancel != null) onCancel();
@@ -139,7 +139,7 @@ class Alert {
                           : SizedBox.shrink(),
                       ordinaryButton(
                         text: confirm ?? '确定',
-                        textStyle: MyTextStyles.sixteenBlue91FF,
+                        textStyle: AppTextStyles.sixteenBlue91FF,
                         onPressed: () {
                           hide();
                           if (onConfirm != null) onConfirm();
@@ -187,7 +187,7 @@ class Alert {
             child: AlertDialog(
               title: Text(
                 title ?? '提示',
-                style: MyTextStyles.sixteenBlack3333Bold,
+                style: AppTextStyles.sixteenBlack3333Bold,
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -211,7 +211,7 @@ class Alert {
                       return value != null && value.length > 0
                           ? Text(
                               value,
-                              style: MyTextStyles.fourteenBlack3333,
+                              style: AppTextStyles.fourteenBlack3333,
                             )
                           : SizedBox.shrink();
                     },
@@ -238,7 +238,7 @@ class Alert {
                     ? FlatButton(
                         child: Text(
                           confirm ?? '确定',
-                          style: MyTextStyles.sixteenBlue91FF,
+                          style: AppTextStyles.sixteenBlue91FF,
                         ),
                         onPressed: () {
                           hide();

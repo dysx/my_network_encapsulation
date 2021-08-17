@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/res/dimens.dart';
-import 'package:my_network_encapsulation/res/my_colors.dart';
+import 'package:my_network_encapsulation/res/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 
@@ -38,7 +38,7 @@ class SkeletonDecoration extends BoxDecoration {
 /// 骨架屏 元素背景 ->形状及颜色
 class BottomBorderDecoration extends BoxDecoration {
   BottomBorderDecoration()
-      : super(border: Border(bottom: BorderSide(width: 0.3,color: MyColors.gray_ee)));
+      : super(border: Border(bottom: BorderSide(width: 0.3,color: AppColors.gray_ee)));
 }
 
 /// 骨架屏

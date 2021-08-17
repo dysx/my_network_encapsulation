@@ -38,7 +38,10 @@ dependencies:
   # 持久化存储
   shared_preferences: 2.0.6
 
-  # 缓存
+  # 列表动画
+  flutter_staggered_animations: 1.0.0
+
+  # app缓存目录
   path_provider: 2.0.2
 
   # 网络
@@ -60,11 +63,20 @@ dependencies:
   # 保存图片
   image_gallery_saver: 1.6.9
 
+  # 视频
+#  flutter_mvideo_plugin:
+#    git:
+#      url: https://github.com/UrielSun/MVideoPlugin.git
+#    path: E:\study_project\mvp\MVideoPlugin-master
+
   # 日志打印
   logger: 1.0.0
 
   # 微光效果
   shimmer: 2.0.0
+
+  # 文字动效
+  animated_text_kit: 4.2.1
 
   # 解析html
   flutter_html: 1.3.0

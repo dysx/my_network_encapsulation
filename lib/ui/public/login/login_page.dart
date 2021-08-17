@@ -1,5 +1,5 @@
 import 'package:my_network_encapsulation/base/base_insert.dart';
-import 'package:my_network_encapsulation/res/my_theme.dart' as theme;
+import 'package:my_network_encapsulation/res/login_theme.dart' as theme;
 import 'package:my_network_encapsulation/ui/public/login/widget/login_indicaor.dart';
 import 'package:my_network_encapsulation/ui/widget/key_board_hider.dart';
 import 'package:my_network_encapsulation/view_model/my_login_model.dart';
@@ -29,15 +29,15 @@ class _LoginPageState extends BaseWidgetState<LoginPage> {
                 height: getScreenHeight(),
                 // 设置渐变的背景
                 decoration: new BoxDecoration(
-                  gradient: theme.MyTheme.primaryGradient,
+                  gradient: theme.LoginTheme.primaryGradient,
                 ),
                 child: Column(
                   // mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     SizedBox(height: getTopBarHeight()),
                     //顶部图片
-                    LocalImageSelector.getSingleImage('login_logo',
-                        imageHeight: 191.h),
+                    // LocalImageSelector.getSingleImage('login_logo',
+                    //     imageHeight: 191.h),
                     Gaps.vGap20h,
                     Expanded(
                       child: ProviderWidget<MyLoginModel>(

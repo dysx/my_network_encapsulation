@@ -1,7 +1,9 @@
+import 'dart:async';
+
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/model/user.dart';
 import 'package:my_network_encapsulation/provider/view_state_model.dart';
-import 'package:my_network_encapsulation/res/my_commons.dart';
+import 'package:my_network_encapsulation/res/keys.dart';
 import 'package:my_network_encapsulation/view_model/user_model.dart';
 
 const String qLoginName = '';
@@ -11,8 +13,14 @@ class MyLoginModel extends ViewStateModel {
 
   MyLoginModel(this.userModel);
 
+  /// 账号tc
   TextEditingController phone = TextEditingController();
+
+  /// 密码tc
   TextEditingController password = TextEditingController();
+
+  /// 验证码tc
+  TextEditingController verificationCode = TextEditingController();
 
   /// 密码是否可见
   bool showPassword = false;
@@ -31,7 +39,7 @@ class MyLoginModel extends ViewStateModel {
       RequestUtil.login('15015802692', 'qds123123', cancelTag: '')
           .then((loginResult) {
         dealUser(loginResult.avatarUrl, loginResult.nickName);
-        LocalStorage.saveString(MyCommons.TOKEN, loginResult.accessToken!);
+        LocalStorage.saveString(Keys.token, loginResult.accessToken!);
         MyNavigator.pop();
         // MyNavigator.pushNamedAndRemoveUntil(RouteName.home);
         setIdle();
@@ -72,7 +80,6 @@ class MyLoginModel extends ViewStateModel {
 
   /// 退出登陆
   Future<bool> logout() async {
-    print('13456');
     if (!userModel.hasUser) {
       //防止递归
       return false;
@@ -82,7 +89,7 @@ class MyLoginModel extends ViewStateModel {
       /// 调退出登陆接口
       /// 清空数据
       userModel.clearUser();
-      LocalStorage.remove(MyCommons.TOKEN);
+      LocalStorage.remove(Keys.token);
       setIdle();
       return true;
     } catch (e) {
@@ -90,6 +97,7 @@ class MyLoginModel extends ViewStateModel {
     }
   }
 
+  /// 保存用户登录信息
   dealUser(String? avatarUrl, String? nickName) {
     Map<String, dynamic> map = {"avatarUrl": avatarUrl, "nickName": nickName};
     print(map);

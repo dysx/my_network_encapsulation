@@ -58,8 +58,8 @@ class _FavouritePageState extends BaseWidgetState<FavouritePage> {
                       return ordinaryButton(
                           text: list[index].collect! ? '已收藏' : '未收藏',
                           backgroundColor: list[index].collect!
-                              ? MyColors.blue_91ff
-                              : MyColors.yellow_ab00,
+                              ? AppColors.blue_91ff
+                              : AppColors.yellow_ab00,
                           onPressed: () {
                             FavouriteModel(
                                     globalFavouriteModel:
@@ -72,8 +72,8 @@ class _FavouritePageState extends BaseWidgetState<FavouritePage> {
                     return ordinaryButton(
                         text: list[index].collect! ? '已收藏' : '未收藏',
                         backgroundColor: list[index].collect!
-                            ? MyColors.blue_91ff
-                            : MyColors.yellow_ab00,
+                            ? AppColors.blue_91ff
+                            : AppColors.yellow_ab00,
                         onPressed: () {
                           FavouriteModel(
                                   globalFavouriteModel:
@@ -92,7 +92,7 @@ class _FavouritePageState extends BaseWidgetState<FavouritePage> {
   void onCreate() {
     // TODO: implement onCreate
     setAppBarTitle('');
-    setBackground(MyColors.white);
+    setBackground(AppColors.white);
   }
 
   @override

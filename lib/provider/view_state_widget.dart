@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/provider/view_state.dart';
-import 'package:my_network_encapsulation/res/my_text_styles.dart';
+import 'package:my_network_encapsulation/res/app_styles.dart';
 import 'package:my_network_encapsulation/util/buttons.dart';
 import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
@@ -232,7 +232,7 @@ class ViewStateButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return iconButton(
       text: textData ?? S.of(context).viewStateButtonRetry,
-      textStyle: MyTextStyles.fourteenGrey3333,
+      textStyle: AppTextStyles.fourteenGrey3333,
       onPressed: onPressed!,
       icon: 'error_retry',
     );

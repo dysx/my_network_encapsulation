@@ -36,13 +36,13 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   text: '$aaa'),
               ordinaryButton(
                   onPressed: () {
-                    LocalStorage.saveString(MyCommons.TOKEN, '123');
-                    print("${LocalStorage.get(MyCommons.TOKEN)}");
+                    LocalStorage.saveString(Keys.token, '123');
+                    print("${LocalStorage.get(Keys.token)}");
                     RequestUtil.login('15015802692', 'qds123123',
                             cancelTag: 'HomePage')
                         .then((value) {
                       LocalStorage.saveString(
-                          MyCommons.TOKEN, value.accessToken!);
+                          Keys.token, value.accessToken!);
                     });
                   },
                   text: '登陆'),
@@ -106,20 +106,20 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
               ),
               ordinaryButton(
                 onPressed: () {
-                  LocalStorage.saveString(MyCommons.TOKEN, '123');
+                  LocalStorage.saveString(Keys.token, '123');
                 },
                 text: "存储token",
               ),
               ordinaryButton(
                 onPressed: () {
-                  Toast.showMsg(LocalStorage.get(MyCommons.TOKEN)!);
+                  Toast.showMsg(LocalStorage.get(Keys.token)!);
                   // Toast.showWidget(widget);
                 },
                 text: "打印token",
               ),
               ordinaryButton(
                 onPressed: () {
-                  LocalStorage.remove(MyCommons.TOKEN);
+                  LocalStorage.remove(Keys.token);
                 },
                 text: "清除token",
               ),
@@ -134,7 +134,7 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                     MyNavigator.pushNamed(RouteName.scrollToIndex);
                   },
                   text: "滑动到指定位置",
-                  sideColor: MyColors.black_3333),
+                  sideColor: AppColors.black_3333),
               ordinaryButton(
                   onPressed: () async {
                     DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
@@ -144,7 +144,7 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                     print(_deviceData);
                   },
                   text: "获取设备信息",
-                  sideColor: MyColors.black_3333),
+                  sideColor: AppColors.black_3333),
               ordinaryButton(
                   onPressed: () {
                     // print(NavigatorManger.activityStack);
@@ -156,7 +156,7 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                     Alert.showAlert(title: '标题', message: '内容');
                   },
                   text: "打印路由",
-                  sideColor: MyColors.black_3333),
+                  sideColor: AppColors.black_3333),
               ordinaryButton(
                   onPressed: () {
                     PermissionManager.applyStoragePermission(() {
@@ -164,19 +164,19 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                     });
                   },
                   text: "文件权限测试",
-                  sideColor: MyColors.black_3333),
+                  sideColor: AppColors.black_3333),
               ordinaryButton(
                   onPressed: () {
                     Toast.showMsg(EnvConfig.CHANNEL);
                   },
                   text: "渠道",
-                  sideColor: MyColors.black_3333),
+                  sideColor: AppColors.black_3333),
               ordinaryButton(
                   onPressed: () {
                     Toast.showMsg(EnvConfig.VERSION);
                   },
                   text: "版本",
-                  sideColor: MyColors.black_3333),
+                  sideColor: AppColors.black_3333),
             ],
           ),
         ],

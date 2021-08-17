@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
-import 'package:my_network_encapsulation/res/my_theme.dart' as theme;
+import 'package:my_network_encapsulation/res/login_theme.dart' as theme;
+import 'package:my_network_encapsulation/ui/widget/send_code.dart';
+import 'package:my_network_encapsulation/ui/widget/slide_verify_widget.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 import 'package:my_network_encapsulation/view_model/my_login_model.dart';
 
@@ -22,8 +24,9 @@ class _SignInPageState extends State<SignInPage>
     with AutomaticKeepAliveClientMixin {
   /// 利用FocusNode和FocusScopeNode来控制焦点
   /// 可以通过FocusNode.of(context)来获取widget树中默认的FocusScopeNode
-  FocusNode emailFocusNode = FocusNode();
-  FocusNode passwordFocusNode = FocusNode();
+  FocusNode emailFN = FocusNode();
+  FocusNode passwordFN = FocusNode();
+  FocusNode verificationCodeFN = FocusNode();
 
   bool isShowPassWord = false;
 
@@ -43,6 +46,13 @@ class _SignInPageState extends State<SignInPage>
     return Column(
       children: [
         buildSignInTextForm(),
+        Gaps.vGap15w,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: SlideVerifyWidget(
+            width: 300.w,
+          ),
+        ),
         Gaps.vGap15w,
         buildSignInButton(),
       ],
@@ -156,7 +166,7 @@ class _SignInPageState extends State<SignInPage>
               padding: EdgeInsets.symmetric(vertical: Dimens.gapDp10w),
               child: TextField(
                 controller: loginModel.phone,
-                focusNode: emailFocusNode,
+                focusNode: emailFN,
                 onChanged: (email) {},
                 decoration: InputDecoration(
                     icon: Icon(Icons.phone, color: Colors.black),
@@ -170,8 +180,22 @@ class _SignInPageState extends State<SignInPage>
             child: Padding(
                 padding: EdgeInsets.symmetric(vertical: Dimens.gapDp10w),
                 child: TextField(
+                  controller: loginModel.verificationCode,
+                  focusNode: verificationCodeFN,
+                  onChanged: (password) {},
+                  decoration: InputDecoration(
+                      hintText: "请输入验证码",
+                      border: InputBorder.none,
+                      suffixIcon: SendCode(phone: '15015802692')),
+                )),
+          ),
+          Gaps.hLine,
+          Flexible(
+            child: Padding(
+                padding: EdgeInsets.symmetric(vertical: Dimens.gapDp10w),
+                child: TextField(
                   controller: loginModel.password,
-                  focusNode: passwordFocusNode,
+                  focusNode: passwordFN,
                   onChanged: (password) {},
                   decoration: InputDecoration(
                       icon: Icon(
@@ -188,7 +212,7 @@ class _SignInPageState extends State<SignInPage>
                           onPressed: () => loginModel.changeShow())),
                   obscureText: loginModel.showPassword,
                 )),
-          ),
+          )
         ],
       ),
     );
@@ -201,7 +225,7 @@ class _SignInPageState extends State<SignInPage>
         padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 10.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
-          gradient: theme.MyTheme.primaryGradient,
+          gradient: theme.LoginTheme.primaryGradient,
         ),
         child: loginModel.isBusy
             ? SizedBox(
@@ -211,7 +235,7 @@ class _SignInPageState extends State<SignInPage>
                   value: null,
                   backgroundColor: Colors.white,
                   valueColor: AlwaysStoppedAnimation<Color>(
-                      theme.MyTheme.loginGradientStart),
+                      theme.LoginTheme.loginGradientStart),
                 ),
               )
             : Text(

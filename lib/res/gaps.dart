@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:my_network_encapsulation/res/my_colors.dart';
+import 'package:my_network_encapsulation/res/app_colors.dart';
 
 import 'dimens.dart';
 
@@ -28,14 +28,14 @@ class Gaps {
     height: 1,
     width: double.infinity,
     child:
-        const DecoratedBox(decoration: BoxDecoration(color: MyColors.gray_ee)),
+        const DecoratedBox(decoration: BoxDecoration(color: AppColors.gray_ee)),
   );
 
   static Widget vLine = const SizedBox(
     width: 1,
     height: double.infinity,
     child:
-        const DecoratedBox(decoration: BoxDecoration(color: MyColors.gray_ee)),
+        const DecoratedBox(decoration: BoxDecoration(color: AppColors.gray_ee)),
   );
 
   static const Widget empty = const SizedBox();

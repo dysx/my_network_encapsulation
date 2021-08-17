@@ -11,7 +11,7 @@ class LoadingWidget extends StatelessWidget {
     // TODO: implement build
     return Container(
       padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
-      color: MyColors.white,
+      color: AppColors.white,
       width: screenSize.width,
       // height: double.infinity,
       child: Center(
@@ -19,9 +19,9 @@ class LoadingWidget extends StatelessWidget {
         // 圆形进度条
         new CircularProgressIndicator(
           strokeWidth: 4.0,
-          backgroundColor: MyColors.yellow_9a22,
+          backgroundColor: AppColors.yellow_9a22,
           // value: 0.2,
-          valueColor: new AlwaysStoppedAnimation<Color>(MyColors.yellow_c133),
+          valueColor: new AlwaysStoppedAnimation<Color>(AppColors.yellow_c133),
         ),
       ),
     );

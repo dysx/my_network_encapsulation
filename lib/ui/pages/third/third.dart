@@ -23,27 +23,27 @@ class ThirdState extends BaseInnerWidgetState<Third> {
         children: [
           ordinaryButton(
               text: '列表',
-              backgroundColor: MyColors.blue_91ff,
+              backgroundColor: AppColors.blue_91ff,
               onPressed: () {
                 MyNavigator.pushNamed(RouteName.mockPage);
               }),
           // ordinaryButton(
           //     text: '登陆保存user',
-          //     backgroundColor: MyColors.blue_91ff,
+          //     backgroundColor: AppColors.blue_91ff,
           //     onPressed: (){
           //       print(UserModel().hasUser);
           //     }
           // ),
           // ordinaryButton(
           //     text: '打印user',
-          //     backgroundColor: MyColors.blue_91ff,
+          //     backgroundColor: AppColors.blue_91ff,
           //     onPressed: (){
           //       print(UserModel().hasUser);
           //     }
           // ),
           ordinaryButton(
               text: 'indicator测试',
-              backgroundColor: MyColors.blue_91ff,
+              backgroundColor: AppColors.blue_91ff,
               onPressed: () {
                 MyNavigator.pushNamed(RouteName.indicatorTest);
               }),

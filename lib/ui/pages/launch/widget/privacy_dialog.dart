@@ -40,7 +40,7 @@ class PrivacyDialog extends StatelessWidget {
                 children: [
                   Text(
                     S.of(context).terms_of_service_and_privacy_policy_tips,
-                    style: MyTextStyles.sixteenBlack3333Bold,
+                    style: AppTextStyles.sixteenBlack3333Bold,
                   ),
                   Gaps.vGap15w,
                   Text('欢迎使用...app'),
@@ -70,7 +70,7 @@ class PrivacyDialog extends StatelessWidget {
                               exit(0);
                             },
                             text: '不同意',
-                            textStyle: MyTextStyles.fourteenBlack3333)),
+                            textStyle: AppTextStyles.fourteenBlack3333)),
                     Gaps.vLine,
                     Expanded(
                         child: ordinaryButton(
@@ -79,11 +79,11 @@ class PrivacyDialog extends StatelessWidget {
                             minimumSize: Size(double.infinity, 45),
                             onPressed: () {
                               LocalStorage.saveBool(
-                                  MyCommons.AGREE_PRIVACY, true);
+                                  Keys.agreePrivacy, true);
                               MyNavigator.pushReplacementNamed(RouteName.lead);
                             },
                             text: '同意并使用',
-                            textStyle: MyTextStyles.sixteenWhite)),
+                            textStyle: AppTextStyles.sixteenWhite)),
                   ],
                 ))
           ],

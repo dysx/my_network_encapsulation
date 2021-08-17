@@ -123,7 +123,7 @@ class _ItemWidget extends StatelessWidget {
           },
         ),
         SizedBox(height: 4.w),
-        Text(item.title,style: MyTextStyles.tenYellow)
+        Text(item.title,style: AppTextStyles.tenYellow)
       ],
     );
   }
@@ -146,7 +146,7 @@ class _ItemWidget extends StatelessWidget {
           child: item.icon,
         ),
         SizedBox(height: 4.w),
-        Text(item.title,style: MyTextStyles.tenBlack3333)
+        Text(item.title,style: AppTextStyles.tenBlack3333)
       ],
     );
   }
@@ -156,8 +156,8 @@ class BottomNavyBarItem {
   BottomNavyBarItem({
     required this.icon,
     required this.title,
-    this.activeColor = MyColors.yellow_ab00,
-    this.inactiveColor = MyColors.black_3333,
+    this.activeColor = AppColors.yellow_ab00,
+    this.inactiveColor = AppColors.black_3333,
   });
 
   final Widget icon;

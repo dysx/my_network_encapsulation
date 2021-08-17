@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/res/my_commons.dart';
+import 'package:my_network_encapsulation/res/keys.dart';
 import 'package:my_network_encapsulation/routes/page_route_anim.dart';
 import 'package:my_network_encapsulation/ui/pages/Third/third.dart';
 import 'package:my_network_encapsulation/ui/pages/home.dart';
@@ -108,7 +108,7 @@ class MyRouter {
       // 如果此路由需登陆权限
       if (item == settings.name) {
         // 获取本地存储的token
-        final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
+        final token = LocalStorage.get(Keys.token) ?? '';
         if (token != '') {
           if (settings.name == 'login') {
             route = 'login';

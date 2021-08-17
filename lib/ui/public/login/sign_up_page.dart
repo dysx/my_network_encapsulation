@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:my_network_encapsulation/res/my_theme.dart' as theme;
+import 'package:my_network_encapsulation/res/login_theme.dart' as theme;
 
 /// @describe: 注册页面
 /// @author: qds
@@ -35,7 +35,7 @@ class _SignUpPageState extends State<SignUpPage>
                   padding:
                       EdgeInsets.only(top: 10, bottom: 10, left: 42, right: 42),
                   decoration: new BoxDecoration(
-                    gradient: theme.MyTheme.primaryGradient,
+                    gradient: theme.LoginTheme.primaryGradient,
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
                   child: new Text(

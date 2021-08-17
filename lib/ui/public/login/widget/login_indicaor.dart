@@ -59,7 +59,7 @@ class _LoginIndicatorState extends State<LoginIndicator> {
                       onTap: () => _toPage(0),
                       child: Center(
                         child: Text('登录',
-                            style: MyTextStyles.sixteenBlack3333W500),
+                            style: AppTextStyles.sixteenBlack3333W500),
                       ),
                     )),
                     Expanded(
@@ -68,7 +68,7 @@ class _LoginIndicatorState extends State<LoginIndicator> {
                       onTap: () => _toPage(1),
                       child: Center(
                         child: Text('注册',
-                            style: MyTextStyles.sixteenBlack3333W500),
+                            style: AppTextStyles.sixteenBlack3333W500),
                       ),
                     )),
                   ],
@@ -94,7 +94,7 @@ class _LoginIndicatorState extends State<LoginIndicator> {
                     ),
                     child: Center(
                       child: Text(snapshot.data! < 0.5 ? '登录' : '注册',
-                          style: MyTextStyles.sixteenBlack3333W500),
+                          style: AppTextStyles.sixteenBlack3333W500),
                     ),
                   );
                 }),

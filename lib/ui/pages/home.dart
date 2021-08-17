@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/base/base_widget.dart';
-import 'package:my_network_encapsulation/res/my_commons.dart';
+import 'package:my_network_encapsulation/res/keys.dart';
 import 'package:my_network_encapsulation/ui/pages/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/pages/mine/mine.dart';
 import 'package:my_network_encapsulation/ui/pages/second/second.dart';
@@ -70,25 +70,25 @@ class HomeState extends BaseWidgetState<Home> {
             icon: Icon(Icons.apps),
             title: '首页',
             activeColor: Colors.green,
-            inactiveColor: MyColors.black_3333,
+            inactiveColor: AppColors.black_3333,
           ),
           BottomNavyBarItem(
             icon: Icon(Icons.apps),
             title: '社区',
             activeColor: Colors.green,
-            inactiveColor: MyColors.black_3333,
+            inactiveColor: AppColors.black_3333,
           ),
           BottomNavyBarItem(
             icon: Icon(Icons.apps),
             title: '消息',
             activeColor: Colors.green,
-            inactiveColor: MyColors.black_3333,
+            inactiveColor: AppColors.black_3333,
           ),
           BottomNavyBarItem(
             icon: Icon(Icons.apps),
             title: '我的',
             activeColor: Colors.green,
-            inactiveColor: MyColors.black_3333,
+            inactiveColor: AppColors.black_3333,
           ),
         ],
         iconSize: 23.w,
@@ -104,7 +104,7 @@ class HomeState extends BaseWidgetState<Home> {
         });
 
     return CupertinoTabBar(
-      backgroundColor: MyColors.white,
+      backgroundColor: AppColors.white,
       currentIndex: currentIndex,
       onTap: (index) async {
         setState(() {
@@ -146,7 +146,7 @@ class HomeState extends BaseWidgetState<Home> {
   /*登陆权限拦截*/
   Future<void> _checkPower() async {
     // 获取本地存储的token
-    final token = LocalStorage.get(MyCommons.TOKEN) ?? '';
+    final token = LocalStorage.get(Keys.token) ?? '';
     if (currentIndex == 3) {
       if (token == '') {
         setState(() {

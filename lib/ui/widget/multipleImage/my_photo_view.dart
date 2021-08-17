@@ -87,7 +87,7 @@ class _MyPhotoViewState extends BaseWidgetState<MyPhotoView> {
     showModalBottomSheet(
         context: context,
         barrierColor: Colors.transparent,
-        backgroundColor: MyColors.white,
+        backgroundColor: AppColors.white,
         elevation: 100,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -99,7 +99,7 @@ class _MyPhotoViewState extends BaseWidgetState<MyPhotoView> {
               ListTile(
                   title: Text('保存图片',
                       textAlign: TextAlign.center,
-                      style: MyTextStyles.sixteenBlack3333),
+                      style: AppTextStyles.sixteenBlack3333),
                   onTap: () {
                     _saveImage(widget.photoList[currentIndex]);
                     // Navigator.pop(context);
@@ -110,7 +110,7 @@ class _MyPhotoViewState extends BaseWidgetState<MyPhotoView> {
               ListTile(
                   title: Text('取消',
                       textAlign: TextAlign.center,
-                      style: MyTextStyles.sixteenFF66),
+                      style: AppTextStyles.sixteenFF66),
                   onTap: () {
                     Navigator.pop(context);
                   })
@@ -238,10 +238,10 @@ class _MyPhotoViewState extends BaseWidgetState<MyPhotoView> {
                     ? e.cumulativeBytesLoaded / e.expectedTotalBytes!
                     : 0,
                 strokeWidth: 4.0,
-                backgroundColor: MyColors.white,
+                backgroundColor: AppColors.white,
                 // value: 0.2,
                 valueColor:
-                    new AlwaysStoppedAnimation<Color>(MyColors.yellow_c133),
+                    new AlwaysStoppedAnimation<Color>(AppColors.yellow_c133),
               ))),
         )
       ],

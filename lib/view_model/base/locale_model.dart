@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
-import 'package:my_network_encapsulation/res/my_commons.dart';
+import 'package:my_network_encapsulation/res/keys.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// 语言model
 class LocaleModel extends ChangeNotifier {
 
-  int _localeIndex = LocalStorage.get(MyCommons.LOCALE) ?? 0;
+  int _localeIndex = LocalStorage.get(Keys.currentLanguage) ?? 0;
 
   int get localeIndex => _localeIndex;
 
@@ -25,7 +25,7 @@ class LocaleModel extends ChangeNotifier {
   switchLocale(int index) {
     _localeIndex = index;
     notifyListeners();
-    LocalStorage.saveInt(MyCommons.LOCALE, index);
+    LocalStorage.saveInt(Keys.currentLanguage, index);
   }
 
   static String localeName(index, context) {

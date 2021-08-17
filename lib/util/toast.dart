@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/res/my_text_styles.dart';
+import 'package:my_network_encapsulation/res/app_styles.dart';
 import 'package:oktoast/oktoast.dart';
 
 /// @describe: 吐司工具
@@ -21,7 +21,7 @@ class Toast {
     showToast(msg,
         duration: Duration(milliseconds: duration),
         backgroundColor: Colors.transparent,
-        textStyle: MyTextStyles.fourteenBlack3333);
+        textStyle: AppTextStyles.fourteenBlack3333);
   }
 
   static dismiss() {

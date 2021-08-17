@@ -1,6 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:my_network_encapsulation/res/my_colors.dart';
+import 'package:my_network_encapsulation/res/app_colors.dart';
 import 'package:my_network_encapsulation/util/image/net_image.dart';
 
 ///头像类型
@@ -35,7 +35,7 @@ class MyAvatar extends StatelessWidget {
         width: width ?? 55,
         height: height ?? 55,
         decoration: BoxDecoration(
-          border: Border.all(color: MyColors.white, width: borderWidth??0),
+          border: Border.all(color: AppColors.white, width: borderWidth??0),
           shape: BoxShape.circle,
         ),
         child: ClipOval(

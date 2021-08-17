@@ -67,7 +67,7 @@ class _IndicatorTestState extends BaseWidgetState<IndicatorTest> {
   void onCreate() {
     // TODO: implement onCreate
     setAppBarTitle('');
-    setBackground(MyColors.background);
+    setBackground(AppColors.background);
 
   }
 

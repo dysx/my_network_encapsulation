@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
-import 'package:my_network_encapsulation/res/my_colors.dart';
-import 'package:my_network_encapsulation/res/my_text_styles.dart';
+import 'package:my_network_encapsulation/res/app_colors.dart';
+import 'package:my_network_encapsulation/res/app_styles.dart';
 import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/log_utils.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
@@ -33,14 +33,14 @@ abstract class BaseFunction {
   Color _backgroundColor = Colors.white;
 
   /// 状态栏背景色
-  Color _topBarColor = MyColors.background;
+  Color _topBarColor = AppColors.background;
 
   /// 导航栏背景色
-  Color _appBarColor = MyColors.background;
+  Color _appBarColor = AppColors.background;
 
   /// 导航栏内容颜色
-  Color _appBarContentColor = MyColors.black_3333;
-  Color _appBarBottomLineColor = MyColors.background;
+  Color _appBarContentColor = AppColors.black_3333;
+  Color _appBarBottomLineColor = AppColors.background;
 
   /// 导航栏右边组件
   Widget? _appBarRightContent;
@@ -103,7 +103,7 @@ abstract class BaseFunction {
                 bottom: _isAppBarBottomShow ? _appBarBottomLineheight : 0),
             decoration: _isAppBarBottomShow
                 ? BoxDecoration(
-                    color: _appBarColor, boxShadow: [Styles.appbarShadow])
+                    color: _appBarColor, boxShadow: [AppShadow.appbarShadow])
                 : BoxDecoration(),
             child: Column(
               children: <Widget>[

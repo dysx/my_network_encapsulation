@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
-import 'package:my_network_encapsulation/res/my_colors.dart';
+import 'package:my_network_encapsulation/res/app_colors.dart';
 import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 
@@ -28,7 +28,7 @@ Widget ordinaryButton(
     TextButton(
       onPressed: onPressed,
       child: Text(text!,
-          style: textStyle ?? MyTextStyles.fourteenBlack3333),
+          style: textStyle ?? AppTextStyles.fourteenBlack3333),
       style: ButtonStyle(
           padding: MaterialStateProperty.all(
               padding ?? EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
@@ -73,14 +73,14 @@ Widget iconButton(
         ),
         style: ButtonStyle(
             backgroundColor:
-                MaterialStateProperty.all(backgroundColor ?? MyColors.white),
+                MaterialStateProperty.all(backgroundColor ?? AppColors.white),
             overlayColor:
-                MaterialStateProperty.all(overlayColor ?? MyColors.background),
+                MaterialStateProperty.all(overlayColor ?? AppColors.background),
             //使用padding时须设置minimumSize为（0,0）
             minimumSize: MaterialStateProperty.all(size ?? Size(0, 0)),
             padding: MaterialStateProperty.all(padding ??
                 EdgeInsets.symmetric(horizontal: 15.w, vertical: 7.w)),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 side: BorderSide(
-                    color: borderColor ?? MyColors.background, width: 1),
+                    color: borderColor ?? AppColors.background, width: 1),
                 borderRadius: BorderRadius.circular(radius ?? 4)))));

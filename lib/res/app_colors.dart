@@ -5,7 +5,7 @@ import 'package:my_network_encapsulation/base/base_insert.dart';
 /// @describe: 颜色管理
 /// @author: qds
 /// @date:
-class MyColors {
+class AppColors {
   static const Color white = Color(0xFFFFFFFF);
 
   static const Color appbar_bottom = Color(0x0A000000);

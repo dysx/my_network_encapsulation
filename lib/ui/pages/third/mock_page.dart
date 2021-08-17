@@ -56,7 +56,7 @@ class _MockPageState extends BaseWidgetState<MockPage> {
                       //本地没有此条数据收藏状态
                       return ordinaryButton(
                           text: list[index].collect! ? '已收藏' : '未收藏',
-                          backgroundColor: list[index].collect! ? MyColors.blue_91ff : MyColors.yellow_ab00,
+                          backgroundColor: list[index].collect! ? AppColors.blue_91ff : AppColors.yellow_ab00,
                           onPressed: (){
                             // print(favouriteModel);
                             FavouriteModel(globalFavouriteModel: Provider.of<GlobalFavouriteStateModel>(context,listen: false)).collect(list[index]);
@@ -67,7 +67,7 @@ class _MockPageState extends BaseWidgetState<MockPage> {
                     list[index]..collect = favouriteModel[list[index].id!];
                     return ordinaryButton(
                         text: list[index].collect! ? '已收藏' : '未收藏',
-                        backgroundColor: list[index].collect! ? MyColors.blue_91ff : MyColors.yellow_ab00,
+                        backgroundColor: list[index].collect! ? AppColors.blue_91ff : AppColors.yellow_ab00,
                         onPressed: (){
                           // print(Provider.of(context,listen: false));
                           FavouriteModel(globalFavouriteModel: Provider.of<GlobalFavouriteStateModel>(context,listen: false)).collect(list[index]);
@@ -76,7 +76,7 @@ class _MockPageState extends BaseWidgetState<MockPage> {
                   },
                   // child: ordinaryButton(
                   //     text: '是否收藏111',
-                  //     backgroundColor: model.list[index].collect! ? MyColors.blue_91ff : MyColors.yellow_ab00,
+                  //     backgroundColor: model.list[index].collect! ? AppColors.blue_91ff : AppColors.yellow_ab00,
                   //     onPressed: (){
                   //       print(Provider.of(context,listen: false));
                   //       // FavouriteModel(globalFavouriteModel: Provider.of(context,listen: false)).collect(model.list[index]);
@@ -99,7 +99,7 @@ class _MockPageState extends BaseWidgetState<MockPage> {
       child: Container(
         width: 20.w,
         height: 20.w,
-        color: MyColors.yellow_ab00,
+        color: AppColors.yellow_ab00,
       ),
     );
   }
@@ -108,7 +108,7 @@ class _MockPageState extends BaseWidgetState<MockPage> {
   void onCreate() {
     // TODO: implement onCreate
     setAppBarTitle('');
-    setBackground(MyColors.white);
+    setBackground(AppColors.white);
 
   }
 

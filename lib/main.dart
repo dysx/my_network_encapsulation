@@ -88,6 +88,7 @@ class MyApp extends StatelessWidget {
 
   //检测是否同意了隐私政策
   String routeName() {
+    print('分支合并测试');
     if(LocalStorage.get(Keys.agreePrivacy) == null || !LocalStorage.get(Keys.agreePrivacy)){
       return RouteName.privacyTipsPage;
     }else{

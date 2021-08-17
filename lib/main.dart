@@ -93,5 +93,6 @@ class MyApp extends StatelessWidget {
     }else{
       return RouteName.startupPage;
     }
+    print('123456');
   }
 }

@@ -43,13 +43,12 @@ class GridViewPhotos extends StatelessWidget {
             onTap: () {
               Navigator.push(
                   context,
-                  FadeRouteBuilder(
-                      MyPhotoView(
+                  CupertinoPageRoute(
+                      builder: (context) => MyPhotoView(
                           photoList: originalImage,
                           thumbnails: thumbnail,
                           localPhotos: [],
-                          initialIndex: i),
-                      RouteName.myPhotoView));
+                          initialIndex: i)));
             },
             child: Container(
               child: ClipRRect(

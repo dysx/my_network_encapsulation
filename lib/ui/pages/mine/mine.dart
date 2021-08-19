@@ -103,9 +103,11 @@ class UserHeaderWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                            NetImage.cachedNetworkImage(
-                                imgUrl: userModel.user!.avatarUrl ?? ''),
-                            Gaps.vGap20w,
+                            ClipOval(
+                              child: NetImage.cachedNetworkImage(
+                                  imgUrl: userModel.user!.avatarUrl ?? '',width: 45.w,height: 45.w)
+                            ),
+                            Gaps.vGap10w,
                             Text('${userModel.user!.nickName}'),
                           ])
                     : Center(

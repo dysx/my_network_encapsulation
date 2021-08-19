@@ -11,12 +11,14 @@ class ThemeDataModel extends ChangeNotifier {
   int get themeIndex => _themeIndex;
 
   final ThemeData norTheme = ThemeData(
+      platform: TargetPlatform.iOS,
       brightness: Brightness.light, // content颜色
       backgroundColor: Colors.white,
       textTheme: TextTheme(
           bodyText2: TextStyle(fontSize: 14.sp, color: AppColors.black_3333)));
 
   final ThemeData darkTheme = ThemeData(
+      platform: TargetPlatform.iOS,
       brightness: Brightness.dark,
       primaryColor: Colors.black,
       textTheme: TextTheme(bodyText1: TextStyle(fontSize: 50)));

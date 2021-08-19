@@ -43,6 +43,48 @@ class FadeRouteBuilder extends PageRouteBuilder {
                 ));
 }
 
+/// 从右往左展开路由
+class SlideRightRouteBuilder extends PageRouteBuilder {
+  final Widget page;
+  final String routeName;
+
+  SlideRightRouteBuilder(this.page, this.routeName)
+      : super(
+      settings: RouteSettings(name: routeName),
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionDuration: Duration(milliseconds: 250),
+      transitionsBuilder:
+          (context, animation, secondaryAnimation, child) =>
+          SlideTransition(
+            position: Tween<Offset>(
+                begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                .animate(CurvedAnimation(
+                parent: animation, curve: Curves.linear)),
+            child: child,
+          ));
+}
+
+/// 从左往右展开路由
+class SlideLeftRouteBuilder extends PageRouteBuilder {
+  final Widget page;
+  final String routeName;
+
+  SlideLeftRouteBuilder(this.page, this.routeName)
+      : super(
+      settings: RouteSettings(name: routeName),
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionDuration: Duration(milliseconds: 250),
+      transitionsBuilder:
+          (context, animation, secondaryAnimation, child) =>
+          SlideTransition(
+            position: Tween<Offset>(
+                begin: Offset(-1.0, 0.0), end: Offset(0.0, 0.0))
+                .animate(CurvedAnimation(
+                parent: animation, curve: Curves.linear)),
+            child: child,
+          ));
+}
+
 /// 从上往下展开路由
 class SlideTopRouteBuilder extends PageRouteBuilder {
   final Widget page;
@@ -59,7 +101,7 @@ class SlideTopRouteBuilder extends PageRouteBuilder {
                       position: Tween<Offset>(
                               begin: Offset(0.0, -1.0), end: Offset(0.0, 0.0))
                           .animate(CurvedAnimation(
-                              parent: animation, curve: Curves.fastOutSlowIn)),
+                              parent: animation, curve: Curves.linearToEaseOut)),
                       child: child,
                     ));
 }
@@ -80,7 +122,7 @@ class SlideBottomRouteBuilder extends PageRouteBuilder {
                       position: Tween<Offset>(
                               begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
                           .animate(CurvedAnimation(
-                              parent: animation, curve: Curves.fastOutSlowIn)),
+                              parent: animation, curve: Curves.linearToEaseOut)),
                       child: child,
                     ));
 }
@@ -96,9 +138,6 @@ class SizeRoute extends PageRouteBuilder {
           pageBuilder: (context, animation, secondaryAnimation) => page,
           transitionDuration: Duration(milliseconds: 300),
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-//                Align(
-//                  child: SizeTransition(child: child, sizeFactor: animation),
-//                ),
               ScaleTransition(
             scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
                 parent: animation, curve: Curves.fastOutSlowIn)),

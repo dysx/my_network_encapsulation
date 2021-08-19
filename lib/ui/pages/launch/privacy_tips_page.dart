@@ -7,6 +7,7 @@ import 'package:my_network_encapsulation/ui/pages/launch/widget/privacy_dialog.d
 /// @author: qds
 /// @date:
 class PrivacyTipsPage extends BaseWidget {
+
   @override
   BaseWidgetState<BaseWidget> getState() => PrivacyTipsPageState();
 }

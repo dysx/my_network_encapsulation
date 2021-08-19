@@ -516,7 +516,7 @@ abstract class BaseFunction {
 
   /// 输入日志
   void log(String content) {
-    Log.d(getClassName() + "------:" + content);
+    print(getClassName() + "------:" + content);
   }
 
   String getClassName() {

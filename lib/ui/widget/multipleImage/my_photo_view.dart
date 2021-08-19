@@ -38,6 +38,8 @@ class _MyPhotoViewState extends BaseWidgetState<MyPhotoView> {
 
   @override
   Widget buildWidget(BuildContext context) {
+    return widget.photoList.isNotEmpty ? _buildNetPhotos() : _buildLocalPhotos();
+
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pop();
@@ -259,6 +261,10 @@ class _MyPhotoViewState extends BaseWidgetState<MyPhotoView> {
       initialScale: scale,
       minScale: scale,
       maxScale: 3.0,
+      onTapUp: (c, d, p) => MyNavigator.pop(),
+      onTapDown: (c, d, p) {
+        print('123456');
+      }
     );
   }
 

@@ -6,6 +6,7 @@ import 'package:my_network_encapsulation/base/base_insert.dart';
 /// @author: qds
 /// @date:
 class StartupPage extends BaseWidget {
+
   @override
   BaseWidgetState<BaseWidget> getState() => StartupPageState();
 

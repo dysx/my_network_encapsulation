@@ -51,13 +51,11 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
       }
       return data;
     } catch (e, s) {
-      Log.e("e的错误信息$e");
-      Log.e("s的错误信息$s");
-
       /// 页面已经加载了数据,如果刷新报错,不应该直接跳转错误页面
       /// 而是显示之前的页面数据.给出错误提示
       if (init) list.clear();
       refreshController.refreshFailed();
+      print('列表错误信息：$e');
       setError(e, s);
       return null;
     }

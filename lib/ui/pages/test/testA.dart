@@ -9,6 +9,11 @@ import 'package:my_network_encapsulation/view_model/article_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TestA extends BaseWidget {
+
+  String title;
+
+  TestA({required this.title});
+
   @override
   BaseWidgetState<BaseWidget> getState() => TestAState();
 }
@@ -24,22 +29,22 @@ class TestAState extends BaseWidgetState<TestA> {
   Widget buildWidget(BuildContext context) {
     // return Container(height: getScreenWidth() * 9.0 / 16.0, child: videoPlayer);
 
-    return Container(
-      color: Colors.blue,
-      height: double.infinity,
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AnimatedTextKit(animatedTexts: [
-            TypewriterAnimatedText('我爱学习'),
-            // TyperAnimatedText('我爱'),
-            // TyperAnimatedText('我爱学'),
-            // TyperAnimatedText('我爱学习')
-          ])
-        ],
-      ),
-    );
+    // return Container(
+    //   color: Colors.blue,
+    //   height: double.infinity,
+    //   width: double.infinity,
+    //   child: Column(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+    //       AnimatedTextKit(animatedTexts: [
+    //         TypewriterAnimatedText('我爱学习'),
+    //         // TyperAnimatedText('我爱'),
+    //         // TyperAnimatedText('我爱学'),
+    //         // TyperAnimatedText('我爱学习')
+    //       ])
+    //     ],
+    //   ),
+    // );
 
     return ProviderWidget<ArticleModel>(
       model: ArticleModel(cancelTag: 'TestA'),
@@ -56,6 +61,7 @@ class TestAState extends BaseWidgetState<TestA> {
           return ViewStateEmptyWidget(onPressed: () => model.initData());
         } else if (model.isError) {
           print("model.isError");
+          print(model.viewStateError!.errorType);
           if (model.viewStateError!.isUnauthorized) {
             return ViewStateUnAuthWidget(onPressed: () async {
               var success =
@@ -108,6 +114,7 @@ class TestAState extends BaseWidgetState<TestA> {
   void onCreate() {
     setAppBarTitle('testA');
     // _initVideo();
+    print(widget.title);
   }
 
   @override

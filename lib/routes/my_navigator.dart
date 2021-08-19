@@ -6,8 +6,21 @@ import 'package:my_network_encapsulation/config/appConfig.dart';
 /// @author: qds
 /// @date:
 class MyNavigator {
+
+  Future<dynamic> routePush(Widget widget) {
+    final route = CupertinoPageRoute(
+      builder: (BuildContext context) => widget,
+      settings: RouteSettings(
+        name: widget.toStringShort(),
+      ),
+    );
+    return AppConfig.globalKey.currentState!.push(route);
+  }
+
   /// 打开新页面
   static Future pushNamed(String routeName, {Map<String, dynamic>? arguments}) {
+    // return Navigator.pushNamed(AppConfig.globalKey.currentContext!, routeName);
+
     return AppConfig.globalKey.currentState!
         .pushNamed(routeName, arguments: arguments);
   }

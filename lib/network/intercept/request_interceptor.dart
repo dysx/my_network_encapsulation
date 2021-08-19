@@ -20,7 +20,7 @@ class RequestInterceptor extends Interceptor {
         "请求data:${options.data.toString()}\n"
         "请求query:${options.queryParameters}\n"
         "请求path:${options.path}\n"
-        "请求header:${options.headers}\n");
+        "请求header:${options.headers}");
     // Alert.showLoading();
     return super.onRequest(options, handler);
   }
@@ -28,7 +28,7 @@ class RequestInterceptor extends Interceptor {
   @override
   onResponse(Response response, ResponseInterceptorHandler handler) {
     // TODO: implement onResponse
-    Log.d("*** 请求返回onResponse (这里暂不打印)***");
+    Log.d("*** 请求响应onResponse (这里暂不打印)***");
     // Log.d("*** 请求返回onResponse ***\n"
     //     "response:${response.data.toString()}");
     return super.onResponse(response, handler);
@@ -39,6 +39,8 @@ class RequestInterceptor extends Interceptor {
     // TODO: implement onError
     Log.e("*** 错误处理onError ***\n"
         "response:${err.response}");
+
+    print(err.error);
 
     /// 网络错误
     if (err.error is SocketException) {

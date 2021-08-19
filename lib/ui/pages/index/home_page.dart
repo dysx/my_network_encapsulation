@@ -1,6 +1,7 @@
 import 'package:device_info/device_info.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
-import 'package:my_network_encapsulation/util/pack/env_config.dart';
+import 'package:my_network_encapsulation/network/address.dart';
+import 'package:my_network_encapsulation/config/env_config.dart';
 import 'package:my_network_encapsulation/util/permission_manager.dart';
 import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
 import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
@@ -125,7 +126,7 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
               ),
               ordinaryButton(
                 onPressed: () {
-                  MyNavigator.pushNamed(RouteName.testA);
+                  MyNavigator.pushNamed(RouteName.testA,arguments: {'title': '123456000'});
                 },
                 text: "测试popUntil路由",
               ),
@@ -176,6 +177,18 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                     Toast.showMsg(EnvConfig.VERSION);
                   },
                   text: "版本",
+                  sideColor: AppColors.black_3333),
+              ordinaryButton(
+                  onPressed: () {
+                    RequestUtil.getRecommends(1, 10,cancelTag: 'HomePage')
+                        .catchError((e, s) {
+                      print('异常捕捉');
+                      print('$e,$s');
+                      // setError(e, s);
+                    });
+                    // Toast.showMsg(Address.baseHttp);
+                  },
+                  text: "打印http",
                   sideColor: AppColors.black_3333),
             ],
           ),

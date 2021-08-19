@@ -64,7 +64,7 @@ class ViewStateModel with ChangeNotifier {
   /// [e]分类Error和Exception两种
   void setError(e, stackTrace, {String? message}) {
     ViewStateErrorType errorType = ViewStateErrorType.defaultError;
-    Log.e('错误详情信息: $e');
+    print('错误详情信息: $e');
 
     /// 见https://github.com/flutterchina/dio/blob/master/README-ZH.md#dioerrortype
     if (e is DioError) {
@@ -81,23 +81,13 @@ class ViewStateModel with ChangeNotifier {
         if (e.error is SocketException) {
           errorType = ViewStateErrorType.networkTimeOutError;
           message = e.message;
+          print(message);
         } else {
           message = e.message;
         }
-        // if(e is UnauthorisedException) {
-        //   stackTrace = null;
-        //   errorType = ViewStateErrorType.unauthorizedError;
-        // } else if(e is NotSuccessException){
-        //   stackTrace = null;
-        //   // message = e.message;
-        // } else if (e is SocketException) {
-        //   errorType = ViewStateErrorType.networkTimeOutError;
-        //   message = e.message;
-        // } else {
-        //   message = e.message;
-        // }
       }
     }
+    print(errorType);
     viewState = ViewState.error;
     _viewStateError = ViewStateError(errorType,
         message: '',
@@ -147,7 +137,7 @@ class ViewStateModel with ChangeNotifier {
 /// [s]为堆栈信息
 printErrorStack(e, s) {
   debugPrint('''
-<-----↓↓↓↓↓↓↓↓↓↓-----error-----↓↓↓↓↓↓↓↓↓↓----->
+<-----↓↓↓↓↓↓↓↓↓↓-----erroreee-----↓↓↓↓↓↓↓↓↓↓----->
 $e
 <-----↑↑↑↑↑↑↑↑↑↑-----error-----↑↑↑↑↑↑↑↑↑↑----->''');
   if (s != null) debugPrint('''

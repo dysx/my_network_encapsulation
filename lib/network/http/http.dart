@@ -177,7 +177,10 @@ class Http {
     future.then((data) {
       completer.complete(TransformJson().jsonConvertResult(data));
     }).catchError((err) {
+      print(completer.future);
       Log.e("------- future catchError --------");
+      print(err);
+      print('000');
       completer.completeError(err);
     });
 

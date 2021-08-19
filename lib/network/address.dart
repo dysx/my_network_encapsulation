@@ -1,11 +1,15 @@
-import 'package:my_network_encapsulation/network/api_config.dart';
 
 /// @describe: api地址
 /// @author: qds
 /// @date:
 class Address {
+
+  static setBaseUrl(String baseUrl) {
+    baseHttp = baseUrl;
+  }
+
   ///基础地址
-  static final String baseHttp = ApiConfig().getBaseUrl();
+  static late String baseHttp;
 
   ///获取我的内容推荐列表
   static final String getRecommends =

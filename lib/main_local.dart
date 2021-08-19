@@ -22,10 +22,10 @@ void main() async {
 
   /// 设置头部导航栏的透明
   SystemUiOverlayStyle systemUiOverlayStyle =
-      SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+  SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
 
-  runApp(MyApp());
+  Address.setBaseUrl(DomainConfig.getBaseUrl(Domain.Local));
 
-  Address.setBaseUrl(DomainConfig.getBaseUrl(Domain.Product));
+  runApp(MyApp());
 }

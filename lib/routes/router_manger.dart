@@ -50,7 +50,7 @@ class RouteName {
   static const String scrollToIndex = 'scrollToIndex';
 }
 
-/// 路由初始化
+/// 路由初始化,可自定义的路由
 /// [arguments]: 参数为Object类型，根据需求自定义；接受页面请定义
 class MyRouter {
   static Route generateRoute<T extends Object>(RouteSettings settings) {
@@ -58,43 +58,44 @@ class MyRouter {
     routeName = routeBeforeHook(settings);
     switch (routeName) {
       case RouteName.privacyTipsPage:
-        return NoAnimRouteBuilder(PrivacyTipsPage(), routeName);
+        return SlideRightRouteBuilder(PrivacyTipsPage(), routeName);
       case RouteName.startupPage:
-        return NoAnimRouteBuilder(StartupPage(), routeName);
+        return SlideRightRouteBuilder(StartupPage(), routeName);
       case RouteName.lead:
-        return FadeRouteBuilder(LeadPage(), routeName);
+        return SlideRightRouteBuilder(LeadPage(), routeName);
       case RouteName.loginPage:
         return SlideBottomRouteBuilder(LoginPage(), routeName);
       case RouteName.home:
-        return SizeRoute(Home(), routeName);
+        return SlideRightRouteBuilder(Home(), routeName);
       case RouteName.homePage:
-        return NoAnimRouteBuilder(HomePage(), routeName);
+        return SlideRightRouteBuilder(HomePage(), routeName);
       case RouteName.second:
-        return NoAnimRouteBuilder(Second(), routeName);
+        return SlideRightRouteBuilder(Second(), routeName);
       case RouteName.third:
-        return NoAnimRouteBuilder(Third(), routeName);
+        return SlideRightRouteBuilder(Third(), routeName);
       case RouteName.favouritePage:
-        return SizeRoute(FavouritePage(), routeName);
+        return SlideRightRouteBuilder(FavouritePage(), routeName);
       case RouteName.mockPage:
-        return SizeRoute(MockPage(), routeName);
+        return SlideRightRouteBuilder(MockPage(), routeName);
       case RouteName.mine:
-        return NoAnimRouteBuilder(Mine(), routeName);
+        return SlideRightRouteBuilder(Mine(), routeName);
       case RouteName.baseTest:
-        return NoAnimRouteBuilder(BaseTest(), routeName);
+        return SlideRightRouteBuilder(BaseTest(), routeName);
       case RouteName.testA:
-        return FadeRouteBuilder(TestA(), routeName);
+        dynamic obj = settings.arguments;
+        return SlideRightRouteBuilder(TestA(title: obj['title']), routeName);
       case RouteName.testB:
-        return NoAnimRouteBuilder(TestB(), routeName);
+        return SlideRightRouteBuilder(TestB(), routeName);
       case RouteName.testC:
-        return NoAnimRouteBuilder(TestC(), routeName);
+        return SlideRightRouteBuilder(TestC(), routeName);
       case RouteName.testD:
-        return NoAnimRouteBuilder(TestD(), routeName);
+        return SlideRightRouteBuilder(TestD(), routeName);
       case RouteName.indicatorTest:
-        return NoAnimRouteBuilder(IndicatorTest(), routeName);
+        return SlideRightRouteBuilder(IndicatorTest(), routeName);
       case RouteName.scrollToIndex:
-        return NoAnimRouteBuilder(ScrollToIndexDemoPage2(), routeName);
+        return SlideRightRouteBuilder(ScrollToIndexDemoPage2(), routeName);
       default:
-        return FadeRouteBuilder(NotFoundPage(), routeName);
+        return SlideRightRouteBuilder(NotFoundPage(), routeName);
     }
   }
 

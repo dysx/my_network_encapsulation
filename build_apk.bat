@@ -1,1 +1,1 @@
-build_channel.bat xiaomi & build_channel.bat huawei
+build_channel.bat xiaomi

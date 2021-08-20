@@ -19,10 +19,17 @@ class SendCode extends StatefulWidget {
 }
 
 class _SendCodeState extends State<SendCode> {
-  bool isButtonEnable = true; //按钮状态  是否可点击
-  String buttonText = '发送验证码'; //初始文本
-  int count = 60; //初始倒计时时间
-  Timer? timer; //倒计时的计时器
+  /// 按钮状态  是否可点击
+  bool isButtonEnable = true;
+
+  /// 初始文本
+  String buttonText = '发送验证码';
+
+  /// 初始倒计时时间
+  int count = 60;
+
+  /// 倒计时的计时器
+  Timer? timer;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +56,7 @@ class _SendCodeState extends State<SendCode> {
     super.dispose();
   }
 
+  /// 发送验证码按钮点击
   void _buttonClickListen() {
     if (isButtonEnable) {
       //当按钮可点击时
@@ -59,6 +67,7 @@ class _SendCodeState extends State<SendCode> {
     }
   }
 
+  /// 进行倒计或者重置
   void _initTimer() {
     timer = new Timer.periodic(Duration(seconds: 1), (Timer timer) {
       count--;

@@ -15,15 +15,9 @@ class PrivacyTipsPage extends BaseWidget {
 class PrivacyTipsPageState extends BaseWidgetState<PrivacyTipsPage> {
   @override
   Widget buildWidget(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: () {
-        _showDialog();
-      },
-      child: ConstrainedBox(
-        constraints: BoxConstraints.expand(),
-        child: LocalImageSelector.getImgByPhysicalSize("startup_page"),
-      ),
+    return ConstrainedBox(
+      constraints: BoxConstraints.expand(),
+      child: LocalImageSelector.getImgByPhysicalSize("startup_page"),
     );
 
     return ConstrainedBox(
@@ -56,7 +50,7 @@ class PrivacyTipsPageState extends BaseWidgetState<PrivacyTipsPage> {
     Future.delayed(Duration(seconds: 1), () {
       showDialog(
           context: context,
-          barrierDismissible: true,
+          barrierDismissible: false,
           builder: (BuildContext context) {
             return PrivacyDialog();
           });

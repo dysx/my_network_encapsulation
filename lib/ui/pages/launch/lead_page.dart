@@ -1,5 +1,6 @@
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/ui/pages/launch/widget/animation_page.dart';
+import 'package:my_network_encapsulation/ui/widget/page_indicaor.dart';
 
 /// @describe: 引导页
 /// @author: qds
@@ -10,19 +11,40 @@ class LeadPage extends BaseWidget {
 }
 
 class LeadPageState extends BaseWidgetState<LeadPage> {
-  // 引出带动画的widget
+  /// 引出带动画的widget
   AnimationPage aniPage = new AnimationPage();
 
+  PageController _pageController = PageController();
   List<String> _leadImages = ['guide_page1', 'guide_page2', 'guide_page3'];
 
   @override
   Widget buildWidget(BuildContext context) {
-    return PageView(
-      scrollDirection: Axis.horizontal,
-      children: _leads(),
-      onPageChanged: (pageIndex) {
-        startPagePaged(pageIndex);
-      },
+    return Stack(
+      children: [
+        Positioned(
+            child: PageView(
+          controller: _pageController,
+          scrollDirection: Axis.horizontal,
+          physics: ClampingScrollPhysics(),
+          children: _leads(),
+          onPageChanged: (pageIndex) {
+            startPagePaged(pageIndex);
+          },
+        )),
+        Positioned(
+            left: 0,
+            right: 0,
+            bottom: 15.h,
+            child: Center(
+              child: PageIndicator(
+                length: 3,
+                pageController: _pageController,
+                normalColor: AppColors.grey_9999,
+                currentDecoration:
+                    BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
+              ),
+            ))
+      ],
     );
   }
 
@@ -52,16 +74,13 @@ class LeadPageState extends BaseWidgetState<LeadPage> {
 
   List<Widget> _leads() {
     List<Widget> list = [];
-
     for (int i = 0; i < 2; i++) {
       list.add(ConstrainedBox(
         constraints: BoxConstraints.expand(),
         child: LocalImageSelector.getImgByPhysicalSize(_leadImages[i]),
       ));
     }
-
     list.add(aniPage);
-
     return list;
   }
 }

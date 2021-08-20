@@ -1,1 +1,1 @@
-flutter build apk --release --dart-define=ANDROID_CHANNEL=%1 & copy E:\study_project\my_network_encapsulation\build\app\outputs\apk\release\%1_myapp.apk F:\test
+flutter build apk  -t lib/main.dart --release --dart-define=ANDROID_CHANNEL=%1 & copy E:\study_project\my_network_encapsulation\build\app\outputs\apk\release\%1_myapp.apk F:\test

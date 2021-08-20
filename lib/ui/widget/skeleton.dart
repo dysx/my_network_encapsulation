@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/res/dimens.dart';
 import 'package:my_network_encapsulation/res/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:my_network_encapsulation/util/size_util.dart';
+
+/// 骨架屏 给予用户页面正在加载的体验效果
 
 class SkeletonBox extends StatelessWidget {
   final double? width;

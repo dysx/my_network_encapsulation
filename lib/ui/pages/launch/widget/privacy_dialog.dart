@@ -33,6 +33,7 @@ class PrivacyDialog extends StatelessWidget {
           children: [
             Expanded(
                 child: SingleChildScrollView(
+                  physics: ClampingScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.w),
               child: Column(
                 mainAxisSize: MainAxisSize.min,

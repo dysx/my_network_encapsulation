@@ -1,8 +1,6 @@
 import 'package:device_info/device_info.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
-import 'package:my_network_encapsulation/network/address.dart';
 import 'package:my_network_encapsulation/config/env_config.dart';
-import 'package:my_network_encapsulation/network/http/http.dart';
 import 'package:my_network_encapsulation/util/permission_manager.dart';
 import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
 import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
@@ -169,12 +167,6 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   sideColor: AppColors.black_3333),
               ordinaryButton(
                   onPressed: () async {
-                    // RequestUtil.getRecommends(1, 10,cancelTag: 'HomePage')
-                    //     .catchError((e, s) {
-                    //   print('异常捕捉');
-                    //   print('$e,$s');
-                    //   // setError(e, s);
-                    // });
                     var list = await RequestUtil.getRecommends(1,20,cancelTag: 'HomePage');
 
                     print('0000000000${list[0].title}');
@@ -183,6 +175,10 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   },
                   text: "打印http",
                   sideColor: AppColors.black_3333),
+              ordinaryButton(
+                  onPressed: () {},
+                  text: "富文本",
+                  sideColor: AppColors.black_3333)
             ],
           ),
         ],

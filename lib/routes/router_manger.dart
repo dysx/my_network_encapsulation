@@ -19,8 +19,7 @@ import 'package:my_network_encapsulation/ui/pages/test/testD.dart';
 import 'package:my_network_encapsulation/ui/pages/third/favourite_page.dart';
 import 'package:my_network_encapsulation/ui/pages/third/mock_page.dart';
 import 'package:my_network_encapsulation/ui/public/login/login_page.dart';
-import 'package:my_network_encapsulation/ui/public/test/indicator_test.dart';
-import 'package:my_network_encapsulation/ui/widget/not_found_page.dart';
+import 'package:my_network_encapsulation/ui/public/not_found_page.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// @describe: 路由
@@ -34,7 +33,6 @@ class RouteName {
   static const String lead = 'lead';
   static const String myPhotoView = 'myPhotoView';
   static const String loginPage = 'loginPage';
-  static const String indicatorTest = 'indicatorTest';
   static const String home = 'home';
   static const String homePage = 'homePage';
   static const String second = 'second';
@@ -90,8 +88,6 @@ class MyRouter {
         return SlideRightRouteBuilder(TestC(), routeName);
       case RouteName.testD:
         return SlideRightRouteBuilder(TestD(), routeName);
-      case RouteName.indicatorTest:
-        return SlideRightRouteBuilder(IndicatorTest(), routeName);
       case RouteName.scrollToIndex:
         return SlideRightRouteBuilder(ScrollToIndexDemoPage2(), routeName);
       default:

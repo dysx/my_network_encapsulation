@@ -14,6 +14,7 @@ import 'package:my_network_encapsulation/util/local_storage.dart';
 class Http {
   /// 超时时间 毫秒
   static const int CONNECT_TIMEOUT = 30000;
+  /// 接收时间 毫秒
   static const int RECEIVE_TIMEOUT = 5000;
 
   late Dio dio;
@@ -95,6 +96,17 @@ class Http {
     dio.options.headers.addAll(map);
   }
 
+  /// 读取本地配置  设置token
+  Map<String, dynamic> getAuthorizationHeader() {
+    var headers;
+    String accessToken = LocalStorage.get(Keys.token) ?? '';
+    headers = {
+      "Authorization": 'Bearer $accessToken',
+      "Access-Token": '$accessToken'
+    };
+    return headers;
+  }
+
   /// 取消请求
   ///
   /// 同一个cancel token 可用于多个请求，当一个cancel token取消时
@@ -112,15 +124,16 @@ class Http {
     }
   }
 
-  /// 读取本地配置  设置token
-  Map<String, dynamic> getAuthorizationHeader() {
-    var headers;
-    String accessToken = LocalStorage.get(Keys.token) ?? '';
-    headers = {
-      "Authorization": 'Bearer $accessToken',
-      "Access-Token": '$accessToken'
-    };
-    return headers;
+  /// 根据页面返回cancelToken
+  /// [cancelTag] 页面名称，根据页面名称
+  CancelToken getCancelToken(String cancelTag) {
+    CancelToken cancelToken;
+    cancelToken = (_cancelTokens[cancelTag] == null
+        ? CancelToken()
+        : _cancelTokens[cancelTag])!;
+    //_cancelTokens添加cancelToken
+    _cancelTokens[cancelTag] = cancelToken;
+    return cancelToken;
   }
 
   /// ----------------------- restful -------------------------
@@ -150,17 +163,10 @@ class Http {
       "cacheKey": cacheKey,
       "cacheDisk": cacheDisk,
     });
-
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     requestOptions = requestOptions.copyWith(headers: _authorization);
+    CancelToken cancelToken = getCancelToken(cancelTag);
 
-    CancelToken cancelToken;
-    cancelToken = (_cancelTokens[cancelTag] == null
-        ? CancelToken()
-        : _cancelTokens[cancelTag])!;
-    _cancelTokens[cancelTag] = cancelToken;
-
-    print('89889889$cancelTag');
     return await dio.get(path,
         queryParameters: params,
         options: requestOptions,
@@ -178,12 +184,7 @@ class Http {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     requestOptions = requestOptions.copyWith(headers: _authorization);
-
-    CancelToken cancelToken;
-    cancelToken = (_cancelTokens[cancelTag] == null
-        ? CancelToken()
-        : _cancelTokens[cancelTag])!;
-    _cancelTokens[cancelTag] = cancelToken;
+    CancelToken cancelToken = getCancelToken(cancelTag);
 
     return await dio.post(path,
         data: data, options: requestOptions, cancelToken: cancelToken);
@@ -201,12 +202,7 @@ class Http {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     requestOptions = requestOptions.copyWith(headers: _authorization);
-
-    CancelToken cancelToken;
-    cancelToken = (_cancelTokens[cancelTag] == null
-        ? CancelToken()
-        : _cancelTokens[cancelTag])!;
-    _cancelTokens[cancelTag] = cancelToken;
+    CancelToken cancelToken = getCancelToken(cancelTag);
 
     return await dio.put(path,
         queryParameters: params,
@@ -226,12 +222,7 @@ class Http {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     requestOptions = requestOptions.copyWith(headers: _authorization);
-
-    CancelToken cancelToken;
-    cancelToken = (_cancelTokens[cancelTag] == null
-        ? CancelToken()
-        : _cancelTokens[cancelTag])!;
-    _cancelTokens[cancelTag] = cancelToken;
+    CancelToken cancelToken = getCancelToken(cancelTag);
 
     return await dio.patch(path,
         queryParameters: params,
@@ -251,12 +242,7 @@ class Http {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     requestOptions = requestOptions.copyWith(headers: _authorization);
-
-    CancelToken cancelToken;
-    cancelToken = (_cancelTokens[cancelTag] == null
-        ? CancelToken()
-        : _cancelTokens[cancelTag])!;
-    _cancelTokens[cancelTag] = cancelToken;
+    CancelToken cancelToken = getCancelToken(cancelTag);
 
     return await dio.delete(path,
         data: data,
@@ -276,14 +262,8 @@ class Http {
     Options requestOptions = options ?? Options();
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     requestOptions = requestOptions.copyWith(headers: _authorization);
-
     var data = FormData.fromMap(params!);
-
-    CancelToken cancelToken;
-    cancelToken = (_cancelTokens[cancelTag] == null
-        ? CancelToken()
-        : _cancelTokens[cancelTag])!;
-    _cancelTokens[cancelTag] = cancelToken;
+    CancelToken cancelToken = getCancelToken(cancelTag);
 
     return await dio.post(path,
         data: data, options: requestOptions, cancelToken: cancelToken);

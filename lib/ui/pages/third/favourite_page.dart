@@ -1,5 +1,5 @@
 import 'package:my_network_encapsulation/base/base_insert.dart';
-import 'package:my_network_encapsulation/network/model/goods_entity.dart';
+import 'package:my_network_encapsulation/model/goods_entity.dart';
 import 'package:my_network_encapsulation/ui/pages/third/goods_mock_data.dart';
 import 'package:my_network_encapsulation/view_model/favourite_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

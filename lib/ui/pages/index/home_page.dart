@@ -2,6 +2,7 @@ import 'package:device_info/device_info.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/network/address.dart';
 import 'package:my_network_encapsulation/config/env_config.dart';
+import 'package:my_network_encapsulation/network/http/http.dart';
 import 'package:my_network_encapsulation/util/permission_manager.dart';
 import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
 import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
@@ -57,18 +58,6 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                     // });
                   },
                   text: '获取列表'),
-              ordinaryButton(
-                  onPressed: () {
-                    RequestUtil.getTime();
-                  },
-                  text: '获取时间'),
-              ordinaryButton(
-                  onPressed: () {
-                    RequestUtil.getTime().then((value) {
-                      print('请求结束,打印结果: ${value.sysTime2}');
-                    });
-                  },
-                  text: '接口测试'),
               ordinaryButton(
                 onPressed: () {
                   Provider.of<LocaleModel>(context, listen: false)
@@ -179,13 +168,17 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   text: "版本",
                   sideColor: AppColors.black_3333),
               ordinaryButton(
-                  onPressed: () {
-                    RequestUtil.getRecommends(1, 10,cancelTag: 'HomePage')
-                        .catchError((e, s) {
-                      print('异常捕捉');
-                      print('$e,$s');
-                      // setError(e, s);
-                    });
+                  onPressed: () async {
+                    // RequestUtil.getRecommends(1, 10,cancelTag: 'HomePage')
+                    //     .catchError((e, s) {
+                    //   print('异常捕捉');
+                    //   print('$e,$s');
+                    //   // setError(e, s);
+                    // });
+                    var list = await RequestUtil.getRecommends(1,20,cancelTag: 'HomePage');
+
+                    print('0000000000${list[0].title}');
+
                     // Toast.showMsg(Address.baseHttp);
                   },
                   text: "打印http",

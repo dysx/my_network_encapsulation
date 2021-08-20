@@ -48,36 +48,36 @@ class AppException implements Exception {
                 }
               case 401:
                 {
-                  return UnauthorisedException(errCode, "没有权限");
+                  return UnauthorisedException(errCode, error.response!.data['error']['message']);
                 }
-              case 403:
-                {
-                  return UnauthorisedException(errCode, "服务器拒绝执行");
-                }
-              case 404:
-                {
-                  return UnauthorisedException(errCode, "无法连接服务器");
-                }
-              case 405:
-                {
-                  return UnauthorisedException(errCode, "请求方法被禁止");
-                }
-              case 500:
-                {
-                  return UnauthorisedException(errCode, "服务器内部错误、请求参数错误");
-                }
-              case 502:
-                {
-                  return UnauthorisedException(errCode, "无效的请求");
-                }
-              case 503:
-                {
-                  return UnauthorisedException(errCode, "服务器挂了");
-                }
-              case 505:
-                {
-                  return UnauthorisedException(errCode, "不支持HTTP协议请求");
-                }
+              // case 403:
+              //   {
+              //     return UnauthorisedException(errCode, "服务器拒绝执行");
+              //   }
+              // case 404:
+              //   {
+              //     return UnauthorisedException(errCode, "无法连接服务器");
+              //   }
+              // case 405:
+              //   {
+              //     return UnauthorisedException(errCode, "请求方法被禁止");
+              //   }
+              // case 500:
+              //   {
+              //     return UnauthorisedException(errCode, "服务器内部错误、请求参数错误");
+              //   }
+              // case 502:
+              //   {
+              //     return UnauthorisedException(errCode, "无效的请求");
+              //   }
+              // case 503:
+              //   {
+              //     return UnauthorisedException(errCode, "服务器挂了");
+              //   }
+              // case 505:
+              //   {
+              //     return UnauthorisedException(errCode, "不支持HTTP协议请求");
+              //   }
               default:
                 {
                   // return ErrorEntity(code: errCode, message: "未知错误");

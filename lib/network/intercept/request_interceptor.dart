@@ -50,6 +50,13 @@ class RequestInterceptor extends Interceptor {
 
     /// 登陆失效处理 统一跳回登陆页
     if (err.response!.data['unAuthorizedRequest']) {
+      AppException requestException = AppException.create(err);
+      err.error = requestException;
+      throw requestException;
+      // return super.onError(err, handler);
+
+      // throw UnauthorisedException();
+      // AppException requestException = AppException.create(err);
       AppConfig.globalKey.currentState!
           .pushNamed(RouteName.loginPage, arguments: {'havePop': true});
       return super.onError(err, handler);

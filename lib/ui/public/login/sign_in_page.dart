@@ -5,14 +5,14 @@ import 'package:my_network_encapsulation/res/login_theme.dart' as theme;
 import 'package:my_network_encapsulation/ui/widget/send_code.dart';
 import 'package:my_network_encapsulation/ui/widget/slide_verify_widget.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
-import 'package:my_network_encapsulation/view_model/my_login_model.dart';
+import 'package:my_network_encapsulation/view_model/login_model.dart';
 
 /// @describe: 登陆页面
 /// @author: qds
 /// @date:
 // ignore: must_be_immutable
 class SignInPage extends StatefulWidget {
-  MyLoginModel myLoginModel;
+  LoginModel myLoginModel;
 
   SignInPage({required this.myLoginModel});
 
@@ -30,7 +30,7 @@ class _SignInPageState extends State<SignInPage>
 
   bool isShowPassWord = false;
 
-  MyLoginModel get loginModel => widget.myLoginModel;
+  LoginModel get loginModel => widget.myLoginModel;
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-import 'package:my_network_encapsulation/network/model/goods_entity.dart';
+import 'package:my_network_encapsulation/model/goods_entity.dart';
 
 /// @describe: 虚拟收藏数据
 /// @author: qds

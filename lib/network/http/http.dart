@@ -5,10 +5,8 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:my_network_encapsulation/config/appConfig.dart';
 import 'package:my_network_encapsulation/network/intercept/request_interceptor.dart';
-import 'package:my_network_encapsulation/network/response/transform.dart';
 import 'package:my_network_encapsulation/res/keys.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
-import 'package:my_network_encapsulation/util/log_utils.dart';
 
 /// @describe: http请求
 /// @author: qds
@@ -110,6 +108,7 @@ class Http {
         _cancelTokens[tag]!.cancel();
       }
       _cancelTokens.remove(tag);
+      print('+++++++++++++');
     }
   }
 
@@ -125,7 +124,7 @@ class Http {
   }
 
   /// ----------------------- restful -------------------------
-  ///      [params]       get 请求参数
+  /// [params]       get 请求参数
   /// [data]         post请求参数
   /// [options]      requestOptions
   /// [cancelTag]    取消请求页面名
@@ -135,17 +134,15 @@ class Http {
   /// [noCache]      是否缓存
   /// [cacheKey]     缓存key
   /// [cacheDisk]    是否是磁盘缓存
-  Future<T> get<T>(
-    String path, {
-    Map<String, dynamic>? params,
-    Options? options,
-    required String cancelTag,
-    CancelToken? cancelToken,
-    bool refresh = false,
-    bool noCache = !AppConfig.CACHE_ENABLE,
-    String? cacheKey,
-    bool cacheDisk = false,
-  }) async {
+  Future get(String path,
+      {Map<String, dynamic>? params,
+      Options? options,
+      required String cancelTag,
+      CancelToken? cancelToken,
+      bool refresh = false,
+      bool noCache = !AppConfig.CACHE_ENABLE,
+      String? cacheKey,
+      bool cacheDisk = false}) async {
     Options requestOptions = options ?? Options();
     requestOptions = requestOptions.copyWith(extra: {
       "refresh": refresh,
@@ -153,6 +150,7 @@ class Http {
       "cacheKey": cacheKey,
       "cacheDisk": cacheDisk,
     });
+
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     requestOptions = requestOptions.copyWith(headers: _authorization);
 
@@ -162,33 +160,15 @@ class Http {
         : _cancelTokens[cancelTag])!;
     _cancelTokens[cancelTag] = cancelToken;
 
-    late Future future;
-    Completer<T> completer = Completer();
-
-    try {
-      future = dio.get(path,
-          queryParameters: params,
-          options: requestOptions,
-          cancelToken: cancelToken);
-    } on DioError catch (e) {
-      Log.e('------- dio catchError --------');
-      completer.completeError(e);
-    }
-    future.then((data) {
-      completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err) {
-      print(completer.future);
-      Log.e("------- future catchError --------");
-      print(err);
-      print('000');
-      completer.completeError(err);
-    });
-
-    return completer.future;
+    print('89889889$cancelTag');
+    return await dio.get(path,
+        queryParameters: params,
+        options: requestOptions,
+        cancelToken: cancelToken);
   }
 
   /// restful post 操作
-  Future<T> post<T>(
+  Future post(
     String path, {
     data,
     Options? options,
@@ -205,28 +185,12 @@ class Http {
         : _cancelTokens[cancelTag])!;
     _cancelTokens[cancelTag] = cancelToken;
 
-    late Future future;
-    Completer<T> completer = Completer();
-
-    try {
-      future = dio.post(path,
-          data: data, options: requestOptions, cancelToken: cancelToken);
-    } on DioError catch (e) {
-      Log.e('------- dio catchError --------');
-      completer.completeError(e);
-    }
-    future.then((data) {
-      completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err) {
-      Log.e("------- future catchError --------");
-      completer.completeError(err);
-    });
-
-    return completer.future;
+    return await dio.post(path,
+        data: data, options: requestOptions, cancelToken: cancelToken);
   }
 
   /// restful put 操作
-  Future<T> put<T>(
+  Future put(
     String path, {
     data,
     Map<String, dynamic>? params,
@@ -244,30 +208,14 @@ class Http {
         : _cancelTokens[cancelTag])!;
     _cancelTokens[cancelTag] = cancelToken;
 
-    late Future future;
-    Completer<T> completer = Completer();
-
-    try {
-      future = dio.put(path,
-          queryParameters: params,
-          options: requestOptions,
-          cancelToken: cancelToken);
-    } on DioError catch (e) {
-      Log.e('------- dio catchError --------');
-      completer.completeError(e);
-    }
-    future.then((data) {
-      completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err) {
-      Log.e("------- future catchError --------");
-      completer.completeError(err);
-    });
-
-    return completer.future;
+    return await dio.put(path,
+        queryParameters: params,
+        options: requestOptions,
+        cancelToken: cancelToken);
   }
 
   /// restful patch 操作
-  Future<T> patch<T>(
+  Future patch(
     String path, {
     data,
     Map<String, dynamic>? params,
@@ -285,30 +233,14 @@ class Http {
         : _cancelTokens[cancelTag])!;
     _cancelTokens[cancelTag] = cancelToken;
 
-    late Future future;
-    Completer<T> completer = Completer();
-
-    try {
-      future = dio.patch(path,
-          queryParameters: params,
-          options: requestOptions,
-          cancelToken: cancelToken);
-    } on DioError catch (e) {
-      Log.e('------- dio catchError --------');
-      completer.completeError(e);
-    }
-    future.then((data) {
-      completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err) {
-      Log.e("------- future catchError --------");
-      completer.completeError(err);
-    });
-
-    return completer.future;
+    return await dio.patch(path,
+        queryParameters: params,
+        options: requestOptions,
+        cancelToken: cancelToken);
   }
 
   /// restful delete 操作
-  Future<T> delete<T>(
+  Future delete(
     String path, {
     data,
     Map<String, dynamic>? params,
@@ -326,31 +258,15 @@ class Http {
         : _cancelTokens[cancelTag])!;
     _cancelTokens[cancelTag] = cancelToken;
 
-    late Future future;
-    Completer<T> completer = Completer();
-
-    try {
-      future = dio.delete(path,
-          data: data,
-          queryParameters: params,
-          options: requestOptions,
-          cancelToken: cancelToken);
-    } on DioError catch (e) {
-      Log.e('------- dio catchError --------');
-      completer.completeError(e);
-    }
-    future.then((data) {
-      completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err) {
-      Log.e("------- future catchError --------");
-      completer.completeError(err);
-    });
-
-    return completer.future;
+    return await dio.delete(path,
+        data: data,
+        queryParameters: params,
+        options: requestOptions,
+        cancelToken: cancelToken);
   }
 
   /// restful post form 表单提交操作
-  Future<T> postForm<T>(
+  Future postForm(
     String path, {
     Map<String, dynamic>? params,
     Options? options,
@@ -362,7 +278,6 @@ class Http {
     requestOptions = requestOptions.copyWith(headers: _authorization);
 
     var data = FormData.fromMap(params!);
-    Log.d('${data.length}');
 
     CancelToken cancelToken;
     cancelToken = (_cancelTokens[cancelTag] == null
@@ -370,23 +285,7 @@ class Http {
         : _cancelTokens[cancelTag])!;
     _cancelTokens[cancelTag] = cancelToken;
 
-    late Future future;
-    Completer<T> completer = Completer();
-
-    try {
-      future = dio.post(path,
-          data: data, options: requestOptions, cancelToken: cancelToken);
-    } on DioError catch (e) {
-      Log.e('------- dio catchError --------');
-      completer.completeError(e);
-    }
-    future.then((data) {
-      completer.complete(TransformJson().jsonConvertResult(data));
-    }).catchError((err) {
-      Log.e("------- future catchError --------");
-      completer.completeError(err);
-    });
-
-    return completer.future;
+    return await dio.post(path,
+        data: data, options: requestOptions, cancelToken: cancelToken);
   }
 }

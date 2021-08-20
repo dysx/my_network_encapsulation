@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
+import 'package:my_network_encapsulation/network/exception/app_exception.dart';
 import 'package:my_network_encapsulation/provider/view_state.dart';
-import 'package:my_network_encapsulation/util/log_utils.dart';
 import 'package:my_network_encapsulation/util/toast.dart';
 
 /// @describe: model状态基类
@@ -78,10 +78,12 @@ class ViewStateModel with ChangeNotifier {
       } else if (e.type == DioErrorType.cancel) {
         message = e.error;
       } else {
-        if (e.error is SocketException) {
+        e = e.error;
+        if (e is UnauthorisedException) {
+          errorType = ViewStateErrorType.unauthorizedError;
+        } else if (e is SocketException) {
           errorType = ViewStateErrorType.networkTimeOutError;
           message = e.message;
-          print(message);
         } else {
           message = e.message;
         }

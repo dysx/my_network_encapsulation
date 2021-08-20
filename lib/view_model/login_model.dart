@@ -1,17 +1,19 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/model/user.dart';
 import 'package:my_network_encapsulation/provider/view_state_model.dart';
 import 'package:my_network_encapsulation/res/keys.dart';
 import 'package:my_network_encapsulation/view_model/user_model.dart';
 
-const String qLoginName = '';
+const String loginNickName = 'loginNickName';
 
-class MyLoginModel extends ViewStateModel {
+class LoginModel extends ViewStateModel {
   final UserModel userModel;
 
-  MyLoginModel(this.userModel);
+  LoginModel(this.userModel);
 
   /// 账号tc
   TextEditingController phone = TextEditingController();
@@ -34,21 +36,18 @@ class MyLoginModel extends ViewStateModel {
   /// 账号登陆
   loginWithPhone() async {
     setBusy();
+    //调账号登陆接口
     try {
-      //调账号登陆接口
-      RequestUtil.login('15015802692', 'qds123123', cancelTag: '')
-          .then((loginResult) {
-        dealUser(loginResult.avatarUrl, loginResult.nickName);
-        LocalStorage.saveString(Keys.token, loginResult.accessToken!);
-        MyNavigator.pop();
-        // MyNavigator.pushNamedAndRemoveUntil(RouteName.home);
-        setIdle();
-      }).catchError((e) {
-        print(e);
-        setIdle();
-      });
-    } catch (e, s) {
-      setError(e, s);
+      var user = await RequestUtil.login('15015802692', 'qds123123', cancelTag: 'LoginPage');
+      dealUser(user);
+      LocalStorage.saveString(Keys.token, user.accessToken!);
+      MyNavigator.pop();
+      setIdle();
+    } on DioError catch (e){
+      if(e.error is SocketException){
+        Toast.showMsg('请连接网络后重试');
+      }
+      setIdle();
     }
   }
 
@@ -98,10 +97,8 @@ class MyLoginModel extends ViewStateModel {
   }
 
   /// 保存用户登录信息
-  dealUser(String? avatarUrl, String? nickName) {
-    Map<String, dynamic> map = {"avatarUrl": avatarUrl, "nickName": nickName};
-    print(map);
-    LocalStorage.saveString(qLoginName, nickName!);
-    userModel.saveUser(User.fromJsonMap(map));
+  dealUser(User user) {
+    LocalStorage.saveString(loginNickName, user.nickName!);
+    userModel.saveUser(user);
   }
 }

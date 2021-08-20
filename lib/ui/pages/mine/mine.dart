@@ -5,7 +5,7 @@ import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/ui/widget/bottom_clipper.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
 import 'package:my_network_encapsulation/view_model/base/cache_model.dart';
-import 'package:my_network_encapsulation/view_model/my_login_model.dart';
+import 'package:my_network_encapsulation/view_model/login_model.dart';
 import 'package:my_network_encapsulation/view_model/user_model.dart';
 
 /// @describe: bottomNavItem_second页面
@@ -57,7 +57,7 @@ class MineState extends BaseInnerWidgetState<Mine> {
           trailing: Icon(Icons.login_outlined),
           title: Text('退出登陆'),
           onTap: () {
-            MyLoginModel(Provider.of<UserModel>(context, listen: false))
+            LoginModel(Provider.of<UserModel>(context, listen: false))
                 .logout()
                 .then((value) {
               print('退出是否成功: $value');

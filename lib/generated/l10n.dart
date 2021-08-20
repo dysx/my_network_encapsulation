@@ -47,71 +47,11 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Terms of service and privacy policy tips`
-  String get terms_of_service_and_privacy_policy_tips {
+  /// `Tip`
+  String get tip {
     return Intl.message(
-      'Terms of service and privacy policy tips',
-      name: 'terms_of_service_and_privacy_policy_tips',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Click again to exit`
-  String get click_again_to_exit {
-    return Intl.message(
-      'Click again to exit',
-      name: 'click_again_to_exit',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `interfaceTest`
-  String get interfaceTest {
-    return Intl.message(
-      'interfaceTest',
-      name: 'interfaceTest',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `jump`
-  String get jump {
-    return Intl.message(
-      'jump',
-      name: 'jump',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `test`
-  String get test {
-    return Intl.message(
-      'test',
-      name: 'test',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `autoBySystem`
-  String get autoBySystem {
-    return Intl.message(
-      'autoBySystem',
-      name: 'autoBySystem',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `normalPage`
-  String get normalPage {
-    return Intl.message(
-      'normalPage',
-      name: 'normalPage',
+      'Tip',
+      name: 'tip',
       desc: '',
       args: [],
     );
@@ -202,6 +142,56 @@ class S {
     return Intl.message(
       'Sign In',
       name: 'viewStateButtonLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms of service and privacy policy tips`
+  String get terms_of_service_and_privacy_policy_tips {
+    return Intl.message(
+      'Terms of service and privacy policy tips',
+      name: 'terms_of_service_and_privacy_policy_tips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Click again to exit`
+  String get click_again_to_exit {
+    return Intl.message(
+      'Click again to exit',
+      name: 'click_again_to_exit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `test`
+  String get test {
+    return Intl.message(
+      'test',
+      name: 'test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `autoBySystem`
+  String get autoBySystem {
+    return Intl.message(
+      'autoBySystem',
+      name: 'autoBySystem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `normalPage`
+  String get normalPage {
+    return Intl.message(
+      'normalPage',
+      name: 'normalPage',
       desc: '',
       args: [],
     );

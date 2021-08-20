@@ -8,7 +8,7 @@ import 'favourite_model.dart';
 
 /// 用户model
 class UserModel extends ChangeNotifier {
-  static const String qUser = 'qUser';
+  static const String loginUser = 'loginUser';
 
   final GlobalFavouriteStateModel globalFavouriteStateModel = GlobalFavouriteStateModel();
 
@@ -19,21 +19,22 @@ class UserModel extends ChangeNotifier {
   bool get hasUser => user != null;
 
   UserModel() {
-    String? userMap = LocalStorage.get(qUser);
-    _user = userMap != null ? User.fromJsonMap(json.decode(userMap)) : null;
+    String? userMap = LocalStorage.get(loginUser);
+    _user = userMap != null ? User.fromJson(json.decode(userMap)) : null;
   }
 
   saveUser(User user) {
     _user = user;
     notifyListeners();
     globalFavouriteStateModel.clearFavourite();
-    LocalStorage.saveString(qUser, jsonEncode(user).toString());
+    LocalStorage.saveString(loginUser, jsonEncode(user).toString());
+    print(LocalStorage.get(loginUser));
   }
 
   /// 清除持久化的用户数据
   clearUser() {
     _user = null;
     notifyListeners();
-    LocalStorage.remove(qUser);
+    LocalStorage.remove(loginUser);
   }
 }

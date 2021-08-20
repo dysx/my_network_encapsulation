@@ -1,6 +1,6 @@
 
 import 'package:my_network_encapsulation/base/base_insert.dart';
-import 'package:my_network_encapsulation/network/model/goods_entity.dart';
+import 'package:my_network_encapsulation/model/goods_entity.dart';
 import 'package:my_network_encapsulation/ui/pages/third/goods_mock_data.dart';
 import 'package:my_network_encapsulation/ui/pages/test/testA.dart';
 import 'package:my_network_encapsulation/ui/widget/skeleton.dart';
@@ -27,7 +27,6 @@ class _MockPageState extends BaseWidgetState<MockPage> {
       child: ListView.builder(
           itemCount: list.length,
           itemBuilder: (BuildContext context, int index) {
-            print('刷新000');
             return Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,7 +51,6 @@ class _MockPageState extends BaseWidgetState<MockPage> {
                 ),
                 Consumer<GlobalFavouriteStateModel>(
                   builder: (context, favouriteModel, child) {
-                    print('刷新0000000000000000000000');
                     //利用child局部刷新
                     if (favouriteModel[list[index].id!] == null) {
                       //本地没有此条数据收藏状态

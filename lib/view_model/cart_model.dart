@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/network/model/goods_entity.dart';
+import 'package:my_network_encapsulation/model/goods_entity.dart';
 
 class CartModel extends ChangeNotifier {
   List<GoodsEntity> _items = [];

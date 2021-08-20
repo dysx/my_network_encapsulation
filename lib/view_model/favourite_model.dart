@@ -1,7 +1,6 @@
 
 import 'package:my_network_encapsulation/base/base_insert.dart';
-import 'package:my_network_encapsulation/network/model/get_recommends_entity.dart';
-import 'package:my_network_encapsulation/network/model/goods_entity.dart';
+import 'package:my_network_encapsulation/model/goods_entity.dart';
 import 'package:my_network_encapsulation/provider/view_state.dart';
 import 'package:my_network_encapsulation/provider/view_state_model.dart';
 import 'package:my_network_encapsulation/provider/view_state_refresh_list_model.dart';

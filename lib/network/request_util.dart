@@ -1,32 +1,25 @@
 import 'package:dio/dio.dart';
+import 'package:my_network_encapsulation/model/article.dart';
+import 'package:my_network_encapsulation/model/user.dart';
 import 'package:my_network_encapsulation/network/http/http.dart';
-import 'package:my_network_encapsulation/network/model/login_entity.dart';
-import 'package:my_network_encapsulation/network/model/time_entity.dart';
 
 import 'address.dart';
-import 'model/get_recommends_entity.dart';
+
+// json转model
+// return response.data['result']
+// .map<Article>((item) => Article.fromJson(item))
+// .toList();
+// return Article.fromJson(response.data);
 
 /// @describe: 请求管理
 /// @author: qds
 /// @date:
 class RequestUtil {
-  static Future subscribeKey({required String cancelTag}) {
-    return Http().post(Address.comment,
-        data: {
-          "id": 255,
-          "commentId": 0,
-          "commentType": 0,
-          "content": "123456"
-        },
-        cancelTag: cancelTag);
-  }
-
   ///获取我的内容推荐列表
-  static Future<List<GetRecommendsEntity>> getRecommends(
-      int pageIndex, int pageSize,
-      {required String cancelTag}) {
+  static Future getRecommends(int pageIndex, int pageSize,
+      {required String cancelTag}) async {
     CancelToken _cancelToken = CancelToken();
-    return Http().get(Address.getRecommends,
+    var response = await Http().get(Address.getRecommends,
         params: {
           "PageIndex": pageIndex,
           "PageSize": pageSize,
@@ -34,31 +27,20 @@ class RequestUtil {
         cancelTag: cancelTag,
         cancelToken: _cancelToken,
         refresh: false);
-  }
-
-  static Future<TimeEntity> getTime() {
-    return Http().get('https://quan.suning.com/getSysTime.do',
-        // noCache: true,
-        refresh: false,
-        cancelTag: '');
+    return response.data['result']
+        .map<Article>((item) => Article.fromJson(item))
+        .toList();
   }
 
   ///登陆
-  static Future<LoginEntity> login(String phoneNumber, String password,
-      {required String cancelTag}) {
-    return Http().post(Address.login,
+  static Future login(String phoneNumber, String password,
+      {required String cancelTag}) async {
+    var response = await Http().post(Address.login,
         data: {
           "phoneNumber": phoneNumber,
           "password": password,
         },
         cancelTag: cancelTag);
-  }
-
-  static Future addFriend(int userId, {required String cancelTag}) {
-    return Http().post(
-      Address.addFriend,
-      data: {"userId": userId},
-      cancelTag: cancelTag,
-    );
+    return User.fromJson(response.data['result']);
   }
 }

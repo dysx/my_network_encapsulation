@@ -57,11 +57,8 @@ class TestAState extends BaseWidgetState<TestA> {
             builder: (context, index) => ArticleItemSkeleton(),
           );
         } else if (model.isEmpty) {
-          print("model.isEmpty");
           return ViewStateEmptyWidget(onPressed: () => model.initData());
         } else if (model.isError) {
-          print("model.isError");
-          print(model.viewStateError!.errorType);
           if (model.viewStateError!.isUnauthorized) {
             return ViewStateUnAuthWidget(onPressed: () async {
               var success =
@@ -72,7 +69,6 @@ class TestAState extends BaseWidgetState<TestA> {
               }
             });
           } else if (model.list.isEmpty) {
-            print(model.list.isEmpty);
             // 只有在页面上没有数据的时候才显示错误widget
             return ViewStateErrorWidget(
                 error: model.viewStateError, onPressed: model.initData);
@@ -158,7 +154,6 @@ class TestAState extends BaseWidgetState<TestA> {
   }
 
   getData() {
-    print('=======');
   }
 }
 

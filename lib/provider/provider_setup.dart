@@ -1,7 +1,9 @@
-import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
-import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
-import 'package:my_network_encapsulation/view_model/favourite_model.dart';
-import 'package:my_network_encapsulation/view_model/user_model.dart';
+import 'package:my_network_encapsulation/viewModel/base/locale_model.dart';
+import 'package:my_network_encapsulation/viewModel/base/theme_data_model.dart';
+import 'package:my_network_encapsulation/viewModel/favourite_model.dart';
+import 'package:my_network_encapsulation/viewModel/message/conversion.dart';
+import 'package:my_network_encapsulation/viewModel/message/user.dart';
+import 'package:my_network_encapsulation/viewModel/user_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -19,7 +21,9 @@ List<SingleChildWidget> providers = [
 List<SingleChildWidget> independentServices = [
   ChangeNotifierProvider<ThemeDataModel>(create: (context) => ThemeDataModel()),
   ChangeNotifierProvider<LocaleModel>(create: (context) => LocaleModel()),
+  ChangeNotifierProvider<ConversionModel>(create: (context) => ConversionModel()),
   ChangeNotifierProvider<UserModel>(create: (context) => UserModel()),
+  ChangeNotifierProvider<ImUserModel>(create: (context) => ImUserModel()),
   ChangeNotifierProvider<GlobalFavouriteStateModel>(
     create: (context) => GlobalFavouriteStateModel(),
   )

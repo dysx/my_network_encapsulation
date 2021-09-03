@@ -13,7 +13,7 @@
         -public         //多链路页面（多个路径可以打开此页面）
         -widget         //组件
     -util               //工具类
-    -view_model         //实现View与Model的交互
+    -viewModel         //实现View与Model的交互
 
 本项目封装：
 - 路由：全局路由、路由拦截（用作用户登录状态拦截）、路由管理工具封装

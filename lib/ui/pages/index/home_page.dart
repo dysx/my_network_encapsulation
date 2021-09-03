@@ -1,9 +1,16 @@
 import 'package:device_info/device_info.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/config/env_config.dart';
+import 'package:my_network_encapsulation/designPattern/chainOfResponsibility/base_main.dart';
+import 'package:my_network_encapsulation/designPattern/chainOfResponsibility/single_main.dart';
+import 'package:my_network_encapsulation/designPattern/chainOfResponsibility/test_business.dart';
+import 'package:my_network_encapsulation/designPattern/chainOfResponsibility/test_solve.dart';
+import 'package:my_network_encapsulation/designPattern/strategy/main.dart';
+import 'package:my_network_encapsulation/util/im/xmpp_util.dart';
 import 'package:my_network_encapsulation/util/permission_manager.dart';
-import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
-import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
+import 'package:my_network_encapsulation/viewModel/base/locale_model.dart';
+import 'package:my_network_encapsulation/viewModel/base/theme_data_model.dart';
 
 /// @describe: bottomNavItem_first页面
 /// @author: qds
@@ -178,7 +185,44 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
               ordinaryButton(
                   onPressed: () {},
                   text: "富文本",
-                  sideColor: AppColors.black_3333)
+                  sideColor: AppColors.black_3333),
+              ordinaryButton(
+                  text: '购物车状态测试',
+                  backgroundColor: AppColors.blue_91ff,
+                  onPressed: () {
+                    MyNavigator.pushNamed(RouteName.mockPage);
+                  }),
+              ordinaryButton(
+                  text: '责任链模式测试',
+                  backgroundColor: AppColors.blue_91ff,
+                  onPressed: () {
+                    Chain.use();
+                  }),
+              ordinaryButton(
+                  text: '责任链抽象单方法',
+                  backgroundColor: AppColors.blue_91ff,
+                  onPressed: () {
+                    SingleMain.test();
+                  }),
+              ordinaryButton(
+                  text: '策略模式',
+                  backgroundColor: AppColors.blue_91ff,
+                  onPressed: () {
+                    Main().main();
+                  }),
+              ordinaryButton(
+                  text: '策略模式111',
+                  backgroundColor: AppColors.blue_91ff,
+                  onPressed: () {
+                    Navigator.push(context, CupertinoPageRoute(
+                        builder: (context) => LeaderWidget()));
+                  }),
+              ordinaryButton(
+                  text: '连环弹框',
+                  backgroundColor: AppColors.blue_91ff,
+                  onPressed: () {
+                    BusinessTest.test();
+                  }),
             ],
           ),
         ],

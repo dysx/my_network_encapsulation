@@ -16,31 +16,24 @@ class AppException implements Exception {
   }
 
   factory AppException.create(DioError error) {
+    int errCode = error.response!.statusCode!;
     debugPrint('===============AppException===============');
-
-    switch (error.type) {
-      case DioErrorType.cancel:
-        {
+    if (error.response!.data['unAuthorizedRequest']) {
+      return UnauthorisedException(
+          errCode, error.response!.data['error']['message']);
+    } else {
+      switch (error.type) {
+        case DioErrorType.cancel:
           return BadAppException(-1, "请求取消");
-        }
-      case DioErrorType.connectTimeout:
-        {
+        case DioErrorType.connectTimeout:
           return BadAppException(-1, "连接超时");
-        }
-      case DioErrorType.sendTimeout:
-        {
+        case DioErrorType.sendTimeout:
           return BadAppException(-1, "请求超时");
-        }
-      case DioErrorType.receiveTimeout:
-        {
+        case DioErrorType.receiveTimeout:
           return BadAppException(-1, "响应超时");
-        }
-      case DioErrorType.response:
-        {
+        case DioErrorType.response:
           try {
             int errCode = error.response!.statusCode!;
-            // String errMsg = error.response.statusMessage;
-            // return ErrorEntity(code: errCode, message: errMsg);
             switch (errCode) {
               case 400:
                 {
@@ -48,50 +41,21 @@ class AppException implements Exception {
                 }
               case 401:
                 {
-                  return UnauthorisedException(errCode, error.response!.data['error']['message']);
+                  return UnauthorisedException(
+                      errCode, error.response!.data['error']['message']);
                 }
-              // case 403:
-              //   {
-              //     return UnauthorisedException(errCode, "服务器拒绝执行");
-              //   }
-              // case 404:
-              //   {
-              //     return UnauthorisedException(errCode, "无法连接服务器");
-              //   }
-              // case 405:
-              //   {
-              //     return UnauthorisedException(errCode, "请求方法被禁止");
-              //   }
-              // case 500:
-              //   {
-              //     return UnauthorisedException(errCode, "服务器内部错误、请求参数错误");
-              //   }
-              // case 502:
-              //   {
-              //     return UnauthorisedException(errCode, "无效的请求");
-              //   }
-              // case 503:
-              //   {
-              //     return UnauthorisedException(errCode, "服务器挂了");
-              //   }
-              // case 505:
-              //   {
-              //     return UnauthorisedException(errCode, "不支持HTTP协议请求");
-              //   }
               default:
                 {
-                  // return ErrorEntity(code: errCode, message: "未知错误");
                   return AppException(errCode, error.response!.statusMessage);
                 }
             }
           } on Exception catch (_) {
             return AppException(-1, "未知错误");
           }
-        }
-      default:
-        {
+          break;
+        default:
           return AppException(-1, error.message);
-        }
+      }
     }
   }
 }

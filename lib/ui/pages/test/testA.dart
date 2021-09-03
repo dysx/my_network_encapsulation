@@ -5,7 +5,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/ui/widget/skeleton.dart';
-import 'package:my_network_encapsulation/view_model/article_model.dart';
+import 'package:my_network_encapsulation/viewModel/article_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TestA extends BaseWidget {

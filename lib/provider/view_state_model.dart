@@ -14,7 +14,7 @@ class ViewStateModel with ChangeNotifier {
   /// 防止页面销毁后，异步任务才完成，导致报错
   bool _disposed = false;
 
-  /// 当前的页面状态，默认为busy，可在viewModel的构造方法中指定
+  /// 当前的页面状态，默认为busy，可在的构造方法中指定
   ViewState _viewState;
 
   /// 根据状态构造

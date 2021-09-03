@@ -42,9 +42,21 @@ class RequestInterceptor extends Interceptor {
 
     print(err.error);
 
+    // AppException requestException = AppException.create(err);
+    // err.error = requestException;
+    // if (err.response!.data['error'] != null) {
+    //   Toast.showMsg(err.response!.data['error']['message'] ?? '未知错误');
+    // }
+    // print('-------------');
+    // print(err);
+    // return super.onError(err, handler);
+    // throw requestException;
+
     /// 网络错误
     if (err.error is SocketException) {
       // err.error = BadAppException(-1, "网络错误");
+      print('-============');
+      print(err);
       return super.onError(err, handler);
     }
 
@@ -52,10 +64,12 @@ class RequestInterceptor extends Interceptor {
     if (err.response!.data['unAuthorizedRequest']) {
       AppException requestException = AppException.create(err);
       err.error = requestException;
-      throw requestException;
+      // throw requestException;
+      print('==========');
+      print(err.error);
       // return super.onError(err, handler);
 
-      // throw UnauthorisedException();
+      throw UnauthorisedException();
       // AppException requestException = AppException.create(err);
       AppConfig.globalKey.currentState!
           .pushNamed(RouteName.loginPage, arguments: {'havePop': true});

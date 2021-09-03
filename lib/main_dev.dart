@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:my_network_encapsulation/app.dart';
 import 'package:my_network_encapsulation/config/domain_config.dart';
 import 'package:my_network_encapsulation/network/address.dart';
+import 'package:my_network_encapsulation/util/im/xmpp_util.dart';
 import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
@@ -27,5 +28,6 @@ void main() async {
 
   runApp(MyApp());
 
+  // XmppUtil.init();
   Address.setBaseUrl(DomainConfig.getBaseUrl(Domain.Development));
 }

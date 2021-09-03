@@ -4,9 +4,9 @@ import 'package:my_network_encapsulation/base/base_inner_widget.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/ui/widget/bottom_clipper.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
-import 'package:my_network_encapsulation/view_model/base/cache_model.dart';
-import 'package:my_network_encapsulation/view_model/login_model.dart';
-import 'package:my_network_encapsulation/view_model/user_model.dart';
+import 'package:my_network_encapsulation/viewModel/base/cache_model.dart';
+import 'package:my_network_encapsulation/viewModel/login_model.dart';
+import 'package:my_network_encapsulation/viewModel/user_model.dart';
 
 /// @describe: bottomNavItem_second页面
 /// @author: qds

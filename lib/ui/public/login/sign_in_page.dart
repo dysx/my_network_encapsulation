@@ -5,7 +5,7 @@ import 'package:my_network_encapsulation/res/login_theme.dart' as theme;
 import 'package:my_network_encapsulation/ui/widget/send_code.dart';
 import 'package:my_network_encapsulation/ui/widget/slide_verify_widget.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
-import 'package:my_network_encapsulation/view_model/login_model.dart';
+import 'package:my_network_encapsulation/viewModel/login_model.dart';
 
 /// @describe: 登陆页面
 /// @author: qds
@@ -245,6 +245,7 @@ class _SignInPageState extends State<SignInPage>
       ),
       onTap: () {
         loginModel.loginWithPhone();
+        // loginModel.loginTencentIm();
       },
     );
   }

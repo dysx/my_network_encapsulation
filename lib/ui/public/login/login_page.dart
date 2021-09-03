@@ -2,7 +2,7 @@ import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/res/login_theme.dart' as theme;
 import 'package:my_network_encapsulation/ui/public/login/widget/login_indicaor.dart';
 import 'package:my_network_encapsulation/ui/widget/key_board_hider.dart';
-import 'package:my_network_encapsulation/view_model/login_model.dart';
+import 'package:my_network_encapsulation/viewModel/login_model.dart';
 
 import 'sign_in_page.dart';
 import 'sign_up_page.dart';

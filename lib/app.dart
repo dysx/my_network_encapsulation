@@ -6,8 +6,8 @@ import 'package:my_network_encapsulation/provider/provider_setup.dart';
 import 'package:my_network_encapsulation/res/keys.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
-import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
-import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
+import 'package:my_network_encapsulation/viewModel/base/locale_model.dart';
+import 'package:my_network_encapsulation/viewModel/base/theme_data_model.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
 
   //检测是否同意了隐私政策
   String routeName() {
-    LocalStorage.save(Keys.agreePrivacy,false);
+    // LocalStorage.save(Keys.agreePrivacy,false);
     if (LocalStorage.get(Keys.agreePrivacy) == null ||
         !LocalStorage.get(Keys.agreePrivacy)) {
       return RouteName.privacyTipsPage;

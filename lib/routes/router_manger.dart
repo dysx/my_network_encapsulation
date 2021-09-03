@@ -8,6 +8,7 @@ import 'package:my_network_encapsulation/ui/pages/index/home_page.dart';
 import 'package:my_network_encapsulation/ui/pages/launch/lead_page.dart';
 import 'package:my_network_encapsulation/ui/pages/launch/privacy_tips_page.dart';
 import 'package:my_network_encapsulation/ui/pages/launch/startup_page.dart';
+import 'package:my_network_encapsulation/ui/pages/message/message.dart';
 import 'package:my_network_encapsulation/ui/pages/mine/mine.dart';
 import 'package:my_network_encapsulation/ui/pages/second/second.dart';
 import 'package:my_network_encapsulation/ui/pages/test/base_test.dart';
@@ -46,6 +47,7 @@ class RouteName {
   static const String testC = 'testC';
   static const String testD = 'testD';
   static const String scrollToIndex = 'scrollToIndex';
+  static const String message = 'message';
 }
 
 /// 路由初始化,可自定义的路由
@@ -90,6 +92,8 @@ class MyRouter {
         return SlideRightRouteBuilder(TestD(), routeName);
       case RouteName.scrollToIndex:
         return SlideRightRouteBuilder(ScrollToIndexDemoPage2(), routeName);
+      case RouteName.message:
+        return SlideRightRouteBuilder(Message(), routeName);
       default:
         return SlideRightRouteBuilder(NotFoundPage(), routeName);
     }

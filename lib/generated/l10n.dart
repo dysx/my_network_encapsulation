@@ -10,7 +10,7 @@ import 'intl/messages_all.dart';
 
 // ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
 // ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
-// ignore_for_file: avoid_redundant_argument_values
+// ignore_for_file: avoid_redundant_argument_values, avoid_escaping_inner_quotes
 
 class S {
   S();
@@ -18,28 +18,31 @@ class S {
   static S? _current;
 
   static S get current {
-    assert(_current != null, 'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    assert(_current != null,
+        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
     return _current!;
   }
 
-  static const AppLocalizationDelegate delegate =
-    AppLocalizationDelegate();
+  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final localeName = Intl.canonicalizedLocale(name); 
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
       final instance = S();
       S._current = instance;
- 
+
       return instance;
     });
-  } 
+  }
 
   static S of(BuildContext context) {
     final instance = S.maybeOf(context);
-    assert(instance != null, 'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    assert(instance != null,
+        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
     return instance!;
   }
 
@@ -47,71 +50,11 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Terms of service and privacy policy tips`
-  String get terms_of_service_and_privacy_policy_tips {
+  /// `Tip`
+  String get tip {
     return Intl.message(
-      'Terms of service and privacy policy tips',
-      name: 'terms_of_service_and_privacy_policy_tips',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Click again to exit`
-  String get click_again_to_exit {
-    return Intl.message(
-      'Click again to exit',
-      name: 'click_again_to_exit',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `interfaceTest`
-  String get interfaceTest {
-    return Intl.message(
-      'interfaceTest',
-      name: 'interfaceTest',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `jump`
-  String get jump {
-    return Intl.message(
-      'jump',
-      name: 'jump',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `test`
-  String get test {
-    return Intl.message(
-      'test',
-      name: 'test',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `autoBySystem`
-  String get autoBySystem {
-    return Intl.message(
-      'autoBySystem',
-      name: 'autoBySystem',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `normalPage`
-  String get normalPage {
-    return Intl.message(
-      'normalPage',
-      name: 'normalPage',
+      'Tip',
+      name: 'tip',
       desc: '',
       args: [],
     );
@@ -202,6 +145,56 @@ class S {
     return Intl.message(
       'Sign In',
       name: 'viewStateButtonLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms of service and privacy policy tips`
+  String get terms_of_service_and_privacy_policy_tips {
+    return Intl.message(
+      'Terms of service and privacy policy tips',
+      name: 'terms_of_service_and_privacy_policy_tips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Click again to exit`
+  String get click_again_to_exit {
+    return Intl.message(
+      'Click again to exit',
+      name: 'click_again_to_exit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `test`
+  String get test {
+    return Intl.message(
+      'test',
+      name: 'test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `autoBySystem`
+  String get autoBySystem {
+    return Intl.message(
+      'autoBySystem',
+      name: 'autoBySystem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `normalPage`
+  String get normalPage {
+    return Intl.message(
+      'normalPage',
+      name: 'normalPage',
       desc: '',
       args: [],
     );

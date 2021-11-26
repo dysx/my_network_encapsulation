@@ -8,7 +8,12 @@ import 'package:my_network_encapsulation/ui/widget/skeleton.dart';
 import 'package:my_network_encapsulation/view_model/article_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import 'package:flutter/cupertino.dart';
+
+/// @author: qds
+/// @describe:
 class TestA extends BaseWidget {
+
   @override
   BaseWidgetState<BaseWidget> getState() => TestAState();
 }
@@ -24,22 +29,22 @@ class TestAState extends BaseWidgetState<TestA> {
   Widget buildWidget(BuildContext context) {
     // return Container(height: getScreenWidth() * 9.0 / 16.0, child: videoPlayer);
 
-    return Container(
-      color: Colors.blue,
-      height: double.infinity,
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AnimatedTextKit(animatedTexts: [
-            TypewriterAnimatedText('我爱学习'),
-            // TyperAnimatedText('我爱'),
-            // TyperAnimatedText('我爱学'),
-            // TyperAnimatedText('我爱学习')
-          ])
-        ],
-      ),
-    );
+    // return Container(
+    //   color: Colors.blue,
+    //   height: double.infinity,
+    //   width: double.infinity,
+    //   child: Column(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+    //       AnimatedTextKit(animatedTexts: [
+    //         TypewriterAnimatedText('我爱学习'),
+    //         // TyperAnimatedText('我爱'),
+    //         // TyperAnimatedText('我爱学'),
+    //         // TyperAnimatedText('我爱学习')
+    //       ])
+    //     ],
+    //   ),
+    // );
 
     return ProviderWidget<ArticleModel>(
       model: ArticleModel(cancelTag: 'TestA'),
@@ -118,6 +123,7 @@ class TestAState extends BaseWidgetState<TestA> {
   @override
   void onResume() {
     // TODO: implement onResume
+    print('1111');
   }
 
   // void _initVideo() {

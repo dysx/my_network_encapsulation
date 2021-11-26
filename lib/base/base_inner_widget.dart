@@ -36,7 +36,7 @@ abstract class BaseInnerWidgetState<T extends BaseInnerWidget> extends State<T>
   @override
   void initState() {
     initBaseCommon(this, context);
-    setBackIconHinde();
+    setBackIconHide();
     setTopBarVisible(false);
     setAppBarVisible(false);
     setAppBarBottomShow(false);

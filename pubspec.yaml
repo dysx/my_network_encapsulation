@@ -101,6 +101,10 @@ dependencies:
   # app升级
   ota_update: 3.0.2
 
+  audioplayers: ^0.20.1
+
+  dartx: ^0.8.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -130,6 +134,7 @@ flutter:
     - assets/images/android/xxhdpi/
     - assets/images/android/xxxhdpi/
     - assets/images/ios/
+    - assets/audio/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

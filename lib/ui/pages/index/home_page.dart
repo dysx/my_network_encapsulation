@@ -1,9 +1,17 @@
+import 'dart:io';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:device_info/device_info.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
+import 'package:my_network_encapsulation/util/extension/widget.dart';
 import 'package:my_network_encapsulation/util/pack/env_config.dart';
 import 'package:my_network_encapsulation/util/permission_manager.dart';
+import 'package:my_network_encapsulation/util/sort/bubble_sort.dart';
+import 'package:my_network_encapsulation/util/sort/quick_sort.dart';
 import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
 import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
+import 'package:dartx/dartx.dart';
+import 'package:my_network_encapsulation/util/extension/file.dart';
 
 /// @describe: bottomNavItem_first页面
 /// @author: qds
@@ -48,12 +56,7 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   text: '登陆'),
               ordinaryButton(
                   onPressed: () {
-                    // RequestUtil.getRecommends(1, 20).then((value) {
-                    //
-                    // });
-                    // RequestUtil.subscribeKey().then((value) {
-                    //   print("结果值:${value}");
-                    // });
+                    MyNavigator.pushNamed(RouteName.testA);
                   },
                   text: '获取列表'),
               ordinaryButton(
@@ -177,12 +180,55 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   },
                   text: "版本",
                   sideColor: AppColors.black_3333),
+              ordinaryButton(
+                  onPressed: () {
+                    audioPlayer.play('assets/audio/N003.mp3',isLocal: true);
+                    // audioPlayer.play('http://music.163.com/song/media/outer/url?id=298317.mp3');
+                  },
+                  text: "测试音频",
+                  sideColor: AppColors.black_3333),
+              ordinaryButton(
+                  onPressed: () {
+                    10.minutes;
+                    final File fff = File('some/path/test.dart');
+                    print(fff.fileName);
+                    print(fff.fileNameWithoutExtension);
+                  },
+                  text: "文件名",
+                  sideColor: AppColors.black_3333),
+              ordinaryButton(
+                  onPressed: () {
+                    List<int> ccc = List.generate(6000, (index) => index);
+                    List<int>? aaa;
+                    List<int> bbb = [10,20,54,2,7,5,9];
+                    // BuBBleSort.bubbleSort(aaa);
+                    // BuBBleSort.bubbleSort(bbb);
+                    BuBBleSort.bubbleSort(ccc);
+                    BuBBleSort.bubbleSort(ccc.reversed.toList());
+                  },
+                  text: "冒泡排序",
+                  sideColor: AppColors.black_3333),
+              ordinaryButton(
+                  onPressed: () {
+                    DateTime start = DateTime.now();
+                    List<int> ccc = List.generate(6000, (index) => index).reversed.toList();
+                    List<int>? aaa;
+                    List<int> bbb = [9,8,7,6,5,4,3,2,1];
+                    // BuBBleSort.bubbleSort(aaa);
+                    // BuBBleSort.bubbleSort(bbb);
+                    QuickSort.quickSort(ccc,0,ccc.length - 1,start);
+                  },
+                  text: "快速排序",
+                  sideColor: AppColors.black_3333),
+              Text('123456').intoContainer(color: Colors.red)
             ],
           ),
         ],
       ),
     );
   }
+
+  AudioPlayer audioPlayer = AudioPlayer();
 
   @override
   void onCreate() {
@@ -197,6 +243,13 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
 
   @override
   void onResume() {}
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    audioPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   double getVerticalMargin() => 0;

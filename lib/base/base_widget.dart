@@ -36,7 +36,10 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
 
   @override
   void initState() {
+    print('000');
     initBaseCommon(this, context);
+    print('333');
+    print(getClassName());
     NavigatorManger.addWidget(getClassName());
     WidgetsBinding.instance!.addObserver(this);
     onCreate();
@@ -84,9 +87,6 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
             : SystemUiOverlayStyle.dark,
         child: WillPopScope(
           onWillPop: () => getBackEvent(context),
-          /*onWillPop: () async {
-          return Future.value(false);
-          },*/
           child: isAsFrame
               ? getBaseView(context)
               : Scaffold(

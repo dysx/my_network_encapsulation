@@ -1,3 +1,4 @@
+import 'package:my_network_encapsulation/base/a_base_widget.dart';
 import 'package:my_network_encapsulation/base/base_widget.dart';
 
 /// @describe: 这个管理类，只是标记 当前 按照顺序放入和移除栈名称，并不是页面跳转后退 的功能，
@@ -24,6 +25,8 @@ class NavigatorManger {
   }
 
   static bool isTopPage(String widgetName) {
+    print('isTopPage111: $widgetName');
+    print('isTopPage222: ${activityStack[activityStack.length - 1]}');
     if (activityStack.isEmpty) {
       return false;
     }
@@ -34,12 +37,12 @@ class NavigatorManger {
     }
   }
 
-  static bool isSecondTop(BaseWidgetState widgetName) {
+  static bool isSecondTop(String widgetName) {
     if (activityStack.isEmpty) {
       return false;
     }
     try {
-      return widgetName.getClassName() ==
+      return widgetName ==
           activityStack[activityStack.length - 2];
     } catch (exception) {
       return false;

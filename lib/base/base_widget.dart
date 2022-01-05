@@ -6,9 +6,8 @@ import 'package:my_network_encapsulation/network/http/http.dart';
 import 'base_function.dart';
 import 'navigator_manger.dart';
 
-/// @describe: 基类
+/// @describe: view基类
 /// @author: qds
-/// @date:
 abstract class BaseWidget extends StatefulWidget {
   BaseWidget({Key? key}) : super(key: key);
 
@@ -16,10 +15,6 @@ abstract class BaseWidget extends StatefulWidget {
   BaseWidgetState createState() => getState();
 
   BaseWidgetState getState();
-
-  String getStateName() {
-    return getState().getClassName();
-  }
 }
 
 abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
@@ -36,15 +31,12 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
 
   @override
   void initState() {
-    print('000');
+    super.initState();
     initBaseCommon(this, context);
-    print('333');
-    print(getClassName());
     NavigatorManger.addWidget(getClassName());
     WidgetsBinding.instance!.addObserver(this);
     onCreate();
     log("create");
-    super.initState();
   }
 
   void didChangeDependencies() {
@@ -55,7 +47,7 @@ abstract class BaseWidgetState<T extends BaseWidget> extends State<T>
   void deactivate() {
     // log("----build---deactivate");
     // 说明是被覆盖了
-    if (NavigatorManger.isSecondTop(this)) {
+    if (NavigatorManger.isSecondTop(getClassName())) {
       if (!_onPause) {
         onPause();
         _onPause = true;

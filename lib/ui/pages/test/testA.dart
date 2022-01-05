@@ -1,11 +1,7 @@
 import 'dart:async';
 
-import 'package:animated_text_kit/animated_text_kit.dart';
-// import 'package:flutter_mvideo_plugin/flutter_mvideo_plugin.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/ui/widget/skeleton.dart';
-import 'package:my_network_encapsulation/view_model/article_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -25,8 +21,46 @@ class TestAState extends BaseWidgetState<TestA> {
   // late MVideoPlayer videoPlayer;
   // late MVideoPlayerController mVideoController;
 
+  RefreshController _controller = RefreshController();
+
   @override
   Widget buildWidget(BuildContext context) {
+    return SmartRefresher(controller: _controller,
+    onRefresh: () async {
+      print('123546');
+      _controller.refreshCompleted();
+    },
+      onLoading: () async {
+      print('789');
+      _controller.loadComplete();
+      },
+      enablePullUp: true,
+      child: ListView(
+        children: [
+          Container(
+            height: 300,
+            color: Colors.red,
+          ),
+          Container(
+            height: 300,
+            color: Colors.yellow,
+          ),
+          Container(
+            height: 300,
+            color: Colors.orange,
+          ),
+          Container(
+            height: 300,
+            color: Colors.white,
+          ),
+          Container(
+            height: 300,
+            color: Colors.grey,
+          )
+        ],
+      ),
+    );
+
     // return Container(height: getScreenWidth() * 9.0 / 16.0, child: videoPlayer);
 
     // return Container(
@@ -46,67 +80,67 @@ class TestAState extends BaseWidgetState<TestA> {
     //   ),
     // );
 
-    return ProviderWidget<ArticleModel>(
-      model: ArticleModel(cancelTag: 'TestA'),
-      onModelReady: (model) => model.initData(),
-      builder: (context, model, child) {
-        if (model.isBusy) {
-          // return ViewStateBusyWidget();
-          return SkeletonList(
-            // length: 20,
-            builder: (context, index) => ArticleItemSkeleton(),
-          );
-        } else if (model.isEmpty) {
-          print("model.isEmpty");
-          return ViewStateEmptyWidget(onPressed: () => model.initData());
-        } else if (model.isError) {
-          print("model.isError");
-          if (model.viewStateError!.isUnauthorized) {
-            return ViewStateUnAuthWidget(onPressed: () async {
-              var success =
-                  await Navigator.of(context).pushNamed(RouteName.loginPage);
-              // 登录成功,获取数据,刷新页面
-              if (success != null) {
-                model.initData();
-              }
-            });
-          } else if (model.list.isEmpty) {
-            print(model.list.isEmpty);
-            // 只有在页面上没有数据的时候才显示错误widget
-            return ViewStateErrorWidget(
-                error: model.viewStateError, onPressed: model.initData);
-          }
-        }
-        return SmartRefresher(
-            controller: model.refreshController,
-            header: WaterDropHeader(),
-            onRefresh: model.refresh,
-            onLoading: model.loadMore,
-            enablePullUp: true,
-            child: ListView.separated(
-              padding: EdgeInsets.only(top: 0),
-              shrinkWrap: true,
-              // physics: NeverScrollableScrollPhysics(),
-              separatorBuilder: (BuildContext context, int index) {
-                return Gaps.vGap5w;
-              },
-              itemCount: model.list.length,
-              itemBuilder: (BuildContext context, int index) {
-                return AnimationConfiguration.staggeredList(
-                    position: index,
-                    duration: Duration(milliseconds: 375),
-                    child: SlideAnimation(
-                        verticalOffset: 50.0,
-                        child: FadeInAnimation(
-                            child: Container(
-                          margin: EdgeInsets.symmetric(vertical: 5),
-                          height: 60,
-                          color: AppColors.grey_9999,
-                        ))));
-              },
-            ));
-      },
-    );
+    // return ProviderWidget<ArticleModel>(
+    //   model: ArticleModel(cancelTag: 'TestA'),
+    //   onModelReady: (model) => model.initData(),
+    //   builder: (context, model, child) {
+    //     if (model.isBusy) {
+    //       // return ViewStateBusyWidget();
+    //       return SkeletonList(
+    //         // length: 20,
+    //         builder: (context, index) => ArticleItemSkeleton(),
+    //       );
+    //     } else if (model.isEmpty) {
+    //       print("model.isEmpty");
+    //       return ViewStateEmptyWidget(onPressed: () => model.initData());
+    //     } else if (model.isError) {
+    //       print("model.isError");
+    //       if (model.viewStateError!.isUnauthorized) {
+    //         return ViewStateUnAuthWidget(onPressed: () async {
+    //           var success =
+    //               await Navigator.of(context).pushNamed(RouteName.loginPage);
+    //           // 登录成功,获取数据,刷新页面
+    //           if (success != null) {
+    //             model.initData();
+    //           }
+    //         });
+    //       } else if (model.list.isEmpty) {
+    //         print(model.list.isEmpty);
+    //         // 只有在页面上没有数据的时候才显示错误widget
+    //         return ViewStateErrorWidget(
+    //             error: model.viewStateError, onPressed: model.initData);
+    //       }
+    //     }
+    //     return SmartRefresher(
+    //         controller: model.refreshController,
+    //         header: WaterDropHeader(),
+    //         onRefresh: model.refresh,
+    //         onLoading: model.loadMore,
+    //         enablePullUp: true,
+    //         child: ListView.separated(
+    //           padding: EdgeInsets.only(top: 0),
+    //           shrinkWrap: true,
+    //           // physics: NeverScrollableScrollPhysics(),
+    //           separatorBuilder: (BuildContext context, int index) {
+    //             return Gaps.vGap5w;
+    //           },
+    //           itemCount: model.list.length,
+    //           itemBuilder: (BuildContext context, int index) {
+    //             return AnimationConfiguration.staggeredList(
+    //                 position: index,
+    //                 duration: Duration(milliseconds: 375),
+    //                 child: SlideAnimation(
+    //                     verticalOffset: 50.0,
+    //                     child: FadeInAnimation(
+    //                         child: Container(
+    //                       margin: EdgeInsets.symmetric(vertical: 5),
+    //                       height: 60,
+    //                       color: AppColors.grey_9999,
+    //                     ))));
+    //           },
+    //         ));
+    //   },
+    // );
   }
 
   @override

@@ -6,6 +6,7 @@ import 'package:my_network_encapsulation/config/appConfig.dart';
 import 'package:my_network_encapsulation/generated/l10n.dart';
 import 'package:my_network_encapsulation/provider/provider_setup.dart';
 import 'package:my_network_encapsulation/routes/router_manger.dart';
+import 'package:my_network_encapsulation/ui/a_base_test_page.dart';
 import 'package:my_network_encapsulation/util/image/local_image_selector.dart';
 import 'package:my_network_encapsulation/util/local_storage.dart';
 import 'package:my_network_encapsulation/util/size_util.dart';
@@ -69,8 +70,9 @@ class MyApp extends StatelessWidget {
                   supportedLocales: S.delegate.supportedLocales, // 支持的语言
                   navigatorKey: AppConfig.globalKey,      // 全局globalKey
                   onGenerateRoute: MyRouter.generateRoute,  // 路由拦截器
-                  initialRoute: routeName(),
-                  // initialRoute: RouteName.privacyTipsPage,
+                  // initialRoute: routeName(),
+                  initialRoute: RouteName.privacyTipsPage,
+                  // home: ABaseTestPage(),
                   builder: (context, widget) {
                     return MediaQuery(
                       data: MediaQuery.of(context)

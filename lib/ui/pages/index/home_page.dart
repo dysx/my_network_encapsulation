@@ -1,12 +1,11 @@
 import 'dart:io';
 
-import 'package:audioplayers/audioplayers.dart';
-import 'package:device_info/device_info.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/util/extension/widget.dart';
 import 'package:my_network_encapsulation/util/pack/env_config.dart';
 import 'package:my_network_encapsulation/util/permission_manager.dart';
 import 'package:my_network_encapsulation/util/sort/bubble_sort.dart';
+import 'package:my_network_encapsulation/util/sort/merge_sort.dart';
 import 'package:my_network_encapsulation/util/sort/quick_sort.dart';
 import 'package:my_network_encapsulation/view_model/base/locale_model.dart';
 import 'package:my_network_encapsulation/view_model/base/theme_data_model.dart';
@@ -139,16 +138,6 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   text: "滑动到指定位置",
                   sideColor: AppColors.black_3333),
               ordinaryButton(
-                  onPressed: () async {
-                    DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-                    Map<String, dynamic> _deviceData = Map<String, dynamic>();
-                    _deviceData = _readAndroidBuildData(
-                        await deviceInfoPlugin.androidInfo);
-                    print(_deviceData);
-                  },
-                  text: "获取设备信息",
-                  sideColor: AppColors.black_3333),
-              ordinaryButton(
                   onPressed: () {
                     // print(NavigatorManger.activityStack);
                     // Alert.showSheet(
@@ -179,13 +168,6 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                     Toast.showMsg(EnvConfig.VERSION);
                   },
                   text: "版本",
-                  sideColor: AppColors.black_3333),
-              ordinaryButton(
-                  onPressed: () {
-                    audioPlayer.play('assets/audio/N003.mp3',isLocal: true);
-                    // audioPlayer.play('http://music.163.com/song/media/outer/url?id=298317.mp3');
-                  },
-                  text: "测试音频",
                   sideColor: AppColors.black_3333),
               ordinaryButton(
                   onPressed: () {
@@ -220,6 +202,21 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
                   },
                   text: "快速排序",
                   sideColor: AppColors.black_3333),
+              ordinaryButton(
+                  onPressed: () {
+                    // List<int> ccc = MergeSort.generateIntegers();
+                    List<int> ccc = [5,9,1,4];
+                    print('排序前的数组: $ccc');
+                    MergeSort.sort(ccc,0,ccc.length - 1);
+                  },
+                  text: "合并排序",
+                  sideColor: AppColors.black_3333),
+              ordinaryButton(
+                  onPressed: () {
+                   getClassName();
+                  },
+                  text: "打印widget",
+                  sideColor: AppColors.black_3333),
               Text('123456').intoContainer(color: Colors.red)
             ],
           ),
@@ -228,7 +225,6 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
     );
   }
 
-  AudioPlayer audioPlayer = AudioPlayer();
 
   @override
   void onCreate() {
@@ -247,7 +243,6 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    audioPlayer.dispose();
     super.dispose();
   }
 
@@ -257,36 +252,4 @@ class HomePageState extends BaseInnerWidgetState<HomePage> {
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
-
-  Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
-    return <String, dynamic>{
-      'version.securityPatch': build.version.securityPatch,
-      'version.sdkInt': build.version.sdkInt,
-      'version.release': build.version.release,
-      'version.previewSdkInt': build.version.previewSdkInt,
-      'version.incremental': build.version.incremental,
-      'version.codename': build.version.codename,
-      'version.baseOS': build.version.baseOS,
-      'board': build.board,
-      'bootloader': build.bootloader,
-      'brand': build.brand,
-      'device': build.device,
-      'display': build.display,
-      'fingerprint': build.fingerprint,
-      'hardware': build.hardware,
-      'host': build.host,
-      'id': build.id,
-      'manufacturer': build.manufacturer,
-      'model': build.model,
-      'product': build.product,
-      'supported32BitAbis': build.supported32BitAbis,
-      'supported64BitAbis': build.supported64BitAbis,
-      'supportedAbis': build.supportedAbis,
-      'tags': build.tags,
-      'type': build.type,
-      'isPhysicalDevice': build.isPhysicalDevice,
-      'androidId': build.androidId,
-      'systemFeatures': build.systemFeatures,
-    };
-  }
 }

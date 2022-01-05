@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:my_network_encapsulation/base/base_insert.dart';
+import 'package:my_network_encapsulation/res/app_styles.dart';
+import 'package:my_network_encapsulation/util/size_util.dart';
 
 /// @describe: 登陆指示器
 /// @author: qds
@@ -16,9 +17,7 @@ class LoginIndicator extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return _LoginIndicatorState();
-  }
+  State<StatefulWidget> createState() => _LoginIndicatorState();
 }
 
 class _LoginIndicatorState extends State<LoginIndicator> {

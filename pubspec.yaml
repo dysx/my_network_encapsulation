@@ -38,9 +38,6 @@ dependencies:
   # 持久化存储
   shared_preferences: 2.0.6
 
-  # 列表动画
-  flutter_staggered_animations: 1.0.0
-
   # app缓存目录
   path_provider: 2.0.2
 
@@ -50,9 +47,6 @@ dependencies:
 
   # 吐司
   oktoast: 3.0.0
-
-  # 设备信息
-  device_info: 2.0.2
 
   # 网络图像缓存
   cached_network_image: 3.0.0
@@ -75,9 +69,6 @@ dependencies:
   # 微光效果
   shimmer: 2.0.0
 
-  # 文字动效
-  animated_text_kit: 4.2.1
-
   # 解析html
   flutter_html: 1.3.0
 
@@ -90,20 +81,12 @@ dependencies:
   # webView
   webview_flutter: 1.0.7
 
-  # nested_scroll_view组件（tab内容保持状态+吸顶）
-  extended_nested_scroll_view:
-    git:
-      url: https://gitee.com/fantuanx/extended_nested_scroll_view.git
-
   # 跳转第三方
   url_launcher: 6.0.9
 
-  # app升级
-  ota_update: 3.0.2
-
-  audioplayers: ^0.20.1
-
   dartx: ^0.8.0
+
+  fps_monitor: ^2.0.0
 
 dev_dependencies:
   flutter_test:

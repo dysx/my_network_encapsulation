@@ -11,7 +11,6 @@ import 'package:my_network_encapsulation/util/local_storage.dart';
 
 /// @describe: home
 /// @author: qds
-/// @date:
 class Home extends BaseWidget {
   @override
   BaseWidgetState<BaseWidget> getState() => HomeState();

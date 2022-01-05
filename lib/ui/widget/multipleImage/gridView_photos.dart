@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_network_encapsulation/base/base_insert.dart';
 import 'package:my_network_encapsulation/routes/page_route_anim.dart';
+import 'package:my_network_encapsulation/ui/pages/mytext.dart';
 import 'package:my_network_encapsulation/ui/widget/multipleImage/my_photo_view.dart';
 
 /// @describe: 网格图片
@@ -44,11 +45,17 @@ class GridViewPhotos extends StatelessWidget {
               Navigator.push(
                   context,
                   FadeRouteBuilder(
-                      MyPhotoView(
-                          photoList: originalImage,
-                          thumbnails: thumbnail,
-                          localPhotos: [],
-                          initialIndex: i),
+                      MyPhotoVieweee(
+                        photoList: originalImage,
+                            thumbnails: thumbnail,
+                            localPhotos: [],
+                            initialIndex: i
+                      ),
+                      // MyPhotoView(
+                      //     photoList: originalImage,
+                      //     thumbnails: thumbnail,
+                      //     localPhotos: [],
+                      //     initialIndex: i),
                       RouteName.myPhotoView));
             },
             child: Container(

@@ -82,10 +82,8 @@ abstract class BaseFunction {
   /// 有需要的话就重写以下的方法
   ///-----------------------------
   void initBaseCommon(State state, BuildContext context) {
-    print('111');
     _stateBaseFunction = state;
     _contextBaseFunction = context;
-    print('222');
   }
 
   BuildContext get contextBase {
@@ -523,9 +521,9 @@ abstract class BaseFunction {
 
   String getClassName() {
     String className = _contextBaseFunction.toString();
+    print('_contextBaseFunction: $className');
     className = className.substring(0, className.indexOf("("));
-    print('444');
-    print(_contextBaseFunction.toString());
+    print('className: $className');
     // print(_contextBaseFunction.widget == null);
     // print(_contextBaseFunction.widget.toStringShort());
     // String className = _contextBaseFunction.widget.toStringShort();
